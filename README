@@ -1,0 +1,89 @@
+MarkLogic Marker
+
+See https://github.com/marklogic/marker for a description of this project.
+
+SETUP INSTRUCTIONS
+1. Get the source from Github (where you might be reading this readme).
+
+2. Install and run MarkLogic 4.2 (http://developer.marklogic.com/downloads)
+
+3. Log into the MarkLogic administration console
+  (e.g. http://localhost:8001)
+
+4. Create a new database called 'marker'. Create a forest called 'marker' and 
+attache the database to it.
+
+5. Create a new HTTP app server on port 8100. You may change this port, but you will need to update the application config, setup/index for security and create your own github/facebook oauth applications.
+	
+
+server name         8100-Marker
+root                <location of where the project source is checked out pointed to the src directory
+port                8100
+modules             file system
+database            marker
+url rewriter        system/rewrite.xqy
+authentication		application-level
+default user        admin
+<leave rest of defaults for now>
+
+To setup facebook oauth application : http://www.facebook.com/developers
+To setup github oauth application : http://github.com/account/applications/new
+
+6. Comment out the following line found in the /application/config.xqy
+declare variable $authentication-action as xs:string := 'xquery version "1.0-ml";
+                                                        import module namespace authorization = "http://marklogic.com/plugins/security/authorization" at "/plugins/security/models/authorization-model.xqy";
+                                                        declare variable $controller external;
+                                                        declare variable $action external;
+                                                        declare variable $role external;
+                                                        authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)';
+
+7. Uncomment the following line:
+(:declare variable $authentication-action as xs:string := '';:)
+
+
+8. In a browser hit http://localhost:8100/security/setup/index - should display "complete" on successful setup
+
+9. In a browser hit http://localhost:8100/marker/setup/index - should display "complete" on successful setup
+
+10. Uncomment out the following line found in the /application/config.xqy
+(:declare variable $authentication-action as xs:string := 'xquery version "1.0-ml";
+                                                        import module namespace authorization = "http://marklogic.com/plugins/security/authorization" at "/plugins/security/models/authorization-model.xqy";
+                                                        declare variable $controller external;
+                                                        declare variable $action external;
+                                                        declare variable $role external;
+                                                        authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)';:)
+                                                        
+11. Comment out the following line:
+declare variable $authentication-action as xs:string := '';
+
+12. Via the admin console, set the marker app server default user to 'oauth-anon'.
+
+13. In a browser hit http://localhost:8100/ and you should be redirected to http://localhost:8100/welcome/index
+
+14. To load some static content exec the following in cq on the marker db
+
+(: insert the docs :)
+xquery version "1.0-ml";
+declare namespace markup ="http://www.w3.org/1999/xhtml";
+
+
+declare variable $options := 
+  <options xmlns="xdmp:document-get" xmlns:http="xdmp:http">
+    <repair>full</repair>
+    <format>xml</format>
+  </options>;
+declare variable $main_page := xdmp:document-get("http://en.wikipedia.org/wiki/List_of_constellations",$options);
+
+let $tr := for $table in $main_page//markup:table
+
+where data($table/@class) eq "wikitable"
+return $table/markup:tr
+for $a in $tr/markup:td[1]/markup:a/data(@href)
+let $doc := xdmp:document-get(fn:concat("http://en.wikipedia.org", $a), $options)
+return xdmp:document-insert(
+  fn:concat("/root/content/pages",$a), 
+  $doc, 
+  (xdmp:permission("marker-admin", "read"),xdmp:permission("oauth-anon", "read"), 
+             xdmp:permission("marker-admin", "update")),
+ "wikipedia_pages")
+

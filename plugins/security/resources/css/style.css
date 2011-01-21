@@ -1,0 +1,7 @@
+
+#login-action { text-align:center; font-size:36px; font-family:Helvetica; font-weight:bold; }
+#login-action span { font-size:14px; }
+#profile { background-color:#EFEFEF; height:50px; padding:5px; margin:10px; }
+#profile img { float:left; height:50px;}
+#profile div { float:left;padding: 14px 0 0 10px; }
+#profile span { font-size:0.8em; color:gray;}
