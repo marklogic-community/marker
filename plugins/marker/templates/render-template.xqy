@@ -16,7 +16,7 @@ xquery version "1.0-ml";
  See the License for the specific language governing permissions and 
  limitations under the License. 
  
- Marklogic Marker created/contributed by Avalon Consulting, LLC http://avalonconsult.com
+
 
 :)
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "../../../system/xqmvc.xqy";
