@@ -1,0 +1,59 @@
+xquery version "1.0-ml";
+import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
+
+
+declare variable $username := "facebook_1115962037";
+
+
+let $sec := xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-user('", $username, "')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+let $sec := xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-role('security-admin')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+let $sec := xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-role('security-user')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+let $sec := xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-role('security-anon')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+					
+	
+let $config := admin:get-configuration()
+let $groupid := admin:group-get-id($config, "Default")
+let $server := admin:appserver-delete(
+  $config, 
+ admin:appserver-get-id($config, $groupid, "8100-marker"))
+let $_ :=  admin:save-configuration($server)
+
+let $config := admin:get-configuration()
+let $config := admin:database-delete($config, xdmp:database("marker"))
+let $_ :=  admin:save-configuration($config)
+
+let $config := admin:get-configuration()
+let $config := admin:forest-delete($config, admin:forest-get-id($config, "marker"), fn:true())
+let $_ :=  admin:save-configuration($config)
+
+return "done"
+
+
