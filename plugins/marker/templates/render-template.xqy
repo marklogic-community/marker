@@ -22,7 +22,7 @@ xquery version "1.0-ml";
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "../../../system/xqmvc.xqy";
 declare variable $data as map:map external;
 
-xdmp:set-response-content-type('application/xhtml+xml; charset=utf-8'),
+xdmp:set-response-content-type('text/html; charset=utf-8'),
 
 $xqmvc:doctype-xhtml-1.1,
 map:get($data, 'content')

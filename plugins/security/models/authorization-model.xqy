@@ -24,6 +24,7 @@ module namespace authorization = "http://marklogic.com/plugins/security/authoriz
 import module namespace cfg = "http://marklogic.com/plugins/security/config" at "../config/config.xqy";
 import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
 import module namespace xqmvc-conf = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
+import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "/system/xqmvc.xqy";
 
 declare namespace s = "http://www.w3.org/2009/xpath-functions/analyze-string";
 declare variable $plugin-dir as xs:string := fn:concat($xqmvc-conf:app-root, '/plugins');
@@ -56,33 +57,101 @@ declare function authorization:getAllowedControllerActions($role)
 };
 
 declare function authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)
-{
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Authorizing role:", $role)) else ()
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("for:", $controller, "-", $action)) else ()
-    let $mappingCache := xdmp:get-server-field(fn:concat("authorization:", $role), '')
-    let $mappings :=
-        if($mappingCache eq '')
-        then 
+{   
+    if(authorization:isInstalled($controller))
+    then
         (
-            let $mappingXML := authorization:getAllowedControllerActions($role)
-            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("mappingXML:", $mappingXML)) else ()
-            return
-                if($mappingXML)
+        let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Authorizing role:", $role)) else ()
+        let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("for:", $controller, "-", $action)) else ()
+        let $mappingCache := xdmp:get-server-field(fn:concat("authorization:", $role), '')
+        let $mappings :=
+            if($mappingCache eq '')
+            then 
+            (
+                let $mappingXML := authorization:getAllowedControllerActions($role)
+                let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("mappingXML:", $mappingXML)) else ()
+                return
+                    if($mappingXML)
+                    then 
+                        (
+                            let $newCache := authorization:convertMappingXMLToAuthorizationSequence($mappingXML)
+                            let $_ := xdmp:set-server-field(fn:concat("authorization:", $role), $newCache)
+                            return $newCache    
+                        )
+                    else
+                        (
+                        let $_ := xdmp:set-server-field(fn:concat("authorization:", $role), ("n/a"))
+                        return "n/a"
+                        )
+            )
+            else $mappingCache
+        let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("comparing against:", fn:string-join($mappings, ","))) else ()    
+        return 
+            if($role eq "admin")
+            then 
+                (
+                let $log := if ($xqmvc-conf:debug) then xdmp:log("Is admin -- allowing all access") else () 
+                return fn:true()
+                )
+            else
+                (
+                (fn:concat($controller, "-", $action) eq $mappings)
+                )
+        )
+    else
+        (
+        xdmp:redirect-response("/security/setup/index")
+        )
+};
+declare function authorization:isInstalled($controller)
+{
+    let $installed := 
+        if(xdmp:get-server-field("security-setup", fn:false()))
+        then 
+            (
+            fn:true()
+            )
+        else
+            (
+            let $installed-flag := 
+                if(fn:doc("/plugins/security/config.xml"))
                 then 
                     (
-                        let $newCache := authorization:convertMappingXMLToAuthorizationSequence($mappingXML)
-                        let $_ := xdmp:set-server-field(fn:concat("authorization:", $role), $newCache)
-                        return $newCache    
+                    let $log := if ($xqmvc-conf:debug) then xdmp:log("Security is installed - setting application variable") else ()
+                    let $_ := xdmp:get-server-field("security-setup", fn:true())
+                    return fn:true()
                     )
                 else
                     (
-                    let $_ := xdmp:set-server-field(fn:concat("authorization:", $role), ("n/a"))
-                    return "n/a"
+                    if(fn:starts-with($controller,"/plugins/security/controllers/setup.xqy") or fn:starts-with($controller, "/plugins/security/controllers/error.xqy"))
+                    then
+                        (
+                        fn:true()
+                        )
+                    else
+                        (
+                        let $log := if ($xqmvc-conf:debug) then xdmp:log("Security is not installed - redirecting") else ()
+                        let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Checking controller:", $controller)) else ()
+                        return fn:false()
+                        )
                     )
-        )
-        else $mappingCache
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("comparing against:", fn:string-join($mappings, ","))) else ()    
-    return (fn:concat($controller, "-", $action) eq $mappings)
+            return $installed-flag
+            )
+    return 
+        if($installed eq fn:true())
+        then 
+            (
+            let $log := if ($xqmvc-conf:debug) then xdmp:log("Security is installed or being installed") else ()
+            return $installed
+            )
+        else 
+            (
+            let $log := if ($xqmvc-conf:debug) then xdmp:log("attempting redirect") else ()
+            return $installed
+            )
+            
+        
+            
 };
 declare function authorization:convertMappingXMLToAuthorizationSequence($mappingXML)
 {

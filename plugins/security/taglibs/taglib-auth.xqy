@@ -19,14 +19,14 @@ xquery version "1.0-ml";
 
 
 :)
-module namespace taglib-security = "http://marklogic.avalonconsult.com/plugin/security/taglib";
+module namespace taglib-security = "http://marklogic.com/plugin/security/taglib";
 declare namespace html = "http://www.w3.org/1999/xhtml";
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "/system/xqmvc.xqy";
 
 declare function taglib-security:login-logout()
 {
     let $username := xdmp:get-current-user()
-    let $isLoggedIn := $username != "oauth-anon"
+    let $isLoggedIn := $username != "security-anon"
     let $userDetails := /user[@name = $username]/provider-data
     let $picture :=$userDetails/picture/text()
     return
@@ -63,7 +63,7 @@ declare function taglib-security:login-logout()
             if($isLoggedIn) then
                 <div id="profile" style="padding:5px;display:none;">
                     <div style="float:right;">
-                        <a href="{$userDetails/link/text()}">{$userDetails/name/text()}</a><br/>
+                        <a href="{$userDetails/link/text()}">{$userDetails/name/text()}&nbsp;</a><br/>
                         <span>via {xs:string( $userDetails/@name )}</span>
                     </div>
                     <img style="width:30px;margin-right:5px;" src="{$picture}" />
@@ -76,19 +76,19 @@ declare function taglib-security:login-logout()
 declare function taglib-security:current-user()
 {
     let $username := xdmp:get-current-user()
-    let $isLoggedIn := $username != "oauth-anon"
+    let $isLoggedIn := $username != "security-anon"
     let $userDetails := /user[@name = $username]/provider-data
     let $picture :=$userDetails/picture/text()
     return 
             if($isLoggedIn) then
                 <div id="profile" style="padding:5px;height:40px;">
                 <div style="float:right;text-align:right;">
-                        <a href="{$userDetails/link/text()}">{$userDetails/name/text()}</a><br/>
+                        <a href="{$userDetails/link/text()}">{$userDetails/name/text()}&nbsp;</a><br/>
                         <span>via {xs:string( $userDetails/@name )}</span>
                     </div>
                     <img style="width:30px;margin-right:5px;" src="{$picture}" />
                     
                 </div>
-            else ()
+            else (<div>&nbsp;</div>)
         
 };

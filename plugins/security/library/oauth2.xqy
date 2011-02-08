@@ -131,7 +131,7 @@ declare function oauth2:getOrCreateUserByProvider($providerName as xs:string,
             let $description := fn:concat($providerName, " User ", $fullName, " (", $providerUserId, ")")
             let $username := fn:concat($providerName, "_", $providerUserId)
             let $password := xs:string(xdmp:hash32($username))
-            let $newuser := user:createNewUser($username, $password, $description, ("oauth-user"), $providerName, $providerUserId)
+            let $newuser := user:createNewUser($username, $password, $description, ("security-user"), $providerName, $providerUserId)
             let $usermapping := oauth2:mapUserToAuthProvider($username, $providerName, $providerUserId, $providerUserData)
             return
                 $username
@@ -166,7 +166,7 @@ declare function oauth2:mapUserToAuthProvider($markLogicUsername as xs:string,
                     attribute name { $markLogicUsername },
                     $providerUserData
                 },
-                (xdmp:permission("oauth-anon", "read"), xdmp:permission("oauth-admin", "update"))
+                (xdmp:permission("security-anon", "read"), xdmp:permission("security-admin", "update"))
             )          
 };
 

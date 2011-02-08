@@ -29,40 +29,46 @@ xquery version "1.0-ml";
 
 import module namespace xqmvc-conf = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "xqmvc.xqy";
+
 let $url := xdmp:get-request-url()
+let $contentUrl := xqmvc:getContentURL($url)
+let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Requested url:", $url, " Content Url:", $contentUrl)) else ()
 return
-    if (matches($url, concat("^", $xqmvc:resource-dir)) or matches($url, concat("^", $xqmvc:library-dir)) or matches($url, concat("^", $xqmvc-conf:app-root, "/plugins/([\w\.-]+)/resources")) ) 
-    then
-        $url
-    else
-        let $suffix := replace($xqmvc-conf:url-suffix, '\.', '\\.')
-        let $standard-pattern := concat("^", $xqmvc-conf:app-root, "/([\w\.-]+)/([\w\.-]*)", $suffix, "((\?)(.*))?$")
-        let $plugin-pattern := concat("^", $xqmvc-conf:app-root, "/([\w\.-]+)/([\w\.-]+)/([\w\.-]*)", $suffix, "((\?)(.*))?$")
-        return
+    if ($contentUrl) then
+        $contentUrl
+    else 
+        if (matches($url, concat("^", $xqmvc:resource-dir)) or matches($url, concat("^", $xqmvc:library-dir)) or matches($url,"favicon.ico") or matches($url, concat("^", $xqmvc-conf:app-root, "/plugins/([\w\.-]+)/resources")) ) 
+        then
+            $url
+        else
+            let $suffix := replace($xqmvc-conf:url-suffix, '\.', '\\.')
+            let $standard-pattern := concat("^", $xqmvc-conf:app-root, "/([\w\.-]+)/([\w\.-]*)", $suffix, "((\?)(.*))?$")
+            let $plugin-pattern := concat("^", $xqmvc-conf:app-root, "/([\w\.-]+)/([\w\.-]+)/([\w\.-]*)", $suffix, "((\?)(.*))?$")
+            return
         
-            (: standard url rewriting :)
-            if (matches($url, $standard-pattern)) then
+                (: standard url rewriting :)
+                if (matches($url, $standard-pattern)) then
                 
-                let $from := $standard-pattern
-                let $to := concat($xqmvc-conf:app-root, "/?",
-                    $xqmvc-conf:controller-querystring-field, "=$1&amp;",
-                    $xqmvc-conf:function-querystring-field, "=$2&amp;",
-                    "$5")
-                let $new := replace($url, $from, $to)
-                return
-                    $new
+                    let $from := $standard-pattern
+                    let $to := concat($xqmvc-conf:app-root, "/?",
+                        $xqmvc-conf:controller-querystring-field, "=$1&amp;",
+                        $xqmvc-conf:function-querystring-field, "=$2&amp;",
+                        "$5")
+                    let $new := replace($url, $from, $to)
+                    return
+                        $new
                     
-            (: plugin url rewriting :)
-            else if (matches($url, $plugin-pattern)) then
+                (: plugin url rewriting :)
+                else if (matches($url, $plugin-pattern)) then
                 
-                let $from := $plugin-pattern
-                let $to := concat($xqmvc-conf:app-root, "/?",
-                    $xqmvc-conf:controller-querystring-field, "=$2&amp;",
-                    $xqmvc-conf:function-querystring-field, "=$3&amp;",
-                    $xqmvc-conf:plugin-querystring-field, "=$1&amp;",
-                    "$6")
-                let $new := replace($url, $from, $to)
-                return
-                    $new
-            else
-                fn:concat("?path=",$url, "&amp;", $xqmvc-conf:controller-querystring-field, "&amp;", $xqmvc-conf:function-querystring-field)
+                    let $from := $plugin-pattern
+                    let $to := concat($xqmvc-conf:app-root, "/?",
+                        $xqmvc-conf:controller-querystring-field, "=$2&amp;",
+                        $xqmvc-conf:function-querystring-field, "=$3&amp;",
+                        $xqmvc-conf:plugin-querystring-field, "=$1&amp;",
+                        "$6")
+                    let $new := replace($url, $from, $to)
+                    return
+                        $new
+                else
+                    fn:concat("?path=",$url, "&amp;", $xqmvc-conf:controller-querystring-field, "&amp;", $xqmvc-conf:function-querystring-field)

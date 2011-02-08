@@ -1,0 +1,1037 @@
+/* snagged format buttons icons and styles from ckeditor */
+#marker-editor-container {
+    position: absolute;
+    width: 400px;
+    height: 120px;
+    display: none;
+}
+
+#marker-editor {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 400px;
+    height: 95px;
+}
+
+#debug-container {
+    position: absolute;
+    border: solid 1px #ccc;
+    background: #fff;
+    padding: 5px;
+    width: 350px;
+    height: 370px;
+    overflow: hidden;
+}
+
+#clear-output {
+    width: 80px;
+    clear: both;
+    float: right;
+    margin: 5px;
+    border: solid 1px #ccc;
+}
+
+#debug-output {
+    border: solid 1px #ccc;
+    width: 345px;
+    height: 340px;
+    overflow-y: scroll;
+}
+
+#debug-output ul {
+    list-style-type: none;
+    margin-left: 0px;
+    padding: 0px;
+}
+
+#debug-output ul li {
+    border: solid 1px #ccc;
+    background-color: #eee;
+    width: 320px;
+    margin: 3px 0px;
+}
+
+#marker-editor div.tab {
+    width: 400px;
+    height: 20px;
+}
+
+#marker-editor .ui-tabs-panel {
+    padding: 4px;
+}
+
+tr.published {
+    background-color: #ddd;
+}
+
+tr.unpublished {
+    background-color: #eee;
+}
+
+.marker_button {
+    position: relative;
+    background: transparent url(../img/icons.gif) no-repeat;
+    width: 21px;
+    height: 21px;
+    float: left;
+    border: transparent solid 1px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /*outline:#999 solid 1px;*/
+    margin: 1px;
+}
+
+.marker_button:hover {
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.marker_button:active {
+    background-color: #ccc;
+    border: solid 1px #333;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.marker_button_sm {
+    background: transparent url(../img/icons.gif) no-repeat;
+    width: 10px;
+    height: 21px;
+    float: left;
+    border: transparent solid 1px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /*outline:#999 solid 1px;*/
+    margin: 1px;
+}
+
+.marker_button_sm:hover {
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.marker_button_sm:active {
+    background-color: #ccc;
+    border: solid 1px #333;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.palette {
+    position: absolute;
+    width: 18px;
+    height: 4px;
+    bottom: 2px;
+    left: 2px;
+}
+
+#insert-details, #image-details, #content-details {
+    float: left;
+    font-size: 10px;
+    width: 325px;
+    border: #ccc solid 1px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /*outline:#999 solid 1px;*/
+    margin-left: 5px;
+    padding: 2px;
+    height: 50px;
+}
+
+#insert-details div, #image-details div {
+    margin: 3px 0;
+    text-align: right;
+}
+
+#image-details {
+    width: 270px;
+}
+
+#content-details {
+    overflow: auto;
+}
+
+#content-details table {
+    font-size: 8px;
+}
+
+.image-buttons {
+    margin-left: 2px;
+}
+
+.two-col-buttons-container {
+    width: 50px;
+    height: 50px;
+    padding: 2px;
+    float: left;
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.three-col-buttons-container {
+    width: 75px;
+    height: 50px;
+    padding: 2px;
+    float: left;
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.expandable-buttons-container {
+    padding: 0px;
+    float: left;
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+}
+
+.color-buttons-container {
+    width: 40px;
+    height: 50px;
+    padding: 2px;
+    float: left;
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 2px;
+}
+
+.confirm-buttons {
+    width: 50px;
+    height: 25px;
+    float: left;
+    border: solid 1px #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#insert-details input[type =
+"text"], #insert-details textarea, #image-details input[type = "text"], #image-details textarea {
+    font-family: Arial, Sans-Serif;
+    margin-bottom: 2px;
+    padding: 2px;
+    border: solid 1px #85b1de;
+    background-color: #EDF2F7;
+}
+
+.ui-tabs .ui-state-disabled {
+    display: none; /* disabled tabs don't show up */
+}
+
+.marker_button_img_align_none {
+    background: transparent url(../img/align-none.png) no-repeat;
+    background-position: 0 3px;
+}
+
+.marker_button_img_align_left {
+    background: transparent url(../img/align-left.png) no-repeat;
+    background-position: 0 3px;
+}
+
+.marker_button_img_align_right {
+    background: transparent url(../img/align-right.png) no-repeat;
+    background-position: 0 3px;
+}
+
+.marker_button_img_align_center {
+    background: transparent url(../img/align-center.png) no-repeat;
+    background-position: 0 3px;
+}
+
+/* Theme */
+.marker_button_h1 {
+    background-position: -40px -40px
+}
+
+.marker_button_h2 {
+    background-position: -60px -40px
+}
+
+.marker_button_h3 {
+    background-position: -80px -40px
+}
+
+.marker_button_h4 {
+    background-position: -100px -40px
+}
+
+.marker_button_h5 {
+    background-position: -120px -40px
+}
+
+.marker_button_h6 {
+    background-position: -140px -40px
+}
+
+.marker_button_p {
+    background-position: -160px -40px
+}
+
+.marker_button_confirm {
+    background-position: -180px -40px
+}
+
+.marker_button_pre {
+    background-position: -200px -40px
+}
+
+.marker_button_checkin {
+    background-position: -240px -40px
+}
+
+.marker_button_publish {
+    background-position: -260px -40px
+}
+
+.marker_button_view {
+    background-position: -280px -40px
+}
+
+.marker_button_pin {
+    background-position: -300px -40px
+}
+
+.marker_button_switch {
+    background-position: -320px -40px
+}
+
+.marker_button_checkout {
+    background-position: -220px -40px
+}
+
+.marker_button_bold {
+    background-position: 0 0
+}
+
+.marker_button_italic {
+    background-position: -60px 0
+}
+
+.marker_button_underline {
+    background-position: -140px 0
+}
+
+.marker_button_strikethrough {
+    background-position: -120px 0
+}
+
+.marker_button_undo {
+    background-position: -160px 0
+}
+
+.marker_button_redo {
+    background-position: -100px 0
+}
+
+.marker_button_cleanup {
+    background-position: -40px 0
+}
+
+.marker_button_bullist {
+    background-position: -20px 0
+}
+
+.marker_button_numlist {
+    background-position: -80px 0
+}
+
+.marker_button_justifyleft {
+    background-position: -460px 0
+}
+
+.marker_button_justifyright {
+    background-position: -480px 0
+}
+
+.marker_button_justifycenter {
+    background-position: -420px 0
+}
+
+.marker_button_justifyfull {
+    background-position: -440px 0
+}
+
+.marker_button_anchor {
+    background-position: -200px 0
+}
+
+.marker_button_indent {
+    background-position: -400px 0
+}
+
+.marker_button_outdent {
+    background-position: -540px 0
+}
+
+.marker_button_link {
+    background-position: -500px 0
+}
+
+.marker_button_unlink {
+    background-position: -640px 0
+}
+
+.marker_button_sub {
+    background-position: -600px 0
+}
+
+.marker_button_sup {
+    background-position: -620px 0
+}
+
+.marker_button_removeformat {
+    background-position: -580px 0
+}
+
+.marker_button_newdocument {
+    background-position: -520px 0
+}
+
+.marker_button_image {
+    background-position: -380px 0
+}
+
+.marker_button_help {
+    background-position: -340px 0
+}
+
+.marker_button_code {
+    background-position: -260px 0
+}
+
+.marker_button_hr {
+    background-position: -360px 0
+}
+
+.marker_button_visualaid {
+    background-position: -660px 0
+}
+
+.marker_button_charmap {
+    background-position: -240px 0
+}
+
+.marker_button_paste {
+    background-position: -560px 0
+}
+
+.marker_button_copy {
+    background-position: -700px 0
+}
+
+.marker_button_cut {
+    background-position: -680px 0
+}
+
+.marker_button_blockquote {
+    background-position: -220px 0
+}
+
+.marker_button_downarrow {
+    background-position: -740px 0
+}
+
+.marker_button_forecolorpicker {
+    background-position: -720px 0
+}
+
+.marker_button_backcolorpicker {
+    background-position: -760px 0
+}
+
+/* Plugins */
+.marker_button_advhr {
+    background-position: -0px -20px
+}
+
+.marker_button_ltr {
+    background-position: -20px -20px
+}
+
+.marker_button_rtl {
+    background-position: -40px -20px
+}
+
+.marker_button_emotions {
+    background-position: -60px -20px
+}
+
+.marker_button_fullpage {
+    background-position: -80px -20px
+}
+
+.marker_button_fullscreen {
+    background-position: -100px -20px
+}
+
+.marker_button_iespell {
+    background-position: -120px -20px
+}
+
+.marker_button_insertdate {
+    background-position: -140px -20px
+}
+
+.marker_button_inserttime {
+    background-position: -160px -20px
+}
+
+.marker_button_absolute {
+    background-position: -180px -20px
+}
+
+.marker_button_backward {
+    background-position: -200px -20px
+}
+
+.marker_button_forward {
+    background-position: -220px -20px
+}
+
+.marker_button_insert_layer {
+    background-position: -240px -20px
+}
+
+.marker_button_insertlayer {
+    background-position: -260px -20px
+}
+
+.marker_button_movebackward {
+    background-position: -280px -20px
+}
+
+.marker_button_moveforward {
+    background-position: -300px -20px
+}
+
+.marker_button_media {
+    background-position: -320px -20px
+}
+
+.marker_button_nonbreaking {
+    background-position: -340px -20px
+}
+
+.marker_button_pastetext {
+    background-position: -360px -20px
+}
+
+.marker_button_pasteword {
+    background-position: -380px -20px
+}
+
+.marker_button_selectall {
+    background-position: -400px -20px
+}
+
+.marker_button_preview {
+    background-position: -420px -20px
+}
+
+.marker_button_print {
+    background-position: -440px -20px
+}
+
+.marker_button_cancel {
+    background-position: -460px -20px
+}
+
+.marker_button_save {
+    background-position: -480px -20px
+}
+
+.marker_button_replace {
+    background-position: -500px -20px
+}
+
+.marker_button_search {
+    background-position: -520px -20px
+}
+
+.marker_button_styleprops {
+    background-position: -560px -20px
+}
+
+.marker_button_table {
+    background-position: -580px -20px
+}
+
+.marker_button_cell_props {
+    background-position: -600px -20px
+}
+
+.marker_button_delete_table {
+    background-position: -620px -20px
+}
+
+.marker_button_delete_col {
+    background-position: -640px -20px
+}
+
+.marker_button_delete_row {
+    background-position: -660px -20px
+}
+
+.marker_button_col_after {
+    background-position: -680px -20px
+}
+
+.marker_button_col_before {
+    background-position: -700px -20px
+}
+
+.marker_button_row_after {
+    background-position: -720px -20px
+}
+
+.marker_button_row_before {
+    background-position: -740px -20px
+}
+
+.marker_button_merge_cells {
+    background-position: -760px -20px
+}
+
+.marker_button_table_props {
+    background-position: -980px -20px
+}
+
+.marker_button_row_props {
+    background-position: -780px -20px
+}
+
+.marker_button_split_cells {
+    background-position: -800px -20px
+}
+
+.marker_button_template {
+    background-position: -820px -20px
+}
+
+.marker_button_visualchars {
+    background-position: -840px -20px
+}
+
+.marker_button_abbr {
+    background-position: -860px -20px
+}
+
+.marker_button_acronym {
+    background-position: -880px -20px
+}
+
+.marker_button_attribs {
+    background-position: -900px -20px
+}
+
+.marker_button_cite {
+    background-position: -920px -20px
+}
+
+.marker_button_del {
+    background-position: -940px -20px
+}
+
+.marker_button_ins {
+    background-position: -960px -20px
+}
+
+.marker_button_pagebreak {
+    background-position: 0 -40px
+}
+
+.marker_button_restoredraft {
+    background-position: -20px -40px
+}
+
+.marker_button_spellchecker {
+    background-position: -540px -20px
+}
+
+.colorpicker {
+    width: 356px;
+    height: 176px;
+    overflow: hidden;
+    position: absolute;
+    background: url(../img/colorpicker_background.png);
+    font-family: Arial, Helvetica, sans-serif;
+    display: none;
+}
+
+.colorpicker_color {
+    width: 150px;
+    height: 150px;
+    left: 14px;
+    top: 13px;
+    position: absolute;
+    background: #f00;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.colorpicker_color div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background: url(../img/colorpicker_overlay.png);
+}
+
+.colorpicker_color div div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    overflow: hidden;
+    background: url(../img/colorpicker_select.gif);
+    margin: -5px 0 0 -5px;
+}
+
+.colorpicker_hue {
+    position: absolute;
+    top: 13px;
+    left: 171px;
+    width: 35px;
+    height: 150px;
+    cursor: n-resize;
+}
+
+.colorpicker_hue div {
+    position: absolute;
+    width: 35px;
+    height: 9px;
+    overflow: hidden;
+    background: url(../img/colorpicker_indic.gif) left top;
+    margin: -4px 0 0 0;
+    left: 0px;
+}
+
+.colorpicker_new_color {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    left: 213px;
+    top: 13px;
+    background: #f00;
+}
+
+.colorpicker_current_color {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    left: 283px;
+    top: 13px;
+    background: #f00;
+}
+
+.colorpicker input {
+    background-color: transparent;
+    border: 1px solid transparent;
+    position: absolute;
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #898989;
+    top: 4px;
+    right: 11px;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    height: 11px;
+}
+
+.colorpicker_hex {
+    position: absolute;
+    width: 72px;
+    height: 22px;
+    background: url(../img/colorpicker_hex.png) top;
+    left: 212px;
+    top: 142px;
+}
+
+.colorpicker_hex input {
+    right: 6px;
+}
+
+.colorpicker_field {
+    height: 22px;
+    width: 62px;
+    background-position: top;
+    position: absolute;
+}
+
+.colorpicker_field span {
+    position: absolute;
+    width: 12px;
+    height: 22px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    cursor: n-resize;
+}
+
+.colorpicker_rgb_r {
+    background-image: url(../img/colorpicker_rgb_r.png);
+    top: 52px;
+    left: 212px;
+}
+
+.colorpicker_rgb_g {
+    background-image: url(../img/colorpicker_rgb_g.png);
+    top: 82px;
+    left: 212px;
+}
+
+.colorpicker_rgb_b {
+    background-image: url(../img/colorpicker_rgb_b.png);
+    top: 112px;
+    left: 212px;
+}
+
+.colorpicker_hsb_h {
+    background-image: url(../img/colorpicker_hsb_h.png);
+    top: 52px;
+    left: 282px;
+}
+
+.colorpicker_hsb_s {
+    background-image: url(../img/colorpicker_hsb_s.png);
+    top: 82px;
+    left: 282px;
+}
+
+.colorpicker_hsb_b {
+    background-image: url(../img/colorpicker_hsb_b.png);
+    top: 112px;
+    left: 282px;
+}
+
+.colorpicker_submit {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: url(../img/colorpicker_submit.png) top;
+    left: 322px;
+    top: 142px;
+    overflow: hidden;
+}
+
+.colorpicker_focus {
+    background-position: center;
+}
+
+.colorpicker_hex.colorpicker_focus {
+    background-position: bottom;
+}
+
+.colorpicker_submit.colorpicker_focus {
+    background-position: bottom;
+}
+
+.colorpicker_slider {
+    background-position: bottom;
+}
+
+div.comoms-editor-field-separator {
+    clear: both;
+    padding: 10px 0 10px 0;
+}
+
+div.comoms-ctd-editor-fields {
+    margin: 25px;
+}
+
+span.comoms-field-help {
+    color: #ABABAB;
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+
+/* basic form label formatting */
+label {
+    position: absolute;
+    text-align: right;
+    width: 130px;
+}
+
+input.defaultSkin {
+    margin-left: 140px;
+}
+
+label.check, label.radio {
+    position: relative;
+    text-align: left;
+}
+
+input.comoms-inline-textbox {
+    width: 300px;
+    padding: 5px;
+}
+
+/*
+ #comoms-inline-tinymce {
+ width:660px;
+ height:335px;
+ margin-left: 0px;
+ }
+ */
+#comoms-inline-controls {
+    float: right;
+}
+
+.hover-editable {
+    background-color: #DCDCDC;
+}
+
+#marker-admin {
+    height: 30px;
+}
+
+#marker-admin-menu {
+    margin: 0;
+    padding: 0;
+    line-height: 100%;
+    border-radius: 2px;
+    height: 30px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    background: #8b8b8b; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='eee'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#eee)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #ccc,  #eee); /* for firefox 3.6+ */
+ 
+	border: solid 1px #6d6d6d;
+	
+}
+#marker-admin-menu-left {
+	float:left;
+	margin:0 5px;
+}
+#marker-admin-menu-center {
+	float:left;
+	margin:0 5px;
+}
+#marker-admin-menu-right {
+	float:right;
+	margin:0 5px;
+}
+ 
+ 
+ 
+#marker-admin ul {
+	padding: 0;
+}
+ 
+#marker-admin ul li {
+	list-style-type: none;
+	display: inline;
+	margin-right: 15px;
+}
+ 
+#marker-admin ul li a {
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #000;
+	
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	
+	-webkit-transition-property: color, background;
+	-webkit-transition-duration: 0.5s, 0.5s;
+}
+ 
+#marker-admin ul li a:hover {
+	background: #01458e;
+	color: #ff0;
+ 
+	-webkit-transition-property: color, background;
+	-webkit-transition-duration: 0.5s, 0.5s;
+}
+ 
+.marker-admin-default {
+	position:absolute;
+	top:0px;
+	left:0px;
+	
+	width: 100%;
+	
+	box-shadow: 0 5px 20px #888;
+	-webkit-box-shadow: 0 5px 20px #888;
+	-moz-box-shadow: 0 5px 20px #888;
+}
+ 
+.marker-admin-fixed {
+	position: fixed;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	
+	box-shadow: 0 0 40px #222;
+	-webkit-box-shadow: 0 0 40px #222;
+	-moz-box-shadow: 0 0 40px #222;
+}
+.pinned {
+	border:1px inset;
+}
+.button-text{
+	font-size:9px;
+	line-height:9px;
+	padding-top:4px;
+}
+*:focus {outline: none;}
+@-webkit-keyframes pulse {
+  from {
+  	outline: 1px solid #ccc;
+	outline-offset: 10px;
+    
+  }
+  50% {
+    outline: 1px solid blue;
+	outline-offset: 6px;
+  }
+  to { 
+    outline: 1px solid #ccc;
+	outline-offset: 10px;
+  }
+}
+
+div.marker-editable { outline: 1px solid transparent;
+	outline-offset: 3px; }
+div.marker-editable:hover { 
+  -webkit-animation-name: pulse; 
+  -webkit-animation-duration: 0.5s; 
+  -webkit-animation-iteration-count: 1; 
+}
+div.marker-editable:focus { 
+  outline: 1px solid #ccc;
+	outline-offset: 10px; 
+}
+.error-focus
+{
+	box-shadow: 0 0 5px rgba(245, 10, 20, 1);
+    -webkit-box-shadow: 0 0 5px rgba(245, 10, 20, 1);
+    -moz-box-shadow: 0 0 5px rgba(245, 10, 20, 1);
+}

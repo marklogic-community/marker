@@ -57,6 +57,10 @@ declare variable $debug as xs:boolean := fn:true();
 declare variable $url-suffix as xs:string := '';
 
 (:
+ : Default controller path, if none specified.
+ :)
+declare variable $default-controller-path as xs:string := 'plugins/marker/controllers/render.xqy';
+(:
  : Default controller to load, if none specified.
  :)
 declare variable $default-controller as xs:string := 'render';
@@ -64,7 +68,7 @@ declare variable $default-controller as xs:string := 'render';
 (:
  : Default plugin to load, needed if default controller is not in main application.
  :)
-declare variable $default-plugin as xs:string := 'marker';
+declare variable $default-action as xs:string := 'index';
 
 (:
  : Default plugin to load, needed if default controller is not in main application.

@@ -1,0 +1,65 @@
+xquery version "1.0-ml";
+import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
+(: *****************************************
+	configuration area here 
+	these items must be completed prior to running this script via cq
+	this script assumes you do not have marker installed already
+******************************************** :)
+
+(: define where your marker files are located :)
+declare variable $file-location := "/Users/chadchatfield/dev/Avalon/MarkLogic/marker";	
+	
+
+
+(: forest :)
+
+let $config := admin:get-configuration()
+let $config := admin:forest-create(
+  $config, 
+  "marker",
+  xdmp:host(), 
+  ())
+let $_ := admin:save-configuration($config)
+
+(: database :)
+
+let $config := admin:get-configuration()
+let $config := admin:database-create(
+  $config,
+  "marker",
+  xdmp:database("Security"),
+  xdmp:database("Schemas"))
+let $_ := admin:save-configuration($config)
+
+(: attach forest to database :)
+
+let $config := admin:get-configuration()
+let $config := admin:database-attach-forest(
+  $config,
+  xdmp:database("marker"), 
+  xdmp:forest("marker"))
+let $_ := admin:save-configuration($config)
+
+(: application server :)
+
+let $config := admin:get-configuration()
+let $groupid := admin:group-get-id($config, "Default")
+let $server := admin:http-server-create(
+  $config, 
+  $groupid,
+  "8100-marker", 
+  $file-location,
+  8100,
+  0,
+  admin:database-get-id($config, "marker"))
+  
+let $_ :=  admin:save-configuration($server)
+
+let $config := admin:get-configuration()
+let $groupid := admin:group-get-id($config, "Default")
+let $_ := admin:appserver-set-url-rewriter($config,
+         admin:appserver-get-id($config, $groupid, "8100-marker"),
+         "system/rewrite.xqy")
+let $_ :=  admin:save-configuration($config)
+
+return "Complete - please open your browser to http://localhost:8100 and login with your admin credentials"

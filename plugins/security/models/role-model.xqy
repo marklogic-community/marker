@@ -20,7 +20,7 @@ xquery version "1.0-ml";
 
 :)
 module namespace role = "http://marklogic.com/plugins/security/role";
-
+import module namespace xqmvc-cfg = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
 import module namespace cfg = "http://marklogic.com/plugins/security/config" at "../config/config.xqy";
 
 (:~ 
@@ -104,8 +104,75 @@ declare function role:getRolesOfRole($roleName as xs:string, $securityDatabaseNa
         return ()
     }    
 };
-
+declare function role:addUserToRole($user, $role)
+{
+    try {
+    xdmp:eval(
+        fn:concat(
+        "xquery version '1.0-ml'; 
+        import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+        sec:user-add-roles('", $user, "','", $role, "')"
+        ), (),
+        <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> </options>)
+    } catch($err) {
+        let $log := xdmp:log(fn:concat("Couldn't add User To because Role ", $role, ".", $err/*:message/text()))
+        return ()
+    }    
+};
 declare function role:getRolesOfRole($roleName as xs:string) 
 {
     role:getRolesOfRole($roleName, "Security") 
+};
+(: 
+    check to see if the first user has been set
+    if not, assign this role the security-admin role
+:)
+declare function role:checkForFirstUser($user)
+{
+    if(role:isFirstUser())
+    then
+        (
+            let $log := if ($xqmvc-cfg:debug) then xdmp:log("No first user - setting as security-admin") else ()  
+            let $_ := role:addUserToRole($user, "security-admin")
+            let $_ := role:markAsFirstUser()
+            return ()
+        )
+    else ()
+    
+};
+declare function role:isFirstUser()
+{
+    try {
+    let $log := if ($xqmvc-cfg:debug) then xdmp:log("Reading if First USer") else ()  
+    let $eval := xdmp:eval(
+        fn:concat(
+        "xquery version '1.0-ml'; 
+        import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+        if(fn:doc('/plugins/security/config.xml')/security_config/admin-user-completed/text() eq 'false')
+        then (fn:true())
+        else (fn:false())"
+        ), (),
+        ())
+        return $eval
+    } catch($err) {
+        let $log := xdmp:log(fn:concat("error reading security config for first user", $err/*:message/text()))
+        return fn:false()
+    }    
+};
+declare function role:markAsFirstUser()
+{
+    try {
+     let $log := if ($xqmvc-cfg:debug) then xdmp:log("Updating security config to mark true for admin-user-completed") else ()  
+    let $eval := xdmp:eval(
+        fn:concat(
+        "xquery version '1.0-ml'; 
+        import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+        xdmp:node-replace(fn:doc('/plugins/security/config.xml')/security_config/admin-user-completed, <admin-user-completed>true</admin-user-completed>);"
+        ), (),
+        ())
+        return $eval
+    } catch($err) {
+        let $log := xdmp:log(fn:concat("error reading security config for first user", $err/*:message/text()))
+        return fn:false()
+    }    
 };

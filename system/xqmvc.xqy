@@ -47,6 +47,7 @@ declare variable $doctype-xhtml-1.0-transitional := '<!DOCTYPE html PUBLIC "-//W
 declare variable $doctype-xhtml-1.0-frameset :=     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">';
 declare variable $doctype-xhtml-1.1 :=              '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">';
 
+
 declare function _handleAuthorization($controller-file, $function)
 {
     if($xqmvc-conf:authentication-action eq '')
@@ -56,12 +57,13 @@ declare function _handleAuthorization($controller-file, $function)
         
         let $roles := xdmp:get-current-roles()
         let $roleNames := 
-            (:let $stored-roles := xdmp:get-session-field("roles",'')
+            let $stored-roles := xdmp:get-session-field("roles",'')
             return 
-            if($stored-roles eq '')
+            if($stored-roles eq '' or $stored-roles eq ())
             then
                 (
-                let $security-roles := :)
+           
+                let $security-roles := 
                 xdmp:eval(fn:concat("xquery version '1.0-ml'; 
                                 import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
                                 sec:get-role-names((",fn:string-join(for $ri in $roles return xs:string($ri), ","),"))"), 
@@ -70,16 +72,17 @@ declare function _handleAuthorization($controller-file, $function)
                                     <database>{xdmp:database("Security")}</database> 
                                 </options>
                                 ) 
-           (:     let $_ := xdmp:set-session-field("roles", $security-roles)
-                let $_ := xdmp:log("caching roles")
+                let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Caching Roles:",  fn:string-join($security-roles, ","))) else ()             
+                let $_ := xdmp:set-session-field("roles", $security-roles)
                 return $security-roles
                 )
             else
                 (
-                $stored-roles
-                ):)
+                    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Pulling roles from cache:",  fn:string-join($stored-roles, ","))) else () 
+                    return $stored-roles
+                )
         
-       let $isAuthorized :=
+        let $isAuthorized :=
             let $done := 0
             for $role in $roleNames/text()
             where ($done lt 1)
@@ -93,7 +96,7 @@ declare function _handleAuthorization($controller-file, $function)
                         </options>))
                 then (xdmp:set($done, 1),fn:true()) 
                 else (fn:false())
-                )
+                 )
         return 
             $isAuthorized
         )
@@ -115,11 +118,11 @@ as item()*
         then (
             (: check authorization if defined :)
             let $isAuthorized := 
-                if($controller-file ne fn:concat($plugin-dir, '/', $xqmvc-conf:default-plugin, '/controllers/', $xqmvc-conf:default-controller, '.xqy'))
+                if($controller-file ne $xqmvc-conf:default-controller-path)
                 then _handleAuthorization($controller-file, $function)
                 else fn:true()
             return
-                if($isAuthorized eq fn:true())
+                if($isAuthorized)
                 then 
                     (
                     let $import-declaration := fn:concat(
@@ -145,10 +148,14 @@ as item()*
         (: choose routing since controller not found :)    
         else (
             if($xqmvc-conf:use-default-controller-on-fail)
-            then (
-                 plugin-controller($xqmvc-conf:default-plugin, $xqmvc-conf:default-controller, 'index' )
+            then 
+                (
+                _controller($xqmvc-conf:default-controller-path, $xqmvc-conf:default-action)
                 )
-            else ()
+            else 
+                (
+                xdmp:set-response-code(404,"Not Found.")
+                )
         )
 };
 
@@ -505,4 +512,27 @@ declare function log-status()
         'controller=[', current-controller()    , '] ',
         'function=[',     current-function()        , '] '
     ))
+};
+declare function getContentURL($url)
+{   
+    let $urlParts := fn:tokenize($url, "\?")
+    let $mappings := fn:doc('/application/mapping.xml')/mappings
+    let $mapping := 
+        for $mapping in $mappings/mapping
+        return 
+            if (fn:matches($urlParts[1], $mapping/@regex)) then
+                $mapping
+            else ()
+    return
+        if (fn:count($mapping)) then (
+            let $replaceString := 
+                for $params in $mapping[1]/params
+                return
+                    fn:concat("&amp;", $params/@name/fn:string(), "=$", $params/@match/fn:string())
+            let $template := $mapping[1]/@template/fn:string()
+            let $queryString := fn:replace($urlParts[1], $mapping/@regex, fn:string-join($replaceString, "")) 
+            return 
+                fn:concat("?path=", $template, $queryString, "&amp;", $urlParts[2])
+        )
+        else ()    
 };

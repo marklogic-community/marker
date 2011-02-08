@@ -20,7 +20,7 @@ xquery version "1.0-ml";
 
 :)
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "../../system/xqmvc.xqy";
-import module namespace taglib-security = "http://marklogic.avalonconsult.com/plugin/security/taglib" at "/plugins/security/taglibs/taglib-auth.xqy";
+import module namespace taglib-security = "http://marklogic.com/plugin/security/taglib" at "/plugins/security/taglibs/taglib-auth.xqy";
    
 
 declare variable $data as map:map external;
@@ -46,16 +46,13 @@ $xqmvc:doctype-xhtml-1.1,
     <div id="container">
     <div id="header" style="position:relative;">
         <h1>
-            MarkLogic Marker
+          &nbsp; 
         </h1>
         <div style="position:absolute;top:5px;right:5px;width:150px;text-align:right;"> {taglib-security:login-logout()}</div>
     </div>
     <div id="navigation">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact us</a></li>
+          &nbsp;   
         </ul>
     </div>
     <div id="content-container">
@@ -63,12 +60,7 @@ $xqmvc:doctype-xhtml-1.1,
             <div>{ map:get($data, 'body') }</div>
         </div>
         <div id="aside">
-            <h3>
-                Content 
-            </h3>
-            <p>
-                <a href="/root/content/pages/wiki/Aquarius_(constellation)">Sample Wiki Page</a>
-            </p>
+            
         </div>
         <div id="footer">
            {taglib-security:current-user()}

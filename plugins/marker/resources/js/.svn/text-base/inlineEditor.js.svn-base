@@ -1,0 +1,390 @@
+/*
+
+ admin/js/inlineEditor.js
+
+ Copyright 2010 MarkLogic Corporation 
+
+ Licensed under the Apache License, Version 2.0 (the "License"); 
+ you may not use this file except in compliance with the License. 
+ You may obtain a copy of the License at 
+
+        http://www.apache.org/licenses/LICENSE-2.0 
+
+ Unless required by applicable law or agreed to in writing, software 
+ distributed under the License is distributed on an "AS IS" BASIS, 
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+ See the License for the specific language governing permissions and 
+ limitations under the License. 
+
+*/
+
+$(document).ready(function(){
+	COMOMSInlineEdit.init();
+});
+
+// library for setting up inline editing controls and submitting create and updates of content
+var COMOMSInlineEdit = {
+	currentFocus:null,
+	
+	init: function() {
+		var originalValues = new Array();
+
+		// wire up the Collection toggle
+		if($.cookie('COMOMS_COLLECTION') == "DRAFTS")
+			$("#adminbar-collection a").html("viewing [DRAFTS]").click(function() {
+				$.cookie('COMOMS_COLLECTION', "PUBLISHED", {path: '/'});
+				window.location.href = window.location.href;
+			});
+		else
+			$("#adminbar-collection a").html("viewing [PUBLISHED]").click(function() {
+				$.cookie('COMOMS_COLLECTION', "DRAFTS", {path: '/'});
+				window.location.href = window.location.href;
+			});
+			
+		
+		// don't allow enter keys to wrap inline element text
+		$(".one-line-content-editable").keypress(function(e){ 
+			return e.which != 13 && // enter
+				(e.which != 8 || $(this).html().length > 0);       //backspace 
+		});
+	
+		// register create content action
+		$("#comoms-inline-create").click(function(){
+			
+			var data = COMOMSInlineEdit.prepareFieldData();			
+			var type = $("comoms\\:type").html();
+			data.action="POST"
+			
+			$.ajax({
+				type: 'POST',
+				url: "/api/content/" + type + ".html",
+				data: data,
+				success: function(rsp){
+					window.location.href = rsp;
+				},
+				error :function(req, status, error) {
+					alert("ERROR! " + error)
+				}
+			});
+		});
+		
+		// register save content action
+		$("#comoms-inline-save").click(function(){
+			
+			var data = COMOMSInlineEdit.prepareFieldData();			
+			var type = $("comoms\\:type").html();
+			data.uri = $("comoms\\:uri").html();
+			data.action = "PUT";
+			
+			$.ajax({
+				type: 'POST',
+				url: "/api/content/" + type + ".html",
+				data: data,
+				success: function(rsp){
+					window.location.href = rsp;
+				},
+				error :function(req, status, error) {
+					alert("ERROR! " + error)
+				}
+			});
+		});	
+		
+		// register publish content action
+		$("#comoms-inline-publish").click(function(){
+					
+			var type = $("comoms\\:type").html();
+			
+			$.ajax({
+				type: 'POST',
+				url: "/api/content.html",
+				data: { uri: $("comoms\\:uri").html(), action: "PUB"},
+				success: function(rsp){
+					window.location.href = rsp;
+				},
+				error :function(req, status, error) {
+					alert("ERROR - Failed to publish! ");
+				}
+			});
+			
+			return false;
+		});			
+
+		// register publish content action
+		$("#comoms-inline-unpublish").click(function(){
+					
+			var type = $("comoms\\:type").html();
+			
+			$.ajax({
+				type: 'POST',
+				url: "/api/content.html",
+				data: { uri: $("comoms\\:uri").html(), action: "UNPUB"},
+				success: function(rsp){
+					window.location.href = rsp;
+				},
+				error :function(req, status, error) {
+					alert("ERROR - Failed to unpublish! ");
+				}
+			});
+			
+			return false;
+		});			
+			
+		// register publish content action
+		$("#comoms-inline-history").click(function(){
+					
+			var type = $("comoms\\:type").html();
+			
+			$.ajax({
+				type: 'GET',
+				url: "/api/content.html",
+				data: { uri: $("comoms\\:uri").html(), action: "HISTORY"},
+				success: function(rsp){
+
+					$.fn.colorbox({html: rsp, opacity: 0.5});
+				},
+				error :function(req, status) {
+					alert("ERROR - Failed to fetch history! " + status);
+				}
+			});
+			
+			return false;
+		});			
+
+		
+		$(document).find("comoms\\:field").each(function() {
+			// store the original value
+			var value =  $(this).html();
+			var fieldType = $(this).attr("type");
+			var fieldName = $(this).attr("name");
+			var fieldLabel = $(this).attr("label");
+			
+			originalValues[$(this).parent().attr("name") ] = value;
+			
+			if (fieldType == "xhtml") {
+				$(this).html( "<comoms:wrapper><div contenteditable='true' class='comoms-editable'>" + value + '</div></comoms:wrapper>' );	
+				$(this).click(function(){
+					if($('#rich-editor-controls').length < 1)
+						$('#adminbar-pagetools').append("<li id='rich-editor-controls'>" +
+							"<input type='button' value='Bold' id='bold' class='rich-editor-button'/>" +
+							"<input type='button' value='Italic' id='italic' class='rich-editor-button'/>" +
+							"<input type='button' value='Underline' id='underline' class='rich-editor-button'/>" +
+							"<input type='button' value='&lt;a&gt;' id='createLink' cmdValue='promptUser' promptText='URL of link?' class='rich-editor-button'/>" +
+							"<input type='button' value='&lt;img&gt;' id='insertimage' cmdValue='promptUser' promptText='URL of image?' class='rich-editor-button'/>" +
+							"<input type='button' value='&lt;ul&gt;' id='insertunorderedlist' class='rich-editor-button'/>" +
+							"<input type='button' value='&lt;ol&gt;' id='insertorderedlist' class='rich-editor-button'/>" +
+							"<input type='button' value='Code Toggle' onclick='COMOMSInlineEdit.rawToggle()'/>" +
+							
+							"</li>");
+					if(!$("#bar").hasClass("lock"))
+						$("#bar").addClass("lock");		
+				});	
+
+			} else {
+				$(this).html( "<div contenteditable='true' class='comoms-editable' style='display:inline;'>" + value + '</div>' );	
+				$(this).click(function(){ 
+					$('#rich-editor-controls').remove(); 
+					if($("#bar").hasClass("lock"))
+						$("#bar").removeClass("lock");		
+				});								
+			}
+	
+			var el = $(this).children(":first");
+			
+
+
+			//el.inlineEdit();
+			
+			/*
+			if(fieldType == "string") {
+				el.click(function(e){
+					var inputElement = $('<div></div>')
+						.addClass('comoms-inline')
+						.append($('<label/>').html(fieldLabel + " (" + fieldName + ")"))
+						.append($('<input/>').attr({ type: "text", value: value}).addClass('comoms-inline-textbox'))
+						.keyup(function() { 
+							el.html($(this).find('input').val());
+						});
+					$.fn.colorbox({html: inputElement, opacity: 0.5});
+				});			
+			} else 
+			*/
+			/*
+			if(fieldType == "xhtml") {
+				el.click(function(e){
+					var value =  $(this).html();
+					var inputElement = $('<textarea></textarea>')
+						.addClass('comoms-inline')
+						.attr({ id: "comoms-inline-tinymce"}).addClass('comoms-inline-tinymce tinymce').val(value);
+					$.fn.colorbox({html: inputElement, opacity: 0.5});
+					COMOMSInlineEdit.initializeTinymceEditor(inputElement, el);
+					
+					//$.fn.colorbox.resize();
+				});			
+				
+			}
+			*/	
+			el.hover(
+				function(e){
+					el.addClass("hover-editable");
+					
+                                                                 // Recipe demo looks a little nicer without this.
+					var title = $(this).parent().attr("label") ; // + " (" + $(this).parent().attr("name") + ")";
+		            var top = (e.pageY + yOffset); 
+					var left = (e.pageX + xOffset);
+		            
+		            $('body').append( '<p id="vtip"><img id="vtipArrow" />' + title + '</p>' );
+		                        
+		            $('p#vtip #vtipArrow').attr("src", '/images/vtip_arrow.png');
+		            $('p#vtip').css("top", top+"px").css("left", left+"px").fadeIn("slow");
+					
+				},
+				function() {
+					el.removeClass("hover-editable");
+					$("p#vtip").fadeOut("slow").remove();
+				}
+			).mousemove(
+		        function(e) {
+		            var top = (e.pageY + yOffset);
+		            var left = (e.pageX + xOffset);
+		                         
+		            $("p#vtip").css("top", top+"px").css("left", left+"px");
+		        }
+		    ).blur(
+				function() {
+					// some cases where errent br tags are getting added to content editable regions
+					$(this).html( $(this).html().replace("<br>", "") );
+					if($(this).text() == "")
+						$(this).html("[-]");
+				}
+			);
+		});		
+		
+		$(".rich-editor-button").live('click', function(){ 
+			var cmd = $(this).attr("id");
+			var bool = false;
+			var value = $(this).attr('cmdValue') || null;
+			if (value == 'promptUser')
+				value = prompt($(this).attr('promptText'));
+			var returnValue = document.execCommand(cmd,bool,value);
+		});
+		
+
+		$('*').focus( function() {
+		    COMOMSInlineEdit.currentFocus = this;
+		}).blur( function() {		
+		    //COMOMSInlineEdit.currentFocus = null;		
+		}); 
+	},
+	
+	prepareFieldData: function() {
+		var data = {};
+		$("comoms\\:field").each(function() { 
+			var fieldType = $(this).attr("type");
+			var fieldName = $(this).attr("full-path-id");
+			var fieldValue;
+			if(fieldType == "xhtml") {
+				var el = $(this).children(":first").children(":first");
+				if($(el).attr("contenteditable") == "false") {
+					COMOMSInlineEdit.rawToggle($(el));
+				}
+				fieldValue = $(el).html();
+				fieldValue = fieldValue.replace(/<br>/g, "<br/>");
+			} else {
+				fieldValue = $(this).children(":first").html();
+			}
+			data[fieldName] = fieldValue;
+		});
+		return data;
+	},
+	
+	/** 
+	 * this below is the function you need from:
+	 * http://stackoverflow.com/questions/1865563/
+	 * set-cursor-at-a-length-of-14-onfocus-of-a-textbox
+	 */
+    setCursor: function(node,pos){
+	    var node = (typeof node == "string" || node instanceof String) ? document.getElementById(node) : node;
+        if(!node){
+            return false;
+        }else if(node.createTextRange){
+            var textRange = node.createTextRange();
+            textRange.collapse(true);
+            textRange.moveEnd(pos);
+            textRange.moveStart(pos);
+            textRange.select();
+            return true;
+        }else if(node.setSelectionRange){
+            node.setSelectionRange(pos,pos);
+            return true;
+        }
+        return false;
+    },
+	
+	rawToggle: function(focusedElement) {
+	   	if ( focusedElement === undefined ) {
+			focusedElement = COMOMSInlineEdit.currentFocus;
+   		}
+		
+		if($(focusedElement).attr("contenteditable") == "true") {
+			var current = $(focusedElement).html()
+			var width = $(focusedElement).width()
+			var height = $(focusedElement).height()
+			$(focusedElement).attr("contenteditable", false);
+			$(focusedElement).html("<textarea>" + current + "</textarea>");
+			$(focusedElement).children("textarea").width(width);
+			$(focusedElement).children("textarea").height(height);
+			
+		} else {
+			var current = $(focusedElement).children("textarea").val();
+			$(focusedElement).html(current);
+			$(focusedElement).attr("contenteditable", true);
+		}
+
+	}
+	
+	
+};
+
+
+
+
+//TODO - this was inlined and should be replaced when we have a UI design, or if used
+//       included appropriately
+
+/**
+Vertigo Tip by www.vertigo-project.com
+Requires jQuery
+*/
+
+this.vtip = function() {    
+    this.xOffset = -10; // x distance from mouse
+    this.yOffset = 10; // y distance from mouse       
+    
+    $(".vtip").unbind().hover(    
+        function(e) {
+            this.t = this.title;
+            this.title = ''; 
+            this.top = (e.pageY + yOffset); this.left = (e.pageX + xOffset);
+            
+            $('body').append( '<p id="vtip"><img id="vtipArrow" />' + this.t + '</p>' );
+                        
+            $('p#vtip #vtipArrow').attr("src", 'images/vtip_arrow.png');
+            $('p#vtip').css("top", this.top+"px").css("left", this.left+"px").fadeIn("slow");
+            
+        },
+        function() {
+            this.title = this.t;
+            $("p#vtip").fadeOut("slow").remove();
+        }
+    ).mousemove(
+        function(e) {
+            this.top = (e.pageY + yOffset);
+            this.left = (e.pageX + xOffset);
+                         
+            $("p#vtip").css("top", this.top+"px").css("left", this.left+"px");
+        }
+    );            
+    
+};
+
+jQuery(document).ready(function($){vtip();}) 

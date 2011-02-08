@@ -19,7 +19,8 @@ body {
 
 #header
 {
-	background: #ccc;
+	background: url(/application/resources/img/MarkerHeader.jpg);
+	height:60px;
 	padding: 20px;
 }
 
@@ -29,38 +30,18 @@ body {
 {
 	float: left;
 	width: 900px;
-	background: #333;
+	background: #07186a;
+	height:31px;
 }
 
-#navigation ul
-{
-	margin: 0;
-	padding: 0;
-}
 
-#navigation ul li
-{
-	list-style-type: none;
-	display: inline;
-}
-
-#navigation li a
-{
-	display: block;
-	float: left;
-	padding: 5px 10px;
-	color: #fff;
-	text-decoration: none;
-	border-right: 1px solid #fff;
-}
-
-#navigation li a:hover { background: #383; }
 
 #content-container
 {
 	float: left;
 	width: 900px;
 	background: #fff ;
+	clear:both;
 }
 
 #content
@@ -69,6 +50,7 @@ body {
 	float: left;
 	width: 650px;
 	padding: 20px 0;
+	min-height:300px;
 	/*margin: 0 0 0 30px;*/
 }
 
@@ -79,6 +61,7 @@ body {
 	float: right;
 	width: 240px;
 	padding: 20px 0;
+	min-height:300px;
 	/*margin: 0 20px 0 0;*/
 }
 
@@ -86,11 +69,15 @@ body {
 
 #footer
 {
-	clear: left;
-	background: #ccc;
-	text-align: right;
+	clear: both;
+	background: #07186a;
+	/*text-align: right;*/
 	padding: 20px;
 	height: 1%;
+}
+#footer a
+{
+	color:#fff;
 }
 a, a:link, a:visited { color: #0099CC; font-weight: normal; text-decoration: none; }
 a:hover { color: #009900; text-decoration: underline; }
