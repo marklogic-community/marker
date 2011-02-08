@@ -156,17 +156,56 @@ declare function oauth2:mapUserToAuthProvider($markLogicUsername as xs:string,
  
     return
         if($userDetail) then
-            if($userDetail/provider-data[@name = $providerName]) then
-                xdmp:node-replace($userDetail/provider-data[@name = $providerName], $providerUserData)
-               else
-                xdmp:node-insert-child($userDetail,$providerUserData)
+            if($userDetail/provider-data[@name = $providerName]) 
+            then
+                (
+                let $evalStatement := "xquery version '1.0-ml'; 
+                                        declare variable $userDetail external;
+                                        declare variable $providerName external;
+                                        declare variable $providerUserData external;
+                                        xdmp:node-replace($userDetail/provider-data[@name = $providerName], $providerUserData)"
+                let $eval := xdmp:eval($evalStatement,
+                                        (xs:QName("userDetail"), $userDetail,xs:QName("providerName"), $providerName,xs:QName("providerUserData"), $providerUserData),
+                                        (<options xmlns="xdmp:eval">
+                                          <isolation>different-transaction</isolation>
+                                          <prevent-deadlocks>true</prevent-deadlocks>
+                                        </options>))
+                return $eval
+                )
+           else
+                let $evalStatement := "xquery version '1.0-ml'; 
+                                        declare variable $userDetail external;
+                                        declare variable $providerUserData external;
+                                        xdmp:node-insert-child($userDetail,$providerUserData)"
+                let $eval := xdmp:eval($evalStatement,
+                                        (xs:QName("userDetail"), $userDetail,xs:QName("providerUserData"), $providerUserData),
+                                        (<options xmlns="xdmp:eval">
+                                          <isolation>different-transaction</isolation>
+                                          <prevent-deadlocks>true</prevent-deadlocks>
+                                        </options>))
+                return $eval
+                
         else
-            xdmp:document-insert($pathToUserDetail,
-                element user { 
-                    attribute name { $markLogicUsername },
-                    $providerUserData
-                },
-                (xdmp:permission("security-anon", "read"), xdmp:permission("security-admin", "update"))
+            (
+            let $evalStatement := "xquery version '1.0-ml'; 
+                                        declare variable $pathToUserDetail external;
+                                        declare variable $markLogicUsername external;
+                                        declare variable $providerUserData external;
+                                        xdmp:document-insert($pathToUserDetail,
+                                            element user { 
+                                                attribute name { $markLogicUsername },
+                                                $providerUserData
+                                            },
+                                            (xdmp:permission('security-anon', 'read'), xdmp:permission('security-admin', 'update'))
+                                            )"
+            let $eval := xdmp:eval($evalStatement,
+                                    (xs:QName("pathToUserDetail"), $pathToUserDetail,xs:QName("markLogicUsername"), $markLogicUsername,xs:QName("providerUserData"), $providerUserData),
+                                    (<options xmlns="xdmp:eval">
+                                      <isolation>different-transaction</isolation>
+                                      <prevent-deadlocks>true</prevent-deadlocks>
+                                    </options>))
+            return $eval
+            
             )          
 };
 
