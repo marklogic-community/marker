@@ -136,7 +136,7 @@ declare function install()
                 <redirect_url>http://localhost:8100/security/authentication/github</redirect_url>
             </provider>
         </security_config>,
-            (xdmp:permission("security-anon", "read"), xdmp:permission("security-admin", "update"))
+            (xdmp:permission("security-anon", "read"), xdmp:permission("security-anon", "update"), xdmp:permission("security-admin", "update"))
     )
     (:let $_ := xdmp:logout():)
     let $_ := for $name in xdmp:get-session-field-names()
