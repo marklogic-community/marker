@@ -5,6 +5,6 @@ declare variable $data as map:map external;
 
 <div id="main-content">
    <div>
-    Setup was successful for the security plugin. Please login now to set your account as the administrator.
+    Setup was successful for the security plugin. Please click logout (upper right top corner) and then click login to set your account as the administrator.
    </div>
 </div>

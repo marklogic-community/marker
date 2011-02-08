@@ -57,7 +57,7 @@ let $_ :=  admin:save-configuration($server)
 
 let $config := admin:get-configuration()
 let $groupid := admin:group-get-id($config, "Default")
-let $_ := admin:appserver-set-url-rewriter($config,
+let $config := admin:appserver-set-url-rewriter($config,
          admin:appserver-get-id($config, $groupid, "8100-marker"),
          "system/rewrite.xqy")
 let $_ :=  admin:save-configuration($config)
