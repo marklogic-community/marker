@@ -113,7 +113,8 @@ declare function role:addUserToRole($user, $role)
         import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
         sec:user-add-roles('", $user, "','", $role, "')"
         ), (),
-        <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> </options>)
+        <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> <isolation>different-transaction</isolation>
+      <prevent-deadlocks>true</prevent-deadlocks> </options>)
     } catch($err) {
         let $log := xdmp:log(fn:concat("Couldn't add User To because Role ", $role, ".", $err/*:message/text()))
         return ()
