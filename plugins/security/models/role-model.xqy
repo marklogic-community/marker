@@ -113,8 +113,7 @@ declare function role:addUserToRole($user, $role)
         import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
         sec:user-add-roles('", $user, "','", $role, "')"
         ), (),
-        <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> <isolation>different-transaction</isolation>
-      <prevent-deadlocks>true</prevent-deadlocks> </options>)
+        <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> </options>)
     } catch($err) {
         let $log := xdmp:log(fn:concat("Couldn't add User To because Role ", $role, ".", $err/*:message/text()))
         return ()
@@ -153,10 +152,7 @@ declare function role:isFirstUser()
         then (fn:true())
         else (fn:false())"
         ), (),
-        (<options xmlns="xdmp:eval">
-      <isolation>different-transaction</isolation>
-      <prevent-deadlocks>true</prevent-deadlocks>
-    </options> ))
+        ())
         return $eval
     } catch($err) {
         let $log := xdmp:log(fn:concat("error reading security config for first user", $err/*:message/text()))
