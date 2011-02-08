@@ -46,6 +46,7 @@ declare function install()
          "http://marklogic.com/xdmp/privileges/xdmp-get-session-field",
          "http://marklogic.com/xdmp/privileges/xdmp-value",
          "http://marklogic.com/xdmp/privileges/xdmp-user-roles",
+         "http://marklogic.com/xdmp/privileges/user-add-roles",
          "http://marklogic.com/xdmp/privileges/xdmp-get-session-field-names"))  
     let $addRoles := authorization:addPrivileges("security-admin", 
        ("http://marklogic.com/xdmp/privileges/admin-module-read",

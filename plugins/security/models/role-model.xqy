@@ -167,12 +167,12 @@ declare function role:markAsFirstUser()
         fn:concat(
         "xquery version '1.0-ml'; 
         import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-        xdmp:node-replace(fn:doc('/plugins/security/config.xml')/security_config/admin-user-completed, <admin-user-completed>true</admin-user-completed>);"
+        xdmp:node-replace(fn:doc('/plugins/security/config.xml')/security_config/admin-user-completed, <admin-user-completed>true</admin-user-completed>)"
         ), (),
         ())
         return $eval
     } catch($err) {
-        let $log := xdmp:log(fn:concat("error reading security config for first user", $err/*:message/text()))
+        let $log := xdmp:log(fn:concat("error updating security config for first user", $err/*:message/text()))
         return fn:false()
     }    
 };
