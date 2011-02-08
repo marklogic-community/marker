@@ -152,7 +152,10 @@ declare function role:isFirstUser()
         then (fn:true())
         else (fn:false())"
         ), (),
-        ())
+        (<options xmlns="xdmp:eval">
+      <isolation>different-transaction</isolation>
+      <prevent-deadlocks>true</prevent-deadlocks>
+    </options> ))
         return $eval
     } catch($err) {
         let $log := xdmp:log(fn:concat("error reading security config for first user", $err/*:message/text()))
@@ -169,7 +172,10 @@ declare function role:markAsFirstUser()
         import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
         xdmp:node-replace(fn:doc('/plugins/security/config.xml')/security_config/admin-user-completed, <admin-user-completed>true</admin-user-completed>)"
         ), (),
-        ())
+        (<options xmlns="xdmp:eval">
+      <isolation>different-transaction</isolation>
+      <prevent-deadlocks>true</prevent-deadlocks>
+    </options> ))
         return $eval
     } catch($err) {
         let $log := xdmp:log(fn:concat("error updating security config for first user", $err/*:message/text()))
