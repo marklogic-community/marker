@@ -5,7 +5,8 @@ import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic
 declare variable $username := "facebook_1115962037";
 
 
-let $sec := xdmp:eval(
+let $sec := try{
+				xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
@@ -13,7 +14,19 @@ let $sec := xdmp:eval(
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
-let $sec := xdmp:eval(
+            } catch ($e){}
+let $sec := try{
+				xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-user('security-anon')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+            } catch ($e){}
+
+let $sec := try{xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
@@ -21,15 +34,27 @@ let $sec := xdmp:eval(
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
-let $sec := xdmp:eval(
+                     } catch ($e){}
+let $sec := try{xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
                     sec:remove-role('security-user')"), (),
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
+                    </options>)
+                     } catch ($e){} 
+let $sec := try{xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:remove-role('marker-admin')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
                     </options>) 
-let $sec := xdmp:eval(
+                     } catch ($e){}
+                
+let $sec := try{xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
@@ -37,7 +62,27 @@ let $sec := xdmp:eval(
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
-					
+                     } catch ($e){}
+let $sec := try{
+				xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:unprotect-collection('DRAFTS')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+            } catch ($e){}
+let $sec := try{
+				xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:unprotect-collection('PUBLISHED')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+            } catch ($e){}					
 	
 let $config := admin:get-configuration()
 let $groupid := admin:group-get-id($config, "Default")

@@ -23,16 +23,25 @@ import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "../.
 declare variable $data as map:map external;
 
 <div>
+    <h1>Welcome to Marker from MarkLogic</h1>
     <p>
-        <a href="http://code.google.com/p/xqmvc">
+        This is a sample site provided by MarkLogic to demonstrate a CMS on top of MarkLogic. The sample is based off of a derived xqmvc architecture that has been modified
+        to support multiple url structures and security schemes.
+    </p>
+    <p>
+        Out of the box you get the new security plugin that allows role based authorization to the mvc model. If you are seeing this screen, you have successfully
+        installed the security plugin.
+    </p>
+    <p>
+        Please check out the side bar to the right for additional plugins that may need to be installed.
+    </p>
+    <p>
+        <a href="http://github.com/marker">
             Website / Documentation
         </a>
     </p>
     <table>
-        <tr>
-        <td>doc count:</td><td>{fn:count(xdmp:directory("/wiki/"))}</td>
-        </tr>
-        <tr>
+          <tr>
             <td>Time:</td><td>{ xdmp:strftime("%a %d %b %Y %I:%M %p", xs:dateTime(map:get($data, 'time'))) }</td>
         </tr>
         <tr>
@@ -44,6 +53,16 @@ declare variable $data as map:map external;
         <tr>
             <td>MarkLogic:</td><td>{ map:get($data, 'vers') }</td>
         </tr>
+        <tr>
+            <td># of Documents in Library:</td><td>{fn:count(cts:search(fn:doc(), 
+        cts:and-query((
+            cts:directory-query("/", "infinity"), fn:concat('', "*")))))}</td>
+        </tr>
+        <tr>
+            <td>Documents:</td><td>{for $doc in cts:search(fn:doc(), 
+        cts:and-query((
+            cts:directory-query("/", "infinity"), fn:concat('', "*"))))
+            return <div>{fn:base-uri($doc)}</div>}</td>
+        </tr>
     </table>
-    <p><a href="{ xqmvc:link('welcome', 'restricted') }">Restricted &raquo;</a></p>
 </div>

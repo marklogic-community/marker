@@ -7,83 +7,23 @@ SETUP INSTRUCTIONS
 
 2. Install and run MarkLogic 4.2 (http://developer.marklogic.com/downloads)
 
-3. Log into the MarkLogic administration console
-  (e.g. http://localhost:8001)
+3. Open cq and copy and paste "Admin-base-install.txt" contents into the query window. Press text.
 
-4. Create a new database called 'marker'. Create a forest called 'marker' and 
-attache the database to it.
+4. If successful you should see : Complete - please open your browser to http://localhost:8100 and login with your admin credentials
 
-5. Create a new HTTP app server on port 8100. You may change this port, but you will need to update the application config, setup/index for security and create your own github/facebook oauth applications.
-	
-
-server name         8100-Marker
-root                <location of where the project source is checked out pointed to the src directory
-port                8100
-modules             file system
-database            marker
-url rewriter        system/rewrite.xqy
-authentication		application-level
-default user        admin
-<leave rest of defaults for now>
-
-To setup facebook oauth application : http://www.facebook.com/developers
-To setup github oauth application : http://github.com/account/applications/new
-
-6. Comment out the following line found in the /application/config.xqy
-declare variable $authentication-action as xs:string := 'xquery version "1.0-ml";
-                                                        import module namespace authorization = "http://marklogic.com/plugins/security/authorization" at "/plugins/security/models/authorization-model.xqy";
-                                                        declare variable $controller external;
-                                                        declare variable $action external;
-                                                        declare variable $role external;
-                                                        authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)';
-
-7. Uncomment the following line:
-(:declare variable $authentication-action as xs:string := '';:)
+5. Open a browser to http://localhost:8100 and follow the on screen prompts
+	a. to install security, click "Security has not been installed on this application. To continue, please click here to install"
+	b. you should see : Setup was successful for the security plugin. Please click logout (upper right top corner) and then click login to set your account as the administrator.
+	c. click logout
+	d. this will take you to the welcome screen
+	e. click login - this sets your account as the admin account
+	f. after successfully logging in (you will be prompted to allow this application access to your fb or github account) you will be placed back on the welcome screen
+	g. you should see "plugins" on the sidebar with security -INSTALLED and marker - NOT INSTALLED
+	h. click on marker - NOT INSTALLED
+	i. to install marker, click "Marker has not been installed on this application. To continue, please click here to install."
+	j. to install the sample data, click "Setup was successful for the marker plugin. Click here to install the sample data set"
+	k. begin exploring the application
 
 
-8. In a browser hit http://localhost:8100/security/setup/index - should display "complete" on successful setup
-
-9. In a browser hit http://localhost:8100/marker/setup/index - should display "complete" on successful setup
-
-10. Uncomment out the following line found in the /application/config.xqy
-(:declare variable $authentication-action as xs:string := 'xquery version "1.0-ml";
-                                                        import module namespace authorization = "http://marklogic.com/plugins/security/authorization" at "/plugins/security/models/authorization-model.xqy";
-                                                        declare variable $controller external;
-                                                        declare variable $action external;
-                                                        declare variable $role external;
-                                                        authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)';:)
-                                                        
-11. Comment out the following line:
-declare variable $authentication-action as xs:string := '';
-
-12. Via the admin console, set the marker app server default user to 'oauth-anon'.
-
-13. In a browser hit http://localhost:8100/ and you should be redirected to http://localhost:8100/welcome/index
-
-14. To load some static content exec the following in cq on the marker db
-
-(: insert the docs :)
-xquery version "1.0-ml";
-declare namespace markup ="http://www.w3.org/1999/xhtml";
-
-
-declare variable $options := 
-  <options xmlns="xdmp:document-get" xmlns:http="xdmp:http">
-    <repair>full</repair>
-    <format>xml</format>
-  </options>;
-declare variable $main_page := xdmp:document-get("http://en.wikipedia.org/wiki/List_of_constellations",$options);
-
-let $tr := for $table in $main_page//markup:table
-
-where data($table/@class) eq "wikitable"
-return $table/markup:tr
-for $a in $tr/markup:td[1]/markup:a/data(@href)
-let $doc := xdmp:document-get(fn:concat("http://en.wikipedia.org", $a), $options)
-return xdmp:document-insert(
-  fn:concat("/root/content/pages",$a), 
-  $doc, 
-  (xdmp:permission("marker-admin", "read"),xdmp:permission("oauth-anon", "read"), 
-             xdmp:permission("marker-admin", "update")),
- "wikipedia_pages")
-
+UNINSTALL INSTRUCTIONS
+1. Open cq and copy and paste "Admin-base-uninstall.txt" contents into the query window. Press text.

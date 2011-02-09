@@ -133,7 +133,13 @@ declare function logout(){
     let $_ := xdmp:logout()
     let $_ := for $name in xdmp:get-session-field-names()
                 let $log := if ($xqmvc-cfg:debug) then xdmp:log(fn:concat("Clearing Session Field Name:", $name)) else ()
-                return xdmp:set-session-field($name,()) 
+                return 
+                    if($name ne "init-redirect")
+                    then 
+                        (
+                        xdmp:set-session-field($name,())
+                        )
+                    else () 
     return xdmp:redirect-response("/")
 };
 

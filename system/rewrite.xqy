@@ -31,7 +31,10 @@ import module namespace xqmvc-conf = "http://scholarsportal.info/xqmvc/config" a
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "xqmvc.xqy";
 
 let $url := xdmp:get-request-url()
-let $contentUrl := xqmvc:getContentURL($url)
+let $contentUrl := 
+    if (matches($url, concat("^", $xqmvc:resource-dir)) or matches($url, concat("^", $xqmvc:library-dir)) or matches($url,"favicon.ico") or matches($url, concat("^", $xqmvc-conf:app-root, "/plugins/([\w\.-]+)/resources")) )
+    then ()
+    else (xqmvc:getContentURL($url))
 let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Requested url:", $url, " Content Url:", $contentUrl)) else ()
 return
     if ($contentUrl) then

@@ -1,6 +1,6 @@
 // TODO: find way to reference correct directory in plugin
 
-var _pluginDirectory = "/"
+var _pluginDirectory = "/marker/"
 
 /*
 	FUNCTION: library_manage
@@ -43,7 +43,7 @@ function library_manage(element){
 function _library_insert(uri){
 	$.ajax({
 		type: 'POST',
-		url: _pluginDirectory + 'rest/manage-document',
+		url: _pluginDirectory + 'ajax/manage-document',
 		data: 'uri=' + uri,
 		success: function(data){
 			if(data.isSuccess == "true"){
@@ -69,7 +69,7 @@ function _library_insert(uri){
 function _library_remove(uri, element){
 	$.ajax({
 		type: 'POST',
-		url: _pluginDirectory + 'rest/unmanage-document',
+		url: _pluginDirectory + 'ajax/unmanage-document',
 		data: 'uri=' + uri,
 		success: function(data){
 			if(data.isSuccess == "true"){

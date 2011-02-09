@@ -135,10 +135,12 @@ declare function role:checkForFirstUser($user)
             let $log := if ($xqmvc-cfg:debug) then xdmp:log("No first user - setting as security-admin") else ()  
             let $_ := role:addUserToRole($user, "security-admin")
             let $_ := role:markAsFirstUser()
-            return ()
+            return fn:true()
         )
-    else ()
-    
+    else 
+        (
+        fn:false()
+        )
 };
 declare function role:isFirstUser()
 {

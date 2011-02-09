@@ -47,6 +47,8 @@ declare function install()
          "http://marklogic.com/xdmp/privileges/xdmp-value",
          "http://marklogic.com/xdmp/privileges/xdmp-user-roles",
          "http://marklogic.com/xdmp/privileges/user-add-roles",
+         "http://marklogic.com/xdmp/privileges/admin-module-read",
+         "http://marklogic.com/xdmp/privileges/xdmp-filesystem-directory",
          "http://marklogic.com/xdmp/privileges/xdmp-get-session-field-names"))  
     let $addRoles := authorization:addPrivileges("security-admin", 
        ("http://marklogic.com/xdmp/privileges/admin-module-read",
@@ -70,10 +72,31 @@ declare function install()
                 sec:create-user('security-anon', 'Security Anonymous User', 'password', 'security-anon', (), ())", (),
                 <options xmlns="xdmp:eval"><database>{xdmp:database("Security")}</database> </options>)     
     
+    let $_ := role:addRoleToRole("security-anon","dls-user") 
     let $_ := role:addRoleToRole("security-user", "security-anon")
     let $_ := role:addRoleToRole("security-admin", "security-user")
     let $_ := role:addRoleToRole("security-admin", "security")
-   
+    let $_ := role:addRoleToRole("security-admin", "dls-admin")
+    let $_ := xdmp:document-insert("/plugins/security/controller-mapping/security-admin.xml",
+        <role-mappings>
+            <mapping mapped="1" plugin="security" controller="setup" action="index">security/setup/index</mapping>
+            <mapping mapped="1" plugin="security" controller="authentication" action="index">security/authentication/index</mapping>
+            <mapping mapped="1" plugin="security" controller="authentication" action="facebook">security/authentication/facebook</mapping>
+            <mapping mapped="1" plugin="security" controller="authentication" action="github">security/authentication/github</mapping>
+            <mapping mapped="1" plugin="security" controller="authentication" action="_authenticate">security/authentication/_authenticate</mapping>
+            <mapping mapped="1" plugin="security" controller="authentication" action="logout">security/authentication/logout</mapping>
+            <mapping mapped="1" plugin="security" controller="authorization" action="role-to-controller">security/authorization/role-to-controller</mapping>
+            <mapping mapped="1" plugin="security" controller="authorization" action="update-role-to-controller">security/authorization/update-role-to-controller</mapping>
+            <mapping mapped="1" plugin="security" controller="user" action="list">security/user/list</mapping>
+            <mapping mapped="1" plugin="" controller="welcome" action="index">/welcome/index</mapping>
+            <mapping mapped="1" plugin="" controller="welcome" action="restricted">/welcome/restricted</mapping>
+            <mapping mapped="1" plugin="marker" controller="setup" action="index">marker/setup/index</mapping>
+            <mapping mapped="1" plugin="marker" controller="setup" action="install">marker/setup/install</mapping>
+            <mapping mapped="1" plugin="marker" controller="setup" action="install-data">marker/setup/install-data</mapping>
+            <mapping mapped="1" plugin="marker" controller="render" action="index">marker/render/index</mapping>
+        </role-mappings>,
+            (xdmp:permission("security-anon", "read"), xdmp:permission("security-admin", "update"))
+    )
     let $_ := xdmp:document-insert("/plugins/security/controller-mapping/security-user.xml",
         <role-mappings>
             <mapping mapped="1" plugin="security" controller="setup" action="index">security/setup/index</mapping>
@@ -83,8 +106,6 @@ declare function install()
             <mapping mapped="1" plugin="security" controller="authentication" action="_authenticate">security/authentication/_authenticate</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="logout">security/authentication/logout</mapping>
             <mapping mapped="1" plugin="" controller="welcome" action="index">/welcome/index</mapping>
-            <mapping mapped="1" plugin="" controller="welcome" action="restricted">/welcome/restricted</mapping>
-            <mapping mapped="1" plugin="marker" controller="setup" action="index">marker/setup/index</mapping>
             <mapping mapped="1" plugin="marker" controller="render" action="index">marker/render/index</mapping>
         </role-mappings>,
             (xdmp:permission("security-anon", "read"), xdmp:permission("security-admin", "update"))
@@ -138,9 +159,10 @@ declare function install()
         </security_config>,
             (xdmp:permission("security-anon", "read"), xdmp:permission("security-anon", "update"), xdmp:permission("security-admin", "update"))
     )
-    (:let $_ := xdmp:logout():)
+    
     let $_ := for $name in xdmp:get-session-field-names()
-                return xdmp:set-session-field($name,()) 
+                return xdmp:set-session-field($name,())
+   let $_ := xdmp:set-session-field("init-redirect","/welcome/index")
     return xqmvc:template('master-template', (
                 'browsertitle', 'Security Setup Complete',
                 'body', xqmvc:plugin-view($plugin-cfg:plugin-name,'setup-install-view', ())

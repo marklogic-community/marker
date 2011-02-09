@@ -55,6 +55,7 @@ xquery version "1.0";
 module namespace mem = "http://xqdev.com/in-mem-update";
 declare default function namespace "http://www.w3.org/2005/xpath-functions";
 
+
 (:
     Inserts the given nodes as children of the given node
 :)

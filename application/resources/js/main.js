@@ -15,6 +15,7 @@
  *   http://www.gnu.org/licenses/gpl.html
  *
 */
+$().ready(function(){
 (function($){
 
 $.widget("ech.notify", {
@@ -140,3 +141,14 @@ $.extend($.ech.notify.instance.prototype, {
 });
 
 })(jQuery);
+});
+
+function _show_error(title, message, expires){
+	if(!expires)
+		var expires = 5000;
+	var handler = $("#notification-container").notify().notify("create", "themeroller-error", { title:title, text:message }, { custom:true, expires:expires });
+
+}
+function _show_info(title, message){
+	var handler = $("#notification-container").notify().notify("create", "themeroller-info", { title:title, text:message }, { custom:true });
+}

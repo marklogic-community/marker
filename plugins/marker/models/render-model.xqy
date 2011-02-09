@@ -29,19 +29,19 @@ import module namespace taglib-marker = "http://marklogic.com/marker/taglib/mark
 import module namespace marker-lib = "http://marklogic.com/marker" at "../library/marker.xqy";
 import module namespace library = "http://marklogic.com/marker/library" at "../library/library.xqy";
 import module namespace security = "http://marklogic.com/security" at "/plugins/security/library/security.xqy";
+import module namespace functx = "http://www.functx.com" at '/MarkLogic/functx/functx-1.0-nodoc-2007-01.xqy';
 
 import module namespace dls = 'http://marklogic.com/xdmp/dls' at '/MarkLogic/dls.xqy'; 
 declare namespace marker = "http://marklogic.com/plugins/marker";
 
 declare function display-content($uri){
-
     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading requested uri:", $uri)) else ()
     (: check if viewing published or library :)
     let $content :=
         try{
             if(xdmp:get-session-field("view-mode",library:collection-name()) eq library:collection-name())
-            then dls:node-expand(fn:doc($uri)/node(),cts:collection-query((library:collection-name())))
-            else dls:node-expand(fn:doc($uri)/node(),())
+            then dls:node-expand(library:doc($uri)/node(),cts:collection-query((library:collection-name())))
+            else dls:node-expand(library:doc($uri)/node(),())
         }catch ($e){
             let $log := xdmp:log(fn:concat("Missing published content for uri : ",$uri , " error:", fn:string($e)), "error")
             return 
@@ -55,24 +55,59 @@ declare function display-content($uri){
                     )
                 else
                     (
-                    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not logged in -- redirecting to error page:", $uri)) else ()
+                    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not logged in -- redirecting:", $uri)) else ()
                     let $_ := xdmp:set-session-field("redirect", fn:replace(fn:replace($uri, $cfg:default-document, ''),$cfg:content-root,''))
                     return ()
                     )
                 )
             
         } 
-       
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Injecting content:", $uri)) else ()   
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Base content:", xdmp:quote($content))) else ()   
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Injecting content:", $uri)) else ()
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Initial redirect set to:", xdmp:get-session-field("init-redirect"))) else ()   
     let $injectedContent := mem:node-insert-child($content//head,taglib-marker:editorJavascriptDependencies())
+    let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected javascript") else ()
     let $injectedContent := mem:node-insert-child($injectedContent//head,taglib-marker:editorCSSDependencies())
+    let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected css") else ()
     let $injectedContent := mem:node-insert-after($injectedContent//body,taglib-marker:adminBar())
+    let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected admin bar") else ()
     let $injectedContent := mem:node-insert-after($injectedContent//body,taglib-marker:notifications())
+    let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected notifications") else ()
     let $injectedContent := _resolveDynamicContent($injectedContent)
+    let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected dynamic content") else ()
+    let $log := if ($xqmvc-conf:debug) 
+        then 
+            (
+            if ($injectedContent)
+            then 
+                (
+                xdmp:log("Content rendered")
+                )
+            else 
+                (
+                xdmp:log("Content is empty")
+                )
+            )
+        else ()
+    
     return 
         if ($injectedContent)
-        then $injectedContent
-        else (xdmp:redirect-response("/security/error/not-authorized"))
+        then 
+            (
+            $injectedContent
+            )
+        else 
+            (
+            if(xdmp:get-session-field("init-redirect"))
+            then
+                (
+                xdmp:redirect-response(xdmp:get-session-field("init-redirect"))
+                )
+            else
+                (
+                xdmp:redirect-response("/security/error/not-authorized")
+                )
+            ) 
 };
 declare function _resolveDynamicContent($doc)
 {

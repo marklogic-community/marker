@@ -35,15 +35,7 @@ declare function taglib-marker:editorJavascriptDependencies() {
         <script type="text/javascript" src="/plugins/marker/resources/js/rangy-core.js">&nbsp;</script>,
         <script type="text/javascript" src="/plugins/marker/resources/js/rangy-selectionsaverestore.js">&nbsp;</script>,
         <script type="text/javascript"> 
-            $(document).ready(function() {{
-                $("[xml\\:base]").each(function(i){{
-                    //$(this).attr('contentEditable', 'true');
-                    $(this).attr('id', $(this).attr('xml:base'));
-                    $(this).attr('marker:field', 'xhtml');
-                    //$(this).aloha();
-                    
-                }});
-            }});
+            
             // initialise plugins
             jQuery(function(){{
                 jQuery('ul.sf-menu').superfish();

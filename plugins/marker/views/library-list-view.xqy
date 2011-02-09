@@ -1,6 +1,6 @@
 xquery version "1.0-ml";
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "/system/xqmvc.xqy";
-import module namespace taglib-library = "http://marklogic.avalonconsult.com/marker/taglib/library" at "../taglibs/taglib-library.xqy";
+import module namespace taglib-library = "http://marklogic.com/marker/taglib/library" at "../taglibs/taglib-library.xqy";
 declare namespace html = "http://www.w3.org/1999/xhtml";
 declare variable $data as map:map external;
 <div style="">

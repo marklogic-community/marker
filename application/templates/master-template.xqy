@@ -21,6 +21,7 @@ xquery version "1.0-ml";
 :)
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "../../system/xqmvc.xqy";
 import module namespace taglib-security = "http://marklogic.com/plugin/security/taglib" at "/plugins/security/taglibs/taglib-auth.xqy";
+import module namespace taglib-plugins = "http://marklogic.com/xqmvc/taglib/plugins" at "/application/taglibs/taglib-plugins.xqy";
    
 
 declare variable $data as map:map external;
@@ -60,7 +61,10 @@ $xqmvc:doctype-xhtml-1.1,
             <div>{ map:get($data, 'body') }</div>
         </div>
         <div id="aside">
-            
+            <h2>Plugins</h2>
+            <div>
+                {taglib-plugins:plugins-list()}
+            </div>
         </div>
         <div id="footer">
            {taglib-security:current-user()}

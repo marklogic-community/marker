@@ -36,16 +36,3 @@ as item()*
         ))
     ))
 };
-declare function restricted()
-as item()*
-{
-    xqmvc:template('master-template', (
-        'browsertitle', 'MarkLogic Marker',
-        'body', xqmvc:view('welcome-restricted-view', (
-            'time', fn:current-dateTime(),
-            'arch', xdmp:architecture(),
-            'plat', xdmp:platform(),
-            'vers', xdmp:version()
-        ))
-    ))
-};

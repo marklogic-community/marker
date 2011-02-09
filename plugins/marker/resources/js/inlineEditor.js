@@ -20,6 +20,15 @@
 
 $(document).ready(function(){
 	rangy.init();
+    // remove attr from HTML
+    $("html").removeAttr("xml:base");
+    $("[xml\\:base]").each(function(i){
+        //$(this).attr('contentEditable', 'true');
+        $(this).attr('id', $(this).attr('xml:base'));
+        $(this).attr('marker:field', 'xhtml');
+        //$(this).aloha();
+        
+    });
 	if (viewMode != 'PUBLISHED') {
 		MarkerInlineEdit.init();
 		var t = setTimeout("initialValueChecks()", 1000);
@@ -121,25 +130,6 @@ var MarkerInlineEdit = {
 		var originalValues = new Array();
 		
 
-		// register create content action
-		$("#marker-inline-create").click(function(){
-			
-			var data = MarkerInlineEdit.prepareFieldData();			
-			var type = $("marker\\:type").html();
-			data.action="POST"
-			
-			$.ajax({
-				type: 'POST',
-				url: "/api/content/" + type + ".html",
-				data: data,
-				success: function(rsp){
-					window.location.href = rsp;
-				},
-				error :function(req, status, error) {
-					alert("ERROR! " + error)
-				}
-			});
-		});
 		
 		
 		
