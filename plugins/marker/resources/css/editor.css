@@ -917,7 +917,7 @@ input.comoms-inline-textbox {
     -moz-border-radius: 2px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
-    background: #8b8b8b; /* for non-css3 browsers */
+    background: #eee; /* for non-css3 browsers */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='eee'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#eee)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  #ccc,  #eee); /* for firefox 3.6+ */
