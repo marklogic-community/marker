@@ -40,8 +40,8 @@ declare function display-content($uri){
     let $content :=
         try{
             if(xdmp:get-session-field("view-mode",library:collection-name()) eq library:collection-name())
-            then dls:node-expand(library:doc($uri)/node(),cts:collection-query((library:collection-name())))
-            else dls:node-expand(library:doc($uri)/node(),())
+            then dls:node-expand(library:doc($uri)/*,cts:collection-query((library:collection-name())))
+            else dls:node-expand(library:doc($uri)/*,())
         }catch ($e){
             let $log := xdmp:log(fn:concat("Missing published content for uri : ",$uri , " error:", fn:string($e)), "error")
             return 
@@ -56,6 +56,7 @@ declare function display-content($uri){
                 else
                     (
                     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not logged in -- redirecting:", $uri)) else ()
+                    (: for security redirect  - TODO - finish :)
                     let $_ := xdmp:set-session-field("redirect", fn:replace(fn:replace($uri, $cfg:default-document, ''),$cfg:content-root,''))
                     return ()
                     )
@@ -98,6 +99,7 @@ declare function display-content($uri){
             )
         else 
             (
+            (: for install only on the init redirect :)
             if(xdmp:get-session-field("init-redirect"))
             then
                 (
