@@ -90,12 +90,12 @@ declare function install()
         xquery version '1.0-ml'; 
         import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
         
-            sec:protect-collection('DRAFTS', 
+            try { sec:protect-collection('DRAFTS', 
                 (xdmp:permission('marker-admin', 'execute'), xdmp:permission('marker-admin', 'update'))
-            ),
-            sec:protect-collection('PUBLISHED', 
+            ) } catch ($e) { () } ,
+            try { sec:protect-collection('PUBLISHED', 
                 (xdmp:permission('marker-admin', 'execute'), xdmp:permission('security-anon', 'read'), xdmp:permission('marker-admin', 'update'))
-            )
+            ) } catch ($e) { () }
      
         ",  
         (),
