@@ -69,8 +69,8 @@ declare function taglib-marker:editorJavascriptDependencies() {
 declare function taglib-marker:editorCSSDependencies()
 {
     (
-        <link rel="stylesheet" type="text/css" href="/plugins/marker/resources/css/editor.css"/>,
         <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>,
+        <link rel="stylesheet" type="text/css" href="/plugins/marker/resources/css/editor.css"/>,
         <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/redmond/jquery-ui-1.8.7.custom.css"/>,
         <link rel="stylesheet" type="text/css" href="/plugins/marker/resources/css/superfish.css" media="screen"/> 
     )

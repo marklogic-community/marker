@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  <ml:title>Building a Web-Based Music Player with Information Studio and Application Builder</ml:title>
+  <ml:author>Justin Makeig</ml:author>
+  <ml:created>2010-10-18T22:52:06.277457-07:00</ml:created>
+  <ml:last-updated>2010-10-18T22:58:11.664834-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>information studio</ml:tag>
+    <ml:tag>etl</ml:tag>
+    <ml:tag>itunes</ml:tag>
+    <ml:tag>video</ml:tag>
+    <ml:tag>justin makeig</ml:tag>
+    <ml:tag/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ml:tags>
+  <ml:body>
+    <div>
+<object width="480" height="385" data="http://www.youtube.com/v/On6pGs5NPIc?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" type="application/x-shockwave-flash">
+<param name="data" value="http://www.youtube.com/v/On6pGs5NPIc?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowscriptaccess" value="always" valuetype="data"/>
+<param name="src" value="http://www.youtube.com/v/On6pGs5NPIc?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p>Information Studio is a new product that simplifies loading information into a MarkLogic database. It includes browser-based tools and high-level APIs that allow you to easily collect, transform, and load information from a variety of sources. Combined with <a title="MarkLogic Application Builder" href="http://www.marklogic.com/product/application-builder.html">Application Builder</a>, Information Studio changes how you build rich, interactive information applications.</p>
+<p>
+In the video above, I walk you through loading content with Information Studio and creating a search application using Application Builder. Not just any search application, though. I use iTunes metadata and a little HTML5 to build a web app that allows you to search for tracks in your iTunes library and actually play them in your browser. (Who hasn’t wanted better search for iTunes?) Because I like to listen to tunes on the go, I also built a mobile version of the application using Application Builder’s new extensibility hooks. 
+</p>
+<p>
+Both Information Studio and Application Builder ship with the latest version of MarkLogic Server. You can <a title="Download MarkLogic Server" href="/products">download it for free</a> and get up and running with your own application in minutes. You can grab the code that I use to extend Information Studio and customize the Application Builder application from the <a title="tunage project page on GitHub" href="http://github.com/marklogic/tunage">project page on GitHub</a>.
+</p>
+  </ml:body>
+</ml:Post>

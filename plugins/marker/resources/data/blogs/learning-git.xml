@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Draft" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Learning Git</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-06-20T11:59:04.618955-07:00</ml:created>
+  <ml:last-updated>2010-07-08T11:15:04.175412-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>git</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>Earlier this year, we moved the MarkLogic open source projects over to <a href="http://github.com/marklogic">GitHub</a>.  (There's still a center for them here at the <a href="/code">Code</a> area where we maintain cross-linkages.)</p>
+<p>We did this for a handful of reasons, but one of them was to get on to using git itself as a version-control system. I've heard from a number of sources how powerful git is.  And while to date, my main usage has been a translation of the workflows I know from previous systems (svn, p4, cvs), I felt I owed it to myself to learn how to really make best use of it (and well, I've been drooling over 'git stash' since my friend, Adam, demoed it for me).</p>
+<p dir="ltr">I found the following document that explains the internals of git and it's vocabulary (commits, trees, blogs, the index, and so on). The author's conclusion is nice:</p>
+<blockquote>
+<p dir="ltr">Over the years I’ve used many version control systems, and many backup schemes. They all have facilities for retrieving the past contents of a file. Most of them have ways to show how a file has differed over time. Many permit you to go back in time, begin a divergent line of reasoning, and then later bring these new thoughts back to the present. Still fewer offer fine-grained control over that process, allowing you to collect your thoughts however you feel best to present your ideas to the public. Git lets you do all these things, and with relative ease — once you under- stand its fundamentals.It’s not the only system with this kind of power, nor does it always employ the best interface to its concepts. What it does have, however, is a solid base to work from. In the future, I imagine many new methods will be devised to take advantage of the flexibilities Git allows. Most other systems have led me to believe they’ve reached their conceptual plateau — that all else from now will be only a slow refinement of what I’ve seen before. Git gives me the opposite impression, however. I feel we’ve only begun to see the potential its deceptively simple design promises.</p>
+</blockquote>
+  </ml:body>
+</ml:Post>

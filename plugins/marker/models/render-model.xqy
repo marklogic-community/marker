@@ -36,6 +36,7 @@ declare namespace marker = "http://marklogic.com/plugins/marker";
 
 declare function display-content($uri){
     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading requested uri:", $uri)) else ()
+     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading mode:", xdmp:get-session-field("view-mode"))) else ()
     (: check if viewing published or library :)
     let $content :=
         try{
@@ -74,7 +75,11 @@ declare function display-content($uri){
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected admin bar") else ()
     let $injectedContent := mem:node-insert-after($injectedContent//body,taglib-marker:notifications())
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected notifications") else ()
-    let $injectedContent := _resolveDynamicContent($injectedContent)
+    let $params :=
+        for $name in xdmp:get-request-field-names()
+        let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("param:", $name, " value:", xdmp:get-request-field(fn:string($name)))) else ()
+        return (xs:QName(fn:string($name)), xdmp:get-request-field(fn:string($name)))
+    let $injectedContent := _resolveDynamicContent($injectedContent,$params)
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected dynamic content") else ()
     let $log := if ($xqmvc-conf:debug) 
         then 
@@ -95,7 +100,7 @@ declare function display-content($uri){
         if ($injectedContent)
         then 
             (
-            $injectedContent
+            library:stripMeta($injectedContent)
             )
         else 
             (
@@ -111,7 +116,7 @@ declare function display-content($uri){
                 )
             ) 
 };
-declare function _resolveDynamicContent($doc)
+declare function _resolveDynamicContent($doc, $params)
 {
     let $dynamicDoc := 
         if (($doc//exec)[1])
@@ -119,7 +124,9 @@ declare function _resolveDynamicContent($doc)
             (
             
             let $exec := fn:replace(fn:replace(xdmp:quote(($doc//exec)[1]), "<exec.*?>", ""), "</exec>", "")
-            let $rendered := xdmp:eval($exec)
+            let $rendered := xdmp:eval($exec, $params)
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Exec statement:", xdmp:quote($exec))) else ()
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("rendered:", xdmp:quote($rendered))) else ()
                 (:let $rendered := xdmp:eval(fn:string(($doc//exec/text())[1])):)
             return
                 ( 
@@ -127,9 +134,9 @@ declare function _resolveDynamicContent($doc)
                 then 
                     (
                         if ($rendered) then 
-                            _resolveDynamicContent(mem:node-replace(($doc//exec)[1],$rendered))
+                            _resolveDynamicContent(mem:node-replace(($doc//exec)[1],$rendered) , $params)
                         else 
-                            _resolveDynamicContent(mem:node-replace(($doc//exec)[1], <p>There was a problem with this region</p>))
+                            _resolveDynamicContent(mem:node-replace(($doc//exec)[1], <p>There was a problem with this region</p>), $params)
                     )
                 else 
                     (

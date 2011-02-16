@@ -1035,3 +1035,4 @@ div.marker-editable:focus {
     -webkit-box-shadow: 0 0 5px rgba(245, 10, 20, 1);
     -moz-box-shadow: 0 0 5px rgba(245, 10, 20, 1);
 }
+td {padding:3px;vertical-align: middle; }

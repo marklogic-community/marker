@@ -29,7 +29,7 @@ $(document).ready(function(){
         //$(this).aloha();
         
     });
-	if (viewMode != 'PUBLISHED') {
+	if (viewMode != 'http://marklogic.com/marker/published') {
 		MarkerInlineEdit.init();
 		var t = setTimeout("initialValueChecks()", 1000);
 	}
@@ -74,10 +74,10 @@ var MarkerAdminMenu = {
 		$('#marker-admin-menu-center').html('');
 		$('#marker-admin-menu-right').html('');
 		$('#marker-admin-menu-left').append("<div class='expandable-buttons-container'><div id='marker-admin-pin' class='marker_button marker_button_pin " + (MarkerAdminMenu.pinned ? 'pinned' : '') + "' onclick='MarkerAdminMenu.togglePin(this)'></div></div>");
-		if(viewMode == 'PUBLISHED'){
+		if(viewMode == 'http://marklogic.com/marker/published'){
 			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"EDITABLE\")'></div><div class='button-text'> VIEWING: PUBLISHED</div></div>");
 		}else{
-			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"PUBLISHED\")'></div><div class='button-text'> VIEWING: EDITABLE</div></div>");
+			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")'></div><div class='button-text'> VIEWING: EDITABLE</div></div>");
 		}
 		
 		

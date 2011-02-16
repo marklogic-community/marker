@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>XQuery and XPath Quick References</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-07-06T23:20:19.182346-07:00</ml:created>
+  <ml:last-updated>2010-07-06T23:23:23.553014-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>xquery</ml:tag>
+    <ml:tag>xpath</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>One of our great teachers here at MarkLogic, Ruth Stryker, recently reminded me of some quick reference (aka cheat-sheet) cards that were put together by <a href="http://www.xml.dvint.com/">Dan Vint</a>. He's got a few resources at his site that I like, but the two that seemed most useful are:</p>
+<ul>
+      <li><span><a href="http://www.xml.dvint.com/docs/XPath-2.pdf">XPath 2.0</a></span></li>
+      <li><span><a href="http://www.xml.dvint.com/docs/XQueryXMLSyntax.pdf">XQuery 1.0 and XPath 2.0 Functions and Operators</a></span></li>
+    </ul>
+<p>I've left links to these in the sidebars of our <a href="/docs">docs</a> and <a href="/learn">learn</a> sections should you misplace them.</p>
+  </ml:body>
+</ml:Post>

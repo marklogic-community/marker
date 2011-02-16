@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  <ml:title>Fun With XQuery</ml:title>
+  <ml:author>Jason Booth</ml:author>
+  <ml:created>2010-07-27T20:58:31.18607-07:00</ml:created>
+  <ml:last-updated>2010-07-29T20:41:22.718522-07:00</ml:last-updated>
+  
+  
+  
+  
+  <ml:body>
+    <p>Recently on a flight, I decided to put an idea to the test with programming in XQuery. I wanted to write a simple logic puzzle of some sort – what I ended up doing was writing a simple card dealing program. XQuery 1.0, along with MarkLogic extensions to the language (the “xquery version 1.0-ml” dialect), provides some great programming capabilities. The following example shows the usage of maps, recursion, logging (via xdmp:log()), random numbers (via xdmp:random()) and side effects (via xdmp:set()).<br/> <br/>Why I don’t expect that a poker site, nor the latest strategy game, will be written in XQuery, it is refreshing to see any language used for something you normally wouldn’t use it for. Often, when doing so a developer can learn something new about a language when they look at it in a different context. Also, I hope the following example will show those new to XQuery a look at the language that they may not get to see in other tutorials or examples.</p>
+<script src="https://gist.github.com/732322.js?file=gistfile1.xqy"></script>
+  </ml:body>
+</ml:Post>

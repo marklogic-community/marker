@@ -1,3 +1,47 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 /* alignment for images in editor */
 .alignCenter{
    display: block;
@@ -32,7 +76,12 @@ body {
 	width: 900px;
 	background: #fff;
 }
-
+ol, ul {
+	margin-left:20px;
+	line-height:1.3em;
+	list-style: disc;
+	margin-bottom:5px;
+}
 #header
 {
 	background: url(/application/resources/img/MarkerHeader.jpg);
@@ -46,7 +95,7 @@ body {
 {
 	float: left;
 	width: 900px;
-	background: #07186a;
+	background: #012a5e;
 	height:31px;
 }
 
@@ -86,7 +135,7 @@ body {
 #footer
 {
 	clear: both;
-	background: #07186a;
+	background: #012a5e;color:#fff;
 	/*text-align: right;*/
 	padding: 20px;
 	height: 1%;
@@ -96,13 +145,13 @@ body {
 	color:#fff;
 }
 a, a:link, a:visited { color: #0099CC; font-weight: normal; text-decoration: none; }
-a:hover { color: #009900; text-decoration: underline; }
+a:hover { color: #0099CC; text-decoration: underline; }
 
-p { margin: 0 0 5px 0; padding: 0; font-size:.9em }
+p { margin: 0 0 5px 0; padding: 0; font-size:1em; line-height:1.3em; }
 img { border: none; }
 em { color: #000; font-weight: bold; font-style: normal }
 
-h1, h2, h3, h4, h5, h6 { color: #2c93a6; font-weight: normal; }
+h1, h2, h3, h4, h5, h6 { color: #012a5e; font-weight: normal; }
 h1 { font-size: 2em; margin: 0 0 20px 0; padding: 5px 0 }
 h2 { font-size: 1.5em; margin: 0 0 15px 0; padding: 5px 0; }
 h3 { font-size: 1.2em; margin: 0 0 15px; padding: 0; }
@@ -640,3 +689,60 @@ tr.even.gradeU td.sorting_3 {
 .ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted {
     background-color: #E6FF99;
 }
+.pagination-container{
+	width:100%;
+	border-top:solid 1px #ccc;
+	margin-top:15px;
+	
+}
+.pagination-container .page-status{display:none;text-align:right;}
+
+ul.pagination{border:0; margin:10px; padding:0;width:auto;}
+
+
+ul.pagination li{
+	border:0; margin:0; padding:0;
+	font-size:11px;
+	list-style:none;
+	margin-right:2px;
+	margin-left:2px;
+	
+}
+ul.pagination a{
+	border:solid 1px #ccc;
+	margin-left:2px;
+	margin-right:2px;
+}
+
+ul.pagination .next a,
+ul.pagination .previous a {
+font-weight:bold;
+} 
+ul.pagination .active{
+	background:#012a5e;
+	color:#FFFFFF;
+	font-weight:bold;
+	display:block;
+	float:left;
+	padding:4px 6px;
+}
+ul.pagination a:link,
+ul.pagination a:visited {
+	color:#012a5e
+	display:block;
+	float:left;
+	padding:3px 6px;
+	text-decoration:none;
+}
+ul.pagination a:hover{
+	border:solid 1px #0e509e
+}
+.results{min-height:400px;}
+.result p{font-size:.9em;color:#333;}
+.result a{margin-bottom:3px;display:block;}
+.facets{float:right;padding:5px 5px 5px 0;border:solid 1px #ccc;-webkit-border-radius: 3px;margin-bottom:5px;margin-left:5px;
+-moz-border-radius: 3px;
+border-radius: 3px;}
+.facet{margin-bottom:5px;}
+.facet .purplesubheading{margin:0 0 5px  0; font-size:1.1em;}
+.facet-value{line-height:1.3em;}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Change You Can Believe In</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-04-29T13:00:00</ml:created>
+  <ml:last-udpated/>
+  <ml:body>
+<h3>Look!</h3>
+<p>
+If you're reading this blog post directly on our site you'll notice
+a few changes.  And if you're reading it somewhere else, please <a href="http://developer.marklogic.com/blog">swing on by</a> for a look!  
+In particular, we've
+</p>
+<ul>
+      <li>Migrated to a clean, modern look</li>
+      <li>Organized our <a href="/code">open source projects</a></li>
+      <li>Moved project source trees to <a href="//github.com/marklogic/">GitHub</a>, <a href="http://codeplex.com">CodePlex</a>, 
+or <a href="http://code.google.com">Google Code</a></li>
+      <li>Opened up the area for <a href="/meet">User Groups</a> and group specific content</li>
+      <li>Centralized all our <a href="/learn">online learning materials</a></li>
+    </ul>
+
+And with all the change, I hope experienced MarkLogic peeps will appreciate that we've kept it
+easy for them to find their favorites, the <a href="/docs">docs</a> and <a href="/download">downloads</a>.
+As you look around, you'll hopefully find a few more places we've made changes for the good, too.
+
+<h3>Why and How?</h3>
+
+<p> As the site and 
+MarkLogic have grown, we've needed to make it easier for folks to update things.  And, as things go, once we decided 
+to make changes, we decided to make a few more and the list of goals above grew.
+</p>
+
+<p>Serendipitously, MarkLogic engineering has been hard at work on the upcoming 4.2 release
+and it seemed like a perfect opportunity to take advantage of some of the newer features and
+in particular XSLT.
+We enlisted XSLT-maestro, <a href="http://lenzconsulting.com">Evan Lenz</a> to help us out and
+we got some cycles from <a href="http://www.ylle.com/">Ylva Wickberg's UI design team.</a>  And off we went! </p>
+
+<p>The result is what you see here.  A site that is running off
+a pre-Alpha version of an open source MarkLogic application we call <a href="/code/rundmc">RunDMC</a>.
+(Yes, it runs <strong>D</strong>eveloper dot <strong>M</strong>arklogic dot <strong>C</strong>om and
+and yes we love the name because it provokes hiphop in our <a href="/media/podtrio.png">office pod</a>).
+</p>
+
+<p>
+Each page in the site is now, big surprise, backed by an XML document.  We are using XSLT for templating 
+and XQuery for data access and control (including friendly URL rewriting).  The navigational structure as well 
+as the placement of our new "widgets" are configured via XML as well.  (The widgets include things like 
+<i>Recent Tweets</i> on the <a href="/">home page</a>, the 
+<a href="/learn">training calendar</a>, or the <a href="/code"><i>'ads for projects'</i></a>).
+</p>
+<p>
+The client side work is relatively simple so far. Pages are rendered on the server and we annotate the HTML
+with CSS classes and other declarative structure as needed.  In turn, we use <a href="http://jquery.com/">JQuery</a> to manipulate, layout, 
+and/or modify the client DOM based on the markup and CSS itself.  
+</p>
+<p>
+And now that pages are represented as documents, we have an administrative interface (similar to a blog publishing tool)
+that allows folks to edit and preview changes to the pages without having to edit code.
+</p>
+
+<h3>Who did this?</h3>
+<p>
+All of this happened through the hard work of a number of folks, including Jason Monberg, Justin Makeig, 
+Ylva Wickberg, Adam London, Evan Lenz, Sidney Chen, Danny Sokolsky, and yours truly.
+</p>
+
+<h3>What's Next?</h3>
+<p>
+The RunDMC project is pre-alpha and it's not quite sample-code ready yet.  Feel free to check out the 
+<a href="/code/rundmc">repository</a>, but we'd recommend you hold off a bit until we've had a chance 
+to get to at least our 0.2 release.  We're following the release early, release often mantra here as we continue 
+to add features and functionality to RunDMC.  In the meantime, we do get to bask in the glory 
+of actually shipping something.  Yay!!
+</p>
+<p>
+If you have feedback or questions about the site, feel free to send them over to
+the MarkLogic <a href="/discuss">developer list</a>.
+</p>
+</ml:body>
+</ml:Post>

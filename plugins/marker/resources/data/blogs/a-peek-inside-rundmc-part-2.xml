@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>A peek inside RunDMC, Part 2</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-11-10T13:21:37.974144-07:00</ml:created>
+  <ml:last-updated>2010-11-10T16:34:53.164616-07:00</ml:last-updated>
+  
+  <ml:body>
+    <p>In <a href="/blog/a-peek-inside-rundmc">part 1</a>, we looked at how RunDMC configures the navigational structure of the website you're viewing. In this post, we'll look at the other major technique used in RunDMC: an XML-based tag library for generating dynamic content.</p>
+<h3>XML-based custom tag library</h3>
+<p>The basic idea here is the same as that of other server-side scripting languages such as JSP or ASP. You use HTML templates with special tags that designate dynamic content. In our case, every page of the site uses the same outermost template: <a href="https://code.google.com/p/rundmc/source/browse/trunk/config/template.xhtml">template.xhtml</a>. This file contains all the boilerplate that needs to go on every page, such as CSS and JavaScript references and the copyright notice you see at the bottom of the page. For things that vary from page to page, we use custom tags in our own namespace mapped to the "ml" prefix. Thus, for the page content, we have a tag called &lt;ml:page-content/&gt; and for the breadcrumb navigation we have a tag called &lt;ml:breadcrumbs/&gt;.</p>
+<p>But this isn't ASP or JSP or even XQuery. How do those tags get replaced with the content for each page? Before I answer that question, let's back up a bit. Recall that RunDMC is an XSLT-based application. In fact, every page of the site is generated using the same XSLT stylesheet (<a href="https://code.google.com/p/rundmc/source/browse/trunk/view/page.xsl">page.xsl</a>). When the browser makes a request for an HTML page on this site, the URL rewriter performs an internal redirect to <a href="https://code.google.com/p/rundmc/source/browse/trunk/controller/transform.xqy">transform.xqy</a>, which applies page.xsl to the XML source document that was requested.</p>
+<p>For example, let's talk about what happens when you visit the <a href="/code">"Code" section of this site</a>. When you click a link to "http://developer.marklogic.com/code", the server performs an internal redirect, invoking transform.xqy, which calls the xdmp:xslt-invoke() function to apply page.xsl to code.xml. That's the basic framework: apply page.xsl to whatever page the user requested.</p>
+<p>Now that we know that, let's see what page.xsl does. The very first thing that happens is that it processes <a href="https://code.google.com/p/rundmc/source/browse/trunk/config/template.xhtml">the master XHTML template, template.xhtml</a> (which is bound to the $template variable). In fact, at least at first, it completely ignores the contents of code.xml.</p>
+<script src="http://gist.github.com/462066.js" xml:space="preserve"></script>
+<p>And here are the default template rules that are invoked as a result (in <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/page.xsl">page.xsl</a>):</p>
+<script src="http://gist.github.com/462068.js" xml:space="preserve"></script>
+<p>In other words, copy everything unchanged (except to strip out the declarations for unused namespaces). Obviously, we don't want to copy <em>everything</em> in template.xhtml. We want to convert our custom tags to some other XHTML content. To do that, we write some more template rules for just that purpose—rules which override the default copying behavior. For example, to generate the top-level navigation menu, we need a rule that matches the &lt;ml:top-nav/&gt; element.</p>
+<p>That can be found in <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/navigation.xsl">navigation.xsl</a> (which page.xsl includes):</p>
+<script src="http://gist.github.com/462072.js" xml:space="preserve"></script>
+<p>By the way, if you're wondering why we didn't include the "ml:" 
+prefix in the match attribute, it's because we don't need to: the tag 
+library namespace is 
+configured as the default, using the <code>xpath-default-namespace</code>
+ stylesheet directive.</p>
+<p>The above rule creates an unordered list and gets the list items by processing the contents of <a href="https://code.google.com/p/rundmc/source/browse/trunk/config/navigation.xml">navigation.xml</a> (bound to the $navigation variable), creating an item for each top-level &lt;page&gt; element that isn't marked as hidden. That's what results in the horizontal menu we see at the top, which is just a CSS-styled unordered list:</p>
+<p>
+<img src="/media/top-menu-screenshot.png" alt="Top menu screenshot"/></p>
+<p>Similarly, the rule for &lt;ml:page-content/&gt; (defined in page.xsl) is as follows (slightly simplified here):</p>
+<script src="http://gist.github.com/462073.js" xml:space="preserve"></script>
+<p>This is how we switch back to our principal source document, code.xml, which is bound to the global variable $content, defined earlier in page.xsl:</p>
+<script src="http://gist.github.com/462075.js" xml:space="preserve"></script>
+<p>Now, let's take a look at the contents of code.xml. Inside the &lt;ml:page&gt; container, we see some XHTML elements (&lt;h1&gt; and &lt;p&gt;), as we'd expect. But it also starts off with a custom element, named &lt;ml:short-description&gt;:</p>
+<script src="http://gist.github.com/462076.js" xml:space="preserve"></script>
+<p>What happens when the &lt;ml:short-description&gt; element gets processed? Well, as it turns out, that's the simplest tag implementation yet. Looking in <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/tag-library.xsl">tag-library.xsl</a> (also included by page.xsl), we see an empty template rule:</p>
+<script src="http://gist.github.com/462078.js" xml:space="preserve"></script>
+<p>In other words, don't do anything. Don't copy it or convert it; just ignore it. So the purpose of this element is <em>not</em> to display its contents on the page. Instead, it's used in another context (try hovering over the "Code" link in the top-level site menu above, and you'll see how the short description is used.)</p>
+<p>We'll look at one more custom tag. The content of code.xml also contains this tag:</p>
+<script src="http://gist.github.com/462083.js" xml:space="preserve"></script>
+<p>Until now, most of the custom tags have been simply empty placeholders, but this custom tag is configurable. It's what results in the tabbed feature menu we see on the Code page:</p>
+<p>
+<img src="/media/tabbed-features.png" alt="screenshot of tabbed features menu"/></p>
+<p>And the implementation for this custom tag is also found in <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/tag-library.xsl">tag-library.xsl</a>:</p>
+<script src="http://gist.github.com/462082.js" xml:space="preserve"></script>
+<p>In other words, process each child &lt;feature&gt; element twice, once to generate the horizontal tab labels at the top, and once to generate the content that's displayed for each tab. The details of this implementation are farmed out to some other template rules, which you can explore in <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/tag-library.xsl">tag-library.xsl</a> if you're interested.</p>
+<p>XSLT is a great language for implementing custom tag libraries. Of course, I'm not the first person to point this out. For more on this topic, check out <a href="http://www.xml.com/pub/a/2000/07/26/xslt/xsltstyle.html">"Style-free XSLT"</a> and <a href="http://www.xml.com/pub/a/2002/03/27/templatexslt.html">"Template Languages in XSLT."</a></p>
+<p>One advantage of this approach is that all the content is stored in XML and all the logic for generating dynamic content is separated from that. In other words, it helps us achieve <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">"separation of concerns."</a> We generally aimed to minimize the amount of XHTML we put into the XSLT. Both the individual content pages and the outermost XHTML wrapper do not appear in code (XSLT or XQuery) but in "data," i.e. plain old XML files which can be edited by an XML authoring tool.</p>
+  </ml:body>
+</ml:Post>

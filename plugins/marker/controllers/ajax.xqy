@@ -20,7 +20,8 @@ xquery version "1.0-ml";
 module namespace xqmvc-controller = "http://scholarsportal.info/xqmvc/controller";
 import module namespace xqmvc = "http://scholarsportal.info/xqmvc/core" at "/system/xqmvc.xqy";
 
-import module namespace library = "http://marklogic.com/marker/model/library" at "../models/library-model.xqy";
+import module namespace library-model = "http://marklogic.com/marker/model/library" at "../models/library-model.xqy";
+import module namespace library = "http://marklogic.com/marker/library" at "../library/library.xqy";
 
 declare function index()
 {
@@ -38,7 +39,7 @@ declare function list-documents()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-list-documents($directory, $depth, $echo,$filter,$start,$length)
+        library-model:json-list-documents($directory, $depth, $echo,$filter,$start,$length)
         )
         
 };
@@ -48,7 +49,7 @@ declare function unmanage-document()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-unmanage($uri)
+        library-model:json-unmanage($uri)
         )
         
 };
@@ -58,7 +59,7 @@ declare function manage-document()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-manage($uri)
+        library-model:json-manage($uri)
         )
         
 };
@@ -69,7 +70,7 @@ declare function update-uri-content()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-update-uri-content($uri, $content)
+        library-model:json-update-uri-content($uri, $content)
         )
         
 };
@@ -79,7 +80,7 @@ declare function checkout-status()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-checkout-status($uri)
+        library-model:json-checkout-status($uri)
         )
         
 };
@@ -89,7 +90,7 @@ declare function checkout()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-checkout($uri)
+        library-model:json-checkout($uri)
         )
         
 };
@@ -99,7 +100,7 @@ declare function checkin()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-checkin($uri)
+        library-model:json-checkin($uri)
         )
         
 };
@@ -109,7 +110,7 @@ declare function publish()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-publish($uri)
+        library-model:json-publish($uri)
         )
         
 };
@@ -119,7 +120,7 @@ declare function unpublish()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-unpublish($uri)
+        library-model:json-unpublish($uri)
         )
         
 };
@@ -129,7 +130,7 @@ declare function get-version-content()
     return 
         (
         xdmp:set-response-content-type("text/html"),
-        library:get-version-content($uri)
+        library:stripMeta(library-model:get-version-content($uri))
         )
         
 };
@@ -139,7 +140,7 @@ declare function get-uri-information()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-get-uri-information($uri)
+        library-model:json-get-uri-information($uri)
         )
 };
 declare function change-view-mode()
@@ -148,6 +149,6 @@ declare function change-view-mode()
     return 
         (
         xdmp:set-response-content-type("application/json"),
-        library:json-change-view-mode($mode)
+        library-model:json-change-view-mode($mode)
         )
 };

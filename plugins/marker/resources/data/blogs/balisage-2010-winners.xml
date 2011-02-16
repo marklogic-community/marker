@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Balisage 2010: Winners!</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-08-19T12:54:51.242102-07:00</ml:created>
+  <ml:last-updated>2010-08-19T18:55:47.301373-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>balisage</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <h3>Contest Winner</h3>
+<p>The MarkLogic developer community is proud to announce Erik Hennum as the author of the winning entry of our <a href="/news/marklogic-sponsors-balisage-2010-contest">Balisage 2010 "Tower of Babel" Contest</a>.  Erik's entry stood out for it's detailed understanding of the current state of the art as well as its real and actionable proposal for wiki interchange using XHTML dialect declarations.  We've published his entry <a href="/news/balisage-2010-content-winner">here</a> and encourage those of you interested in the issue to take the time to read through it. I guarantee you'll learn a few things.</p>
+<h3>DemoJam!</h3>
+<p>On Wednesday evening of the conference, we were also witness to another entertaining and mind-expanding <a href="/news/balisage2010demojam2">DemoJam</a>.  The entries in this Jam included:</p>
+<table class="table3">
+<colgroup span="1">
+	<col class="col1" span="1" width="230px"/>
+	<col class="col2" span="1"/>
+      </colgroup>
+        <thead>
+	<tr>
+	  <th scope="col" rowspan="1" colspan="1">Participant</th>
+	  <th scope="col" rowspan="1" colspan="1">Demo</th>
+	</tr>
+      </thead>
+        
+<tbody>
+	<tr>
+	  <td rowspan="1" colspan="1">Colleen Whitney</td>
+	  <td rowspan="1" colspan="1">MarkLogic Information Studio</td>
+	</tr>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1">Vojtěch Toman</td>
+	  <td rowspan="1" colspan="1">XProc DITA Pipelines</td>
+	</tr>
+	<tr>
+	  <td rowspan="1" colspan="1">Hugh Cayless</td>
+	  <td rowspan="1" colspan="1">SoSOL: The Son of Suda Online</td>
+	</tr>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1">Benjamin Bock</td>
+	  <td rowspan="1" colspan="1">Maiana</td>
+	</tr>
+	<tr>
+	  <td rowspan="1" colspan="1">Pierre-Édouard Portier</td>
+	  <td rowspan="1" colspan="1">DINAH, a philological platform for the creation of multi-structural documents</td>
+	</tr>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1">Wendell Piez</td>
+	  <td rowspan="1" colspan="1">Generalized Overlap on an XML Platform</td>
+	</tr>
+	<tr>
+	  <td rowspan="1" colspan="1">Andrew Spyker</td>
+	  <td rowspan="1" colspan="1">Native XML processing across hybrid runtimes of DB2 and WebSphere Application Server</td>
+	</tr>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1">Vyacheslav Zholudev</td>
+	  <td rowspan="1" colspan="1">TNTBase: Versioned XML Database</td>
+	</tr>
+	<tr>
+	  <td rowspan="1" colspan="1">Cyril Briquet</td>
+	  <td rowspan="1" colspan="1">Retroconversion platform of FEW dictionary</td>
+	</tr>
+      </tbody>
+</table>
+<p>This jam's winning demo was Wendell Piez's, <strong><em>"Generalized Overlap on an XML Platform"</em></strong>, which received the most applause and allowed Wendell to claim an iPad.</p>
+<h3>Student Awards</h3>
+<p>And while we're naming winners, I'd also like to mention the Balisage 2010 Conference Student Award winners:</p>
+<p style="padding-left: 60px;"><strong>First Place:</strong><br/>  Stefanie Haupt, Bielefeld University<br/><br/><strong>Second Place:</strong><br/>   Gioele Barabucci, University of Bologna<br/><br/><strong>Third Place:</strong><br/>    Lena Wienecke Andersen, University of Copenhagen<br/>    Kevin Caliendo, Loyola University Chicago,<br/>    Andrew Dombrowski, University of Chicago<br/>    Michael Greenlee, University of Illinois at Urbana-Champaign<br/>    Ken Herdy, Simon Fraser University,<br/>    Deborah Maron,  University of Illinois at Urbana-Champaign<br/>    Mohamadou Nassourou, University of Würzburg<br/>    Sven Windisch, University of Leipzig<br/>    Vyacheslav Zholudev, Jacobs University Bremen</p>
+<p>It was a great conference, all and all.  I felt like a winner myself, honestly, just being lucky enough to attend and contribute to this geeky gathering.  For those who coudn't make it, the conference and symposium proceedings are available <a href="http://www.balisage.net/Proceedings/index.html">online</a>.  And a hearty thanks is due to Tommie Usdin, Debbie Lapeyre, and crew for making it all happen!</p>
+  </ml:body>
+</ml:Post>

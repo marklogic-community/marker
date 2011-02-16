@@ -3,6 +3,8 @@ module namespace library = "http://marklogic.com/marker/library";
 import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
 import module namespace security = "http://marklogic.com/security" at "/plugins/security/library/security.xqy";
 import module namespace util = "http://marklogic.com/marker/util" at "util.xqy";
+import module namespace mem = "http://xqdev.com/in-mem-update" at "in-mem-update.xqy";
+import module namespace functx = "http://www.functx.com" at '/MarkLogic/functx/functx-1.0-nodoc-2007-01.xqy';
 import module namespace xqmvc-conf = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
 declare namespace html = "http://www.w3.org/1999/xhtml";
 
@@ -103,11 +105,11 @@ declare function library:list-directories($start, $starting-depth){
  :)
 declare function library:insert($uri as xs:string, $doc as node(),  $note as xs:string){
     let $log := xdmp:log("in library:insert.")
-    let $collection := "DRAFTS"
+    let $collection := "http://marklogic.com/marker/drafts"
     let $permissions := (xdmp:permission('marker-admin', 'update'), xdmp:permission('marker-admin', 'read')) 
     return dls:document-insert-and-manage($uri, fn:false(), $doc, $note, $permissions, $collection)
     (:
-    let $collection := "DRAFTS"
+    let $collection := "http://marklogic.com/marker/drafts"
     return
         xdmp:eval(
             fn:concat(
@@ -127,7 +129,8 @@ declare function library:insert($uri as xs:string, $doc as node(),  $note as xs:
     
 };
 declare function library:update($uri as xs:string, $doc as node(), $note as xs:string){
-   (: let $_ := library:checkout($uri):)
+    (:place in meta data -- for search faceting only :)
+    let $meta := library:insertMeta($doc, $uri)
     let $return := xdmp:eval(
         fn:concat(
             library:_import(), 
@@ -140,7 +143,7 @@ declare function library:update($uri as xs:string, $doc as node(), $note as xs:s
         ),
         (xs:QName("uri"), $uri, xs:QName("doc"), $doc, xs:QName("note"), $note)
     )
-   (: let $_ := library:checkin($uri):)
+
     return $return
  
 };
@@ -213,9 +216,74 @@ declare function library:publish($version_uris as item()*) {
     let $managed_base_uri := $doc/node()/property::dls:version/dls:document-uri/text()
     let $existing :=  library:publishedDoc($managed_base_uri)
     let $unpublishExisting := if($existing) then library:unpublishVersion((xdmp:node-uri($existing)))  else ()
-    let $addPermissions := dls:document-add-permissions($uri, (xdmp:permission('security-anon', 'read'),xdmp:permission('marker-admin', 'update'), xdmp:permission('marker-admin', 'read')))
+    let $addPermissions := library:applyPermissions($uri, (xdmp:permission('security-anon', 'read')))
+    let $addPermissions := library:applyPermissions($uri, (xdmp:permission('marker-admin', 'update')))
+    let $addPermissions := library:applyPermissions($uri, (xdmp:permission('marker-admin', 'read')))
+    
+    let $searchable := 
+        if(fn:doc($managed_base_uri)/property::marker-content/marker-searchable/text() eq 'true')
+        then  
+            (
+            library:applyCollections($uri, ("http://marklogic.com/marker/searchable"))
+            )
+        else 
+            (
+            )
     return
-        dls:document-add-collections($uri, ("PUBLISHED"))    
+        library:applyCollections($uri, ("http://marklogic.com/marker/published"))
+};
+declare function library:applyProperties($uri, $properties){
+    let $eval-statement :=
+        fn:concat (library:_import(), "declare variable $properties external;declare variable $uri external;", "dls:document-set-properties($uri, $properties)")
+    return xdmp:eval($eval-statement,(xs:QName("properties"), $properties, xs:QName("uri"), $uri ))
+
+};
+declare function library:applyPermissions($uri, $permissions){
+    let $eval-statement :=
+        fn:concat (library:_import(), "declare variable $permissions external;declare variable $uri external;", "dls:document-add-permissions($uri, $permissions)")
+    return xdmp:eval($eval-statement,(xs:QName("permissions"), ($permissions), xs:QName("uri"), $uri ))
+
+};
+declare function library:applyCollections($uri, $collections){
+    let $eval-statement :=
+        fn:concat (library:_import(), "declare variable $collections external;declare variable $uri external;", "dls:document-add-collections($uri, $collections)")
+    return xdmp:eval($eval-statement,(xs:QName("collections"), ($collections), xs:QName("uri"), $uri ))
+
+};
+declare function library:removePermissions($uri, $permissions){
+    let $eval-statement :=
+        fn:concat (library:_import(), "declare variable $permissions external;declare variable $uri external;", "dls:document-remove-permissions($uri, $permissions)")
+    return xdmp:eval($eval-statement,(xs:QName("permissions"), ($permissions), xs:QName("uri"), $uri ))
+
+};
+declare function library:removeCollections($uri, $collections){
+    let $eval-statement :=
+        fn:concat (library:_import(), "declare variable $collections external;declare variable $uri external;", "dls:document-remove-collections($uri, $collections)")
+    return xdmp:eval($eval-statement,(xs:QName("collections"), ($collections), xs:QName("uri"), $uri ))
+
+};
+declare function library:insertMeta($doc, $uri)
+{ 
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Insert meta on base:", xdmp:quote($doc) )) else ()
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Insert meta child on node name:", fn:node-name($doc/node()) )) else ()
+    let $newXML := 
+    element {fn:node-name($doc/node())} {
+        $doc/node(),
+        element marker-content {fn:doc(library:getManagedDocUri($uri))/property::marker-content/* }
+        
+    }   
+    return $newXML
+   
+};
+declare function library:stripMeta($doc)
+{ 
+    
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ()
+    let $cleaned := functx:remove-elements-deep($doc,"marker-content")
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($doc) )) else ()
+    return $cleaned
+    
+   
 };
 
 declare function library:publishLatest($uri) {
@@ -274,8 +342,9 @@ declare function library:latestPublishedDocAuthor($uri) {
 declare function library:unpublishVersion($version_uris as item()*) {
     for $uri in $version_uris
     return
-        let $removePermissions := dls:document-remove-permissions($uri, (xdmp:permission('security-anon', 'read')))
-        return dls:document-remove-collections($uri, ("PUBLISHED"))        
+        let $removePermissions :=  library:removePermissions($uri, (xdmp:permission('security-anon', 'read')))
+        let $removeSearchable := library:removeCollections($uri, ("http://marklogic.com/marker/searchable"))
+        return  library:removeCollections($uri, ("http://marklogic.com/marker/published"))        
 };
 
 (:~
@@ -283,7 +352,7 @@ declare function library:unpublishVersion($version_uris as item()*) {
  : of the version that is published
  :)
 declare function library:publishedDoc($uri) {
-    fn:collection("PUBLISHED")[property::dls:version/dls:document-uri = $uri] 
+    fn:collection("http://marklogic.com/marker/published")[property::dls:version/dls:document-uri = $uri] 
 };
 
 
@@ -354,14 +423,14 @@ declare function library:collection()  {
  : THIS or library:collection() SHOULD BE USED WHEN BUILDING ANY QUERY FOR MANAGED CONTENT 
  :)
 declare function library:collection-name() as xs:string {
-    "PUBLISHED"
+    "http://marklogic.com/marker/published"
 };
 
 (:~
  : Check if the published collection is being viewed
  :)
 declare function library:isViewingPublished() {
-    if(library:collection-name() = "PUBLISHED") then
+    if(library:collection-name() = "http://marklogic.com/marker/published") then
         fn:true()
     else
         fn:false()

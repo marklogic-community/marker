@@ -7,5 +7,10 @@ declare variable $data as map:map external;
            <div>
             Setup was successful for the security plugin. Please click logout (upper right top corner) and then click login to set your account as the administrator.
            </div>
+              <script>
+            $(function() {{
+               $('#login-modal').dialog('open');
+            }});
+        </script>
         </div>
 )

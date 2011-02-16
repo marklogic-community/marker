@@ -114,6 +114,8 @@ declare function install()
     let $_ := xdmp:document-insert("/plugins/security/controller-mapping/security-user.xml",
         <role-mappings>
             <mapping mapped="1" plugin="security" controller="setup" action="index">security/setup/index</mapping>
+            <mapping mapped="1" plugin="security" controller="setup" action="install">security/setup/install</mapping>
+            <mapping mapped="1" plugin="security" controller="setup" action="install-complete">security/setup/install-complete</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="index">security/authentication/index</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="facebook">security/authentication/facebook</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="github">security/authentication/github</mapping>
@@ -130,6 +132,7 @@ declare function install()
             <mapping mapped="1" plugin="security" controller="authentication" action="facebook">security/authentication/facebook</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="github">security/authentication/github</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="_authenticate">security/authentication/_authenticate</mapping>
+            <mapping mapped="1" plugin="security" controller="setup" action="install-complete">security/setup/install-complete</mapping>
             <mapping mapped="1" plugin="security" controller="authentication" action="logout">security/authentication/logout</mapping>
             <mapping mapped="1" plugin="security" controller="error" action="not-authorized">security/error/not-authorized</mapping>
             <mapping mapped="1" plugin="" controller="welcome" action="index">/welcome/index</mapping>
@@ -177,11 +180,15 @@ declare function install()
     let $_ := for $name in xdmp:get-session-field-names()
                 return xdmp:set-session-field($name,())
    let $_ := xdmp:set-session-field("init-redirect","/welcome/index")
-    return xqmvc:template('master-template', (
+    return xdmp:redirect-response("/security/setup/install-complete") 
+    
+    
+};
+declare function install-complete(){
+    xqmvc:template('master-template', (
                 'browsertitle', 'Security Setup Complete',
                 'body', xqmvc:plugin-view($plugin-cfg:plugin-name,'setup-install-view', ())
             ))
-    
 };
 
 

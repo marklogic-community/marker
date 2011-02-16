@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Introducing Comoms - Open source CMS toolkit for MarkLogic Server</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-09-10T14:15:00.212099-07:00</ml:created>
+  <ml:last-updated>2010-09-13T10:58:59.594171-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>comoms</ml:tag>
+    <ml:tag>cms</ml:tag>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ml:tags>
+  <ml:body>
+    <p>Since working on <a href="/code/rundmc">RunDMC</a>, the web publishing application that runs this site, I've been itching to spend time on the management side of Web CMS.  Recently, I had an opportunity to begin work on an open-source project to do just that. </p>
+<p>You can see a clip below of the project's 0.1 milestone.  (For best viewing, I recommend you hit the full-screen button in the lower right-hand corner of the video player):</p>
+<p>
+<object style="border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" width="520" height="420" data="http://www.youtube.com/v/s0gGyhXwIxc?fs=1&amp;hl=en_US&amp;rel=0&amp;border=1" type="application/x-shockwave-flash">
+<param name="data" value="http://www.youtube.com/v/s0gGyhXwIxc?fs=1&amp;hl=en_US&amp;rel=0&amp;border=1" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowscriptaccess" value="always" valuetype="data"/>
+<param name="src" value="http://www.youtube.com/v/s0gGyhXwIxc?fs=1&amp;hl=en_US&amp;rel=0&amp;border=1" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+<p>This milestone comes from the efforts of several MarkLogic folks (including <a href="http://www.jdvogt.com/">JD Vogt</a>, our User Experience Director) and some of our partners from <a href="http://blogs.avalonconsult.com/">Avalon Consulting, LLC</a>.  We set out to design a web CMS for "site-generated" content (like RunDMC) as well as "user-generated" content and items "in between" these that are curated to some degree.  We're focusing on web-based content for now and we're actively blurring the lines between a traditional Web 
+CMS and a Wiki.</p>
+<p>Our initial goals include:</p>
+<ul style="list-style-position: outside;">
+      <li>To produce useful tools and libraries that can serve as the core of a full Web CMS, built with XQuery and Javascript</li>
+      <li>To enable "not-just-another-<span class="caps">CMS"</span>, taking advantage of MarkLogic-specific capabilities</li>
+      <li>To avoid rigid schemas – content can be <em>polymorphic </em>and based on <em>prototypes<br/></em></li>
+      <li>To promote and provide inline (WYSIWYG) content editing</li>
+      <li>To provide search that is configurable, extensible, tunable, turn-key, and aware of a content-type dictionary</li>
+    </ul>
+<p>This project (COntent Management on MarkLogic Server aka <a title="COntent Management On MarkLogic Server" href="/code/comoms">CoMoms</a>) is now available for folks to look at on <a title="Comoms" href="http://github.com/marklogic/comoms">Github</a>.</p>
+<p>This is a <em><strong>very</strong> <strong>early</strong></em> milestone and nothing is baked-in-stone yet (read: <strong>not stable</strong>, things will change).  There is some working code (as <a href="http://mike.brevoort.com/">Mike</a> says, "some good nuggets") espcially around our use of MarkLogic <a href="http://docs.marklogic.com/4.1doc/docapp.xqy#display.xqy?fname=http://pubs/4.1doc/apidoc/dls.xml&amp;category=Library+Services&amp;query=library+services">Library Services</a> API and a working sample deployment (recipes) to get a sense of what we're building.  0.1 includes:</p>
+<ul style="list-style-position: outside;">
+      <li>Flexible content type modeling – no management interface yet, hand-edited <span class="caps">XML</span> content-type dictionary</li>
+      <li>Inline/<span class="caps">WYSIWYG</span> content editing/creation via HTML5</li>
+      <li>Single database, multi-version publishing via MarkLogic's <a href="http://docs.marklogic.com/4.1doc/docapp.xqy#display.xqy?fname=http://pubs/4.1doc/apidoc/dls.xml&amp;category=Library+Services&amp;query=library+services">Library Services</a> API</li>
+      <li>Pervasive security (because content is managed using <span class="caps">DLS</span>)</li>
+      <li>Extensible authentication interface – including an initial implementation using <a href="http://developers.facebook.com/docs/authentication/">OAuth2 (pointed at Facebook)</a></li>
+      <li><span class="caps">OOTB</span> search and faceting</li>
+      <li>A reference deployment (using wikipedia cookbook recipe data)</li>
+    </ul>
+<p>Feel free to give us a holler if you're interested in finding out more about this project.</p>
+  </ml:body>
+</ml:Post>

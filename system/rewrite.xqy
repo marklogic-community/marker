@@ -74,4 +74,10 @@ return
                     return
                         $new
                 else
-                    fn:concat("?path=",$url, "&amp;", $xqmvc-conf:controller-querystring-field, "&amp;", $xqmvc-conf:function-querystring-field)
+                    let $urlParts := fn:tokenize($url, "\?")
+                    let $uri := $urlParts[1] 
+                    let $original-query-string := 
+                        if($urlParts[2])
+                        then (fn:concat("&amp;", $urlParts[2]))
+                        else ''
+                    return fn:concat("?path=", $uri, "&amp;", $xqmvc-conf:controller-querystring-field, "&amp;", $xqmvc-conf:function-querystring-field, $original-query-string)

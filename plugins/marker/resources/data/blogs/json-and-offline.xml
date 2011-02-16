@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Draft" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>JSON and Offline Access</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:author>Jason Booth</ml:author>
+  <ml:created>2010-05-20T13:40:58.148995-07:00</ml:created>
+  <ml:last-updated>2010-05-21T17:05:13.764322-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>json</ml:tag>
+    <ml:tag>offline</ml:tag>
+    <ml:tag>persistjs</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>
+There are a bunch of us here at MarkLogic thinking about things that would make it easier to interact with the browser, and in particular, <a href="http://json.org">JSON</a>.  Beyond the existing support that MarkLogic provides with the <tt>xdmp:to-json()</tt> and <tt>xdmp:from-jon()</tt> API calls, we've tossed around a number of ideas.   I wanted to share something that Jason Booth, one of our top-notch Consultants has whipped up.   
+</p>
+
+<p>
+There are essentially two parts.  The first piece is a q jQuery plugin that exposes the MarkLogic Search API.  The second is ...Below is a screencast that he's kindly put together.
+</p>
+
+</ml:body>
+</ml:Post>

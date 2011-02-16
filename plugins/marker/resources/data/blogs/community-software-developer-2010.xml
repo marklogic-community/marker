@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Sweet Gig - Software Developer, MarkLogic Community</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-11-16T07:35:10.331349-08:00</ml:created>
+  <ml:last-updated>2010-11-16T08:37:37.75492-08:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>job</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>If working on the set of <a href="/code">open-source projects</a> listed on our developer site excites you, please read on.  We're actively interviewing folks to come join us fulltime in the MarkLogic Developer Community.</p>
+<p>It's a pretty sweet gig as software jobs go. You'll learn new techniques, languages, apis, platforms, and the like.  And, you'll work on projects that show how to use them with MarkLogic's awesome database for unstructured information. Because, as developers, we value "real, working code", you'll be building applications, 
+demonstrations, integrations, and re-usable libraries that show these best practices. </p>
+<p>It's definitely fun, but it's not your average software job. It requires someone who is able to balance multiple projects and responsibilities, correctly and collaboratively prioritizing each week.  There are a good many engineers who prefer to work on one thing, do it, and be 
+done.  That is not this job.  This role is suited to a multi-talented 
+developer, interested sometimes in the database, sometimes in the UI, sometimes in the interaction, and so on.  It requires the kind of person who thinks about presentations that aren't a series of bullets on a powerpoint.  </p>
+<p>Below is the formal job description.  If this is you, please contact us (Eric Bloch or Lisa Rogers) here at MarkLogic today!</p>
+<p> </p>
+<hr/>
+<p> </p>
+<p><strong>Software Developer, Community</strong><br/><br/>The MarkLogic Developer Community is looking for a creative software developer to join its small team in San Carlos, CA, USA.  This is a rare opportunity to work on "developer-community"-focused, open-source software at a successful and awesome, late-stage start-up.<br/><br/><strong>Main Responsibilities</strong></p>
+<ul>
+      <li>Lead MarkLogic community-sponsored software development projects, including development of feature work for developer.marklogic.com</li>
+      <li>Produce technical samples, examples, demonstrations, tutorials, and articles</li>
+      <li>Communicate about, promote and publish best practices</li>
+    </ul>
+<p><br/><strong>Requirements</strong></p>
+<ul>
+      <li>Software development skills in at least two programming languages (e.g., java, c#, ruby, python, php, perl, javascript)</li>
+      <li>Solid understanding of CS foundations (algorithms, data structures, architecture, operating systems)</li>
+      <li>Knowledge and experience with web application development (including HTML and CSS) and unix/linux servers</li>
+      <li>Desire to learn and assess new technologies</li>
+      <li>Ability to explain technologies to both technical and non-technical audiences</li>
+      <li>Strong written and verbal communication skills</li>
+    </ul>
+<p><br/><strong>Nice to have</strong></p>
+<ul>
+      <li>Knowledge of XQuery, XSLT, Javascript</li>
+      <li>Pointers to existing work including:
+ <br/>
+<ul>
+	  <li>open source software</li>
+	  <li>technical blogs or journals</li>
+	  <li>public web sites you've worked on</li>
+	</ul>
+</li>
+      <li>UI/UX design skill and proficiency with tools like photoshop, gimp, Flash, and so on.</li>
+      <li>Experience developing applications for mobile (iOS, Android)</li>
+      <li>Operations and/or unix/linux system administration experience</li>
+    </ul>
+  </ml:body>
+</ml:Post>

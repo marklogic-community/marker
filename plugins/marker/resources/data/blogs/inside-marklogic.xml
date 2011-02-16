@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  <ml:title>Beyond NoSQL - Inside MarkLogic Server!</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-10-26T22:10:03.393561-07:00</ml:created>
+  <ml:last-updated>2010-10-26T20:01:08.210909-07:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <p>This is a brief post I've been wanting to write for sometime now.  It's a post I alluded to when I started the <em><a href="/blog/marklogic-beyond-nosql">MarkLogic: Beyond NoSQL</a> </em>series earlier this year.  </p>
+<p>We're making good on an earlier promise to explain our architetcure,<em> in more detail</em>.  Beyond simply saying what our customers already know (e.g. things like, "MarkLogic is really fast"), we've taken the time and effort to explain why and how this is so.  </p>
+<p>Specifically, MarkLogic Principal Technologist, <a href="http://servlets.com/jason">Jason Hunter</a>, has published <a href="/inside-marklogic">Inside MarkLogic Server</a>.  This paper provides a deep dive into our architecture and data model so 
+that you can understand "what's under the hood" and how best to use 
+it.   </p>
+<p>As Jason told me, his hope is that, after reading this paper, you'll have the knowledge to do things like predict how long a given query should really take in your environment - should it happen in 200ms?  Or in 5ms?  How many times will it hit the disk?  And so on.  Likewise, you'll be able to make better informed application design and deployment.</p>
+<p>If you want to understand what's <a href="/inside-marklogic">inside MarkLogic</a>, this paper is for you. Enjoy!</p>
+  </ml:body>
+</ml:Post>

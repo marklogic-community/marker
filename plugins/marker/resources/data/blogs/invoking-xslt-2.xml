@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Invoking XSLT: the optional arguments</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-11-01T12:12:28.418994-07:00</ml:created>
+  <ml:last-updated>2010-11-01T13:11:39.266028-07:00</ml:last-updated>
+  
+  <ml:body>
+    <p>In <a href="/blog/invoking-xslt">my last post</a>, I discussed the required arguments of the XQuery and XSLT flavors of <code>invoke()</code> and <code>eval()</code>. Now let's look at the optional arguments. All four functions have two optional arguments:</p>
+<ol>
+      <li>an argument for passing parameters (or "external variables" as they're 
+called in XQuery), and</li>
+      <li>an argument for setting evaluation options (an "options" node).</li>
+    </ol>
+<p>The first optional argument (for passing parameters) serves essentially the same purpose whether you're invoking XSLT or XQuery. In the case of XSLT, it allows you to initialize any top-level parameters you have declared in your stylesheet. In the case of XQuery, it does the same thing, except that those parameters are called "external variables." But whereas the task is essentially the same, the API has been updated (or upgraded) in the case of the XSLT functions, as we'll see shortly.</p>
+<p>When invoking XQuery, this is how you initialize external variables:</p>
+<script src="http://gist.github.com/659093.js" xml:space="preserve"></script>
+<p>This API has some limitations. Well, to be fair, it's the data model that has the limitation. In XPath 2.0 (and thus XQuery), you can't nest sequences; they can only be flat. So the second argument is defined as a sequence, with the additional constraint that it must have an even number of items, such that each pair is interpreted to be a QName/value pair. This can be problematic. What if you want to initialize an external variable with the empty sequence? You can't. (You'll have to get away with some other value, such as the empty string.)</p>
+<p>The XSLT API remedies this problem by utilizing one of MarkLogic's data model extensions: the <em>map</em> data type. To set parameters, you pass a map value, which is a built-in way of representing key/value pairs. Here's how you initialize top-level parameters when invoking XSLT:</p>
+<script src="http://gist.github.com/659095.js" xml:space="preserve"></script>
+<p>First, you store an empty map in the $map variable. Then you find a place to call map:put(), once for each top-level parameter you want to initialize. map:put() has the side effect of inserting the given key/value pair into the given map, but it itself returns the empty sequence. That means you can put it anywhere. In the above example, I've chosen to call it in a dummy variable definition that I won't be using. Finally, you pass $map as the third argument to the xdmp:xslt-invoke() function. If your top-level parameter name is namespace-qualified, you can represent the QName as a string using <a href="http://www.jclark.com/xml/xmlns.htm">Clark notation</a>, e.g., "{http://mynamespace.com}name1".</p>
+<p>If you're allergic to relying on side effects, you can use the XML representation for map values, like this:</p>
+<script src="http://gist.github.com/659105.js" xml:space="preserve"></script>
+<p>In fact, I did this for a while before I decided it was silly and stopped worrying about it.</p>
+<p>The second and last optional argument is an options element, which takes this structure:</p>
+<script src="http://gist.github.com/659096.js" xml:space="preserve"></script>
+<p>The child elements are named by the option you're setting. The xdmp:xslt-invoke() and xdmp:xslt-eval() functions allow the same options as the corresponding XQuery functions, xdmp:invoke() and xdmp:eval(). I won't go into those here. But the XSLT functions add two additional options, specific to XSLT. The XSLT 2.0 recommendation allows you to <a href="http://www.w3.org/TR/xslt20/#initiating">specify an initial mode or an initial named template</a> (but not both). For example, if you want to start processing with a mode named "main", you would invoke your XSLT like this:</p>
+<script src="http://gist.github.com/659097.js" xml:space="preserve"></script>
+<p>Frankly, I haven't found a use for this yet, but it's good to know MarkLogic won't keep me from being able to do it.</p>
+  </ml:body>
+</ml:Post>

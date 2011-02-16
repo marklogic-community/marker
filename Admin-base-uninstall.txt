@@ -68,7 +68,7 @@ let $sec := try{
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:unprotect-collection('DRAFTS')"), (),
+                    sec:unprotect-collection('http://marklogic.com/marker/drafts')"), (),
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
@@ -78,7 +78,7 @@ let $sec := try{
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:unprotect-collection('PUBLISHED')"), (),
+                    sec:unprotect-collection('http://marklogic.com/marker/published')"), (),
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 

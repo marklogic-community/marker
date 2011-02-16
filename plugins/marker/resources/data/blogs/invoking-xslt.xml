@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <ml:title>Invoking XSLT: the required arguments</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-10-29T12:12:28.418994-07:00</ml:created>
+  <ml:last-updated>2010-10-29T13:11:39.266028-07:00</ml:last-updated>
+  
+  
+  <ml:body>
+    <p>In one sense, XQuery is more "first-class" than XSLT in MarkLogic. Specifically, you don't need XSLT to invoke XQuery, but you do need (a little bit of) XQuery to invoke XSLT. Also, XQuery can be used to define a URL rewriter, but XSLT cannot. However, despite these differences, you can still write most of your code in XSLT if you want. Or, if you prefer, you may choose to farm out only some tasks to XSLT, doing most of your development in XQuery. Either way, you'll need to learn how to execute the XSLT processor. That's what this post is about.</p>
+<p>The API for invoking XSLT stylesheets resembles the API for invoking XQuery scripts. Whereas you use <code>xdmp:invoke()</code> to invoke XQuery scripts, you use <code>xdmp:<strong>xslt-</strong>invoke()</code> to invoke XSLT stylesheets. Similarly, whereas <code>xdmp:eval()</code> is used to evaluate a dynamically constructed XQuery script, <code>xdmp:<strong>xslt-</strong>eval()</code> does the same for XSLT.</p>
+<p>However, there are some differences. Highlighting these reveals some things about the nature of each language. In particular, two differences stand out:</p>
+<ol>
+      <li>XSLT is always concerned with a primary input document (or node); XQuery is not.</li>
+      <li>XSLT is represented as XML; XQuery is not.</li>
+    </ol>
+<p>Let's look at the first distinction. Since XSLT always assumes the presence of an initial context node, both of the API functions for invoking it have an additional required argument compared to their XQuery counterparts.</p>
+<p>To invoke XQuery, you can just specify the file name:</p>
+<script src="http://gist.github.com/654306.js" xml:space="preserve"></script>
+<p>But to invoke XSLT, you also need to supply an initial context node (in this case a document node):</p>
+<script src="http://gist.github.com/654311.js" xml:space="preserve"></script>
+<p>Now, let's look at the second distinction. Whereas the "invoke" functions are concerned with executing the script with the given file name, the "eval" functions allow you to execute dynamically constructed code. That's true for both the XQuery and XSLT flavors of "eval". However, the data type of the code is different. In XQuery's case, the eval function expects a string argument. But in XSLT's case, it expects you to give it an element node.</p>
+<p>Here's an example XQuery evaluation:</p>
+<script src="http://gist.github.com/654312.js" xml:space="preserve"></script>
+<p>The string contains an (albeit trivial) XQuery script, which is parsed and then evaluated.</p>
+<p>With XSLT, you can embed a stylesheet element—not as a string, but as an actual element:</p>
+<script src="http://gist.github.com/654314.js" xml:space="preserve"></script>
+<p>The funny thing about this example is that the empty stylesheet actually does something potentially useful: concatenating all the descendant text nodes from the input document into the result. But that's really beside the point. The more interesting thing is that you can create general pipelines of transformations, including transformations that modify or generate other transformations, through nested calls to <code>xdmp:xslt-invoke()</code> and <code>xdmp:xslt-eval()</code>. Even better, you can call these functions from within XSLT itself, which allows you to utilize the behavior of another stylesheet as a black box. This is something you can't (yet) do in standard XSLT (because you have to first make sure there are no global variable name, template rule, or function name conflicts).</p>
+<p>In the next installment, we'll look at the optional arguments to xdmp:xslt-invoke() and xdmp:xslt-eval().</p>
+  </ml:body>
+</ml:Post>

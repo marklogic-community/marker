@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Back-to-school XQuery Syntax Bounties</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-09-09T17:41:56.716679-07:00</ml:created>
+  <ml:last-updated>2010-09-10T10:34:19.265437-07:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <p>September is back-to-school month. In recognition of the joy of learning, we're offering up some enticements for MarkLogic and XQuery community folk to go learn something new (or for some, re-visit something old). </p>
+<p>I've listed a handful of open-source syntax-highlighting projects below that are missing support for XQuery. And attached to them, you'll see listed rewards (Apple iPads, O'Reilly online book subscriptions) that can be claimed by producing the missing piece(s) of code that would benefit our community.  </p>
+<p style="text-align: center;"><img style="display: block; margin-left: auto; margin-right: auto;" title="WANTED!" src="/media/wanted.gif" alt="wanted" width="162" height="51"/></p>
+<table class="table3">
+<colgroup span="1">
+	<col class="col1" span="1"/>
+	<col class="col2" span="1" width="500"/>
+	<col class="col3" span="1"/>
+      </colgroup>
+<thead>
+	<tr>
+	  <th scope="col" rowspan="1" colspan="1">Name</th>
+	  <th style="text-align: center;" scope="col" rowspan="1" colspan="1">Summary</th>
+	  <th scope="col" rowspan="1" colspan="1">Bounty</th>
+	</tr>
+      </thead>        
+<tbody>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1"><a style="color: #235bab;" href="http://github.com/">Github</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://github.com/">Github</a> is lacking support for XQuery.  They use <a style="color: #235bab;" href="http://pygments.org/">Pygments</a> (a python framework for syntax highlighting) and need a <a style="color: #235bab;" href="http://pygments.org/docs/lexers/">Pygments Lexer</a>. See this brief <a style="color: #235bab;" href="http://support.github.com/discussions/graphs/133-xquery-syntax-highlighting">note</a>.</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: center;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/>
+<strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://codemirror.net/">Codemirror</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://codemirror.net/">Codemirror</a> is a javascript library that provides in-browser syntax highlighting.  It is missing support for XQuery.<br/></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/><strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr class="alt">
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://code.google.com/">Google Code</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://code.google.com/">Google Code</a> uses <a style="color: #235bab;" href="http://code.google.com/p/google-code-prettify">google-code-prettify</a> and it is missing support for XQuery.  A first step here would be to provide a patch that supports these.  Bonus points would be to get the project to take in the patch.</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/>
+<strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1">
+<a style="color: #235bab;" href="http://alexgorbatchev.com/SyntaxHighlighter">SyntaxHighlighter</a>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">Popular open-source Javascript syntax highlighter.</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: center;" rowspan="1" colspan="1"><strong>1 year subscription to<img title="safari" src="http://my.safaribooksonline.com/static/201009-1036-my/images/6.0/logo_sbo.gif" alt="safari" width="185" height="49"/></strong></td>
+	</tr>
+	<tr class="alt">
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://www.gnu.org/software/src-highlite/">GNU Source-highlight</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1">GNU C++ highlight library<br/></td>
+	  <td style="padding-top: 3px; padding-bottom: 6px; text-align: center;" rowspan="1" colspan="1"><strong>1 year subscription to<img style="display: block; margin-left: auto; margin-right: auto;" title="safari" src="http://my.safaribooksonline.com/static/201009-1036-my/images/6.0/logo_sbo.gif" alt="safari" width="185" height="49"/></strong></td>
+	</tr>
+      </tbody>
+</table>
+<p><br/>There are some helpful starting points, too.  The following tools do have XQuery support:</p>
+<ul>
+      <li><a href="http://wiki.eclipse.org/XQDT">Eclipse XQDT</a></li>
+      <li><a href="http://www.oxygenxml.com/">Oxygen</a></li>
+      <li><a href="http://www.vim.org/">vim</a> and <a href="http://www.emacswiki.org/">emacs</a></li>
+      <li><a href="/code/dq">DQ</a> (See also this <a href="http://exist.markmail.org/thread/vlz6wolrdk7e5jfc">thread</a> of conversation back from March earlier this year.)</li>
+      <li><a href="http://www.textpad.com/add-ons/synu2z.html">Textpad</a></li>
+      <li><a href="http://www.jedit.org/">jEdit</a></li>
+    </ul>
+<p>If you're interested, read on.  The process of claiming a bounty is relatively simple.  </p>
+<ol>
+      <li>Let us know you're going to work on it by sending an email to the 
+<a href="mailto:general@developer.marklogic.com">MarkLogic developer list</a> with the words "bounty hunting" in the subject 
+and your name and the specific bounty in the body of the email.  At that time, we also recommend your <a href="http://marklogic.markmail.org/search/?q=%22bounty+hunting%22">searching through the list</a> to see if anyone else is working on claiming your bounty. </li>
+      <li>When you're done, send a note to the <a href="mailto:general@developer.marklogic.com">MarkLogic developer list</a> with a pointer to the code, docs, and any other relevant artifacts.    </li>
+      <li>Entries will be judged on completeness, accuracy, quality, and other standard metrics
+for software tools.  At the end of the month of September, we'll evaluate all entries and choose a winner for each bounty.  In the event of a tie, the entry that was received first wins.  Judges' decisions are final.</li>
+      <li>Everyone (including MarkLogic employees, but excluding me) is eligible to participate.</li>
+      <li>Bounties unclaimed at the end of the month may roll over to the following month.</li>
+    </ol>
+<p>Help us out and go claim your reward!</p>
+  </ml:body>
+</ml:Post>
