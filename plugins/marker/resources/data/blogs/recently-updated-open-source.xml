@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Open Source Project Updates</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-06-03T12:19:04.043043-07:00</ml:created>
+  <ml:last-updated>2010-06-04T13:56:05.684737-07:00</ml:last-updated>
+  
+  <ml:body>
+    <p>Just a brief update to let you know there's a whole lotta goodness going on.</p>
+<ul>
+      <li>Clark Richey pushed 0.3 of <a title="ActiveDocument" href="/code/active-document">ActiveDocument</a> to rubygems.</li>
+      <li>Keith Breinholt published 1.0 of <a href="/code/xqdebug">XQDebug</a> and</li>
+      <li>Pete Aven pushed 1.2.1 of <a title="MarkLogic Toolkit For Word" href="/code/marklogic-toolkit-for-word">MarkLogic Toolkit for Word</a> </li>
+      <li>Pete also wrote up an <a href="http://marklogics1w.codeplex.com/">awesome description</a> of the <a href="http://www.tillettnj.freeserve.co.uk/Images/Art/Dimensciousness_by_Fuzzy_800x600.jpg" target="_blank">face-melting</a> <a title="MarkLogic Sample Authoring App" href="/code/marklogic-sample-authoring">Sample Authoring Application for Word</a></li>
+      <li>Norm Walsh has kindly published his <a href="/code/atompub-server">MarkLogic AtomPub Server</a></li>
+    </ul>
+  </ml:body>
+</ml:Post>

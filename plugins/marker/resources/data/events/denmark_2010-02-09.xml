@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="denmark" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Learn about MarkLogic in the Cloud at the next Denver MarkLogic User Group (DenMARK)</ml:title>
+  <ml:description>
+    <p><ml:teaser>Denise Miura, Sr. Director of Product Management will be speaking about MarkLogic's new offering for the Cloud at our upcoming User Group in Denver.</ml:teaser></p>
+<p>
+In this presentation, Denise will explain MarkLogic's new cloud deployment options and describe how they are being used today within the MarkLogic development community. She will demonstrate instantuating a MarkLogic AMI live on Amazon EC2 and talk about best practices for using MarkLogic on the EC2 platform. Finally a preview of the planned cloud-related product enhancements will be provided. This is a great opportunity to provide feedback and influence the cloud computing initiative at MarkLogic.
+</p>
+
+</ml:description>
+  <ml:details>
+    <ml:date>2009-02-09</ml:date>
+    <ml:time>7pm</ml:time>
+    <ml:location>Auriria Campus, Tivoli Bldg (900 Walnut st. Denver, CO) Rm 320 Section B, Baerresen Ballroom</ml:location>
+    <ml:topic>MarkLogic Cloud Services</ml:topic>
+    <ml:presenter>Denise Miura</ml:presenter>
+  </ml:details>
+</ml:Event>

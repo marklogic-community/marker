@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  <ml:title>Fast Track to MarkLogic for XSLT Developers, Part 1</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-10-23T00:27:25.359176-07:00</ml:created>
+  <ml:last-updated>2010-10-23T00:33:02.303558-07:00</ml:last-updated>
+  
+  
+  
+  
+  
+  <ml:body>
+    <p>As I mentioned in my <a href="/blog/guest/a-dream-come-true">first blog post</a> earlier this year, <a title="The application that runs this site!" href="/code/rundmc">RunDMC</a> was my first XSLT-based Web application using MarkLogic Server. It was a treat to be able to use XSLT for almost all of the development. However, before I could dive in, I had to learn some basics about how to set up an application in MarkLogic, and about how to run XSLT stylesheets. Looking back, it wasn't complicated, but it did take some extra time. This post is what I wish I had had when I was getting started.</p>
+<p>If you're an XSLT developer interested in checking out MarkLogic Server, this series is designed to help you get up-to-speed quickly with minimal hassle. In a series of five short video tutorials, I'll show you how to set up a simple framework for a basic Web application. You'll learn how to set up an application server, invoke your first "Hello World" XQuery script, apply an XSLT transformation, create cool URIs, and access multiple documents from XSLT. These videos are very short and designed to save you time. You can always dig deeper by reading the <a href="http://developer.marklogic.com/learn/4.2/app-developer-guide">Application Developer's Guide</a>. But if you're interested in getting to XSLT as quickly as possible, this series is for you.</p>
+<p>
+<object style="height: 390px; width: 640px;" width="100" height="100" data="http://www.youtube.com/v/R1E5D6BAo80?version=3" type="application/x-shockwave-flash">
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://www.youtube.com/v/R1E5D6BAo80?version=3" valuetype="data"/>
+</object>
+</p>
+    <p>You can continue on to part 2 <a href="/blog/xslt-videos-part-2">here</a></p>.
+  </ml:body>
+</ml:Post>

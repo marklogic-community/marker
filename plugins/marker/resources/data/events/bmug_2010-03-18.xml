@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="bmug" status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>First Boston User Group Meeting March 18!</ml:title>
+  <ml:description>
+<p><ml:teaser>The first Boston MarkLogic User Group meeting will take place on Thursday March 18th. This will be the last stop on the user group tour about MarkLogic's new offering in the Cloud.</ml:teaser>
+</p>
+<p>
+This presentation will explain MarkLogic's new cloud deployment options and describe how they are being used today within the MarkLogic development community. Attendees will also be able to assist to a MarkLogic AMI live on Amazon EC2 and talk about best practices for using MarkLogic on the EC2 platform. Finally a preview of the planned cloud-related product enhancements will be provided. This is a great opportunity to provide feedback and influence the cloud computing initiative at MarkLogic.
+</p>
+</ml:description>
+  <ml:details>
+    <ml:date>2010-03-18</ml:date>
+    <ml:time>6:00pm</ml:time>
+    <ml:location>OHO office, 1100 Massachusetts Avenue, 2nd Floor, Cambridge, MA 02138</ml:location>
+    <ml:topic>MarkLogic Cloud Services</ml:topic>
+    <ml:presenter>Clark Richey</ml:presenter>
+  </ml:details>
+</ml:Event>

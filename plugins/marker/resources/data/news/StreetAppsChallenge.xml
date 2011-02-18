@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic is a Proud Sponsor of the Thomson Reuters StreetApps Challenge</ml:title>
+  <ml:author>Cleo Haynal</ml:author>
+  <ml:date>2010-05-18</ml:date>
+  <ml:body>
+    <img style="float: right" src="http://www.streetappschallenge.com/images/logo.gif" alt="streetapps"/>
+<p>
+<ml:teaser>
+<a href="http://www.streetappschallenge.com">The StreetApp Challenge</a> is a contest to create innovative mobile apps for financial professionals.
+</ml:teaser>
+</p>
+<p>
+Thomson Reuters is challenging developers internationally to build the most useful, high-quality, and visually appealing applications, offering $25,000 USD in cash and prizes. 
+</p>
+<p>
+In order to be considered for prizes,
+all submitted software applications must use at least one content set from the Thomson Reuters Knowledge Direct API. Applications must be installable on the iPhone, iPad, Blackberry, or Android Operating systems.
+</p>
+<p>
+The StreetApps Challenge is a contest to create innovative mobile apps for financial professionals.
+</p>
+<p><b>If the winning application is developed on <a href="http://developer.marklogic.com/">MarkLogic</a>, <a href="http://www.marklogic.com">MarkLogic Corporation</a> will give an additional $5000 to the winner.</b> 
+</p>
+<p>
+<i>Note: Developers maintain all intellectual property ownership for their submissions.</i>
+</p>
+<p>
+Learn more at <a href="http://www.streetappschallenge.com">http://www.streetappschallenge.com/</a></p>
+</ml:body>
+  <ml:created>2010-05-18T23:16:00.841833-07:00</ml:created>
+  <ml:last-updated>2010-05-19T15:38:30.996162-07:00</ml:last-updated>
+</ml:Announcement>

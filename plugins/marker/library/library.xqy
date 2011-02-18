@@ -7,6 +7,7 @@ import module namespace mem = "http://xqdev.com/in-mem-update" at "in-mem-update
 import module namespace functx = "http://www.functx.com" at '/MarkLogic/functx/functx-1.0-nodoc-2007-01.xqy';
 import module namespace xqmvc-conf = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
 declare namespace html = "http://www.w3.org/1999/xhtml";
+declare namespace marker="http://marklogic.com/marker";
 
 declare function library:list-documents($directory, $depth, $filter, $start, $length){
     let $log := xdmp:log("in library:list-documents")
@@ -221,7 +222,7 @@ declare function library:publish($version_uris as item()*) {
     let $addPermissions := library:applyPermissions($uri, (xdmp:permission('marker-admin', 'read')))
     
     let $searchable := 
-        if(fn:doc($managed_base_uri)/property::marker-content/marker-searchable/text() eq 'true')
+        if(fn:doc($managed_base_uri)/property::marker:content/marker:searchable/text() eq 'true')
         then  
             (
             library:applyCollections($uri, ("http://marklogic.com/marker/searchable"))
@@ -269,18 +270,18 @@ declare function library:insertMeta($doc, $uri)
     let $newXML := 
     element {fn:node-name($doc/node())} {
         $doc/node(),
-        element marker-content {fn:doc(library:getManagedDocUri($uri))/property::marker-content/* }
+        element marker:content {fn:doc(library:getManagedDocUri($uri))/property::marker:content/* }
         
     }   
     return $newXML
    
 };
-declare function library:stripMeta($doc)
+declare function library:stripMeta($doc as node())
 { 
     
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ()
-    let $cleaned := functx:remove-elements-deep($doc,"marker-content")
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($doc) )) else ()
+    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ():)
+    let $cleaned := functx:remove-elements-deep($doc,"content")
+    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($doc) )) else ():)
     return $cleaned
     
    
@@ -408,6 +409,43 @@ declare function library:doc($uri) {
                     fn:doc($uri)
                 else
                     ()
+};
+
+declare function library:marker-properties-bag($uri) {
+    let $base-uri := library:getManagedDocUri($uri)
+    let $eval-statement := fn:concat(library:_import(), "declare namespace marker='http://marklogic.com/marker';", "fn:doc('", $base-uri, "')/property::marker:content")
+    return xdmp:eval
+        (
+        $eval-statement,
+        (), 
+        <options xmlns="xdmp:eval">
+            <user-id>{xdmp:user("admin")}</user-id>
+        </options>
+        )
+};
+
+declare function library:content-header($properties-bag) {
+
+   let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("content-header:", xdmp:quote($properties-bag) )) else ()
+   return <div class="content-header">
+        {
+        if($properties-bag/marker:title)
+        then ( <h2>{$properties-bag/marker:title/text()}</h2>)
+        else ()
+        }
+       
+        {
+        if($properties-bag/marker:publish-date)
+        then (<div class="date">{fn:format-dateTime($properties-bag/marker:publish-date/text(),"[Y01]/[M01]/[D01]")}</div>)
+        else ()
+        }
+        {
+        if($properties-bag//marker:author)
+        then (<div class="author">By {fn:string-join($properties-bag//marker:author/text(), ", ")}</div>)
+        else ()
+        }
+        &nbsp;
+    </div>
 };
 
 (:~ 

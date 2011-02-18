@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="markups" status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Mark-UPS: the Maryland MarkLogic User Group</ml:title>
+  <ml:description>
+    <p><ml:teaser>We are happy to announce that the first Maryland MarkLogic User Group, named Mark-UPS (MarkLogic User Participation Sessions) will meet on August 19th at 5:30PM. The event will be hosted by Telly Stroumbis of Boeing and will bring together a diverse crowd of MarkLogic users.</ml:teaser></p>
+<p>
+In recent years, the term "semantic applications" has expanded beyond its original RDF roots to include applications that are increasingly leveraging relevant metadata to allow users to more quickly and intelligently discover and analyze data within broad content sets. In this session, MarkLogic Federal Consultant Gary Katz will discuss MarkLogic Server's role as a semantically enabling technology, the problems it can help solve as well as demonstrate a recently developed semantic application.
+</p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2009-08-19</ml:date>
+    <ml:time>5:30pm</ml:time>
+    <ml:location>131 National Business Parkway, Suite 120, Annapolis Junction, MD 20701</ml:location>
+    <ml:topic>MarkLogic Application Services</ml:topic>
+    <ml:presenter>Justin Makeig, product manager at MarkLogic and self-professed user experience nerd</ml:presenter>
+  </ml:details>
+</ml:Event>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Tired of typeswitch? Try template rules!</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-11-15T11:26:39.494182-07:00</ml:created>
+  <ml:last-updated>2010-11-15T18:16:34.037456-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>XSLT</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>If you've done much XQuery development, you've probably come across the need to transform one XML
+structure into another. And if you were dealing with document-oriented XML
+(having things like sections and headings and formatted text), then you've
+probably found the need to use recursion to handle all the possible element
+combinations. In this article, we'll see how a common design pattern in XQuery
+is a built-in language feature of XSLT. Since MarkLogic Server 4.2 supports
+both XQuery and XSLT, you now have a choice.</p>
+<p>This article will help you figure out how to pick the right tool for the right job. First, we'll look at
+the basic problem. Then we'll look at the XQuery and XSLT approaches to solving
+the problem. Finally, we'll take a deeper look at how the XSLT solution works.</p>
+<p>Let's say you wanted
+to convert all the &lt;emphasis&gt; elements in your source document to
+&lt;em&gt; in the result. Using XQuery, you might try something like this:</p>
+<script src="http://gist.github.com/701080.js" xml:space="preserve"></script>
+<p>But what if you also want to convert &lt;bold&gt; tags to &lt;strong&gt;? In that case, you'd need to add another conditional expression:</p>
+<script src="http://gist.github.com/701082.js" xml:space="preserve"></script>
+<p>But then what happens if we say that the elements can be nested? The code above doesn't account for that scenario. Rather than just copy the children of $x, you'd need to apply the same logic to its children. This is where recursion comes in.</p>
+<p>Let's cut to the chase. The MarkLogic <a href="/pubs/4.1/books/dev_guide.pdf">Application Developer's Guide</a> has an entire section devoted to solving this problem in XQuery, called "Transforming XML Structures  With a Recursive typeswitch Expression." Here's the full example that's given for transforming XML into XHTML:</p>
+<script src="http://gist.github.com/701083.js" xml:space="preserve"></script>
+<p>The local:passthru function is what we call to process all the children of each element. And the local:dispatch function is what local:passthru calls to process each child. The typeswitch expression is a special kind of XQuery conditional expression that does something different depending on the type of the given node. In this case, if the node is an &lt;a&gt; element, then we just process its children. If it's a &lt;title&gt; element, then we create an &lt;h1&gt; element and then process its children. And so on. There is also a catch-all rule (the "default" branch) that is applied if none of the preceding tests returns true.</p>
+<p>Whereas XQuery is up to the challenge for this simple example, things start to get unwieldy as you start adding more scenarios and elements. Fortunately, this problem is the sort of thing that XSLT shines at.</p>
+<p>The following XQuery script contains an embedded XSLT stylesheet and calls xdmp:xslt-eval() on it to effect exactly the same behavior as the previous example:</p>
+<script src="http://gist.github.com/701084.js" xml:space="preserve"></script>
+<p>Each &lt;xsl:template&gt; element (if it has a "match" attribute) is called a "template rule". Template rules give you a polymorphic way of defining what to do with each node as it's processed in XSLT. In this case, the first node that is processed is the &lt;a&gt; element. Since there are no explicit rules matching &lt;a&gt;, the XSLT processor invokes the built-in rule for elements, which is simply to process its children. That happens automatically without any explicit code on our part. Now, the list of nodes being processed is as follows, i.e. the children of &lt;a&gt;:</p>
+<ol>
+      <li>&lt;title&gt;</li>
+      <li>&lt;para&gt;</li>
+      <li>&lt;sectionTitle&gt;</li>
+      <li>&lt;para&gt;</li>
+      <li>&lt;numbered&gt;</li>
+    </ol>
+<p>For each of those nodes, the XSLT processor invokes the best-matching template rule. Thus, &lt;title&gt; gets converted to &lt;h1&gt;, &lt;para&gt; gets converted to &lt;p&gt;, etc. The only thing left to explain is what &lt;xsl:apply-templates/&gt; does. Well, that's how you say "process children" in XSLT; it's analogous to the local:passthru() function in the XQuery version. For example, here's the template rule for &lt;numbered&gt;:</p>
+<script src="http://gist.github.com/701085.js" xml:space="preserve"></script>
+<p>When inside this template rule, the <em>current node</em> is the &lt;numbered&gt; element. The call to &lt;xsl:apply-templates/&gt; in this context causes the children of the current node (&lt;numbered&gt;) to be processed:</p>
+<ol>
+      <li>&lt;number&gt;</li>
+      <li>&lt;number&gt;</li>
+      <li>&lt;number&gt;</li>
+    </ol>
+<p>And, in turn, the template rule for &lt;number&gt; elements gets invoked three times, effectively converting each &lt;number&gt; to &lt;li&gt;.</p>
+<p>But how does the text get copied through? Once again, when there isn't an explicit rule—in this case, there is no template rule with <code>match="text()"</code>—then the built-in template rule gets invoked. XSLT's built-in template rule for text nodes is to copy them to the result, which is exactly the behavior we want!</p>
+<p>Given this simple example, the advantages of XSLT are not altogether clear. But as soon as you start adding more complexity, XSLT's power shines through. Here are some features that start to hint at the power of template rules:</p>
+<ul>
+      <li>The value of the match attribute can be any <em>pattern</em> (syntactically a subset of XPath expressions), which can contain arbitrary boolean predicates. This is more general than what you can do with a typeswitch "case" branch.</li>
+      <li>The &lt;xsl:apply-templates/&gt; instruction has an optional <code>select</code> attribute, which allows you to specify exactly which list of nodes you want to process. When you don't supply it, the behavior is the same as if you wrote <code>select="node()"</code>.</li>
+      <li>The &lt;xsl:apply-templates/&gt; instruction also has an optional <code>mode</code> attribute, which restricts the template rules to those that share the same mode value. This effectively gives you an unlimited supply of named polymorphic "functions" defined using template rules, not just the "unnamed mode" that we're using in the example.</li>
+      <li>When more than one template rule matches a given node, XSLT has an automatic way of resolving conflicts based on the format of the match attribute, or, when you explicitly specify it, the value of the optional <code>priority</code> attribute.</li>
+      <li>Finally, since each template rule is lexically independent of the rest (and their relative order doesn't matter), they can be stored in different modules. Not only that, but you can write a template rule that overrides another template rule defined in an imported module.</li>
+    </ul>
+<p>This list is only a quick summary. For a more comprehensive explanation of how template rules work in XSLT, check out the "Processing Model" section of <a href="http://lenzconsulting.com/how-xslt-works/#processing_model">"How XSLT Works,"</a> a free sample chapter from <em>XSLT 1.0 Pocket Reference</em>. (Everything in this chapter still applies to XSLT 2.0; just think "node sequence" when you read "node-set".)</p>
+<p>I hope I've whetted your appetite. The next time you're solving a highly recursive XML transformation problem, remember that XQuery's typeswitch isn't your only option. MarkLogic's XSLT support can help you out too. Tired of typeswitch? Try template rules!</p>
+  </ml:body>
+</ml:Post>

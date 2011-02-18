@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="mugfr" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>MarkLogic User Group France du 7 décembre 2010</ml:title>
+  <ml:created>2010-11-23T17:55:09.503552-08:00</ml:created>
+  <ml:last-updated>2010-11-24T10:08:35.289577-08:00</ml:last-updated>
+  <ml:description>
+    <p>L’agenda du MUG du 7 décembre enfin dévoilé. Pour rappel, le rendez-vous
+ est fixé le mardi 7 décembre à Paris. Pour vous inscrire, envoyez un 
+mail à <a href="mailto:marie.lichtle@4dconcept.fr">marie.lichtle@4dconcept.fr</a> .  Voice le programme : </p>
+<p style="padding-left: 30px;" dir="ltr"><br/>
+<strong>15h </strong>: <em>Café d'accueil</em><br/><br/>
+<strong>15h30</strong> :<em> Ouverture de la 2ème session du MarkLogic User Group France</em></p>
+<p style="padding-left: 60px;" dir="ltr">Mathieu BALZARINI, Directeur Général, 4Dconcept</p>
+<p style="padding-left: 30px;" dir="ltr"><br/><strong>15h45</strong> : <em>MarkLogic : Fonctionnalités MarkLogic Server et cas d'utilisation</em></p>
+<p style="padding-left: 60px;" dir="ltr">Présentation des fonctionnalités clés de MarkLogic Server, illustrées de cas pratiques d'utilisation</p>
+<p style="padding-left: 60px;" dir="ltr">Ron AVNUR, Vice President of Engineering, MarkLogic</p>
+<p style="padding-left: 30px;" dir="ltr"><br/><strong>16h30</strong> : <em>Lagardère Active : Présentation du projet Digital Factory basé sur MarkLogic</em></p>
+<p style="padding-left: 60px;" dir="ltr">Comment imaginer et faire naître de nouvelles offres numériques à partir de contenus existants</p>
+<p style="padding-left: 60px;" dir="ltr">Vincent MAS, Direction des Technologies, Lagardère Active</p>
+<p style="padding-left: 30px;" dir="ltr"><br/><strong>17h15</strong> : <em>4Dconcept : Présentation d'un démonstrateur de géolocalisation basé sur l'API "geospacial" de MarkLogic Server</em></p>
+<p style="padding-left: 60px;" dir="ltr">Des cas d'utilisation concrets pour illustrer la recherche géolocalisée sur vos contenus XML : recherche par facette combinée à  recherche spatiale</p>
+<p style="padding-left: 60px;" dir="ltr">Grégory CORONA, Product Owner, 4Dconcept</p>
+<p style="padding-left: 30px;" dir="ltr"><br/><strong>18h00</strong> :<em> MUG.fr : Les ressources destinées à la communauté de développeurs MarkLogic</em></p>
+<p style="padding-left: 60px;" dir="ltr">Présentation des canaux d'information techniques sur MarkLogic : mug-fr.org, developer.marklogic.com, docs.marklogic.com, ...</p>
+<p style="padding-left: 60px;" dir="ltr">Mathieu PARISOT, Leader Technique MarkLogic, 4Dconcept</p>
+<p style="padding-left: 30px;" dir="ltr">
+<strong>18h30</strong> : <em>Poursuite des échanges autour d'un cocktail </em><br/><br/>
+</p>
+<p>
+Nous comptons sur votre présence et espérons que vous profiterez de cette occasion unique pour mesurer concrètement les apports, aussi bien techniques que métiers, de la technologie MarkLogic dans le cadre de la gestion des contenus de votre entreprise.
+</p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-12-07</ml:date>
+    <ml:time>15:00</ml:time>
+    <ml:location>TBA</ml:location>
+    <ml:topic>Fonctionnalités MarkLogic Server et cas d'utilisation</ml:topic>
+    <ml:presenter>Mathieu Balzarini, Ron Avnur, Grégory Corona, Mathieu Parisot, Vincent Mas</ml:presenter>
+    
+    
+    
+    
+  </ml:details>
+</ml:Event>

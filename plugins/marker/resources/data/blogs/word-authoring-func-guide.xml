@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>The MarkLogic Sample Authoring App for Word</ml:title>
+  <ml:author>Pete Aven</ml:author>
+  <ml:created>2010-12-16T07:54:03.87679-08:00</ml:created>
+  <ml:last-updated>2010-12-16T12:13:53.906162-08:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <h3>The Authoring App in Action</h3>
+<p>The MarkLogic Authoring Sample App for Word lets authors enrich Word
+documents using Content Controls, associate and manage metadata with
+those Controls, as well as search and reuse existing Controls and their
+metadata in new Word documents.</p>
+<p>The MarkLogic Sample Authoring App is built using the <a class="externalLink" href="http://developer.marklogic.com/code/marklogic-toolkit-for-word">MarkLogic Toolkit for Word</a>.
+Please install the Add-in and supporting XQuery library from the
+Toolkit to use this application. The Toolkit provides a guide for
+installation and comes with its own Sample Application. You can follow
+the guide instructions for installing this Sample App as well.</p>
+<h3>Getting Started</h3>
+<p>To get started using the Sample Application, you'll need to update 3
+areas with the URL of your application. See the README, as well as the
+Sample Authoring App Developer's Guide, both included in the download
+for the application.<br/><br/>Following is an overview of the Sample
+Authoring App functionality. A developer's guide is included in the
+release so you can configure this application to meet your
+requirements. A 'files of interest' section is also included in the
+guide in case you just want to get in there and start hacking.</p>
+<h2>Enrich</h2>
+<p>On this tab you have two sub-tabs to choose from, controls and
+boilerplate. The controls tab provides a palette of Content Controls to
+use. You can select the type of Control from the navigation bar on the
+controls tab. In the image we've selected Rich Text controls. The other
+Content Control types available are picture, calendar, drop down, and
+combo box.</p>
+<p> </p>
+<p><img title="Enrich Task Pane" src="/media/steadybloggin/w_authoring_func_guide/enrich-1.PNG" alt="Enrich Task Pane" width="399" height="485"/></p>
+<p> </p>
+<p>You can enrich a document section by selecting text or sections of
+content in your Word document and then clicking the button to add a
+Rich Text Control around your selection.</p>
+<p><img title="Content Controls One" src="/media/steadybloggin/w_authoring_func_guide/enrich-2.PNG" alt="Content Controls One" width="326" height="78"/></p>
+<p>Or if you're authoring a new document, clicking a button without
+anything selected in the active document results in the control being
+added at the current cursor position.</p>
+<p><img title="Content Controls Two" src="/media/steadybloggin/w_authoring_func_guide/enrich-3.PNG" alt="Content Controls Two" width="378" height="86"/></p>
+<p>The other controls add an image picker, calendar picker, or selectable
+lists of items. Only Rich Text controls can embed other controls and
+rich sections of content.<br/><br/>These controls are configurable. The
+amount of buttons you have for each control and their labels is
+determined by the configuration. For combo box and drop down controls,
+the selectable items for lists is also configurable. See the
+developer's guide for more detail. You can rename the controls, as well
+as create complex controls that embed other controls so an author could
+click a button that inserts a form of controls for entry if that's what
+you require. <br/><br/>The configuration is a simple XML file and it
+generates the HTML for the buttons on your palette as well as the
+associated JavaScript functions required for inserting the controls.
+The names you use for enrichment will be the values you use for Search
+once you've saved your document to MarkLogic Server.<br/><br/>By clicking
+on a control within an active document, the Properties section beneath
+the control palette helps to navigate the controls by providing
+information about the control you are currently authoring within.
+You'll see:</p>
+<ul>
+      <li>an icon for the type of control that is currently active in the document</li>
+      <li>the name of the title of the control</li>
+      <li>the name will be followed by the tag value for the control</li>
+      <li>if the control is embedded, a parent label is also provided to identify the parent control of the control that is active</li>
+    </ul>
+<p>This section also allows you to lock and unlock controls and their
+content. Here we see our Recommendation control is found within a
+Policy control and that the control and its contents are not currently
+locked.</p>
+<p> </p>
+<p><img title="Lock/Unlock Content Controls" src="/media/steadybloggin/w_authoring_func_guide/enrich-4.PNG" alt="Lock/Unlock Content Controls" width="400" height="201"/></p>
+<p><br/>The boilerplate tab provides buttons that will insert boilerplate
+Word documents saved in MarkLogic Server into the document actively being
+authored. The buttons are again configurable. The word, picture, and
+chart icons are provided as a way to cue authors into the types of
+documents they're inserting. The documents are inserted as XML, so
+they're appended to the active document at the current cursor position. </p>
+<p><em>Note: You can think of this as inserting a .docx into a .docx, but the inserted document is not an embedded binary object.  The inserted XML becomes a natural part of the document being authored.</em></p>
+<p><em><br/></em></p>
+<p><img title="Boilerplate Tab" src="/media/steadybloggin/w_authoring_func_guide/enrich-5.PNG" alt="Boilerplate Tab" width="401" height="271"/></p>
+<h2>Metadata</h2>
+<p>Each time you add a Content Control to your document, a custom XML
+metadata part is added to the .docx being authored. This custom
+metadata part is associated by id with the control you've added. On
+this tab you can edit the metadata values for associated controls.<br/><br/>The
+metadata pane provides a tree view hierarchy of the Content Controls
+within your document. By clicking on a label in the tree, the focus of
+the active document will go to that control in the document and the
+form for associated metadata will be displayed beneath the tree view.
+Edit values, and as you change fields, the values will be automatically
+saved to the metadata form.<br/><br/>For larger documents, navigating
+your controls by using the tree view may become tedious, so you can
+also click within a control in your active document. When you do this,
+the tree view focus will set to the associated control label in the
+tree and the associated metadata form will also be displayed.</p>
+<p> </p>
+<p><img title="Metadata Task Pane" src="/media/steadybloggin/w_authoring_func_guide/metadata-1.PNG" alt="Metadata Task Pane" width="402" height="611"/></p>
+<p><br/>You'll see that for this Sample, there are 3 types of metadata
+forms associated with the controls. We are also using Dublin Core
+metadata. This again, is configurable. You can use other XML for your
+metadata, and can even have a different custom XML metadata form for
+each control you define in the control palette. Please refer to the
+developer's guide included with the Sample Authoring App.<br/><br/>If you delete a control from the document, its associated metadata part is also removed from the .docx.</p>
+<h2>Search</h2>
+<p>When you save a .docx to MarkLogic Server, it is automatically unzipped
+and made available for search and re-use. On this pane, you can search
+for text found within any Content Controls in documents saved in
+MarkLogic.</p>
+<p> </p>
+<p><img title="Search Task Pane" src="/media/steadybloggin/w_authoring_func_guide/search-1.PNG" alt="Search Task Pane" width="401" height="609"/></p>
+<p><br/>The results provide a count of search results as well as pagination.<br/><br/>For each result, for each control found that includes our search text, we see:</p>
+<ul>
+      <li>the document title (if present in the extracted document properties part) or the URI of the document in MarkLogic </li>
+      <li>the last modified date and last modified by for the source document </li>
+      <li>an icon informing which type of control our text was found within</li>
+      <li>the name of the control that includes our search text</li>
+      <li>a snippet of text, with our search text in bold</li>
+      <li>rollover of a snippet will display more text for the result </li>
+      <li>an insert button</li>
+      <li>an open button</li>
+    </ul>
+<p>Clicking insert will insert the Content Control into the active
+document at the current cursor position. The search result may have
+embedded controls as well. If any of the inserted controls had
+associated metadata parts in their source document in MarkLogic, those
+metadata parts are retained and added to the document being authored.
+You can view and edit any metadata values by examining them in the
+metadata tab.<br/><br/>By default, every control added to the document
+will have a custom metadata part associated with it, so if the source
+document didn't include metadata for the inserted control, the
+application associates a default metadata part. This is part of the
+configuration and detailed in the developer's guide.<br/><br/>Clicking open will open the source Word document from MarkLogic Server into Word on the client.</p>
+<p><br/><img title="Search Filter" src="/media/steadybloggin/w_authoring_func_guide/search-2.PNG" alt="Search Filter" width="400" height="354"/></p>
+<p><br/>Finally,
+you can restrict searches through use of the filter tab. Click the drop
+down arrow to see a list of control labels you can select to apply to
+your search. This list is also configurable. To apply the criteria,
+click the filter button. You can close the filter selection and keep
+your filter applied.</p>
+<h2>Compare</h2>
+<p>Compare provides a search for metadata values found in custom XML parts
+that are within Word documents saved in MarkLogic Server. The drop down
+list, is a configurable list of values. When you select a value from
+the drop down, a search is performed in MarkLogic for any Word
+documents including the value in the drop down in a custom XML part
+within a Word document.</p>
+<p> </p>
+<p><img title="Compare Task Pane" src="/media/steadybloggin/w_authoring_func_guide/compare-1.PNG" alt="Compare Task Pane" width="401" height="165"/></p>
+<p><br/>The results returned are a slimmed down version of the Search tab results.   You'll see:</p>
+<ul>
+      <li>the title or URI of the source document</li>
+      <li>the last modified date and last modified by for the source document </li>
+      <li>a compare button</li>
+    </ul>
+<p>Clicking compare opens the document into Word, alongside the document
+being authored, in Word's native merge functionality so authors can
+compare documents.</p>
+<h2>Conclusion</h2>
+<p>The Sample Authoring App is intended as a way to provide authors a way
+to enrich content in Word, as well as define and identify <strong>parts</strong> or <strong>sections</strong> of Word documents for search, re-use, auditing, and tracking.<br/><br/>By
+providing a way for authors to re-use sections of content across
+documents, identified by rich metadata, authors can then use MarkLogic
+to query where document components are being re-used. Also, if some
+document component includes text that needs to be updated across
+documents, the metadata can be used to run an update of components
+across all Word documents in MarkLogic that include those sections.</p>
+  </ml:body>
+</ml:Post>

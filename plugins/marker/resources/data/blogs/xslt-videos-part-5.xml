@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Fast Track to MarkLogic for XSLT Developers, Part 5</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-10-27T00:27:25.359176-07:00</ml:created>
+  <ml:last-updated>2010-07-01T10:41:53.608839-07:00</ml:last-updated>
+  
+  <ml:body>
+    <p>The final video in this series covers some ways to access multiple documents from within XSLT. This is where MarkLogic really shines. See also the video tutorial parts <a href="/blog/xslt-videos-part-1">1</a>, <a href="/blog/xslt-videos-part-2">2</a>, <a href="/blog/xslt-videos-part-3">3</a>, and <a href="/blog/xslt-videos-part-4">4</a>.</p>
+<p>
+<object style="height: 390px; width: 640px;" width="100" height="100" data="http://www.youtube.com/v/tHC3wLIV6XM?version=3" type="application/x-shockwave-flash">
+<param name="data" value="http://www.youtube.com/v/tHC3wLIV6XM?version=3" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://www.youtube.com/v/tHC3wLIV6XM?version=3" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+  </ml:body>
+</ml:Post>

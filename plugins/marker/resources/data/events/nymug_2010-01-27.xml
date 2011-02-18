@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="nymug" status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Next NYMUG to Take Place on January 27th!</ml:title>
+  <ml:description>
+    <p><ml:teaser>Come join us for the second occurrence of the MarkLogic New York User Group (NYMUG)! The event will take place on January 27th, 2010 and will be hosted by Steve Kotrch from Simon &amp; Schuster. The main speaker will be Denise Miura, Senior Director of Product Management at MarkLogic who will talk about using MarkLogic Server in new and innovative ways.</ml:teaser></p>
+<p>
+MarkLogic user groups offer an opportunity learn more about MarkLogic Server and collaborate with other MarkLogic users. Pizza and soft drinks will be provided and everyone will be entered into drawings for several giveaways provided by MarkLogic.
+</p>
+</ml:description>
+  <ml:details>
+    <ml:date>2010-01-27</ml:date>
+    <ml:time>6:00pm ET</ml:time>
+    <ml:location>1230 Avenue of the Americas, New York, NY 10020. Between 48th and 49th streets on Sixth Avenue.</ml:location>
+    <ml:topic>MarkLogic Cloud Services</ml:topic>
+    <ml:presenter>Denise Miura</ml:presenter>
+  </ml:details>
+</ml:Event>

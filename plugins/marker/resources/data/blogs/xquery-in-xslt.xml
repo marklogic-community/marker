@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <ml:title>Invoking and importing XQuery in XSLT</ml:title>
+  <ml:author>Evan Lenz</ml:author>
+  <ml:created>2010-11-19T10:07:53.118411-07:00</ml:created>
+  <ml:last-updated>2010-11-19T20:37:07.742639-08:00</ml:last-updated>
+  
+  
+  <ml:body>
+    <p>In a couple of the recent articles introducing the XSLT API, I covered the <a href="/blog/invoking-xslt">required arguments</a> and <a href="/blog/invoking-xslt-2">optional arguments</a> of the xdmp:xslt-invoke() and xdmp:xslt-eval() functions. In other words, we looked at how to call XSLT from within XQuery. In this article, we'll look at the reverse: how you can call XQuery scripts and functions from within XSLT.</p>
+<p>There are two primary ways to utilize XQuery from within XSLT. One is to invoke an XQuery script as a black box, using xdmp:invoke() or xdmp:eval(). For example, to insert the results of an XQuery script into your XSLT result, you might make a call like this:</p>
+<script src="http://gist.github.com/706924.js" xml:space="preserve"></script>
+<p>In fact, that's how the various widgets on this website work. Even though RunDMC is an XSLT-based application, I didn't want to force all the MarkLogic developers to suddenly become XSLT developers. Also, I wanted them to be able to reuse XQuery scripts they had already written for things like displaying the latest top email threads from MarkMail. For situations like that, all they need to do is add an entry to the <a href="https://code.google.com/p/rundmc/source/browse/trunk/config/widgets.xml">widgets.xml</a> configuration file, pointing to the XQuery script they want to use to create the dynamic content. Behind the scenes, the XSLT calls <code>xdmp:invoke()</code> to insert the results of that XQuery script into the final XSLT results.</p>
+<p>There is one other way to utilize XQuery from within XSLT, and we're using that in RunDMC also. Even though most of the RunDMC application is XSLT-based, the <a href="https://code.google.com/p/rundmc/source/browse/trunk/model/data-access.xqy">core data access functions</a> are defined in XQuery. For certain things, such as querying and returning results in a particular order, XQuery can be a nicer choice than XSLT. Also, separating the core data access logic from the view layer enables XQuery developers who know nothing of XSLT to make enhancements, bug fixes, and optimizations to that core layer.</p>
+<p>But this requires more than just invoking an XQuery script as a black box. We need to be able to call specific functions defined in XQuery from within XSLT. MarkLogic defines a top-level extension element (using XSLT's standard extension mechanism) for just that purpose. Here's how you <em>import</em> all the functions and global variable definitions from an XQuery module:</p>
+<script src="http://gist.github.com/706925.js" xml:space="preserve"></script>
+<p>In RunDMC, we've compiled all such imports into one stylesheet module, aptly called <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/xquery-imports.xsl">xquery-imports.xsl</a>. Note that, for the extension element to be correctly interpreted as such, you need to specify <code>extension-element-prefixes="xdmp"</code> on your <code>&lt;xsl:stylesheet&gt;</code> document element.</p>
+<p>Given the above import, we can now call functions and reference variables defined in <a href="https://code.google.com/p/rundmc/source/browse/trunk/model/data-access.xqy">data-access.xqy</a>. For example, here's an actual line from <a href="https://code.google.com/p/rundmc/source/browse/trunk/view/page.xsl">page.xsl</a> that looks up all the comments for a given blog post:</p>
+<script src="http://gist.github.com/706927.js" xml:space="preserve"></script>
+<p>I hope you've found this exploration useful. With just a few simple mechanisms, MarkLogic provides all the building blocks you need to combine XSLT and XQuery code in whatever way makes the most sense to you.</p>
+  </ml:body>
+</ml:Post>

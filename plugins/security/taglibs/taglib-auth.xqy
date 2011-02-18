@@ -33,10 +33,15 @@ declare function taglib-security:login-logout()
     <div>
         <div id="login-action"> 
         {
-            if( $isLoggedIn ) then 
-                <a href="{ xqmvc:plugin-link('security', 'authentication', 'logout')}" onmouseover="$('#profile').show(300);" onmouseout="$('#profile').hide(500);">Logout</a> 
-            else 
-                <div id="login" style="cursor:hand;cursor:pointer;">Login</div>
+            if($username != "admin")
+            then 
+                (
+                if( $isLoggedIn ) then 
+                    <a href="{ xqmvc:plugin-link('security', 'authentication', 'logout')}" onmouseover="$('#profile').show(300);" onmouseout="$('#profile').hide(500);">Logout</a> 
+                else 
+                    <div id="login" style="cursor:hand;cursor:pointer;">Login</div>
+                )
+            else ("&nbsp;")
                 
         }
         </div>
@@ -60,7 +65,7 @@ declare function taglib-security:login-logout()
         </script>
 
         {
-            if($isLoggedIn) then
+            if($isLoggedIn and $username != "admin") then
                 <div id="profile" style="padding:5px;display:none;">
                     <div style="float:right;">
                         <a href="{$userDetails/link/text()}">{$userDetails/name/text()}&nbsp;</a><br/>

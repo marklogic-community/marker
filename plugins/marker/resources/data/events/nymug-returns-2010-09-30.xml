@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="nymug" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>NY-MUG Returns September 30th!</ml:title>
+  <ml:created>2010-09-14T15:48:17.991704-07:00</ml:created>
+  <ml:last-updated>2010-09-15T12:04:41.511315-07:00</ml:last-updated>
+  <ml:description>
+    <p><a title="Coutesy of Totally Sweet Images" href="http://www.totallysweetphotos.com/2010/04/08/ipad-wallpaper-brooklyn-bridge-in-black-white/"><img style="display: block; margin-left: auto; margin-right: auto; vertical-align: middle;" title="Coutesy of Totally Sweet Images" src="http://www.totallysweetphotos.com/wp-content/uploads/2010/04/brooklyn-bridge-ipad-wallpaper-black-and-white.jpg" alt="Coutesy of Totally Sweet Images" width="450" height="300"/></a><br/><br/></p>
+<p>After an extended hiatus, the New York MarkLogic Users Group (NY-MUG) is starting up again at the end of this month!  The September 30th meeting is being hosted by our friends at <a href="http://www.simonandschuster.com/">Simon and Schuster</a> in their offices at <a href="http://maps.google.com/maps?q=1230+Avenue+of+the+Americas,+New+York,+NY+10020&amp;oe=utf-8&amp;rls=org.mozilla:en-US:official&amp;client=firefox-a&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=1230+Avenue+of+the+Americas,+New+York,+NY+10020&amp;gl=us&amp;ei=YvmPTNyCMoOC8gbCoKj-DQ&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CBMQ8gEwAA">1230 Avenue of the Americas, New York, NY 10020</a>, 11th floor.  Between 48th and 49th streets on Sixth Avenue.</p>
+<p>This incarnation of NY-MUG comes with some changes at the healm.  MarkLogic partner, <a href="http://flatironssolutions.com/">Flatirons Solutions</a>, is taking over as the group's new leaders.  And Iain Finlayson, MarkLogic Sales Engineer has stepped up to serve as the group's liaison to MarkLogic.  </p>
+<p>Please come join us for a presentation from <a href="http://norman.walsh.name/">Norm Walsh</a>, MarkLogic Lead Engineer.  Norm will show how to build a Web Analytics tool from scratch using Application Builder, Information Studio, and the XSLT support that all come with MarkLogic Server 4.2</p>
+<p>If you're coming, please rsvp over at <a href="http://meetup.com/ny-mug">http://meetup.com/ny-mug</a> so we can bring the right amount of food and drinks.  Hope to see you there!</p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-09-30</ml:date>
+    <ml:time>6:00 PM - 8:00 PM</ml:time>
+    <ml:location>1230 Avenue of the Americas, New York, NY 10020, 11th floor. Between 48th and 49th streets on Sixth Avenue</ml:location>
+    <ml:topic>Building a Web Analytics Tool with MarkLogic Server 4.2</ml:topic>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <ml:presenter>Norm Walsh</ml:presenter>
+  </ml:details>
+</ml:Event>

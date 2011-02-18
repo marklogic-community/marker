@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="novamug" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Next NOVAMUG Event on June 29th - XQuery Unit Testing</ml:title>
+  <ml:created>2010-06-16T12:57:18.195255-07:00</ml:created>
+  <ml:last-updated>2010-06-16T15:32:55.267064-07:00</ml:last-updated>
+  <ml:description>
+    <p>Missed the standing-room-only talk by Mark Helmstetter at the <a href="http://www.marklogic.com/UserConference2010/">MarkLogic User Conference 2010</a>?  Come to the next meeting of the Northern Virginia MarkLogic User Group (NOVAMUG) at FGM (<a href="http://maps.google.com/maps?oe=utf-8&amp;client=firefox-a&amp;ie=UTF8&amp;q=FGM,+12021+Sunset+Hills+Road,+Suite+400,+Reston,+VA&amp;fb=1&amp;gl=us&amp;hq=FGM,&amp;hnear=12021+Sunset+Hills+Rd+%23400,+Reston,+VA+20190&amp;cid=0,0,1857901630755877588&amp;ei=FVAZTMvoHMLsnQfW773CCg&amp;ved=0CBMQnwIwAA&amp;ll=38.95427,-77.358255&amp;spn=0.009461,0.022724&amp;t=h&amp;z=16&amp;iwloc=A">12021 Sunset Hills Road, Suite 400, Reston</a>).  </p>
+<p>Pizza, beer and other refreshments will be served at 6:30 PM.  The presentation will begin at 7:00 PM. </p>
+<p><strong>About the Speaker:</strong><br/>Mark Helmstetter is a senior consultant in the MarkLogic Federal Professional Services Group.  For the last 3 ½ years, Mark has focused on the design and development of MarkLogic applications for MarkLogic’s Federal customers. Mark has over 13 years of software development experience and holds a bachelor’s degree in Computer Science from Frostburg State University.<br/><br/><strong>Presentation: XQuery Unit Testing</strong><br/>Software testing is a critical component of the software development process.  Testing is necessary to ensure the timely delivery of a quality application. This talk explores several approaches and best practices that can be implemented to test your MarkLogic XQuery libraries, modules, and applications. The talk will provide hands-on XQuery unit testing tips, tools, and techniques.<br/><br/>This presentation is sure to be a good one as Mark’s “Best Practices for XQuery Testing” session at this year’s MarkLogic User’s Conference drew a standing-room-only crowd.<br/><br/></p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-06-29</ml:date>
+    <ml:time>6:30pm</ml:time>
+    <ml:location>FGM, 12021 Sunset Hills Road, Suite 400, Reston, VA</ml:location>
+    <ml:topic>Best Practices for XQuery Testing</ml:topic>
+    <ml:presenter>Mark Helmstetter</ml:presenter>
+  </ml:details>
+</ml:Event>

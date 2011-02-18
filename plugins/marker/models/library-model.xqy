@@ -34,7 +34,7 @@ declare function library-model:json-get-uri-information($uri){
                                             )
                                         else
                                             (
-                                                <td><div cmdValue="contentmgmt" class="marker_button marker_button_cancel" onclick="MarkerInlineEdit.unpublishVersion('{$uri}');"></div></td>
+                                                <td><div cmdValue="contentmgmt" class="marker_button marker_button_unpublish" onclick="MarkerInlineEdit.unpublishVersion('{$uri}');"></div></td>
                                             )     
                                         }
                                     </tr>  

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Post status="Published" xmlns="http://developer.marklogic.com/site/internal">
+  <title>MLUC10 thanks and highlights</title>
+  <author>Eric Bloch</author>
+  <created>2010-05-17T13:48:06.922534-07:00</created>
+  <last-updated>2010-05-17T16:41:59.676135-07:00</last-updated>
+  
+  <body>
+    <div xmlns="http://www.w3.org/1999/xhtml">
+<p>
+Just a quick thanks to all who attended the <a href="http://www.marklogic.com/UserConference2010/">2010 MarkLogic User's Conference</a>.  I had a great time getting to know more of the MarkLogic community.  
+</p>
+<p>
+Personal highlights:
+</p>
+<p>
+    <ul>
+	  <li>Watching <a href="http://mike.brevoort.com/">Mike Breevort</a> <a href="/media/demojam-mluc10-breevort.png">win</a> <a href="http://developer.marklogic.com/news/mluc-demojam-selections-2010">DemoJam</a> even with a 500 error in his demo!</li>
+	  <li>Seeing Chris Biow's session on the Universal index - I'm looking forward to the slides coming out soon.  </li>
+	  <li>Hearing about Holten Norris' UI work on <a href="http://www.freshpatents.com/Flexible-dynamic-menu-based-web-page-architecture-dt20061026ptan20060242557.php">flexible, dynamic menus</a> </li>
+	  <li>Eating <a href="http://minivenus.files.wordpress.com/2008/11/product_tekka_maki_roll_lg.jpg">sushi</a> while looking at cool fish in the <a href="http://www.calacademy.org/academy/exhibits/aquarium/">Steinharte Aquarium</a></li>
+	  <li>Meeting up with <a href="/meet">User Group</a> leaders, Marie Lichte (<a href="http://www.mug-fr.org/">MUGFR</a>) and Mike Fagan (<a href="/meet/denmark">DenMark</a>) and hearing about even more interest in user groups.</li>
+	  <li>The MarkLogic <a href="/media/ML_shirt_design_NoSQL.jpg">NoSQL geek-ware</a>.</li>
+	</ul>
+</p>
+<p>
+Looking forward to next year's meeting already!
+</p>
+</div>
+</body>
+</Post>

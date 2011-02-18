@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  <ml:title>Announcing the availability of MarkLogic Server 4.2 Standard Edition AMI for EC2</ml:title>
+  <ml:author>Dipti Borkar</ml:author>
+  <ml:created>2010-11-09T01:18:00.969877-07:00</ml:created>
+  <ml:last-updated>2010-19-02T02:16:24.187322-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>Cloud</ml:tag>
+    <ml:tag>EC2</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p></p>
+    <p><span style="font-size: small;">We are pleased to announce the availability of <strong>MarkLogic Server 4.2 Standard Edition AMI </strong>(Amazon Machine Image) on EC2 . MarkLogic Server 4.2 brings you </span></p>
+<ul style="list-style-position: outside">
+      <li><span style="font-size: small;"><strong>Increased agility and ease-of-use </strong>with the addition of Information Studio and XSLT support 
+</span></li>
+      <li><span style="font-size: small;"><strong>Enterprise-grade protection and security </strong>with features like Database Rollback 
+</span></li>
+      <li><span style="font-size: small;"><strong>Easier search and discovery </strong>using the newly added Distinctive Terms and Proximity Boost</span></li>
+    </ul>
+<p><span style="font-size: small;">
+To learn more about the new features released as a part of MarkLogic 4.2, check out “<a href="http://www.marklogic.com/product/whats-new-in-marklogic-4.2.html" target="_blank">What’s New in MarkLogic 4.2</a>”  <br/>
+<br/>
+Similar to the existing AMIs, the latest Standard Edition AMI gives users the flexibility of elastic pricing (hourly pay-per-use) and can be used for a variety of projects and for the entire project lifecycle from prototyping to test and development to full production applications. MarkLogic Server Standard Edition is limited to 40GB database size and is restricted to a single node (no multi-node clusters). The <strong>Community Edition AMI for MarkLogic Server 4.2</strong> is also now available for personal non-commercial projects, and is provided with no MarkLogic charges on top of the normal Amazon fees.<br/>
+<br/>
+Documentation to get you start with using the latest MarkLogic EC2 AMIs can be found at <a href="/learn/4.2/ec2-guide" target="_blank">MarkLogic Server for Amazon EC2 Guide</a> <br/>
+<br/>
+Try out the new MarkLogic Server 4.2 AMI today ! <br/>
+</span></p>
+<!--EndFragment-->
+  </ml:body>
+</ml:Post>

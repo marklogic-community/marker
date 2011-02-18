@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic Hearts jQuery </ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:author>Jason Booth</ml:author>
+  <ml:date>2010-07-29</ml:date>
+  <ml:body>
+    <p><br/><img style="display: block; margin-left: auto; margin-right: auto;" title="jquery" src="http://www.bitstorm.org/edwin/jquery-presentatie/pix/jquery_logo_color_onwhite.png" alt="jquery" width="450"/></p>
+<p> </p>
+<ml:teaser>
+<p>We're pleased to sponsor the upcoming <a href="http://meetups.jquery.com/group/novajq">NOVA jQuery meetup</a>, featuring Christopher Thatcher from the <a href="http://www.loc.gov/index.html">Library of Congress</a>.  We love jQuery here at MarkLogic - who can't help love a library that lives up to that tagline.  If you're a jQuery user, you know what we mean.</p>
+</ml:teaser>
+<p>We'll be bringing food (Anita's burritos and pizza) and beverages.  <span>Our partner, </span><a href="http://www.avalonconsult.com/" target="_blank">Avalon Consulting, LLC</a> is kindly hosting the meetup in their offices.</p>
+<p class="xmsonormal">Please kindly <a href="http://novajq-jquery-meetup-july2010.eventbrite.com/" target="_blank">register via eventbrite</a> if you're planning to attend so we can make sure we bring enough grub!</p>
+<p class="xmsonormal"><strong>Date and Time</strong></p>
+<p class="xmsonormal">Thursday, July 29, 2010 at 7pm – 8:30pm</p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Place</strong></p>
+<p class="xmsonormal">Avalon Consulting, LLC</p>
+<p class="xmsonormal">527 Maple Avenue East, Suite 200</p>
+<p class="xmsonormal"><span>Vienna</span><span>, VA 22180</span></p>
+<p class="xmsonormal">See <a href="http://maps.google.com/maps?q=527+Maple+Avenue+East+vienna+va&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=527+Maple+Ave+E,+Vienna,+VA+22180&amp;gl=us&amp;ei=ttE3TOCvM4S8lQfUjJHVBw&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CBMQ8gEwAA" target="_blank">Google Maps</a> or read below for directions.</p>
+<p> </p>
+<p><strong>Registration</strong></p>
+<p class="xmsonormal">Please see <a href="http://novajq-jquery-meetup-july2010.eventbrite.com/" target="_blank">here</a>.</p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Presentation</strong></p>
+<p class="xmsonormal"><span><em>jQuery and QUnit at the Library of Congress</em></span></p>
+<p class="xmsonormal">This presentation will cover a brief overview of the speaker’s knowledge of the use of jQuery and QUnit in various projects at the LoC.  From early use in the <a href="http://wdl.org/">World Digital Library</a>, complex application development with <a href="http://loc.gov/fedsearch/metasearch/">MetaSearch</a>, to Library-wide use with the <a href="http://read.gov/">Share initiative</a>, and finally fundamental web application and JSON ReST  architecture for <a href="http://loc.gov/pictures">Prints and Photographs</a>, which is driven by continuous testing built directly on jQuery and QUnit.  We will also briefly cover usage of jQuery for utility scripting outside the browser, including a web crawler for document indexing and document geocoding with an xml database and google maps API.</p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>About the Presenter</strong></p>
+<p class="xmsonormal"><span>Christopher Thatcher has been working with the Library of Congress since 2007 and is now a full time employee.  He is an avid open source developer working with primarily jQuery and Qunit.  He maintains Envjs (orginally by John Resig), as well as jQuery-Claypool, and many other small projects (<a href="http://github.com/thatcher" target="_blank">github.com/thatcher</a>).</span></p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Directions</strong></p>
+<p class="xmsonormal"><span>From the Beltway, take Route 123 (Chain Bridge Road) West through Tysons Corners.   Go approximately 1 mile and Chain Bridge becomes Maple Avenue.  Avalon’s offices are in the “Karin’s Florists” Building at the corner of Maple and East Street.   Turn Left onto East Street and park behind the building.  Enter on the side of the building facing East Street and take the stairs or elevator to the 2nd Floor.  Suite 200 is in the front of the building.</span></p>
+  </ml:body>
+  <ml:created>2010-07-09T20:17:25.631876-07:00</ml:created>
+  <ml:last-updated>2010-07-09T21:24:45.10483-07:00</ml:last-updated>
+</ml:Announcement>

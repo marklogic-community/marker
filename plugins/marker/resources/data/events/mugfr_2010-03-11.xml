@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="mugfr" status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Launching the MarkLogic User Community in France</ml:title>
+  <ml:description>
+    <p><ml:teaser>
+</ml:teaser></p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-03-11</ml:date>
+    <ml:time>2pm</ml:time>
+    <ml:location>Maison des Polytechniciens</ml:location>
+    <ml:topic>Launching the MarkLogic User Community</ml:topic>
+    <ml:presenter>Jim Stock, Jason Monberg, Matthieu Balzarini (4DConcept), Sebastien Chelin (Reed Business Information), Gregory Corona (4DConcept)</ml:presenter>
+  </ml:details>
+</ml:Event>

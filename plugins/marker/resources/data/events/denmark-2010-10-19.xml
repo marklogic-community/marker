@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="denmark" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Next DenMARK meeting, October 19th</ml:title>
+  <ml:created>2010-10-07T16:24:47.236012-07:00</ml:created>
+  <ml:last-updated>2010-10-07T16:39:43.720937-07:00</ml:last-updated>
+  <ml:description>
+    <h3>Got some logs you'd like to understand better?</h3>
+<p><img style="display: block; border: 2px solid black; margin-left: auto; margin-right: auto;" title="logs" src="/media/500px-Kuopio_logs.jpg" alt="logs" width="350"/></p>
+<p>Please come join us for a presentation from Eric Bloch,
+ MarkLogic community guy.  Eric will show how to build a web analytics 
+tool from scratch using Application Builder, Information Studio, and the
+ XSLT support that all come with MarkLogic Server 4.2</p>
+<p>If you're coming, please rsvp over at <a title="meetup" href="http://www.meetup.com/den-mark-logic/calendar/15034387/">meetup.com</a> so we can bring the right amount of food and drinks.  Hope to see you there!  Here's a <a href="http://maps.google.com/maps?q=900+Walnut+Street+Denver,+CO&amp;oe=utf-8&amp;client=firefox-a&amp;ie=UTF8&amp;hq=&amp;hnear=900+Walnut+St,+Denver,+Colorado+80204&amp;gl=us&amp;ei=clmuTJPwCoaqsAPYsO2ADA&amp;ved=0CBMQ8gEwAA&amp;ll=39.745326,-105.007539&amp;spn=0.0082,0.01708&amp;t=h&amp;z=16">link</a> to the location below.</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto; border: 2px solid black;" title="tivoli student union" src="/media/500px-Tivolistudentunion.JPG" alt="tivoli student union" width="500" height="252"/></p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-10-19</ml:date>
+    <ml:time>7:00 PM</ml:time>
+    <ml:location>Auraria Campus, Tivoli Bldg (900 Walnut St. Denver CO. 80204) Rm 320 Section A - Baerresen Ballroom</ml:location>
+    <ml:topic>Building a Web Analytics Tool with MarkLogic Server 4.2</ml:topic>
+    <ml:presenter>Eric Bloch</ml:presenter>
+  </ml:details>
+</ml:Event>

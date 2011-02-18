@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  <ml:title>Office 2010 support added to MarkLogic Toolkits for Word and Excel</ml:title>
+  <ml:author>Dipti Borkar</ml:author>
+  <ml:created>2010-12-15T10:29:03.091206-08:00</ml:created>
+  <ml:last-updated>2010-12-15T11:56:04.111981-08:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>office</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>Today we announce the release of <strong>MarkLogic Toolkit for Word version 1.2-2</strong> and <strong>MarkLogic Toolkit for Excel version 1.0-3</strong> with <span style="color: #0000ff;"><strong>Office 2010 support</strong></span>. </p>
+<p>MarkLogic toolkits allow rapid creation of information applications embedded within Microsoft Office tools. With the arrival of Microsoft Office 2010 earlier this year, authors have started to migrate from Office 2007 to Office 2010. And now, with the latest release of the MarkLogic Toolkit for Word and MarkLogic Toolkit for Excel, you can continue to develop powerful search and analysis applications for the Microsoft Office version of your choice. </p>
+<p>The latest version of the toolkits support both Office 2007 or Office 2010 (32 bit and 64 bit flavors are supported). So download the updated versions and start building those rich applications today! </p>
+<p><a title="MarkLogic Toolkit for Word" href="/code/marklogic-toolkit-for-word">MarkLogic Toolkit for Word</a></p>
+<p><a title="MarkLogic Toolkit for Excel" href="/code/marklogic-toolkit-for-excel">MarkLogic Toolkit for Excel </a></p>
+  </ml:body>
+</ml:Post>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic to Sponsor WindyCityDB and Participate in All-day Lab</ml:title>
+  <ml:author>Cleo Haynal</ml:author>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-06-26</ml:date>
+  <ml:body>
+    <ml:teaser>
+<p>Come to the <a href="http://en.wikipedia.org/wiki/Origin_of_the_name_%22Windy_City%22">Windy City</a> on June 26th and learn more about MarkLogic at the Illinois Institute of Technology, McCormick Tribune Campus Center.</p>
+</ml:teaser>
+<p><a href="http://windycitydb.org"><img style="display: block; margin-left: auto; margin-right: auto;" title="Windy City" src="http://windycitydb.org/theme/4bc78e8edabe9d3024000013/stylesheets/images/homephoto.jpg" alt="Windy City" width="500" height="230"/></a></p>
+<p>This is a gathering for all who are interested in <a title="NoSQL" href="http://en.wikipedia.org/wiki/NoSQL">NoSQL</a> databases. You can learn more about the event at <a href="http://windycitydb.org/">http://windycitydb.org/</a></p>
+<p>As part of the conference's <a href="http://windycitydb.org/sessions/#thelab">all-day lab</a>, MarkLogic is making available a copy of MarkLogic Server loaded with the <a title="windycity sample db" href="http://github.com/chicagoruby/Windy-City-DB-Dataset">conference sample dataset</a>. You will be able to access database via <a href="../code/active-document">ActiveDocument</a>, an open-source Ruby interface to document databases. Come join us, grab a <a title="windycitydb badge" href="http://m.windycitydb.org/images/badge_attendee.png">badge</a>, see what it's like to interact with a <a href="../blog/marklogic-beyond-nosql">NoSQL solution that has integrated full-text search</a>, and learn more about how MarkLogic was NoSQL before NoSQL was cool.</p>
+<p>Hope to see you there!</p>
+  </ml:body>
+  <ml:created>2010-06-11T16:18:41.306491-07:00</ml:created>
+  <ml:last-updated>2010-06-11T21:44:43.022278-07:00</ml:last-updated>
+</ml:Announcement>

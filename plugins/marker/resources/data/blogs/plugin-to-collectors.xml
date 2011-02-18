@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Plug into Information Studio Collectors</ml:title>
+  <ml:author>Pete Aven</ml:author>
+  <ml:created>2010-11-09T18:46:32.512586-07:00</ml:created>
+  <ml:last-updated>2010-11-09T18:21:23.74063-08:00</ml:last-updated>
+  
+  <ml:body>
+    <h4><em>a whirlwind tour through a custom built collector<br/></em></h4>
+<p>InformationStudio is now available with MarkLogic 4.2.  Want to see it?  You'll find it on the Application Services page on port 8002 (default on install).  </p>
+<p> </p>
+<p>
+<a title="infoStudio by themightyoslo, on Flickr" href="http://www.flickr.com/photos/31116226@N07/5140245348/"><img src="http://farm2.static.flickr.com/1309/5140245348_bc923c3896.jpg" alt="infoStudio" width="500" height="308"/></a>
+</p>
+<p><em>figure 1</em></p>
+<p>InformationStudio provides us with flows, which are essentially reusable pipelines used to load information into MarkLogic Server.  A flow consists of three parts: a collector, a set of
+transformations, and a target database. The collectors and
+transformers are "pluggable", in that you can write your own. They
+become part of the InformationStudio UI automatically.  </p>
+<!--<a title="New flow by Norm Walsh, on Flickr" href="http://www.flickr.com/photos/ndw/5105397636/" _mce_href="http://www.flickr.com/photos/ndw/5105397636/"><img src="http://farm2.static.flickr.com/1317/5105397636_25efc08400.jpg" _mce_src="http://farm2.static.flickr.com/1317/5105397636_25efc08400.jpg" alt="New flow" width="500" height="490" /></a>-->
+<p>Today we're going to examine some of the finer details you'll want to pay attention to when building a custom collector.  Developing InformationStudio collectors is already covered in the <a title="Information Studio Developer's Guide" href="http://developer.marklogic.com/pubs/4.2/books/info_studio.pdf" target="_blank">InformationStudio Developer's Guide</a>. A chapter on the Plugin Architecture can be found in the <a title="Application Developer's Guide" href="http://developer.marklogic.com/pubs/4.2/books/dev_guide.pdf" target="_blank">Application Developer's Guide</a> as well.  This post is in no way comprehensive, but will get down to some of the nitty-gritty so you can see which APIs are used where so you can make your own custom collector that seamlessly integrates with InformationStudio. </p>
+<p>Click 'New Flow' under InformationStudio on the ApplicationServices page to view the Flow Editor.</p>
+<p>
+<a title="New flow by Norm Walsh, on Flickr" href="http://www.flickr.com/photos/ndw/5105397636/"><img src="http://farm2.static.flickr.com/1317/5105397636_25efc08400.jpg" alt="New flow" width="500" height="490"/></a>
+</p>
+<p><em>figure 2</em></p>
+<p>InformationStudio already ships with two collectors, one for reading files from a directory on the filesystem, and another providing a browser dropbox so you can drag and drop files into your InformationStudio flow.  In the Flow Editor, click the 'Change Collector' link in the Collect pane to see which collectors are available.</p>
+<p> </p>
+<p>
+<a title="SelectACollector by themightyoslo, on Flickr" href="http://www.flickr.com/photos/31116226@N07/5140295998/"><img src="http://farm2.static.flickr.com/1235/5140295998_cfc1f6dac5.jpg" alt="SelectACollector" width="448" height="256"/></a>
+</p>
+<p><em>figure 3<br/></em></p>
+<p>What if we want to collect information from an atom feed?  Well, we can build our own collector and plug it right into the InformationStudio framework.</p>
+<p>Spoiler Alert: We've actually provided <a href="http://github.com/marklogic/infostudio-plugins" target="_blank">sample collectors on github</a> to help jumpstart your development.  Here you'll find collector-feed.xqy for collecting the contents of an atom feed.  Rather than post all the code here, let's use this collector as the basis for our discussion on things to think about when building a customer collector, highlighting the essentials of what we need to know to be up and running quickly.</p>
+<h3>Getting Started</h3>
+<br/>
+<p>Copy collector-feed.xqy to marklogic-dir/Plugins, where marklogic-dir is the directory where MarkLogic is installed.  All custom plugins go in this directory.  Now go back to the Flow Editor, and once again click 'Change Collector'.  You'll find the feed collector available for use. (You may have to refresh your browser.)</p>
+<p> </p>
+<p>
+<a title="SelectACollector2 by themightyoslo, on Flickr" href="http://www.flickr.com/photos/31116226@N07/5140332874/"><img src="http://farm5.static.flickr.com/4061/5140332874_9cb46aebf5.jpg" alt="SelectACollector2" width="448" height="256"/></a>
+</p>
+<p><em>figure 4<br/></em></p>
+<p>Click the Feed Collector button to select it.  You'll then see the Feed Configuration page.  There are 2 configurations available.  The first, a URI for a feed, is required. I've entered the URI for a feed from a popular blog I follow.  The second configuration is optional.  I'm leaving it blank for this demonstration, but if we entered a date, the collector would only collect feeds from the URI since that date.  Enter a URI and click 'Done'.</p>
+<p> </p>
+<p>
+<a title="FeedCollectorConfiguration2 by themightyoslo, on Flickr" href="http://www.flickr.com/photos/31116226@N07/5140375756/"><img src="http://farm2.static.flickr.com/1429/5140375756_77af1edb8c.jpg" alt="FeedCollectorConfiguration2" width="448" height="188"/></a>
+</p>
+<p><em>figure 5<br/></em></p>
+<p>We now find ourselves back in the Flow Editor, and the Collect pane is providing the details for our configuration.  If we were to click the 'Configure' button, we'd find ourselves back in the Feed Configuration pane.  <em><br/></em></p>
+<p>
+<a title="CollectorPane by themightyoslo, on Flickr" href="http://www.flickr.com/photos/31116226@N07/5140441692/"><img src="http://farm5.static.flickr.com/4014/5140441692_8b38b19666.jpg" alt="CollectorPane" width="500" height="167"/></a>
+</p>
+<p><em>figure 6<br/></em></p>
+<p>All that's left to do is start collecting content.  But before we do that, remember everything we've seen so far is completely customizable.  We've started with the UI, but before we load content, let's dig into our collector code and see how our button in <em>figure 4</em> and our configuration pane in <em>figure 5</em> were generated as well as what's going to happen when we click 'Start Loading'.</p>
+<h3>Plugins in a Nutshell</h3>
+<br/>
+<p>A Plugin is a registered set of capablities.  A capability is just a handle to a function.  The InformationStudio application will update its UIs and take actions on the documents we collect based on these functions.  So InformationStudio uses the capabilities to resolve what function to call based on a particular action in its interface and will dynamically invoke the right function at runtime. What do these capabilities and functions look like?  Let's look at our Plugin module.</p>
+<p>Open collector-feed.xqy in your favorite editor. </p>
+<p>The first thing you'll notice is this module is declared in the feed namespace.</p>
+<p>
+<script src="https://gist.github.com/729381.js"> </script>
+</p>
+<p>The namespace is arbitrary and for our own code organization and use. Next we see we import 3 modules, <em><strong>plugin</strong></em>, <em><strong>info</strong></em>, and <em><strong>infodev</strong></em>. The <em><strong>plugin </strong></em>module will allows us to register the plugin we're creating with the InformationStudio framework.  Both <em><strong>info </strong></em>and <em><strong>infodev </strong></em>are a set of APIs provided to us to help create our custom plugins, as well as write code that can access InformationStudio functionality programatically, without having to go through the fancy UI.  A great jumpstart introduction to the InformationStudio APIs can be <a title="Jumpstart Scripting with InfoStudio APIs" href="http://developer.marklogic.com/learn/Jumpstart-scripting-with-InfoStudio-APIs" target="_blank">found here</a>.</p>
+<p>Jumping to the comments, we see the minimum set of capabilities required for any Plugin. </p>
+<p>Now, the comment is actually a little bit misleading, as the first required function for any collector is <strong>capabilities()</strong>, which is a map containing the capabilities we want to register for our collector plugin.  Take a look at the following function:</p>
+<p>
+<script src="https://gist.github.com/729384.js"> </script>
+</p>
+<p>You'll see within <strong>feed:capabilities()</strong>, that in addition to<strong> model()</strong>, <strong>start()</strong>, and <strong>string()</strong>, we've also registered <strong>cancel()</strong><strong> </strong> and<strong> view()</strong>.  And that's it.  With those 5 functions we have a custom collector.  Let's look at each in detail.</p>
+<h3>model()</h3>
+<br/>
+<p>
+<script src="https://gist.github.com/729386.js"> </script>
+</p>
+<p>The model is where we can save data that we want to use as parameters for our collection process.  The child elements under <span style="font-family: courier new,courier;">plugin:data</span> are completely up to you.  We've named these to reflect how the feed collector is using them.  We can add as many elements to our model as we like.  Notice that the values here aren't used by our collector, we overwrite them in the configuration screen.  But you could hardcode values or have other elements with values for your model that aren't editable by users.  So how was the configuration screen generated?  And how was it able to populate the URI for our model?</p>
+<h3>view()</h3>
+<br/>
+<p>The view is essentially a form.  We can update the form contents to create fields for our user input, in our case, the Feed Configuration page.  We associate the input with our model through name and id.  We can also associate the input with a label. Labels can then be reused throughout our collector UI in InformationStudio.  The labels here aren't reused anywhere in our collector example, but you could if you wanted to.  Look at the value for the input, and you'll see it's an expression that evaluates our model.</p>
+<p>
+<script src="https://gist.github.com/729387.js"> </script>
+</p>
+<h3>string()</h3>
+<br/>
+<p>All labels for display are captured here.  Look at the key attribute for each label.  You'll find that name and description, populated the values for our button in <em>figure 4</em> above.  After we entered our URI for collection, the description also was used for the description in <em>figure 6</em>.</p>
+<h3>cancel()</h3>
+<br/>
+<p>Once we click 'Start Loading' on the flow editor, we'll see the progress of our load, and this button will be replaced with a 'Stop' button.  Clicking stop calls our cancel function.</p>
+<p>
+<script src="https://gist.github.com/729388.js"> </script>
+</p>
+<p>Here we see our first use of an <em><strong>infodev</strong></em> function.  Setting the ticket status to "cancelled" cancels our collection, and InformationStudio stops any further processing of documents.  This example is very simple, but if you created a much more complex collector, you could do any additional required cleanup here before cancelling your collection run.</p>
+<h3>start()</h3>
+<br/>
+<p>We've seen how <strong>view()</strong> provided our configuration page, and saved values to our <strong>model()</strong> as well as how <strong>string()</strong> captured labels for data we want displayed in the InformationStudio UI for our collector.  We also saw the supporting function <strong>cancel() </strong>to help cancel our run once it starts.  And so here's where the collecting and document processing really begins, in our <strong>start()</strong> function.</p>
+<p>For our collector, collecting is simply a <strong>xdmp:http-get()</strong> of the $uri supplied by our model.  That's it.  Well, not entirely.  So let's conclude by looking at the particular <em><strong>info </strong></em>and <em><strong>infodev </strong></em>functions that are going to help us complete our collector.</p>
+<p>
+<script src="https://gist.github.com/729389.js"> </script>
+</p>
+<p>Look back at <em>figure 6</em>.  We saw how clicking 'Configure' will take us to a custom form we can build using our collector <strong>view()</strong> capability.  Clicking 'Ingestion' takes us to a page of ingestion settings. That page is not configurable, but we'll want those settings for our collector.  The above <em><strong>info</strong></em> and <em><strong>infodev </strong></em>functions get the 'Documents per Transaction' from the ingestion settings page for us. </p>
+<p>You'll see in the code that we calculate the number of transactions we want for our collector by dividing the number of feed entries we are going to ingest by the 'Documents per Transaction' count. Next, we set the total documents and total number of transactions for our collector.  These are going to help drive the nifty UI that gives us a count of how many out of the total have been loaded in our collector progress bar.</p>
+<p>
+<script src="https://gist.github.com/729391.js"> </script>
+</p>
+<p>We batch our ingest into the database by transactions so we don't load everything all at once.  This gives a way to track progress in the progress bar in the InformationStudio interface as well as a way to fail gracefully at a certain collection point and indentify problem documents. To batch transactions for ingest, we save the documents per transaction each to a map. We then loop through our sequence of transactions, calling <strong>infodev:transaction()</strong> for each map.  The documents for each map will be loaded in a single transaction to the database selected for the flow as defined in the Flow Editor.</p>
+<p>
+<script src="https://gist.github.com/729396.js"> </script>
+</p>
+<p>You probably noticed that we pass the function we want to perform the ingesting of documents as a parameter to the  infodev:transaction() function.  You also probably noticed that the function is defined in our collector-feed.xqy and calls a single function infodev:ingest().</p>
+<p>
+<script src="https://gist.github.com/729397.js"> </script>
+</p>
+<p>Why didn't we call <strong>infodev:ingest()</strong> directly?  We could have.  But by specifying this callback function, we provided ourselves a way to do additional processing for each document ingested.  Before calling infodev:ingest(), we could analyze our feed entries, and transform them, or augment them with additional queries based on their contents before loading the final documents we curate into our database.  Callback functions are awesome; very flexible and very useful.</p>
+<p>When collection is complete, we set our ticket status to 'completed'.</p>
+<p>
+<script src="https://gist.github.com/729398.js"> </script>
+</p>
+<p>The very last thing we do is register our plugin.</p>
+<p>
+<script src="https://gist.github.com/729400.js"> </script>
+</p>
+<h3>Conclusion</h3>
+<br/>
+<p>Congratulations! You are now masters of the Collector universe.  Go forth and Collect!  On <a title="github/infostudio-plugins" href="https://github.com/marklogic/infostudio-plugins" target="_blank">github</a> we provided <a title="github/infostudio-plugins" href="https://github.com/marklogic/infostudio-plugins" target="_blank">additional examples</a> for loading a directory of .csv files, as well as extracting .zip files from a directory of zips.  We also provided a simple Twitter collector.  They all have the same basic capabilities, though you'll see some don't use transactions, and twitter has no configuration screen.  These are intended to jumpstart custom collector development and spark some ideas as to what types of things you might want to collect into MarkLogic using InformationStudio.</p>
+<p>For more details on custom collectors and the plugin framework be sure to check out:</p>
+<p>The Plugin chapter of the <a title="Application Developer's Guide" href="http://developer.marklogic.com/pubs/4.2/books/dev_guide.pdf" target="_blank">Application Developer's Guide</a>.</p>
+<p>Creating Custom Collectors and Transformers in the <a title="Information Studio Developer's Guide" href="http://developer.marklogic.com/pubs/4.2/books/info_studio.pdf" target="_blank">Information Studio Developer's Guide</a>.</p>
+<p> </p>
+<p>For more information on InformationStudio, check out the following:</p>
+<p><a title="5 minute InfoStudio Walkthrough" href="http://developer.marklogic.com/learn/5-minute-infostudio-walkthrough" target="_blank">5 minute Information Studio Walkthrough</a></p>
+<p><a title="Jumpstart Scripting with InfoStudio APIs" href="http://developer.marklogic.com/learn/Jumpstart-scripting-with-InfoStudio-APIs" target="_blank">Jumpstart Scripting with the InfoStudio APIs</a></p>
+<p><a title="Building a Web Analytics Tool with MarkLogic Server V4.2" href="http://norman.walsh.name/2010/10/22/infostudio" target="_blank">How to Build A Web Analytics Tool with MarkLogic Server V4.2 and Information Studio</a></p>
+  </ml:body>
+</ml:Post>

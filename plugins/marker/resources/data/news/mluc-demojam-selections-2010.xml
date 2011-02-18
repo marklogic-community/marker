@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>DemoJam Participants Selected for MarkLogic User's Conference 2010</ml:title>
+  <ml:date>2010-04-28</ml:date>
+  <ml:body>
+    <ml:teaser>
+We are excited to announce the participants for the upcoming DemoJam on May 3rd, sponsored
+by our partners, <a href="http://www.avalonconsult.com/">Avalon Consulting LLC</a>.
+The DemoJam will start promptly at 5pm on the Pacific Terrace of the Intercontinental Hotel.
+At 5PM, Matt Turner and Norm Walsh will draw the random order.
+Participants will then be called to the stage in that order and given 300 seconds to impress the 
+crowd and take home an iPad.
+    </ml:teaser>
+   <p>
+       The list of participants in no specific order is:
+   </p>
+   <p>
+
+    <table class="table3">
+        <colgroup span="1">
+	  <col class="col1" width="230px" span="1"/>
+	  <col class="col2" span="1"/>
+	</colgroup>
+        <thead>
+	  <tr>
+	    <th scope="col" rowspan="1" colspan="1">Participant</th>
+	    <th scope="col" rowspan="1" colspan="1">Demo</th>
+	  </tr>
+	</thead>
+        <tbody>
+	  <tr class="alt">
+	    <td rowspan="1" colspan="1"> Mike Fagan, Booz Allen Hamilton</td>
+	    <td rowspan="1" colspan="1">ESpace - a Rich Internet Application built with MarkLogic and Javascript</td>
+	  </tr>
+	  <tr>
+	    <td rowspan="1" colspan="1"> Evan Lenz, Lenz Consulting Group</td>
+	    <td rowspan="1" colspan="1">PianoNinja</td>
+	  </tr>
+	  <tr class="alt">
+	    <td rowspan="1" colspan="1"> Ryan Sappenfield, FlatIrons</td>
+	    <td rowspan="1" colspan="1">Dynamic Content Assembly &amp; Delivery Built on MarkLogic Server, 
+Using XQuery, XSLT &amp; Adobe Flex </td>
+	  </tr>
+	  <tr>
+	    <td rowspan="1" colspan="1"> Laurens van den Oever, Xopus </td>
+	    <td rowspan="1" colspan="1">Super Awesome Offer Builder</td>
+	  </tr>
+	  <tr class="alt">
+	    <td rowspan="1" colspan="1"> Markus Pilman </td>
+	    <td rowspan="1" colspan="1">One Code to Rule them All</td>
+	  </tr>
+	  <tr>
+	    <td rowspan="1" colspan="1"> JD Vogt, MarkLogic</td>
+	    <td rowspan="1" colspan="1">Conference iPhone App</td>
+	  </tr>
+	  <tr class="alt">
+	    <td rowspan="1" colspan="1"> Sandeep Sridharan, Laserwords  </td>
+	    <td rowspan="1" colspan="1"> Integrated Publishing Framework</td>
+	  </tr>
+	  <tr>
+	    <td rowspan="1" colspan="1"> Scott Cipriano and Tom Beyer, IFactory</td>
+	    <td rowspan="1" colspan="1">Oxford Dictionaries Online</td>
+	  </tr>
+	  <tr class="alt">
+	    <td rowspan="1" colspan="1"> Darin McBeath,  Elsevier</td>
+	    <td rowspan="1" colspan="1">Elsevier Labs XML Repository</td>
+	  </tr>
+	  <tr>
+	    <td class="alt" rowspan="1" colspan="1"> G. Ken Holman, Crane Softwrights Ltd.</td>
+	    <td rowspan="1" colspan="1">   The power of XSLT import </td>
+	  </tr>
+	</tbody>
+      </table>
+   </p>
+   <p>  </p>
+  </ml:body>
+</ml:Announcement>

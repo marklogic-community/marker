@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="markups" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>From a directory of files to a complete app in 30 minutes!</ml:title>
+  <ml:created>2010-11-22T18:09:48.323343-08:00</ml:created>
+  <ml:last-updated>2010-11-23T17:01:12.373508-08:00</ml:last-updated>
+  <ml:description>
+    <p><a href="http://www.meetup.com/Mark-UPS/"><img style="display: block; border: 2px solid black; margin-left: auto; margin-right: auto;" src="/media/state-flag-maryland-480.jpg" alt="maryland" width="180" height="120"/></a></p>
+<p>The next Mark-UPS meeting is Wednesday, December 1st at <a href="http://maps.google.com/maps?q=131+National+Business+Parkway+Suite+120+Annapolis+Junction+MD+20701+">Boeing</a>.  Mark-UPS, Mark Logic User Participation Sessions, is run by <a href="mailto:telly.stroumbis@boeing.com">Telly Stroumbis</a> of Boeing.  Pizza and soda will be provided. Get to know others in the area and follow-up on the great Mark Logic user community experience.<br/><br/>MarkLogic is an ideal platform for building rich, interactive applications that leverage unstructured and semi-structured information. Learn how the latest version of MarkLogic Application Services can simplify prototyping and building compelling applications. Senior Product Manager, Justin Makeig, will walk through loading content with Information Studio and then building and customizing a full-featured search application with Application Builder — from a directory of files to a complete application in 30 minutes, from within a web browser.<br/><br/><strong>Speaker Bio:</strong><br/><br/><a href="https://github.com/jmakeig">Justin Makeig</a> is a Senior Product Manager at MarkLogic and self-professed user experience nerd. He is focused on enhancing and simplifying the tools and processes used to build rich, usable, high-performance applications with MarkLogic Server. Justin has over 10 years of experience designing and developing data-driven applications for start-ups and large organizations using XML and web technologies. Justin holds an MBA from the University of California, Berkeley.<br/><br/><strong>Note</strong>: advanced notice is required for non-U.S. Citizens<br/><br/>Please kindly <a href="http://www.meetup.com/Mark-UPS/calendar/15506335/">RSVP to this Meetup</a> or <a href="mailto:telly.stroumbis@boeing.com">send email to Telly</a> so that we can pre-print badges and know how much food to order.<br/><br/></p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-12-01</ml:date>
+    <ml:time>5:30PM</ml:time>
+    <ml:location>Boeing 131 National Business Parkway Suite 120 Annapolis Junction, MD 20701</ml:location>
+    <ml:topic>Jump-Starting Application Development with MarkLogic Application Services</ml:topic>
+    <ml:presenter>Justin Makeig</ml:presenter>
+  </ml:details>
+</ml:Event>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="denmark" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  <ml:title>Next DenMARK meeting, November 16th</ml:title>
+  <ml:created>2010-11-08T16:24:47.236012-07:00</ml:created>
+  <ml:last-updated>2010-11-09T13:45:49.012474-08:00</ml:last-updated>
+  <ml:description>
+    <p> </p>
+<p>Our next meeting is Tuesday, November 16th at 7PM.  MarkLogic Community Guy, Eric Bloch, will speak on the open source CMS toolkit project, <a href="http://developer.marklogic.com/blog/introducing-comoms" target="_blank">Comoms</a>.  The goals of the toolkit are:</p>
+<ul>
+      <br/>
+      <li> To produce useful tools and libraries that can serve as the core of a full Web CMS, built with XQuery and Javascript </li>
+      <li> To enable "not-just-another-CMS", taking advantage of MarkLogic-specific capabilities </li>
+      <li> To avoid rigid schemas – content can be polymorphic and based on prototypes </li>
+      <li> To promote and provide inline (WYSIWYG) content editing </li>
+      <li> To provide search that is configurable, extensible, tunable, turn-key, and aware of a content-type dictionary </li>
+    </ul>
+<p>If you're coming, please rsvp over at <a title="meetup" href="http://www.meetup.com/den-mark-logic/calendar/15395267/">meetup.com</a> so we can bring the right amount of food and drinks.  Hope to see you there!  Here's a <a href="http://maps.google.com/maps?q=900+Walnut+Street+Denver,+CO&amp;oe=utf-8&amp;client=firefox-a&amp;ie=UTF8&amp;hq=&amp;hnear=900+Walnut+St,+Denver,+Colorado+80204&amp;gl=us&amp;ei=clmuTJPwCoaqsAPYsO2ADA&amp;ved=0CBMQ8gEwAA&amp;ll=39.745326,-105.007539&amp;spn=0.0082,0.01708&amp;t=h&amp;z=16">link</a> to the location below.</p>
+<ul></ul>
+<p><img style="display: block; margin-left: auto; margin-right: auto; border: 2px solid black;" title="tivoli student union" src="/media/500px-Tivolistudentunion.JPG" alt="tivoli student union" width="500" height="252"/></p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-11-16</ml:date>
+    <ml:time>7:00 PM</ml:time>
+    <ml:location>Auraria Campus, Tivoli Bldg (900 Walnut St. Denver CO. 80204) Rm 642</ml:location>
+    <ml:topic>CMS Toolkit: OAuth2, Library Services API, HTML5 contentEditable, and more</ml:topic>
+    <ml:presenter>Eric Bloch</ml:presenter>
+  </ml:details>
+</ml:Event>

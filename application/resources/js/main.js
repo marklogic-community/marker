@@ -1,3 +1,59 @@
+/* developer.marklogic.com custom js */
+if(typeof jQuery != 'undefined') {
+    $(function() {
+        $('body').addClass('jsenabled'); // this class is applied to have a selector to add functionality with CSS later on that would only make sense if JS is actually enabled/available
+        if(jQuery().defaultvalue) {
+            $("#s_inp, #ds_inp, #kw_inp").defaultvalue(
+                "Search the site",
+                "Search current document",
+                "Search documents by keyword"
+            );
+        }
+        $("#s_inp").addClass("default");
+                        $("#s_inp").focus(function() {$("#s_inp").removeClass("default");} );
+                        $("#s_inp").blur(function() {
+                            if ($("#s_inp").val() == "Search the site" || $("#s_inp").val() == "")
+                                $("#s_inp").addClass("default");
+                });
+        $('#sub > div:last-child').addClass('last'); // only supposed to add some last-child functionality to IE
+        if(jQuery().tabs) {
+          $('#special_intro > div').hide();
+                    $('#special_intro .nav').tabs('#special_intro > div',{
+                        //effect: 'fade',
+                tabs: 'li'
+            });
+        }
+        // accordion style menu
+        $('#sub .subnav.closed h2, #sub .subnav.closed li span').each(function() {
+            if(!($(this).next().children().is('.current'))) {
+                $(this).addClass('closed').next().hide();
+            }
+        })
+        
+        $('#sub .current').parents().show();
+        $('#sub .subnav h2, #sub .subnav li span').click(function() {
+            $(this).toggleClass('closed').next().toggle();
+        });
+
+
+
+        $('.hide-if-href-empty').each(function() {
+            if ( $(this).attr('href') == "" ) {
+                $(this).hide();
+            }
+        });
+
+
+
+
+ 
+
+
+     
+
+      // new functions should be added here
+   });
+}
 
 
 /*
@@ -55,6 +111,41 @@ $.widget("ech.notify", {
 		return new $.ech.notify.instance(this)._create(msg, $.extend({}, this.options, opts), tpl);
 	}
 });
+
+$().ready(function(){
+	var q = getParameterByName("q") 
+	if(q && q != undefined ){
+		try{
+			$("#q").val(q);
+			
+		}catch(e){}
+	}
+	$( "input.search-button" ).button({
+            icons: {
+                primary: "ui-icon-locked"
+            },
+            text: false
+        });
+	$("input.search-button").button(
+			{
+				icons: {
+					primary: "ui-icon ui-icon-search"
+				},
+				text:false
+			});
+});
+
+function getParameterByName( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 // instance constructor
 $.extend($.ech.notify, {

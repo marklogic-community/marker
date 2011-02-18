@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Draft" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Hot Off the Press -     Inside MarkLogic Server </ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-10-07</ml:date>
+  <ml:body>
+    <ml:teaser>
+<p>As part of his summer, Jason Hunter, Principal Technologist and well-known technology <a href="http://www.amazon.com/gp/product/B0043M4Z8E/ref=pd_lpo_k2_dp_sr_2?pf_rd_p=486539851&amp;pf_rd_s=lpo-top-stripe-1&amp;pf_rd_t=201&amp;pf_rd_i=156592391X&amp;pf_rd_m=ATVPDKIKX0DER&amp;pf_rd_r=0N1TCHK9M5G3JG57FKSC">author</a>, spent some quality time with CTO Chris Lindblad and the MarkLogic engineering team discussing the ins and outs of our server.  The result is <a href="/learn/inside-marklogic">"Inside MarkLogic Server"</a>.</p>
+</ml:teaser>
+<p>The paper describes the server's data model, indexing system, update model, and operational behaviors. This is fabulous detail for someone trying to understand how MarkLogic does what it does and why it works.  It's intended for a technical audience — either someone new to MarkLogic wanting to understand its capabilities, or someone already familiar with MarkLogic who wants to understand what's going on under the hood. This paper is not an introduction to using MarkLogic Server. For that you can read the <a href="/docs">official product documentation</a>. Instead, this paper explains the principles on which MarkLogic is built. The goal isn't to teach you to write code, but to help you understand what's going on behind your code, and thus help you write better and more robust applications.</p>
+<p>The paper is available at our developer site in the <a href="/learn">learn</a> section or directly <a href="/learn/inside-marklogic-server">here</a>.</p>
+  </ml:body>
+  <ml:created>2010-10-07T17:38:31.836683-07:00</ml:created>
+  <ml:last-updated>2010-10-08T08:41:57.959231-07:00</ml:last-updated>
+</ml:Announcement>

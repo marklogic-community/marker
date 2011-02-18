@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Event status="Published" user-group="novamug" xmlns="http://developer.marklogic.com/site/internal">
+  <title>Joint NOVAMUG-NOVARUG meeting Wednesday, May 19th</title>
+  
+  <created>2010-05-17T17:18:50.775836-07:00</created>
+  <last-updated>2010-06-04T18:20:28.972153-07:00</last-updated>
+  <description>
+    <p xmlns="http://www.w3.org/1999/xhtml">This is a joint meeting of the Northern Virginia MarkLogic (<a href="../meet/novamug">NOVAMUG</a>) and Rails (<a href="http://novarug.org">NOVARUG</a>) User Groups.</p>
+<p xmlns="http://www.w3.org/1999/xhtml"><em>Please Note: This meeting is <strong>NOT</strong> at the usual NOVAMUG meeting address.</em></p>
+<hr xmlns="http://www.w3.org/1999/xhtml"/>
+<h3 xmlns="http://www.w3.org/1999/xhtml">Agenda:</h3>
+<p xmlns="http://www.w3.org/1999/xhtml"> </p>
+<ul xmlns="http://www.w3.org/1999/xhtml">
+      <li>Free pizza and sodas at 6:30 PM</li>
+      <li>Presentations start at 7 PM</li>
+      <li>First Talk: Clark Richey presents an in-depth look at the new open source Ruby connector to MarkLogic, <a href="../code/active-document">ActiveDocument</a>.</li>
+      <li>Second Talk: Gray Herter presents an introduction to the <a href="http://www.sproutcore.com/">SproutCore</a> UI framework.</li>
+    </ul>
+<h3 xmlns="http://www.w3.org/1999/xhtml">An Introduction to ActiveDocument</h3>
+<p xmlns="http://www.w3.org/1999/xhtml">This talk takes an in-depth look at the new open source Ruby connector to MarkLogic, ActiveDocument. ActiveDocument is an ActiveDocument style object to XML mapping framework for XML databases (currently implemented only for MarkLogic). It allows developers to leverage the power of an XML database to find, create, update and delete XML documents within their XML database without having to write any XQuery code.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">During this presentation we will talk briefly about the philosophy behind ActiveDocument and then we will start looking at the important classes and concepts that developers will need to understand in order to create applications with ActiveDocument. From there we will create a Rails application from scratch using ActiveDocument as our connection to our underlying MarkLogic XML server.Second presentation:</p>
+<p xmlns="http://www.w3.org/1999/xhtml">About the Speaker: Clark D. Richey, Jr. has spent over ten years architecting and implementing large scale software solutions for the federal government. Currently, Clark is the Principal Technologist, Federal and Community Champion with MarkLogic.  Clark is also an adjunct professor with Loyola University where he teaches in their Master's of Computer Science program, where he is currently teaching Ruby on Rails. Clark has a Master's in Computer Science from American University and a Bachelor's in Computer Science from U.M.U.C.</p>
+<h3 xmlns="http://www.w3.org/1999/xhtml">All Your UIs Are Belong to SproutCore!</h3>
+<p xmlns="http://www.w3.org/1999/xhtml"><em>By Gray Herter, Near Infinity</em></p>
+<p xmlns="http://www.w3.org/1999/xhtml">Gray Herter will introduce SproutCore, an application framework that aims to simplify the building of complex web-based UIs, and demonstrate how to use it in conjunction with Rails to create some fantastic apps.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">SproutCore embraces several novel approaches to building web-based UIs. It uses only JavaScript, and embraces HTML5 and CSS3. This results in impressive user experiences without the need for browser plug-ins.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">To communicate with a server, SproutCore uses only RESTful Ajax calls. While SpourtCore maintains server technology independence, Rails makes a great partner to SproutCore UIs, providing the required access to backend web services.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">About the Speaker: Gray Herter is a Senior Software Engineer at Near Infinity Corporation, the founder of DC's annual RubyNation software conference, and has taught Ruby and Rails since 2007.</p>
+  </description>
+  <details>
+    <date>2010-05-18</date>
+    <time>6:30 PM</time>
+    <location>1881 Campus Commons Drive, Suite 205, Reston, VA 20191</location>
+    <topic>An Introduction to ActiveDocument</topic>
+    <topic>All Your UIs Are Belong to SproutCore!</topic>
+    <presenter>Clark Richey, Jr.</presenter>
+    <presenter>Gray Herter</presenter>
+  </details>
+</Event>

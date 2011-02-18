@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="denmark" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Highlights of MLUC10</ml:title>
+  <ml:created>2010-06-04T18:08:06.755521-07:00</ml:created>
+  <ml:last-updated>2010-06-06T06:58:19.927553-07:00</ml:last-updated>
+  <ml:description>
+    <p><a href="http://maps.google.com/maps/ms?hl=en&amp;ie=UTF8&amp;msa=0&amp;ll=39.745722,-105.00594&amp;spn=0.006088,0.009495&amp;t=h&amp;z=17&amp;msid=101291517320641370674.0004742cabef02aadd39b">Map of meeting location</a></p>
+<p>There were many highlights and news of the conference we can discuss such as:</p>
+<ul>
+      <li>Mike Breevort's DemoJam win</li>
+      <li>Coming Attractions</li>
+      <li>Many great presentations such as XQDEBUG</li>
+      <li>The StreetApp Challenge </li>
+    </ul>
+<p><strong>XQDEBUG</strong> - The browser based debugger for MarkLogic Server</p>
+<p>This open source feature rich debugger was created by Keith Breinholt and was presented at MLUC10.  I will have a demo showing setup and use of this feature rich debugger.  More info can be found at <a href="../code/xqdebug">http://developer.marklogic.com/code/xqdebug</a><br/><br/><strong>Training Giveaway!</strong></p>
+<p>One lucky person will walk away with a voucher for the  'MarkLogic Server Essentials' training class to be held in the Denver Tech Center the first week of August. This is a great hands on three day course and a fantastic giveaway worth more than $2,100.00<br/> <br/>This is an opportunity learn more about MarkLogic Server and collaborate with other MarkLogic users.  Pizza and Soft drinks will be provided and everyone will be entered into drawings for several giveaways and a training session provided by MarkLogic.</p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-06-08</ml:date>
+    <ml:time>7:00 PM</ml:time>
+    <ml:location>Auraria Campus, Tivoli Bldg (900 Walnut St. Denver CO. 80204) Rm 320 Section A - Baerresen Ballroom</ml:location>
+    <ml:topic>Highlights of MLUC10</ml:topic>
+    <ml:topic>XQDEBUG</ml:topic>
+    <ml:presenter>Michael Fagan</ml:presenter>
+  </ml:details>
+</ml:Event>

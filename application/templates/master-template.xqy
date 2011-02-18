@@ -41,7 +41,7 @@ $xqmvc:doctype-xhtml-1.1,
         
         <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/jquery.jstree.js">&nbsp;</script>
         <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/style.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/redmond/jquery-ui-1.8.7.custom.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/smoothness/jquery-ui-1.8.9.custom.css"/>
     </head>
     <body>
     <div id="container">
@@ -50,26 +50,30 @@ $xqmvc:doctype-xhtml-1.1,
           &nbsp; 
         </h1>
         <div style="position:absolute;top:5px;right:5px;width:150px;text-align:right;"> {taglib-security:login-logout()}</div>
-    </div>
-    <div id="navigation">
+        <div id="navigation">
         <ul>
           &nbsp;   
         </ul>
     </div>
-    <div id="content-container">
-        <div id="content">
+    </div>
+    
+    <div id="content">
+        <div id="main">
             <div>{ map:get($data, 'body') }</div>
         </div>
-        <div id="aside">
-            <h2>Plugins</h2>
-            <div>
+        <div id="sub">
+         <div class="subnav">
+            <h2>Administration</h2>
+          <ul>
                 {taglib-plugins:plugins-list()}
-            </div>
+          </ul>
+          </div>
         </div>
-        <div id="footer">
-           {taglib-security:current-user()}
-        </div>
+        
     </div>
+    <div id="footer">
+           <p>Copyright © 2011 MarkLogic Corporation.  MARKLOGIC® is a registered trademark of MarkLogic Corporation in the United States</p>
+        </div>
 </div>
    
       

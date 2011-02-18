@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Warrior Gateway Code Bash 2010 - It's a wrap!</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-10-03T17:54:49.717554-07:00</ml:created>
+  <ml:last-updated>2010-10-10T20:11:14.07965-07:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>warriorgateway</ml:tag>
+  </ml:tags>
+  <ml:body>
+    <p>I spent this past weekend in Fairfax, VA with a number of MarkLogic employees, partners, and friends participating in the <a href="http://warriorgateway.org/">Warrior </a><a href="http://warriorgateway.org/">Gateway</a> Code Bash.  The Warrior Gateway is a non-profit site devoted to connecting returning military personnel and their families with services they need.</p>
+<p><br/><a href="http://warriorgateway.org/"><img style="display: block; border: 7px solid white;" title="Warrior Gateway" src="/media/wgcb-2010-wgcb.png" alt="Warrior Gateway" width="500" height="288"/></a> </p>
+<p> </p>
+<p>This was the first time any of us had participated in an event like this so we weren't sure exactly what we'd be able to accomplish.  </p>
+<p>As the event unfolded, though, things came together in a really great way.  It was both fun and productive and I'm proud of the results.  </p>
+<h3>What is a Code Bash?</h3>
+<p>For those of you unfamiliar with events like this, I thought I'd describe what we set out to do, how we did it, and what we eventually accomplished.  </p>
+<p>In a nutshell, the idea is to get folks together over a couple, focused days and bang out some features in a "hack-a-thon" style effort.  You work collaboratively and quickly.  The participants are all generally familiar with the style of application development and a subset of the technologies in use.  People come with varying levels of familiarity with the code.  Sometimes, as was the case here, there is limited previous experience with the code.  And, the code base for our bash was actually used to drive a live, production site.  As you can imagine, it can be a bit challenging to organize. </p>
+<p>Here's how we did it.</p>
+<h3>Preparations and Planning</h3>
+<p>With such a brief time to do development work at the event itself, the more prep we could do upfront, the higher the likelihood of success. </p>
+<p>The most important preparations for the event involved choosing and drafting use cases that could be tackled in a fashion like this.  The Product Manager for the Warrior Gateway, Howard Chen, wrangled up 10 use cases and published them up to a shared, collaborative workspace (we used <a href="http://www.unfuddle.com/">Unfuddle</a>).  We chose 10 because we were expecting somewhere between 10-20 participants.  We were concerned that any more than that would generate a level of chaos we couldn't handle. </p>
+<p>We made sure the development environment setup instructions were up to date and we published those too. About two weeks before the event, we finalized the guest list, sent out an event schedule, and requested folks familiarize themselves with the website and its users.</p>
+<p>About a week later, we sent out invites to the Unfuddle workspace, which included the docs and a copy of the current source code repository.   And, we also asked folks to set up their development environments (about a week <em><strong>before</strong></em> the event).</p>
+<h3>The Event</h3>
+<p>The first day of the event, we introduced ourselves over breakfast.  Howard then prioritized the use cases and folks self-identified based on what they felt were their relative areas of expertise.   We then dialed in on six use cases to tackle.  Below you can see the whiteboard we used to help organize ourselves and keep track of who was doing what and where they were in the process.</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="whiteboard" src="/media/wgcb-2010-whiteboard.jpg" alt="whiteboard" width="550" height="413"/></p>
+<p>We broke up into teams and started in on the most important use cases first.  As you would expect, at this point in the event, there were lots of people wanting to ask Howard questions.  Luckily somehow, he didn't end up being a bottleneck.  </p>
+<p>Soon many of us were in the part of the day's schedule that was just labeled "do it".  We spent the rest of that first day writing code, getting stuck, reading source code, getting stuck, snacking on chocolate, asking questions, writing code, cursing, occasionally yelling 'yippeee!', and so on. To give you a flavor of the action, I've included below Lam and Erickson's sketch for the layout for adding "Virtual service providers" to the search results.  I can hear you saying, "Oooh layout fun", now.</p>
+<p><img style="border: 10px solid white; display: block; margin-left: auto; margin-right: auto;" title="sketch" src="/media/wgcb-2010-sketch.jpg" alt="sketch" width="300" height="400"/></p>
+<p>Eventually we broke for dinner at a <a href="http://www.texasdebrazil.com/">Brazillian steak house</a> - <a href="http://30.media.tumblr.com/uzIHnIJP8ph9qrllexVztqkuo1_400.jpg">meat</a>, <a href="http://www.examiner.com/images/blog/EXID22668/images/Leg_of_Lamb.jpg">meat</a>, and more <a href="http://www.foodandbeverageunderground.com/images/churr2.jpg">meat</a>.  Yes, it was <strong>very</strong> good, especially the bits wrapped in <strong>bacon</strong>.  (There was a nice salad bar for our vegetarian bashers, too).</p>
+<p>After dinner, some folks worked a bit into the night. Eventualliy we all slept.</p>
+<h3>Day 2 - Coding, Unfuddle Fuddled, and Demos!</h3>
+<p>We got back together at 8:30AM the next morning.  Breakfast ensued and coding quickly commenced. </p>
+<p>There was breakfast and coding all through the morning.  Until, of course, lunch (obligatory pizza), which also included more coding time.</p>
+<p>One item that actually made the second day challening was an unplanned <a href="http://stackoverflow.com/questions/2125957/is-unfuddle-reliable/3850417#3850417">Unfuddle outage</a>.  Yes, for 3-4 hours we were without access to our code repository and shared documentation.  As frustrating as this was, it was way better that it happened on the second day; it was a nuissance rather than a blocker.  After lunch, the repository came back up, just in time for our demos.  Below you can see the "Logo upload" feature, worked on by Cox and Richey.  In general, the demos were really well received by Howard and the Warrior Gateway crew, who were looking forward to actually being able to deploy the new features.</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="Demo" src="/media/wgcb-2010-proj.jpg" alt="Demo" width="557" height="418"/></p>
+<p> </p>
+<h3>Summary</h3>
+<p>So what did we actually accomplish?   We made great progress on all of the use cases.  Some of them are close to being able to go thru final testing and push to production.  Others are "almost there".  All of the efforts provide value to the Warrior Gateway.  As to what's next, I know that we've learned a lot more about how to run an event like this and we also now have a bunch of folks who are familiar with the code base, too.    Given all that and the positive responses I've gotten from the Code Basher's themselves, I'm pretty sure we'll see some more Code Bashing in 2011 :)  Below is the list of use cases we tackled:</p>
+<ol>
+      <li>Adding the notion of "Virtual" Service Providers - These are providers who have an unusual coverage area and may not necessariliy have a brick-and-mortar location.</li>
+      <li>Adding a search widget that could be copied from the Warrior Gateway site and easily deployed via cut-n-paste at other sites that would like to provide Warrior Gateway searching</li>
+      <li>Adding an ability for service providers to upload and manage logos.</li>
+      <li>Adding sign-in via Facebook</li>
+      <li>Adding the ability for site users' to invite their contacts from Gmail, Hotmail, Facebook, and so on.</li>
+      <li>Revamping the rich text editor.</li>
+    </ol>
+<h3>Thanks to all the participants!</h3>
+<p>None of this would have been possible with out the following wonderful peeps:</p>
+<ul>
+      <li>Our Host, Rob Stoltz of <a href="http://www.cvpcorp.com/">Customer Value Partners</a>  </li>
+      <li>Devin Holmes, Warrior Gateway's Executive Director, who came up with the idea for the event.</li>
+      <li>Planning and logistics help from <br/>
+<ul>
+	  <li>Michelle Serrano, Cleo Saab of <a href="http://www.marklogic.com/">MarkLogic</a></li>
+	  <li>Jennifer Hill with Warrior Gateway</li>
+	  <li>Joe Hilger of <a href="http://avalonconsult.com/">Avalon Consulting, LLC.</a></li>
+	</ul>
+</li>
+      <li>Product Management and Technical Architecture/Lead from<br/>
+<ul>
+	  <li>Howard Chen on loan to Warrior Gateway from Deloitte</li>
+	  <li>Christian Leonhard of Deloitte</li>
+	</ul>
+</li>
+      <li>The Code Bashers 
+<ul>
+	  <li>Mike Brevoort, Darrel Cox, and Girish Kulkarni of <a href="http://avalonconsult.com/">Avalon Consulting, LLC.</a></li>
+	  <li>Clark Richey, David Lam, Mallika Iyer, David Erickson, Frank Sanders and yours truly from <a href="http://www.marklogic.com/">MarkLogic</a></li>
+	</ul>
+</li>
+    </ul>
+<h3>Wait there's more!</h3>
+<p>If this lengthy post wasn't quite enough detail, you can catch a bunch of really swell photos of us in action below.  Enjoy.</p>
+<p> </p>
+<p>
+<object style="display: block; margin-left: auto; margin-right: auto;" width="400" height="300" data="http://www.flickr.com/apps/slideshow/show.swf?v=71649" type="application/x-shockwave-flash">
+<param name="data" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649" valuetype="data"/>
+<param name="flashvars" value="offsite=true&amp;lang=en-us&amp;page_show_url=%2Fphotos%2Fmarklogicuc%2Fsets%2F72157625095084134%2Fshow%2F&amp;page_show_back_url=%2Fphotos%2Fmarklogicuc%2Fsets%2F72157625095084134%2F&amp;set_id=72157625095084134&amp;jump_to=" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="src" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+  </ml:body>
+</ml:Post>

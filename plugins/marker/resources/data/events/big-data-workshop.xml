@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic Sponsors <a href="http://bigdataworkshop.com/">Big Data Workshop</a> at <a href="http://www.computerhistory.org/">Computer History Museum</a>, Mountain View, CA</ml:title>
+  <ml:description>
+<p>
+    <ml:teaser>MarkLogic sponsored the first <a href="//bigdataworkshop.com">Big Data Workshop</a>, an <a href="http://en.wikipedia.org/wiki/Unconference">unconference</a> on <i>Big Data</i>, led by <a href="http://identitywoman.net/">Kaliya Hamilton</a>, well-known unconference leader.</ml:teaser>  The purpose of the unconference was to bring together people interested in and capable of addressing some of the big questions
+in this area.  
+<p>
+Principal technologist, Jason Hunter, Community Director, Eric Bloch, and Trainer Nuno Job participated in several sessions and
+organized one on tools for Semi-structured data.
+</p>
+<p>
+The conference's themes as described on the workshop's site were wide ranging:
+</p>
+</p>
+
+<div style="background: #E9ECD6; padding-top: 10px; padding-left: 15px; padding-right: 15px">
+As the internet approaches 1 trillion connected gigabytes, we’re not in Kansas anymore. The data deluge poses important questions:
+<p></p>
+<ul>
+	<li style="padding-top: 1em">How will we manage all this information? Is the relational database doomed? How will we synchronize it? Will we all need to migrate to NoSQL stores? Or will the new play along nicely with 40 years of relational history?</li>
+	<li style="padding-top: 1em">
+      Who will manage this information? Will we all have to own our own massive infrastructure, will we rent it, or just call the APIs of somebody else?
+    </li>
+	<li style="padding-top: 1em">
+      How will we analyze this information? Do we all need to learn Erlang and Map-Reduce, or will a new set of easy-to-use tools spring up, just like the spreadsheet came to the rescue a long time ago? Will programmers write code for distributed hash tables, relational databases, document stores, graph databases or all of the above?
+     </li>
+	<li style="padding-top: 1em">
+      Who will we govern all that information? Who will keep it secure, and private, and audible? Who determines what can and cannot be correlated? Who will watch the watchmen?
+     </li>
+      </ul><ul></ul></div>
+
+<p>
+The attendee list is available at <a href="http://bigdataworkshop.eventbrite.com/">Eventbrite</a> and includes
+a variety of folks working in this space: leading open-source project committers, well-known hackers,
+commercial software vendors, IT professionals, Internet companies, and numerous other folks with lots of data.
+</p>
+<p>
+Conference notes are available at the <a href="http://bigdataworkshop.com/blog/">conference blog</a>.
+The workshop organizers have also created a <a href="http://groups.google.com/group/bigdataworkshop">google group</a> to support 
+the self organization of people who attended the Big Data Workshop in April 2010 and those interested 
+in participating in a community with them.  
+</p>
+</ml:description>
+  <ml:details>
+    <ml:date>2010-04-26</ml:date>
+    <ml:time>9:00AM-5:00 PM</ml:time>
+    <ml:location>Computer History Museum, Shoreline Drive, Mountain View, CA</ml:location>
+    <ml:topic>Big Data/NoSQL</ml:topic>
+  </ml:details>
+</ml:Event>

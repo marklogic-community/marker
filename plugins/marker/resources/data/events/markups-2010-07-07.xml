@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="markups" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Next Mark-UPS Meeting Wednesday, July 7th</ml:title>
+  <ml:created>2010-07-04T18:53:53.934239-07:00</ml:created>
+  <ml:last-updated>2010-07-04T19:12:55.263964-07:00</ml:last-updated>
+  <ml:description>
+    <p>MarkLogic User Participation Sessions (Mark-UPS) will be meeting on Wednesday July 7th at <a href="http://maps.google.com/maps?oe=UTF-8&amp;gfns=1&amp;q=131+National+Business+Parkway,+Suite+100,+Annapolis+Junction,+MD+20701&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=131+National+Business+Pkwy+%23100,+Jessup,+MD+20701&amp;gl=us&amp;ei=wDwxTJ20FMyknwfb3ZHeAw&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CBMQ8gEwAA">131 National Business Parkway</a>, Suite 200.  Get to know others in the area and 
+follow-up on the great MarkLogic user community experience.  Pizza and soda will be provided. Mark-UPS, is led by Telly 
+Stroumbis (<a href="https://exchange.marklogic.com/owa/redir.aspx?C=b1da91859b524df4a99f8aab4b6b0599&amp;URL=mailto%3atelly.stroumbis%40boeing.com">telly.stroumbis@boeing.com</a>)
+ of Boeing.</p>
+<div>
+</div>
+<h3><strong>Presentation:</strong></h3>
+<div>Clark Richey, Jr. will present a preview of MarkLogic's upcoming 4.2 release. This 
+release is packed with numerous major new features including several 
+features designed specifically for the Federal community. Please join us
+ for this unique opportunity to learn more about
+ this exciting upcoming release!</div>
+<div>
+</div>
+<h3><strong>
+Speaker Bio:</strong></h3>
+<div>Clark Richey, Jr. is the Principal Technologist, Federal at MarkLogic 
+where he works closely with customers to help them architect 
+maintainable, scalable solutions to their business problems. He is 
+active in the developer community, providing technology education
+ and best practices for using MarkLogic efficiently while gathering 
+developer feedback for future product enhancements.  Clark has spent 
+more than ten years architecting and developing large scale systems for 
+various government clients including the FBI, Department
+ of Defense, Department of Labor, the Veterans Administration and 
+various IC organizations.  He is also a Java Champion and an associate 
+professor at Loyola University. Clark has a B.S. in Computer Science 
+from U.M.U.C. and a Master's Degree in Computer Science
+ from American University.</div>
+<div>
+ </div>
+<div>
+<span style="text-decoration: underline;">Please RSVP so that we can pre-print badges and know how much food to 
+order</span>.</div>
+<div>
+ </div>
+<div>
+<strong>Note</strong>: advanced notice is required for non-U.S. Citizens.</div>
+  </ml:description>
+  <ml:details>
+    <ml:date>2010-07-07</ml:date>
+    <ml:time>5:30PM - 7:30PM</ml:time>
+    <ml:location>131 National Business Parkway, Suite 100, Annapolis Junction, MD 20701 (visitors need to sign in at Suite 120, see link below for map)</ml:location>
+    <ml:topic>MarkLogic Server 4.2 Preview</ml:topic>
+    <ml:presenter>Clark Richey</ml:presenter>
+  </ml:details>
+</ml:Event>

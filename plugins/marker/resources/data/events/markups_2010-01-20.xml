@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="markups" status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Next MarkUPS Meeting to Take Place on January 20th!</ml:title>
+  <ml:description>
+    <p><ml:teaser>The next Mark-UPS user group will be meeting on Wednesday January 20th. Mark-UPS, MarkLogic User Participation Sessions, is run by Telly Stroumbis.</ml:teaser></p>
+<p>
+MarkLogic user groups offer an opportunity learn more about MarkLogic Server and collaborate with other MarkLogic users. Pizza and soft drinks will be provided and everyone will be entered into drawings for several giveaways provided by MarkLogic.
+</p>
+
+</ml:description>
+  <ml:details>
+    <ml:date>2010-01-20</ml:date>
+    <ml:time>5:30pm</ml:time>
+    <ml:location>131 National Business Parkway, Suite 120, Annapolis Junction, MD, 20701</ml:location>
+    <ml:topic>GeoNews, Putting it all together</ml:topic>
+    <ml:presenter>TBD</ml:presenter>
+  </ml:details>
+</ml:Event>

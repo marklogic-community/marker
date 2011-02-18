@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://marklogic.com/marker"
+    xmlns="http://marklogic.com/marker/schema/template">
+    <xs:element name="content">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="1" fixed="template"/>
+                <xs:element name="title" type="xs:string" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="abstract" type="xs:string" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="searchable" type="xs:boolean" maxOccurs="1" minOccurs="1" default="false"/>
+                <xs:element name="create-date" type="xs:dateTime" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="update-date" type="xs:dateTime" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="base-id" type="xs:string" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="derived" type="xs:boolean" maxOccurs="1" minOccurs="1" default="true"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

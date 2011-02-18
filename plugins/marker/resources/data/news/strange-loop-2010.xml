@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Chris Biow, MarkLogic Federal CTO, to Speak at Strange Loop</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-10-10</ml:date>
+  <ml:body>
+    <p><a href="http://strangeloop2010.com/"><img style="background: none repeat scroll 0% 0% #000000; display: block; margin-left: auto; margin-right: auto;" title="strange loop" src="/media/strange-loop-2010.png" alt="strange loop"/></a></p>
+<ml:teaser>
+<p>Strange Loop is a developer-run conference.  If you're not already planning to attend, checking out the bevy of <a href="http://strangeloop2010.com/calendar">talks</a> and <a href="http://strangeloop2010.com/speakers">speakers</a> will make you say, "How come I'm not going to Strange Loop?"  The conference's self-description reads:</p>
+<p style="padding-left: 30px;"><em>Innovation, creativity, and the future happen in the magical nexus 
+"between" established areas.  Strange Loop eagerly promotes a mix of 
+languages and technologies in this nexus, bringing together the worlds 
+of bleeding edge technology, enterprise systems, and academic research.</em></p>
+</ml:teaser>
+<p>MarkLogic Federal CTO, <a href="http://www.linkedin.com/in/chrisbiow">Chris Biow</a>, will be there to <a href="http://strangeloop2010.com/talks/14473">talk about the Universal Index</a>, a defining feature of MarkLogic Server that puts it squarely in the nexus "between" NoSQL datastore and full-text search engine.  Beyond his talk on the first day, Chris will be participating in Friday's <a href="http://strangeloop2010.com/talks/15702">panel on non-relational, NoSQL datastores</a>, along with voices from other NoSQL projects/products including Basho (Riak), 10gen (MongoDB), Cassandra, and Terracotta.</p>
+<p>If you'll be there, please make sure to come join us Thursday evening for the <a href="http://strangeloop2010.com/talks/14502">Strange Passions Party</a>, which we're sponsoring strangely enough, along with another unstructured information specialist you might have heard of named Google.  At the party, there will be 8 Strange passion talks given and a crowd favorite will be chosen 
+and presented with the fabulous prize of a genuine Klein bottle!</p>
+  </ml:body>
+  <ml:created>2010-10-09T21:25:17.650352-07:00</ml:created>
+  <ml:last-updated>2010-10-10T00:23:42.013821-07:00</ml:last-updated>
+</ml:Announcement>

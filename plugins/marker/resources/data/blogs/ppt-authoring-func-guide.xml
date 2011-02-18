@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>The MarkLogic Sample Authoring App for PowerPoint</ml:title>
+  <ml:author>Pete Aven</ml:author>
+  <ml:created>2010-12-16T11:42:09.828619-08:00</ml:created>
+  <ml:last-updated>2010-12-16T12:09:36.081557-08:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <h3>The Authoring App in Action</h3>
+<p>The MarkLogic Sample Authoring App for PowerPoint lets authors enrich
+PowerPoint presentations using Tags, associate and manage metadata with
+those tags, as well as search and reuse existing tagged components and
+their metadata in new presentations.</p>
+<p>The MarkLogic Sample Authoring App is built using the <a class="externalLink" href="http://developer.marklogic.com/code/marklogic-toolkit-for-powerpoint">MarkLogic Toolkit for PowerPoint</a>.
+Please install the Add-in and supporting XQuery library from the
+Toolkit to use this application. The Toolkit provides a guide for
+installation and comes with its own Sample Application. You can follow
+the guide instructions for installing this Sample App as well.</p>
+<h3>Getting Started</h3>
+<p>To get started using this Sample Application, you'll need to update 3
+areas with the URL of your application. See the README, as well as the
+Sample Authoring App Developer's Guide, both included in the download
+for the application.<br/><br/>Following is an overview of the Sample
+Authoring App functionality. A developer's guide is included in the
+release so you can configure this application to meet your
+requirements. A 'files of interest' section is also included in the
+guide in case you just want to get in there and start hacking.</p>
+<h2>Enrich</h2>
+<p>On this tab you'll find the tags palette. In PowerPoint you can tag
+presentations, slides, and slide components (shapes within a slide).
+For the initial release of the Sample App, the components you can tag
+and roundtrip from MarkLogic include presentations, slides, textboxes,
+and images. You can select what you'd like to tag from the navigation
+bar located on the tags tab. Below the presentation is currently
+selected.</p>
+<p> </p>
+<p><img title="Enrich Task Pane" src="/media/steadybloggin/p_authoring_func_guide/enrich-1.PNG" alt="Enrich Task Pane" width="450" height="349"/></p>
+<p><br/>You can enrich the presentation by just selecting presentation in
+the navigator bar of the tags tab and clicking a button on the tags
+palette to apply the tag. To enrich a slide, you would select the slide
+you'd like to tag in PowerPoint, select slides in the navigator bar of
+the tags tab, and click the button in the tags palette to apply the tag.</p>
+<p> </p>
+<p><img title="Enrich Task Pane Two" src="/media/steadybloggin/p_authoring_func_guide/enrich-2.PNG" alt="Enrich Task Pane Two" width="450" height="348"/></p>
+<p> </p>
+<p>A list of tags that have been applied to the selected presentation,
+slide, or slide component, are listed in the Properties panel below the
+tags palette. To the left of the tag name, is a delete button that you
+can click to remove the tag from your selection.<br/><br/>You may notice
+that the tag labels for presentations and slides in the above screen
+shots differ. These tags are configurable. The tag labels and the
+amount of you tags you make available for enrichment of presentations,
+slides, and slide components is determined by the configuration. See
+the developer's guide for more detail. <br/><br/>The configuration is a
+simple XML file and it generates the HTML for the buttons on your
+palette as well as the associated JavaScript functions required for
+inserting the tags. The names you use for enrichment will be the values
+you use for Search once you've saved your document to MarkLogic Server.
+<br/><br/>By clicking on a slide or slide component within an active
+presentation, the Properties section beneath the tags palette helps to
+navigate the tags by updating automatically and providing information
+about the tags you have currently applied to the object selected.
+You'll see:</p>
+<ul>
+      <li>the name of the tag </li>
+      <li>a delete button to remove the tag</li>
+      <li>if the tag belongs to a slide component (shape), you'll also see a save all button</li>
+    </ul>
+<p><img title="Tagged Components" src="/media/steadybloggin/p_authoring_func_guide/enrich-3.PNG" alt="Tagged Components" width="855" height="385"/></p>
+<p> </p>
+<p>You only need to click save for a tagged slide component in the event
+you have tagged a component and then change the text within it. This is
+required so we can successfully roundtrip the component from MarkLogic
+to a new presentation once you've saved the presentation to MarkLogic
+Server. We hope to improve this in a future release, but for now, if
+the content in a tagged component changes, you'll need to explicitly
+save it to retain the roundtrip capabilities.<br/><br/>Tags are only
+exposed through PowerPoint's object model. There is no native
+functionality in the application for applying or displaying tags. We've
+done our best to provide all the visual cues you'll need to navigate
+tags within the Authoring pane. By selecting slides and components,
+tags and messages will be displayed in the Properties panel to inform
+you what's been tagged and what hasn't.</p>
+<h2>Metadata</h2>
+<p>Each time you add a tag to your presentation, a custom XML metadata
+part is added to the .pptx being authored. This custom metadata part is
+associated by id with the tag you've added. On this tab you can edit
+the metadata values for associated tags.<br/><br/>The metadata pane
+provides a list of the tags applied to your presentations, slides, and
+slide components. By clicking on a label in the list, the form for
+associated metadata will be displayed beneath the list view. Edit
+values, and as you change fields, the values will be automatically
+saved to the metadata form.</p>
+<p> </p>
+<p><img title="Metadata Task Pane" src="/media/steadybloggin/p_authoring_func_guide/metadata-1.PNG" alt="Metadata Task Pane" width="449" height="586"/></p>
+<p><br/>You'll see that for this Sample, there are 3 types of metadata
+forms associated with the tags. We are also using Dublin Core metadata.
+This again, is configurable. You can use other XML for your metadata,
+and can even have a different custom XML metadata form for each tag you
+define in the tag palette. Please refer to the developer's guide
+included with the Sample Authoring App.<br/><br/>If you delete a tag from
+the document (using the delete button on the Properties panel of the
+enrich tab), the tag's associated metadata part is also removed from
+the .pptx.</p>
+<h2>Search</h2>
+<p>When you save a .pptx to MarkLogic Server, it is automatically unzipped
+and made available for search and re-use. On this pane, you can search
+for text found within any slides saved in MarkLogic.<br/><br/>Under the
+search box, you'll find you can select Components, Slides, or
+Presentations. This selection will filter the types of results
+returned, which also have different options available for re-use.</p>
+<p> </p>
+<p><img title="Search Task Pane" src="/media/steadybloggin/p_authoring_func_guide/search-1.PNG" alt="Search Task Pane" width="450" height="608"/></p>
+<p><br/>The results provide a count of search results as well as pagination.<br/><br/>When
+you search and have selected Presentations, all presentations that
+contain a slide that includes the search text value will be returned. <br/><br/>When you search and have Slides, any slide from any presentation including the search text value will be returned.  <br/><br/>When
+you search and have selected Components, any component from any slide,
+from any presentation including the search text value will be returned.
+<br/><br/>For each result, we see:</p>
+<ul>
+      <li>the document title (if present in the extracted document properties part) or the URI of the source document in MarkLogic </li>
+      <li>the last modified date and last modified by for the source document </li>
+      <li>an icon informing which type component we are inserting (either slide, textbox, or image)</li>
+      <li>a snippet of text, with our search text in bold</li>
+      <li>rollover of a snippet will display more text for the result </li>
+      <li>a thumbnail image of the slide (representing the Slide or Slide containing Components)</li>
+      <li>an insert button (Components, Slides)</li>
+      <li>an undo button (Components, Slides)</li>
+    </ul>
+<p><br/>The thumbnail image for Presentations results will be of the first slide in the deck.<br/><br/>You
+won't have the options of 'undo' and 'insert' for Presentation search
+results. Those are only provided when searching for Components and
+Slides.<br/><br/>Clicking the document title will open the source presentation from MarkLogic Server.<br/><br/>Clicking
+insert will insert the slide into the active presentation at the
+current slide position. The search result may have tags with associated
+metadata parts. The slide may also include components that have been
+tagged and also include associated custom metadata parts. If any of the
+search results has tags and associated metadata parts in their source
+document in MarkLogic, those tags and metadata parts are retained and
+added to the presentation being authored. You can view and edit any
+metadata values by examining them in the metadata tab.<br/><br/>In the
+case that you've inserted something you didn't intend to, you can click
+'undo', and the inserted Slide or Component will be removed as well as
+any associated custom metadata parts from the active .pptx package.<br/><br/>Finally,
+you can restrict searches through use of the filter tab. Click the drop
+down arrow to see a list of tag labels you can select to apply to your
+search. This list is also configurable. To apply the criteria, click
+the filter button. You can close the filter selection and keep your
+filter applied.</p>
+<p> </p>
+<p><img title="Search Filter" src="/media/steadybloggin/p_authoring_func_guide/search-2.PNG" alt="Search Filter" width="451" height="469"/></p>
+<h2>A note on slide images</h2>
+<p>You may be asking: Where did the thumbnails for slide images come from?
+Well, in our first version of the MarkLogic Toolkit for PowerPoint, we
+provided the ability to 'Save To MarkLogic' directly from the button in
+Office 2007 (You'll now find the same option available from 'Add-ins'
+in the backstage view for Office 2010). When we save to MarkLogic, we
+also save the deck's slide images, so we have them available for
+display in search results. <br/><br/>For Components, we reuse the slide
+images and provide cues through icons, snippets, and component labels
+to help guide authors in finding and inserting the content they seek to
+re-use in new presentations.</p>
+<h2>Conclusion</h2>
+<p>The Sample Authoring App is intended as a way to provide authors a way
+to enrich content in PowerPoint, as well as define and identify
+PowerPoint <strong>presentations</strong>, <strong>slides</strong>, and <strong>slide components</strong> for search, re-use, auditing, and tracking.<br/><br/>By
+providing a way for authors to re-use components of content across
+documents, identified by rich metadata, authors can then use MarkLogic
+to query where document components are being re-used. Also, if some
+document component includes text that needs to be updated across
+documents, the metadata can be used to run an update of components
+across all PowerPoint presentations in MarkLogic that include those
+sections.</p>
+  </ml:body>
+</ml:Post>

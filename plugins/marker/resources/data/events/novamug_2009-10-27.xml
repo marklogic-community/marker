@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event user-group="novamug" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Northern Virginia MarkLogic User Group (NOVAMUG) Event to Take Place on October 27th</ml:title>
+  <ml:description>
+    <p><ml:teaser>Come join us at the next NOVAMUG meeting at FGM headquarters on October 27. The main speaker will be Micah Dubinko, Lead Engineer at MarkLogic who will give a behind-the-scenes look at the architecture and development of the MarkLogic Application Builder. Learn how XForms, higher-order functions, Relax NG, out-of-line validation, and other hidden gems, can benefit your applications.</ml:teaser></p>
+<p>
+Micah served as an editor and author of the XForms 1.0 W3C specification, where he participated in the XForms effort since September 1999, nine months before the official Working Group was chartered. He knows XForms inside and out, and often acts as a spokesperson for XForms at conferences. At MarkLogic, Micah leads the Application Services team and is acting editor for developer.marklogic.com.
+</p>
+
+</ml:description>
+  <ml:details>
+    <ml:date>2009-10-27</ml:date>
+    <ml:time>7:30pm</ml:time>
+    <ml:location>FGM, 12021 Sunset Hills Road, Suite 400, Reston, VA 20190</ml:location>
+    <ml:topic>Behind the Scenes of Application Builder</ml:topic>
+    <ml:presenter>Micah Dubinko</ml:presenter>
+  </ml:details>
+</ml:Event>

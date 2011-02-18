@@ -5,6 +5,9 @@ declare variable $data as map:map external;
 
 <div id="main-content">
    <div>
+   <h2>Security Setup</h2>
+   <p>
     <a href="/security/setup/install">Security has not been installed on this application. To continue, please click here to install.</a>
+    </p>
    </div>
 </div>

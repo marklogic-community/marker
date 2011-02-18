@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Event status="Published" user-group="nymug" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Development and Deployment of Enterprise-Scale MarkLogic Solutions</ml:title>
+  <ml:created>2011-01-06T13:34:13.839469-08:00</ml:created>
+  <ml:last-updated>2011-01-06T17:48:56.824019-08:00</ml:last-updated>
+  <ml:description>
+    <p><a title="Flatirons Solutions" href="http://www.flatironssolutions.com/"><img style="float: right;" title="Flatirons Solutions" src="/media/flatirons-solutions-logo.png" alt="Flatirons Solutions " width="154" height="72"/></a>Talk to a developer that is using MarkLogic  and you’ll hear about <a href="http://en.wikipedia.org/wiki/FLWOR">
+FLOWRs</a>, XQuery patterns for faceted searching, use of  XPath vs. <a href="http://developer.marklogic.com/pubs/4.2/apidocs/SearchBuiltins.html">CTS 
+functions</a> and lots of exciting ideas about how to manipulate large 
+volumes of XML content. But how do you actually build, deploy and 
+maintain a solution that uses all the power of MarkLogic? And deploy to 
+multiple environments? With meaningful test data? Facilitating <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>? And 
+leveraging continuous integration technologies?  Flatirons Solutions 
+consultant <a href="http://www.meetup.com/den-mark-logic/members/13145863/">Brad Rix</a> will provide an informative presentation on best 
+practices used to automate the build, test and deploy cycle for 
+MarkLogic applications.</p>
+<p>Development teams frequently fall into 
+the trap of spending too much time on developing core functionality of 
+an application and skimp on the dirty details of how to enable easy unit
+ testing, building and testing with clean test data, automated build and
+ deployments to multiple target environments, etc. As a result of this, 
+projects can frequently run afoul of a host of build, test and 
+deployment issues that can drive up project costs and greatly impact the
+ quality of the final solution.</p>
+<p>Using the <a href="/pubs/4.2/apidocs/AdminLibrary.html">MarkLogic Admin APIs</a> 
+and other open source tools, Brad has led the development of a set of 
+configurable processes that dramatically reduce the time, cost and 
+complexity of  the build, unit test and deploy cycle to multiple 
+environments. This is the hard, dirty work of developing truly robust, 
+enterprise ready applications. By automating these tasks, your project 
+can focus valuable development energy on providing more functionality to
+ the user without the risk of deployment complexities getting in the way
+ of user adoption.     </p>
+<p>The presentation will include a live 
+demonstration, along with an overview of "lessons learned" while using 
+these best practices in a production setting.  </p>
+<p>If you're planning on coming, please kindly <a href="http://www.meetup.com/NY-MUG/calendar/15942482/">RSVP</a>, so we can bring the right amount of food and drink.  </p>
+  </ml:description>
+  <ml:details>
+    <ml:date>2011-01-27</ml:date>
+    <ml:time>6:00 PM</ml:time>
+    <ml:location><a href="http://maps.google.com/maps?f=d&amp;hl=en&amp;saddr=&amp;daddr=1230+Avenue+of+the+Americas%2C+New+York%2C+NY+10020%2C+us">Simon &amp; Schuster Offices</a>
+<br/>
+1230 Avenue of the Americas, between 48th and 49th Streets on Sixth Avenue
+<br/>
+New York, NY 10020</ml:location>
+    <ml:topic>Development and Deployment of Enterprise-Scale MarkLogic Solutions</ml:topic>
+    <ml:presenter>Brad Rix</ml:presenter>
+  </ml:details>
+</ml:Event>

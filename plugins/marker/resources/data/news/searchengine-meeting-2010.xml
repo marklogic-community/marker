@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Chris Biow to Present on "Universal" Index at Search Engine Meeting</ml:title>
+  <ml:date>2010-04-26</ml:date>
+  <ml:body>
+    <p><ml:teaser>Chris Biow, MarkLogic Federal CTO will present on the Universal Index at the <a href="http://www.searchenginemeeting.net/">15th annual Search Engine Meeting</a>, 
+        April 26, 2010 at the Hyatt Regency in Boston, MA.  </ml:teaser>
+    </p>
+    <p>
+The presentation demonstrates a radical extension of special-purpose XML databases, incorporating conventional text indexing, “universal” indexing of structure and XML semantics, scalar range indexes, spatial indexes, and “reverse” indexes of search expressions. These “forward” and “reverse” indexes reside within the same  atabases, in the same search engine and DBMS kernel, and use the same extended XQuery language. Indexed databases are built on XML documents that may contain arbitrary combinations of structured or semistructured data, textual content, geospatial locations, and search expressions. Queries may then be run against such databases, where the queries themselves contain arbitrary XML documents mixing text and data, full-text and semantic search expressions, and geospatial constraints. This creates a true “data finding data” capability, in which search expressions are simultaneously evaluated in both directions between the database and the query under evaluation.
+</p>
+  </ml:body>
+</ml:Announcement>

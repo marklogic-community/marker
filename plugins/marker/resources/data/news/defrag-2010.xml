@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>Fernando Mesa to speak at Defrag 2010 in Denver on November 17</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-11-09</ml:date>
+  <ml:body>
+    <p><a title="defrag" href="http://defragcon.com"><img style="display: block; margin-left: auto; margin-right: auto;" title="defrag" src="http://www.defragcon.com/2009/images/DEFRAG_09_Temp_01.gif" alt="defrag" width="409" height="100"/></a></p>
+<ml:teaser>
+<p>Among speakers including <a href="http://www.edventure.com/new-bio.html">Esther Dyson</a> and David Weinberger (of <a href="http://en.wikipedia.org/wiki/The_Cluetrain_Manifesto">Cluetrain Manifesto</a> fame), MarkLogic's Principal Technologist, Fernando Mesa, will be speaking at the <a href="http://defragcon.com">Defrag conference</a> next week.  The conference's agenda is given as:</p>
+</ml:teaser>
+<blockquote>
+<p>
+We live in a deluge of data. Our companies, coworkers, communities and selves are looking to more effectively and efficiently harness, leverage and interact around and with the data that we swim in.  Defrag is about exploring the tools and technologies that intersect around the data deluge. As such, Defrag is concerned with topics like:
+</p>
+<ul>
+	<li>Big Data</li>
+	<li>Analytics</li>
+	<li>Business Intelligence</li>
+	<li>Enterprise 2.0/Social Computing</li>
+	<li>Semantic Web</li>
+      </ul>
+as well as
+<ul>
+	<li>Social Media</li>
+	<li>Community management</li>
+	<li>Next Level Discovery</li>
+	<li>Social Marketing &amp; CRM</li>
+      </ul>
+<p>
+At Defrag, we’ll combine strategic keynotes from authoritative voices with tactical, on the ground implementation steps. Defrag is focused on accelerating the ‘aha’ moment.
+</p>
+</blockquote>
+<p>Fernando will be giving a talk titled, <em>"Social Networking: Beyond Blogs, Tweets, and Facebook Statuses". </em> The abstract is:</p>
+<blockquote>
+<p>In this presentation we’ll discuss emerging trends in the social networking sphere that go beyond the traditional tools of today. The session will explore complex communications and social interactions that can help companies generate additional revenue and gain new insights into the users they serve. We will explore a new breed of technology that are making these new set of richer, more sophisticated interactions a reality. We’ll wrap up the session with demos and examples that can spark new ideas for those developing new social-based applications or enhancing their existing applications to take advantage of these new capabilities.</p>
+</blockquote>
+  </ml:body>
+  <ml:created>2010-11-08T17:51:08.341844-08:00</ml:created>
+  <ml:last-updated>2010-11-09T16:38:59.325177-08:00</ml:last-updated>
+</ml:Announcement>

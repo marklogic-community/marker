@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Jason Hunter to speak at Sold Out QCon SF, November 3, 2010 </ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-10-27</ml:date>
+  <ml:body>
+    <p><a href="http://qconsf.com/"><img style="border: 1px solid black; display: block; margin-left: auto; margin-right: auto;" title="QCon SF 2010" src="http://qconsf.com/sf2010/file?path=/qcon-sanfran-2010/top-banner.jpg" alt="QCon SF 2010" width="600"/></a></p>
+<p> </p>
+<p>QCon is coming up next week here in San Francisco.   From the <a title="QCon SF 2010" href="http://qconsf.com/">conference website</a>, you can see:</p>
+<p> </p>
+<div>
+    </div>
+<blockquote>
+<div><em>
+<ml:teaser>
+QCon is a practitioner-driven conference designed for team leads, architects and project management.  The program includes <a href="http://qconsf.com/sf2010/tutorials/">two tutorial days</a> led by industry experts and authors and <a href="http://qconsf.com/sf2010/schedule/wednesday.jsp">three conference days</a> with <a href="http://qconsf.com/sf2010/tracks/">16 tracks</a>
+ covering a wide variety of relevant and exciting topics in software 
+development today.   There is no other event in the US with similar 
+opportunities for learning, networking, and tracking innovation 
+occurring in the enterprise software development community.
+</ml:teaser>
+</em></div>
+</blockquote>
+<p> </p>
+<p>Among a really great list of speakers including folks like <a href="http://martinfowler.com/">Martin Fowler</a> (of OOP fame) and <a href="http://en.wikipedia.org/wiki/Daniel_Henry_Holmes_Ingalls,_Jr.">Dan Ingalls</a> (of Smalltalk fame), MarkLogic's own <a href="http://servlets.com/jason">Jason Hunter</a> will be speaking on our combination of search-engine and database in MarkLogic's Universal Index.  Details of his presentation are below:</p>
+<p style="text-align: left; margin-top: 7px; margin-bottom: 7px;"><strong style="text-align: left;">Presentation: "Unifying the Search Engine and NoSQL DBMS with a Universal Index"</strong>
+</p>
+<div style="text-align: left;">
+<div style="text-align: left; margin-top: 5px;"><strong style="text-align: left;">Track:</strong><span class="Apple-converted-space"> </span><a class="textlink" style="text-align: left; text-decoration: none;" href="http://qconsf.com/sf2010/tracks/show_track.jsp?trackOID=412">Solutions Track: Wednesday, November 3rd</a></div>
+<p style="text-align: left; margin-top: 7px; margin-bottom: 7px;"><strong style="text-align: left;">Time:</strong><span class="Apple-converted-space"> </span>Wednesday 12:05 - 13:05</p>
+<p style="text-align: left; margin-top: 7px; margin-bottom: 7px;"><strong style="text-align: left;">Location:</strong><span class="Apple-converted-space"> </span>Concordia Room</p>
+<div style="text-align: left;"><strong style="text-align: left;">Abstract:</strong></div>
+<div style="text-align: left;">
+<p style="padding-left: 30px;">
+In contrast to single-function architectures, MarkLogic Server takes an
+unusual approach to collapsing the usual hierarchies of types of servers
+that make up a complete application, combining Search, a NoSQL DBMS, and an
+application server in a single kernel. The computational foundation for
+this hybrid is the Universal Index.
+</p>
+<p style="padding-left: 30px;">
+In this talk, we'll begin with the familiar text indexing data structures
+and algorithms that underlie search engine technologies. We'll extend that
+index to cover document structure and semantics, add scalar range indexing
+in one and two dimensions (including geospatial application), and then
+incorporate "reverse" indexing of queries. We will demonstrate a novel type
+of "matchmaking" query whose evaluation is based on a composition of
+forward and reverse index evaluation. Finally, we'll explore the means by
+which all of this indexing may efficiently run concurrently with querying,
+using Multi-Version Concurrency Control and Log-Structured Merge Trees,
+providing ACID transactions together with lock-free query evaluation,
+built-in sharding, terabyte-per-server scale-out, replication, and query
+distribution.
+</p>
+</div>
+</div>
+  </ml:body>
+  <ml:created>2010-10-27T10:35:35.437705-07:00</ml:created>
+  <ml:last-updated>2010-10-27T11:42:25.734587-07:00</ml:last-updated>
+</ml:Announcement>

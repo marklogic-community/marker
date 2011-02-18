@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic: Beyond NoSQL, Pt. 2</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:author>Chris Biow</ml:author>
+  <ml:author>Wayne Feick</ml:author>
+  <ml:created>2010-06-18T15:13:02.458562-07:00</ml:created>
+  <ml:last-updated>2010-06-18T18:25:51.323141-07:00</ml:last-updated>
+  
+  <ml:body>
+    <h2>The Universal Index</h2>
+<p>In this clip, Chris Biow introduces MarkLogic's <em>Universal Index</em>.  He reviews the design of basic search engine functionality, starting with <a href="http://en.wikipedia.org/wiki/Inverted_index">inverted indices</a>.  He goes on to explain how that same index, as extended in MarkLogic, can provide the substrate for queries on</p>
+<ul>
+      <li>document structure</li>
+      <li>directories and URIs</li>
+      <li>collections (aka tags)</li>
+      <li>security</li>
+    </ul>
+<p>as well as a number of other features.  He moves on to discuss range indexes and lexicons and how you can compose complex (yet efficient) queries on this Universal Index.  The clip ends just as Chris is introducing the notion of reverse-queries, which we'll cover in the next post in this series.</p>
+<p>For those of you who haven't had a chance to check out Chris's excellent introduction to MarkLogic, you may wanna take a look at <a href="/blog/marklogic-beyond-nosql">the previous post</a> before watching the video. </p>
+<p>To see the video in full, click <a title="What is MarkLogic Server from  Biow's Universal Index Talk?" href="http://events.digitallyspeaking.com/marklogic/uc10/player213.html?xml=ml_tues_ic_215_1273007229640NPSB_P2.xml&amp;currentID=1234">here</a> or you can use the embedded player below.</p>
+<p>
+<object style="border: solid 1px black; display: block; margin-left: auto; margin-right: auto;" width="480" height="360" data="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" type="application/x-shockwave-flash">
+<param name="data" value="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" valuetype="data"/>
+<param name="flashvars" value="start=0&amp;xmlURL=http://events.digitallyspeaking.com/marklogic/uc10/xml/ml_tues_ic_215_1273007229640NPSB_P2.xml&amp;eid=mluc10&amp;blogMode=true&amp;shareURL=http://events.digitallyspeaking.com/marklogic/uc10/player-share-embed.html" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowscriptaccess" value="always" valuetype="data"/>
+<param name="src" value="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+  </ml:body>
+</ml:Post>

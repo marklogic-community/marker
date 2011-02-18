@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title><a href="http://www.balisage.net/">Balisage 2010</a> Contest - Solve the Modern Tower of Babel</ml:title>
+  <ml:date>2010-05-18</ml:date>
+  <ml:body>
+    <p><ml:teaser>As part of the <a href="http://www.balisage.net">Balisage 2010</a> Conference, <a href="http://www.marklogic.com/">MarkLogic</a> has put forth a challenge in the form of a contest.  The goal of the contest is to encourage markup experts to review and to research the current state of wiki 
+markup languages and to generate a proposal that serves to de-babelize the current state of affairs for the long haul.</ml:teaser> </p>
+    <p><b>Wikis:</b>
+    <a href="http://en.wikipedia.org/wiki/Tower_of_Babel"><img style="float: right" src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Brueghel-tower-of-babel.jpg/350px-Brueghel-tower-of-babel.jpg" alt="tower-of-babel" width="250" height="200" title="Tower of Babel"/></a>
+    Solve the modern tower of babel</p>
+    <p><b>Contest Description:</b>  In the past few decades, as a planet, we've succeeded 
+    tremendously in standardizing a number of technologies (yay us!). 
+    Wiki technology (other than its underlying use of web technologies 
+    as a platform) is not solidly in this list.  There is a lot of 
+    content available today in a variety of wiki syntaces.  This syntax 
+    is not standardized.  Some argue it shouldn't be.  Go beyond the 
+    existing debates, diatribes, and arguments.  Put us on a practical 
+    track to fixing this and ensuring we will have access to this content 
+    for the long haul.
+    </p>
+    <p>To enter, you must propose a set of concrete steps (organizational, social, and/or 
+    technological) that will enable wiki content interchange, a real 
+    WYSIWYG editor, and/or wiki syntax standardization.
+    </p>
+
+    <p>Entries will be evaluated based on criteria that includes:</p>
+        <ul>
+      <li>How well does the entry understand the current state of the art?</li>
+      <li>How well does the entry identify key stake holders and actors (including history, motivation, and so on)</li>
+      <li>Is the entry clear on its objectives?  (The summary allows for some variance here).</li>
+      <li>Is the approach/vision elegant, clever, or mind-changing?</li>
+      <li>Are the set of steps actionable and implementable?</li>
+    </ul>
+    
+    <p><b>Guidelines, rules, and prize:</b></p>
+        <ol>
+      <li>Please no more than 10000 words.</li>
+      <li>Entries should be submitted by July 15th to:<br/>  <b><i>balisage-2010-contest at marklogic dot com</i></b></li>
+      <li>Author(s) retains copyright and grants MarkLogic a non-exclusive license to publish the winning entry.</li>
+      <li>The winner will be announced on August 3rd at the conference and will take home a choice of
+        <ul style="padding-top: 1em">
+	  <li><a href="http://store.apple.com/us/browse/home/shop_mac/family/macbook_pro">Apple 15" (i5) MacBook Pro</a></li>
+	  <li><a href="http://store.apple.com/us/browse/home/shop_mac/family/macbook_air">Apple MacBook Air</a> or</li>
+	  <li><a href="http://images03.olx.com/ui/1/54/53/12045153_3.jpg">USD $2000</a></li>
+	</ul>
+                </li>
+      <li>The winner will be strongly encouraged (but not required) to give a brief summary (~10 minutes) of their
+            winning entry at the conference on August 3rd.</li>
+      <li>Employees of MarkLogic are not eligible.</li>
+      <li>Judges decision is final.</li>
+      <li>Contest-related questions may also be submitted to: <br/>  <b><i>balisage-2010-contest at marklogic dot com</i></b>.</li>
+    </ol>
+   
+  </ml:body>
+</ml:Announcement>

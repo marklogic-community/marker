@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>MarkLogic: Beyond NoSQL</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-06-02T22:40:26.22668-07:00</ml:created>
+  <ml:last-updated>2010-06-15T16:00:32.087866-07:00</ml:last-updated>
+  
+  <ml:body>
+    <h3>NoSQL Matters</h3>
+<p>Even though the term, <a title="NoSQL" href="http://en.wikipedia.org/wiki/NoSQL" target="_blank">NoSQL</a>, has issues, it's become important. </p>
+<p>Recently, leaders from several NoSQL projects (Riak, HBase, CouchDB, Neo4j) came together for a session at <a title="Gluecon" href="http://gluecon.com/2010">Gluecon</a>.  And while they came from divergent perspectives, they all basically agreed that the term had been <strong>very</strong> helpful to developers and architects in identifying their systems as <strong>new   database</strong> and/or <strong>database-alternative</strong> technologies. </p>
+<p>There have been numerous <a title="NoSQL" href="http://en.wikipedia.org/wiki/NoSQL" target="_blank">NoSQL</a> taxonomies, discussions about them, and <a href="http://blog.couch.io/post/511008668/nosql-is-about">calls</a> to move beyond them.  And while it's clear to <a href="http://www.kellblog.com/2010/04/11/yes-virginia-marklogic-is-a-nosql-system/">us</a>, as well as our <a href="http://blogs.avalonconsult.com/blog/generic/marklogic-a-nosql-database-yes/">friends</a> and customers, that MarkLogic  Server sits among these technologies, we haven't yet fully described why NoSQL folks should pay attention.  To that end, this post is a first step at explaining why and how we're more than "yet another NoSQL system".  And I'll start with some context for NoSQL folks.</p>
+<h3>MarkLogic Server is a NoSQL Document Store</h3>
+<p>MarkLogic shares several key architectural components with well-known NoSQL Document Stores.  While this alone doesn't make us interesting to NoSQL folks, it should help facilitate some understanding of our architecture.  So here are a few high-level details that will sound like motherhood and apple pie to NoSQL folks. </p>
+<p>MarkLogic Server has a:</p>
+<ul>
+      <li>Document-oriented data model, no schemas required.</li>
+      <li>Simple key-value interface (we use URIs for keys).</li>
+      <li>Highly-configurable partitioning including support for consistent hashing.</li>
+      <li><a href="http://en.wikipedia.org/wiki/Shared_nothing_architecture">Shared-nothing</a> cluster architecture</li>
+      <li>Multi-value-consistency-control (<a href="http://en.wikipedia.org/wiki/Multiversion_concurrency_control">MVCC</a>) </li>
+      <li>REST/HTTP interface (actually full WebDAV support) </li>
+      <li>Use of memory-mapped files for performance gains</li>
+    </ul>
+<p>If you haven't already, you can read about how these choices facilitate a number of NoSQL solutions at places like the <a href="http://books.couchdb.org/relax/">CouchDB book</a> or the <a href="http://www.mongodb.org/display/DOCS/Philosophy">MongoDB</a> site.  These choices get us the same benefits in MarkLogic Server - high-scale, high-performance, no bottlenecks, and simple programming interfaces. But to us, that's just what gets us invited to the party.  What's interesting is what separates us.</p>
+<h3>What Distinguishes MarkLogic Server from Other NoSQL Alternatives?</h3>
+<p>While MarkLogic is like these systems in someways, it is quite distinct in others.  At a high-level, MarkLogic is distinguished by</p>
+<ul>
+      <li>Focus on intra-cluster consistency and <a title="ACID" href="http://en.wikipedia.org/wiki/ACID" target="_blank">ACID</a> transactions </li>
+      <li>Use of the XML data model </li>
+      <p style="padding-left: 40px;">Fundamentally MarkLogic is designed and optimized to store, index, update, and search XML data.  MarkLogic can also store plain text, JSON, and binaries data as well.  But MarkLogic is optimized for XML.  And as much as JSON is simpler and ideal for interaction with web browsers, XML still reigns supreme when dealing with structured documents that contain lots of text.  </p>
+      <li>The <em>MarkLogic Universal Index</em></li>
+      <p style="padding-left: 40px;">Because MarkLogic is based on a real-time search-engine core, we index the structure (elements, attributes, hierarchy) of documents <span style="text-decoration: underline;"><strong>as well as the full text</strong></span>.   In MarkLogic, you can compose meaningful queries for semi-structured (or un-structured) data - the kind of data that is most prevalent in the real world.  And you can do this without having to bolt on separate processes or separate pieces of technology (e.g. Lucene, SOLR).  And because MarkLogic is also focused on ACID, every document insert or update results in a fully-transactional update of the index as well.  The query results are always based exactly on what's currently in the database.</p>
+    </ul>
+<p>So that's a quick summary of the highlights.  </p>
+<p>And for those who don't know us well, I thought I'd include one more high-level distinction in terms of how we're organized as a business.  We have, what appears to many developers today, to be a crazy business model.  We have this notion that you can craft kick-ass software and ask people to pay you for it.  Yeah, we're proud of our stuff, we know it kicks ass, and we're not afraid to be upfront about it.</p>
+<h3>A Bit More Detail From Chris Biow and Wayne Feick</h3>
+<p>Ok, that all sounded pretty cool.  Can I get the details? </p>
+<p>Chris Biow, MarkLogic Federal CTO, recently gave a great talk at our 2010 MarkLogic User's Conference (<a href="http://twitter.com/search?q=#mluc10">#mluc10</a>) on the <em>MarkLogic Universal Index</em>.  And while not originally intended as a multi-part talk, we've broken it up into a few pieces that we are releasing for those who want to learn a bit more.  We know we need to get more details out there, this is just a first step.</p>
+<p>This first clip provides a great introduction to MarkLogic by examining it from each of the three potential starting places: a database management system (DBMS), a search engine, and an application server.  To see the video in full, click <a title="What is MarkLogic Server from Biow's Universal Index Talk?" href="http://events.digitallyspeaking.com/marklogic/uc10/player213.html?xml=ml_tues_ic_215_1273007229640NPSB_P1.xml&amp;currentID=1234">here</a> or you can use the embedded player below.  I've got a few more posts planned here that launch into the meat of the talk, but if you're interested in a particular set of details, drop me a line or a comment below.</p>
+<p>
+<object style="border: solid 1px black; display: block; margin-left: auto; margin-right: auto;" width="480" height="360" data="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" type="application/x-shockwave-flash">
+<param name="flashvars" value="start=0&amp;xmlURL=http://events.digitallyspeaking.com/marklogic/uc10/xml/ml_tues_ic_215_1273007229640NPSB_P1.xml&amp;eid=mluc10&amp;blogMode=true&amp;shareURL=http://events.digitallyspeaking.com/marklogic/uc10/player-share-embed.html" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowscriptaccess" value="always" valuetype="data"/>
+<param name="src" value="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+<p>Shout-outs to Kelly Stirman and <a href="http://marklogic.com/services/training.html">MarkLogic University</a> for helping produce these clips. </p>
+  </ml:body>
+</ml:Post>

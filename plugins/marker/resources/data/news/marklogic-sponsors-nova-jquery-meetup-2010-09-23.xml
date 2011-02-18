@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>jQuery Plugin Development Tricks, Traps, and Burritos!</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:date>2010-09-13</ml:date>
+  <ml:body>
+    <p><br/><img style="display: block; margin-left: auto; margin-right: auto;" title="jquery" src="http://www.bitstorm.org/edwin/jquery-presentatie/pix/jquery_logo_color_onwhite.png" alt="jquery" width="450"/></p>
+<p> </p>
+<ml:teaser>
+<p>We're pleased to sponsor the upcoming September 23rd <a href="http://meetups.jquery.com/group/novajq">NOVA jQuery meetup</a>, featuring <span class="vevent"><span class="description"><span>Dave Methvin,</span><span> a long-time contributor to jQuery.  </span></span></span>We'll be bringing food (<a href="http://www.anitascorp.com/">Anita's burritos and pizza</a>) and beverages.  <span>Our partner, </span><a href="http://www.avalonconsult.com/" target="_blank">Avalon Consulting, LLC</a> is kindly hosting the meetup in their offices.</p>
+</ml:teaser>
+<p class="xmsonormal">Please kindly <a href="http://novajq-jquery-meetup-july2010.eventbrite.com/" target="_blank">register via eventbrite</a> if you're planning to attend so we can make sure we bring enough grub!</p>
+<p class="xmsonormal"><strong>Date and Time</strong></p>
+<p class="xmsonormal"><span class="vevent"><span class="description"><span>Thursday, Sept. 23, 2010 at 7pm – 8:30pm</span></span></span></p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Place</strong></p>
+<p class="xmsonormal">Avalon Consulting, LLC</p>
+<p class="xmsonormal">527 Maple Avenue East, Suite 200</p>
+<p class="xmsonormal"><span>Vienna</span><span>, VA 22180</span></p>
+<p class="xmsonormal">See <a href="http://maps.google.com/maps?q=527+Maple+Avenue+East+vienna+va&amp;um=1&amp;ie=UTF-8&amp;hq=&amp;hnear=527+Maple+Ave+E,+Vienna,+VA+22180&amp;gl=us&amp;ei=ttE3TOCvM4S8lQfUjJHVBw&amp;sa=X&amp;oi=geocode_result&amp;ct=title&amp;resnum=1&amp;ved=0CBMQ8gEwAA" target="_blank">Google Maps</a> or read below for directions.</p>
+<p> </p>
+<p><strong>Registration</strong></p>
+<p class="xmsonormal">Please see <a href="http://www.eventbrite.com/event/849640297" target="_blank">here</a>.</p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Presentation</strong></p>
+<p class="xmsonormal"><span class="vevent"><span class="description"><span style="text-decoration: underline;"><em>jQuery Plugin Development Tricks and Traps</em></span></span></span></p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>About the Presenter</strong></p>
+<p class="xmsonormal"><span class="vevent"><span class="description"><span>Dave Methvin</span><span>
+ is a long-time contributor to jQuery, providing extensive help on the 
+jQuery bug tracker and in the jQuery discussion forums. </span></span></span><span class="vevent"><span class="description"><span>As a member of 
+the <a href="http://jquery.org/team">jQuery team</a> he works to provide test cases, triage bugs, and commit 
+to jQuery core.</span></span></span></p>
+<p class="xmsonormal"> </p>
+<p class="xmsonormal"><strong>Directions</strong></p>
+<p class="xmsonormal"><span>From the Beltway, take Route 123 (Chain Bridge Road) West through Tysons Corners.   Go approximately 1 mile and Chain Bridge becomes Maple Avenue.  Avalon’s offices are in the “Karin’s Florists” Building at the corner of Maple and East Street.   Turn Left onto East Street and park behind the building.  Enter on the side of the building facing East Street and take the stairs or elevator to the 2nd Floor.  Suite 200 is in the front of the building.</span></p>
+  </ml:body>
+  <ml:created>2010-09-13T18:02:38.877727-07:00</ml:created>
+  <ml:last-updated>2010-09-13T18:09:44.450239-07:00</ml:last-updated>
+</ml:Announcement>

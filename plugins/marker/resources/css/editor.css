@@ -313,7 +313,12 @@ tr.unpublished {
 .marker_button_switch {
     background-position: -320px -40px
 }
-
+.marker_button_tag {
+    background-position: -340px -40px
+}
+.marker_button_unpublish {
+    background-position: -360px -40px
+}
 .marker_button_checkout {
     background-position: -220px -40px
 }

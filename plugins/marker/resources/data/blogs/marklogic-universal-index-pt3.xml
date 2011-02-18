@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>MarkLogic: Beyond NoSQL Part 3 - Geospatial, Registered, Reverse Queries and Match-making or How to Make Your Brain Hurt</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:author>Chris Biow</ml:author>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:created>2010-07-27T15:19:39.483243-07:00</ml:created>
+  <ml:last-updated>2010-07-27T20:26:07.364589-07:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <p>In the final excerpt from his talk on the MarkLogic Universal Index, Chris Biow describes geospatial queries, registered queries as well as <em>reverse queries</em> and their use for <em>alerts</em>. He then goes on to really make you brain hurt as he describes composing forward and reverse queries together in a single query.</p>
+<p>For those of you who haven't had a chance to check out Chris's excellent introduction to MarkLogic, you may wanna take a look at <a href="/blog/marklogic-beyond-nosql">the initial post</a> in this series or his <a href="/blog/marklogic-indexing-pt2">introduction to the universal index</a> before watching this video. </p>
+<p>To see the video in full, click <a title="Biow's Universal Index Talk?" href="http://events.digitallyspeaking.com/marklogic/uc10/player213.html?xml=ml_tues_ic_215_1273007229640NPSB_P3.xml&amp;currentID=1234">here</a> or you can use the embedded player below.</p>
+<p>
+<object style="border: solid 1px black; display: block; margin-left: auto; margin-right: auto;" width="480" height="360" data="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" type="application/x-shockwave-flash">
+<param name="data" value="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" valuetype="data"/>
+<param name="flashvars" value="start=0&amp;xmlURL=http://events.digitallyspeaking.com/marklogic/uc10/xml/ml_tues_ic_215_1273007229640NPSB_P3.xml&amp;eid=mluc10&amp;blogMode=true&amp;shareURL=http://events.digitallyspeaking.com/marklogic/uc10/player-share-embed.html" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowscriptaccess" value="always" valuetype="data"/>
+<param name="src" value="http://events.digitallyspeaking.com/marklogic/uc10/MarkLogic_player.swf" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</p>
+  </ml:body>
+</ml:Post>

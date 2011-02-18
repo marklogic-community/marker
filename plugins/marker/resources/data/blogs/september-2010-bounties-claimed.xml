@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>XQuery Syntax Highlighting Takedowns!</ml:title>
+  <ml:author>Eric Bloch</ml:author>
+  <ml:created>2010-11-05T10:58:02.416096-07:00</ml:created>
+  <ml:last-updated>2010-11-05T18:21:27.574646-07:00</ml:last-updated>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:body>
+    <p style="text-align: center;"><img title="Takedown" src="/media/takedown.jpg" alt="Takedown" width="450"/></p>
+<p> </p>
+<p>If you've been following this blog, you know we ran a <a href="/blog/back-to-school-bounties">contest</a> in September to encourage folks
+to produce some of the missing support for XQuery syntax-highlighting in a variety of tools.
+I'm pleased to announce that the following efforts have resulted in takedowns!
+</p>
+<p> </p>
+<table class="table3">
+<colgroup span="1">
+	<col class="col1" span="1"/>
+	<col class="col2" span="1" width="500"/>
+	<col class="col3" span="1"/>
+      </colgroup>
+<thead>
+	<tr>
+	  <th scope="col" rowspan="1" colspan="1">Name</th>
+	  <th style="text-align: center;" scope="col" rowspan="1" colspan="1">Takedown</th>
+	  <th scope="col" rowspan="1" colspan="1">Bounty</th>
+	</tr>
+      </thead>        
+<tbody>
+	<tr class="alt">
+	  <td rowspan="1" colspan="1"><a style="color: #235bab;" href="http://github.com/">Github</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p><a style="color: #235bab;" href="http://github.com/">Github</a> is lacking support for XQuery.  They use <a style="color: #235bab;" href="http://pygments.org/">Pygments</a> (a python framework for syntax highlighting) and need a <a style="color: #235bab;" href="http://pygments.org/docs/lexers/">Pygments Lexer</a>. See this brief <a style="color: #235bab;" href="http://support.github.com/discussions/graphs/133-xquery-syntax-highlighting">note</a>.
+</p>
+<p>Though this creature was quite wily, <a style="color: #235bab;" href="http://spig.net/">Steve Spigarelli</a> did eventually pin it  down.  Steve's <a style="color: #235bab;" href="https://github.com/spig/pygments-xquery-lexer">lexer</a>
+is working reasonably well and he's already submitted up a pull request to the Pygments main fork.</p>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: center;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/>
+<strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Steve's Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Steve's Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://codemirror.net/">Codemirror</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p><a style="color: #235bab;" href="http://codemirror.net/">Codemirror</a> is a javascript library that provides in-browser syntax highlighting.  It is missing support for XQuery.<br/>
+<a style="color: #235bab;" href="http://mike.brevoort.com/"></a></p>
+<p><a style="color: #235bab;" href="http://mike.brevoort.com/">Mike Brevoort</a> not only implemented a <a style="color: #235bab;" href="http://github.com/mbrevoort/CodeMirror">great library</a>, which you can <a style="color: #235bab;" href="http://mbrevoort.github.com/CodeMirror">demo here</a>, but he also got his
+patch <a style="color: #235bab;" href="http://github.com/marijnh/CodeMirror/commit/13334ad29643d9d41595dfc5201c70dc105be42a">accepted back</a> into the <a style="color: #235bab;" href="http://github.com/marijnh/CodeMirror">main fork of CodeMirror</a>.
+</p>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/><strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Mike's Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Mike's Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr class="alt">
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1"><a style="color: #235bab;" href="http://code.google.com/">Google Code</a></td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p><a style="color: #235bab;" href="http://code.google.com/">Google Code</a> uses <a style="color: #235bab;" href="http://code.google.com/p/google-code-prettify">google-code-prettify</a> and it is missing support for XQuery.  A first step here would be to provide a patch that supports these.  Bonus points would be to get the project to take in the patch.</p>
+<p><a style="color: #235bab;" href="http://www.patrick-wied.at/">Patrick Wied</a> provided an entry here that does the job, given the limitations (lack of context-dependent lexing) that is inherent in this tool.</p>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p style="text-align: center;"><strong>Apple iPad </strong>
+<br/>
+<strong>64GB w/ WiFi</strong><img style="display: block; margin-left: auto; margin-right: auto;" title="Apple iPad 64GB with WiFi" src="http://images.apple.com/ipad/home/images/buystrip_ipad_20100225.png" alt="Apple iPad 64GB with WiFi" width="50"/></p>
+</td>
+	</tr>
+	<tr>
+	  <td style="padding-top: 3px; padding-bottom: 3px;" rowspan="1" colspan="1">
+<a style="color: #235bab;" href="http://alexgorbatchev.com/SyntaxHighlighter">SyntaxHighlighter</a>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: left;" rowspan="1" colspan="1">
+<p>Popular open-source Javascript syntax highlighter.
+</p>
+<p>
+<a style="color: #235bab;" href="http://www.xqueryhacker.com">Rob Whitby</a> entered his venerable <a style="color: #235bab;" href="http://www.xqueryhacker.com/2009/11/syntaxhighlighter-xquery-brush/">XQuery brush</a> and has claimed this bounty.  It's working decently as it always has.  <a style="color: #235bab;" href="http://alexgorbatchev.com">Alex Gorbachev</a> has "put it in the queue" for integration. 
+</p>
+</td>
+	  <td style="padding-top: 3px; padding-bottom: 3px; text-align: center;" rowspan="1" colspan="1"><strong>1 year subscription to<img title="safari" src="http://my.safaribooksonline.com/static/201009-1036-my/images/6.0/logo_sbo.gif" alt="safari" width="185" height="49"/></strong>
+</td>
+	</tr>
+      </tbody>
+</table>
+<p> </p>
+<p>Well, that's the details.  It's likely we'll run another bounty hunting contest in the coming months.  If you have thoughts on projects like this one that would benefit our community, give me a holler.  I'm off to go ship some iPads and a Safari subscription to the folks who helped us out here</p>
+  </ml:body>
+</ml:Post>

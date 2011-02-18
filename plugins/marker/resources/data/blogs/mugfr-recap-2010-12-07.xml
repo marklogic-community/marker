@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Post status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>Recap of the French MarkLogic User Group December 2010 Meeting</ml:title>
+  <ml:author>Marie Lichtle</ml:author>
+  <ml:created>2010-12-14T18:04:09.259138-08:00</ml:created>
+  <ml:last-updated>2010-12-15T13:18:40.463048-08:00</ml:last-updated>
+  <ml:tags>
+    <ml:tag>mugfr</ml:tag>
+  </ml:tags>
+  
+  <ml:body>
+    <div> </div>
+<div class="head">
+<object style="display: block; margin-left: auto; margin-right: auto;" width="480" height="360" data="http://www.flickr.com/apps/slideshow/show.swf?v=71649" type="application/x-shockwave-flash">
+<param name="data" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649" valuetype="data"/>
+<param name="flashvars" value="offsite=true&amp;lang=en-us&amp;page_show_url=%2Fphotos%2F49650573%40N02%2Fshow%2Fwith%2F5243707872%2F&amp;page_show_back_url=%2Fphotos%2F49650573%40N02%2Fwith%2F5243707872%2F&amp;user_id=49650573@N02&amp;jump_to=5243707872" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="src" value="http://www.flickr.com/apps/slideshow/show.swf?v=71649" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p> </p>
+<p>Above are some photos from the 2nd edition of the French MarkLogic User Group, held last Tuesday in Paris. Thirty-five people gathered to discuss MarkLogic implementation examples as part of a series of four presentations.  The <a href="http://www.mug-fr.org/2010/12/conference-1-ron-avnur-fonctionnalites-marklogic-server-et-cas-d%E2%80%99utilisation/">first presentation</a> was done by Ron Avnur, MarkLogic VP of Engineering, who was attending his first MarkLogic User Group. Ron presented a sample of MarkLogic customer use cases as well as some of the latest MarkLogic Server features. </p>
+<div id="__ss_6097904" style="width: 576px;"><strong style="text-align: center; display: block; margin: 12px 0 4px;"><a title="MarkLogic Overview, Ron Avnur, MarkLogic" href="http://www.slideshare.net/mugfr/mugfr-p">MarkLogic Overview, Ron Avnur, MarkLogic</a></strong>
+<div> </div>
+<object id="__sse6097904" style="display: block; margin-left: auto; margin-right: auto;" width="576" height="468" data="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=francemugr1-3-101210024502-phpapp01&amp;rel=0&amp;stripped_title=mugfr-p&amp;userName=mugfr" type="application/x-shockwave-flash">
+<param name="data" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=francemugr1-3-101210024502-phpapp01&amp;rel=0&amp;stripped_title=mugfr-p&amp;userName=mugfr" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=francemugr1-3-101210024502-phpapp01&amp;rel=0&amp;stripped_title=mugfr-p&amp;userName=mugfr" valuetype="data"/>
+<param name="name" value="__sse6097904" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p> </p>
+<p> </p>
+<p>The <a href="http://www.mug-fr.org/2010/12/conference-2-vincent-mas-presentation-du-projet-digital-factory-base-sur-marklogic/">second presentation</a> was done by Vincent MAS from <a href="http://www.lagardere.com/activites/lagardere-active-2610.html">Lagardere Active</a>. He presented the Digital Factory project, a highly interesting MarkLogic implementation. We had the chance to view and hear some unique archives such as Appollo 11 landing on the Moon.</p>
+<div id="__ss_6090404" style="width: 576px; text-align: center;"><strong style="display: block; margin: 12px 0 4px;"><a title="Présentation de Digital Factory, Vincent MAS, Lagardère Active" href="http://www.slideshare.net/mugfr/mugfr-prsentation-de-digital-factory">Présentation de Digital Factory, Vincent MAS, Lagardère Active</a></strong>
+<object id="__sse6090404" width="576" height="468" data="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lagardereactivecontentfactorymug2010-101209082502-phpapp02&amp;rel=0&amp;stripped_title=mugfr-prsentation-de-digital-factory&amp;userName=mugfr" type="application/x-shockwave-flash">
+<param name="data" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lagardereactivecontentfactorymug2010-101209082502-phpapp02&amp;rel=0&amp;stripped_title=mugfr-prsentation-de-digital-factory&amp;userName=mugfr" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=lagardereactivecontentfactorymug2010-101209082502-phpapp02&amp;rel=0&amp;stripped_title=mugfr-prsentation-de-digital-factory&amp;userName=mugfr" valuetype="data"/>
+<param name="name" value="__sse6090404" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p> </p>
+<p> </p>
+<p>The <a href="http://www.mug-fr.org/2010/12/conference-3-gregory-corona-presentation-d%E2%80%99un-demonstrateur-de-geolocalisation-base-sur-l%E2%80%99api-%C2%AB-geospacial-%C2%BB-de-marklogic-server/">third presentation</a> was done by Gregory CORONA and Yoann BLOT from <a href="http://www.4dconcept.fr/">4Dconcept</a>. They presented GeoLab, a prototype that implements MarkLogic's geospatial functionnality. GeoLab prooves by A+B that geospatial query are easy and powerful to perform with MarkLogic, even with a fully custom-made search area such as a polygone. The use-case is based on the well-known Tour de France.</p>
+<div id="__ss_6078097" style="width: 576px; text-align: center;"><strong style="display: block; margin: 12px 0 4px;"><a title="GeoLab, la géolocalisation avec MarkLogic, Gregory CORONA et Yoann BLOT, 4Dconcept" href="http://www.slideshare.net/mugfr/mugfr-geolab-la-golocalisation-avec-marklogic">GeoLab, la géolocalisation avec MarkLogic, Gregory CORONA et Yoann BLOT, 4Dconcept</a></strong>
+<object id="__sse6078097" width="576" height="468" data="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introductiongeolab-101208084722-phpapp02&amp;rel=0&amp;stripped_title=mugfr-geolab-la-golocalisation-avec-marklogic&amp;userName=mugfr" type="application/x-shockwave-flash">
+<param name="data" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introductiongeolab-101208084722-phpapp02&amp;rel=0&amp;stripped_title=mugfr-geolab-la-golocalisation-avec-marklogic&amp;userName=mugfr" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=introductiongeolab-101208084722-phpapp02&amp;rel=0&amp;stripped_title=mugfr-geolab-la-golocalisation-avec-marklogic&amp;userName=mugfr" valuetype="data"/>
+<param name="name" value="__sse6078097" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Finally, Mathieu Parisot, MarkLogic technical leader at <a href="http://www.4dconcept.fr/">4Dconcept</a> presented the <a href="http://www.mug-fr.org/2010/12/conference-4-mathieu-parisot-les-ressources-destinees-a-la-communaute-de-developpeurs-marklogic/">different resources available for MarkLogic developers</a>. 
+</p>
+<div id="__ss_6077802" style="width: 576px; text-align: center;"><strong style="display: block; margin: 12px 0 4px;"><a title="Mug-fr.org : Les ressources de la communauté MarkLogic" href="http://www.slideshare.net/mugfr/mug7-12-2010communaute">Mug-fr.org : Les ressources de la communauté MarkLogic</a></strong>
+<object id="__sse6077802" width="576" height="468" data="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=mug7122010communaute-101208081640-phpapp02&amp;rel=0&amp;stripped_title=mug7-12-2010communaute&amp;userName=mugfr" type="application/x-shockwave-flash">
+<param name="data" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=mug7122010communaute-101208081640-phpapp02&amp;rel=0&amp;stripped_title=mug7-12-2010communaute&amp;userName=mugfr" valuetype="data"/>
+<param name="allowFullScreen" value="true" valuetype="data"/>
+<param name="allowScriptAccess" value="always" valuetype="data"/>
+<param name="src" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=mug7122010communaute-101208081640-phpapp02&amp;rel=0&amp;stripped_title=mug7-12-2010communaute&amp;userName=mugfr" valuetype="data"/>
+<param name="name" value="__sse6077802" valuetype="data"/>
+<param name="allowfullscreen" value="true" valuetype="data"/>
+</object>
+</div>
+<p><br/>To follow the MarkLogic User Group France, please see :</p>
+<p style="padding-left: 30px;">The blog: <a href="http://www.mug-fr.org">http://www.mug-fr.org</a>/<br/>Twitter: @mugfr<br/>Developer Site Hub for Mugfr (<a href="/meet/mugfr/fr">Français</a>, <a href="/meet/mugfr/en">English</a>)</p>
+  </ml:body>
+</ml:Post>

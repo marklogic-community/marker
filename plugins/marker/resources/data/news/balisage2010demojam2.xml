@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" user-group="" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+  
+  
+  
+  
+  
+  
+  <ml:title>DemoJam at Balisage 2010 on August 4, 2010</ml:title>
+  <ml:author>Cleo Haynal</ml:author>
+  <ml:date>2010-08-01</ml:date>
+  <ml:body>
+<ml:teaser>
+    <h3>Beer and Demo! </h3>
+<p>What better way to finish the day at one of the world's premier XML events?</p>
+</ml:teaser>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="bar" src="http://www.winniesbar.com/Karina/pictures/48-20-Stairs%20Bar.jpg" alt="bar" width="450" height="300"/></p>
+<p>On August 4th, at 6:30p, MarkLogic will invite the <a href="http://www.balisage.net">Balisage</a> 2010 conference attendees 
+to participate in a demo contest at the Sir Winston Churchill Pub Complex in the Karina Room.</p>
+<p>The address is <a href="http://maps.google.com/maps?q=1459+rue+Crescent,+Montr%C3%A9al,&amp;oe=utf-8&amp;client=firefox-a&amp;ie=UTF8&amp;hq=&amp;hnear=1459+Rue+Crescent,+Montr%C3%A9al,+Communaut%C3%A9-Urbaine-de-Montr%C3%A9al,+Qu%C3%A9bec+H3G+2B2,+Canada&amp;gl=us&amp;ei=GSBVTPXFAY_0tgP5m6TZAg&amp;ved=0CBQQ8gEwAA&amp;ll=45.497759,-73.576899&amp;spn=0.003279,0.009109&amp;t=h&amp;z=17">1459 rue Crescent, Montréal</a>, and is walking distance from the conference hotel.</p>
+<h3>About the contest:</h3>
+<p>Demos must be of technical nature, may be on any topic likely to be 
+of interest to the attendees at Balisage, and are the responsibility of 
+the presenter. The demo length is strictly limited to 5 minutes. 
+We will limit the jam to the first 10 demos that arrive first-come, 
+first-serve starting at 6:30p.  MarkLogic will supply a Windows PC with 
+Internet access and a USB port 
+for use by presenters. </p>
+<p>Presenters are also welcome to use their own laptops for the demos.  (Mac folks, best to bring your connectors).</p>
+<p>Judges will determine the winners through audience vote. The winner gets an iPad. Other prizes will be distributed to 
+participants.</p>
+<p>Bring your favorite 5 minute demo to show during our Demo Jam 
+Contest. Join us at 6:30 for beer and tasty nosh; we’ll start the demos 
+at 7 pm at the bar. Your conference badge is your ticket to enter. All 
+Balisage participants are welcome!</p>
+<p>
+More info can be found at <a href="http://www.balisage.net/2010/DemoJam.html">balisage.net</a></p>
+  </ml:body>
+  <ml:created>2010-08-01T00:50:01.538585-07:00</ml:created>
+  <ml:last-updated>2010-08-01T00:41:27.504253-07:00</ml:last-updated>
+</ml:Announcement>

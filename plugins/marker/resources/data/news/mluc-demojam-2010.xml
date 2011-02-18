@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ml:Announcement status="Published" xmlns:ml="http://developer.marklogic.com/site/internal" xmlns="http://www.w3.org/1999/xhtml">
+  <ml:title>DemoJam at MarkLogic User's Conference 2010</ml:title>
+  <ml:date>2010-03-22</ml:date>
+  <ml:body>
+    <ml:teaser>
+MarkLogic will hold a demo contest, called DemoJam, on May 3rd, 2010 at the MarkLogic User Conference opening reception.  
+Everyone is welcome! The demo must be under 5 minutes and must be of technical nature. 
+The crowd will vote on the winner. Winner takes home an iPad.  DemoJam started as an internal MarkLogic contest 
+that we have expanded to include our developer community. Because of the great enthusiasm this 
+event receives, we have to put a ceiling on the number of demos to be presented. Submit your demo now 
+and we will invite the top 10 to compete at the User Conference event.
+    </ml:teaser>
+
+    <p>
+<b><i>Submit your demos by April 21st at demojam at marklogic dot com</i></b> 
+<br/>
+Submissions should include a brief textual description of the demo.  
+You're welcome, but not required, to provide screen shots or screen casts as well.  
+MarkLogic will provide an Internet connection but presenters are encouraged to bring their own laptops.
+   </p>
+  </ml:body>
+</ml:Announcement>

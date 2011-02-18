@@ -221,7 +221,7 @@ var MarkerInlineEdit = {
 						);
 		$('#tabs-4').append(
 						"<div class='image-buttons two-col-buttons-container'>" + 
-						"<div cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div><div cmdValue='contentmgmt' class='checkin-button marker_button marker_button_checkin' onclick='MarkerInlineEdit.checkin(MarkerInlineEdit.focusedId);'></div><div cmdValue='contentmgmt' class='checkout-button marker_button marker_button_checkout' onclick='MarkerInlineEdit.checkout(MarkerInlineEdit.focusedId);'></div></div>" +
+						"<div cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div><div cmdValue='contentmgmt' class='checkin-button marker_button marker_button_checkin' onclick='MarkerInlineEdit.checkin(MarkerInlineEdit.focusedId);'></div><div cmdValue='contentmgmt' class='checkout-button marker_button marker_button_checkout' onclick='MarkerInlineEdit.checkout(MarkerInlineEdit.focusedId);'></div><div value='tag' cmdValue='tag' id='insertHTML' class='marker_button marker_button_tag'></div></div>" +
 							//separator
 						"<div id='content-details' class='not-handle'>" + 
 						
@@ -470,6 +470,11 @@ var MarkerInlineEdit = {
 				//rangy.restoreSelection(MarkerInlineEdit.savedSelection);
 				//MarkerInlineEdit.savedSelection = rangy.saveSelection();
 				//rangy.removeMarkers(MarkerInlineEdit.savedSelection);
+				if(cmd == 'insertHTML' && value== 'tag'){
+					
+					value = "<tag>" + rangy.getSelection() + "</tag>";
+					
+				}
 				var returnValue = document.execCommand(cmd, bool, value);
 			}
 		});
@@ -517,6 +522,7 @@ var MarkerInlineEdit = {
 		data = data.replace(/<br>+/g, "<br/>");
 		data = data.replace(/\n/g, '');
 		data = data.replace(/\t/g, '');
+		data = data.replace("&nbsp;",' ');
 		$(element).html(data);
 			
 		return data;
