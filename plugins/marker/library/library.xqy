@@ -279,9 +279,9 @@ declare function library:insertMeta($doc, $uri)
 declare function library:stripMeta($doc as node())
 { 
     
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ()
+    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ():)
     let $cleaned := functx:remove-elements-deep($doc,"content")
-    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($cleaned) )) else ()
+    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($cleaned) )) else ():)
     return $cleaned
     
    

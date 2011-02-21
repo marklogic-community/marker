@@ -519,11 +519,14 @@ var MarkerInlineEdit = {
 		if($(element).attr("contenteditable") == "false") {
 			MarkerInlineEdit.rawToggle($(element));
 		}
+		
 		data = $(element).html();
+		alert(data);
 		data = data.replace(/<br>+/g, "<br/>");
 		data = data.replace(/\n/g, '');
 		data = data.replace(/\t/g, '');
-		data = data.replace("&nbsp;",' ');
+		data = data.replace(/&nbsp;/g,' ');
+		alert(data);
 		$(element).html(data);
 			
 		return data;
