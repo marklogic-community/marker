@@ -124,6 +124,7 @@ declare function install()
             <mapping mapped="1" plugin="marker" controller="ajax" action="update-uri-content">marker/ajax/update-uri-content</mapping>
             <mapping mapped="1" plugin="marker" controller="ajax" action="checkout-status">marker/ajax/checkout-status</mapping>
             <mapping mapped="1" plugin="marker" controller="ajax" action="checkout">marker/ajax/checkout</mapping>
+            <mapping mapped="1" plugin="marker" controller="ajax" action="checkin">marker/ajax/checkin</mapping>
             <mapping mapped="1" plugin="marker" controller="ajax" action="publish">marker/ajax/publish</mapping>
             <mapping mapped="1" plugin="marker" controller="ajax" action="unpublish">marker/ajax/unpublish</mapping>
             <mapping mapped="1" plugin="marker" controller="ajax" action="get-version-content">marker/ajax/get-version-content</mapping>
@@ -146,12 +147,15 @@ declare function install()
                 <params name="name" match="2"/>
             </mapping>
             <mapping regex="^/blogs/([\w\-:'_]+)$" template="/blogs/blog/template.xhtml">
-                <params name="name" match="1"/>
+                <params name="blog-name" match="1"/>
             </mapping>
             <mapping regex="^/news/([\w\-:'_]+)$" template="/news/detail/template.xhtml">
                 <params name="name" match="1"/>
             </mapping>
             <mapping regex="^/events/([\w\-:'_]+)$" template="/events/detail/template.xhtml">
+                <params name="name" match="1"/>
+            </mapping>
+            <mapping regex="^/about-us/([\w\-:'_]+)$" template="/about-us/detail/template.xhtml">
                 <params name="name" match="1"/>
             </mapping>
         </mappings>,
@@ -182,8 +186,8 @@ declare function install()
     (:let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "create-date", "", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "update-date", "", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "publish-date", "", fn:false() )):)
-    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "http://marklogic.com/marker", "tag", "http://marklogic.com/collation/", fn:false() ))
-    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "", "tag", "http://marklogic.com/collation/codepoint", fn:false() ))
+    (:let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "http://marklogic.com/marker", "tag", "http://marklogic.com/collation/", fn:false() )):)
+    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "", "tag", "http://marklogic.com/collation/", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("date", "", "date", "", fn:false() ))
     let $_ := admin:save-configuration($config)   
     return xqmvc:template('master-template', (
@@ -229,7 +233,7 @@ declare function install-data()
          "/content-root/containers/site-wide/login-logout.container",
          fn:true(),
             (  
-            <div style="position:absolute;top:5px;right:5px;width:150px;text-align:right;"> 
+            <div runtime="dynamic" style="position:absolute;top:5px;right:5px;width:150px;text-align:right;"> 
                 <exec>
                 xquery version "1.0-ml";
                 import module namespace taglib-security = "http://marklogic.com/plugin/security/taglib" at "/plugins/security/taglibs/taglib-auth.xqy";
@@ -300,15 +304,37 @@ declare function install-data()
               <exec>
               declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
               declare namespace marker="http://marklogic.com/marker";
-              let $posts := 
-                for $post in cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Blogs")) 
+              let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Blogs")) 
+              let $recent-blogs :=  
+                for $post in $results[1 to 3]
                 let $title := $post/*/marker:content/marker:title/text() 
-                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ") 
+                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ")  
+                order by xs:dateTime($post/*/marker:content/marker:published-date) descending
+                return
+                    <div> 
+                        <h3>
+                            <a href="/blogs/{{$post/*/marker:content/marker:blog/marker:blog-name/text()}}/{{$post/*/marker:content/marker:name/text()}}">{{$title}} by {{$author}}</a>
+                        </h3>
+                      
+                    </div>
+              let $all-blogs := 
+                for $post in $results
+                let $title := $post/*/marker:content/marker:title/text() 
+                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ")  
                 return 
-                    <li>
+                    <div>
                         <a href="/blogs/{{$post/*/marker:content/marker:blog/marker:blog-name/text()}}/{{$post/*/marker:content/marker:name/text()}}">{{$title}} by {{$author}}</a>
-                    </li> 
-              return <ul>{{$posts}}</ul>    
+                    </div> 
+              return 
+                <div class="blogs">
+                    <h1>Blogs</h1>
+                    <h2>Recent Posts</h2>
+                    {{$recent-blogs}}
+                    <h2>All Posts</h2>
+                    {{$all-blogs}}
+                    <br clear="all"/>
+                </div>    
+             
               </exec>
               <marker:content xmlns:marker="http://marklogic.com/marker">
                 <marker:type>Miscellaneous</marker:type> 
@@ -339,16 +365,38 @@ declare function install-data()
               <exec>
               declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
               declare namespace marker="http://marklogic.com/marker";
-              declare variable $name external;
-              let $posts := 
-                for $post in cts:search(fn:collection("http://marklogic.com/marker/published"),cts:and-query((cts:element-query(xs:QName("marker:type"),"Blogs"),cts:element-query(xs:QName("marker:blog-name"),fn:string($name))))) 
+              declare variable $blog-name external;
+              let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:and-query((cts:element-query(xs:QName("marker:type"),"Blogs"),cts:element-query(xs:QName("marker:blog-name"),fn:string($blog-name))))) 
+              let $recent-blogs :=  
+                for $post in $results[1 to 3]
                 let $title := $post/*/marker:content/marker:title/text() 
-                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ") 
+                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ")  
+                order by xs:dateTime($post/*/marker:content/marker:published-date) descending
+                return
+                    <div> 
+                        <h3>
+                            <a href="/blogs/{{$post/*/marker:content/marker:blog/marker:blog-name/text()}}/{{$post/*/marker:content/marker:name/text()}}">{{$title}} by {{$author}}</a>
+                        </h3>
+                      
+                    </div>
+              let $all-blogs := 
+                for $post in $results
+                let $title := $post/*/marker:content/marker:title/text() 
+                let $author := fn:string-join($post/*/marker:content/marker:authors//marker:author/text(), ", ")  
                 return 
-                    <li>
+                    <div>
                         <a href="/blogs/{{$post/*/marker:content/marker:blog/marker:blog-name/text()}}/{{$post/*/marker:content/marker:name/text()}}">{{$title}} by {{$author}}</a>
-                    </li> 
-              return <ul>{{$posts}}</ul>    
+                    </div> 
+              return 
+                <div class="blogs">
+                    <h1>{{$name}}</h1>
+                    <h2>Recent Posts</h2>
+                    {{$recent-blogs}}
+                    <h2>All Posts</h2>
+                    {{$all-blogs}}
+                    <br clear="all"/>
+                </div>    
+               
               </exec>
               <marker:content xmlns:marker="http://marklogic.com/marker">
                 <marker:type>Miscellaneous</marker:type> 
@@ -373,21 +421,735 @@ declare function install-data()
          $collection)
      let $content-insert := 
         dls:document-insert-and-manage(
+        "/content-root/containers/blogs/blogs-by-date-navigation.container",
+         fn:true(),
+         (  <div runtime="dynamic">
+              <exec>
+                declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
+                declare namespace marker="http://marklogic.com/marker";
+                let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Blogs"))
+                (:prelim sort - sorting occurs after processing:) 
+                let $results :=
+                   for $post in $results
+                   order by xs:dateTime($post/*/marker:content/marker:published-date) descending
+                   return $post
+                let $year := ()
+                let $month := ()
+                let $counter := 0
+                let $counter-year := 0
+                let $counter-month := 0
+                let $sum := 0
+                let $holder := ""
+                let $loop-year := ()
+                let $loop-month := ()
+                
+                let $container := for $post in $results
+                    let $set := 
+                        if($year eq fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                        then 
+                            (
+                            
+                            let $set := xdmp:set($loop-year, ())
+                            return 
+                            if($month eq fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            then (xdmp:set($loop-month,()))
+                            else 
+                                (
+                                    let $set := xdmp:set($loop-month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($holder, fn:replace($holder,  "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-month,0)) 
+                                )
+                
+                            )
+                        else 
+                        (
+                            let $set := xdmp:set($loop-month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($year, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := xdmp:set($loop-year, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := 
+                                if($counter eq 0)
+                                then ()
+                                else 
+                                (
+                                    let $set := xdmp:set($holder, fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-year,0),xdmp:set($counter-month,0)) 
+                                )
+                            return ()
+                        )
+                    
+                    let $set := xdmp:set($counter-year, $counter-year + 1)
+                    let $set := xdmp:set($counter-month, $counter-month + 1)
+                    
+                    let $set := xdmp:set($counter, $counter + 1)
+                
+                    return 
+                        if ($loop-year and $counter eq 1)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-year)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-month)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                return 
+                (
+                if($counter-month eq 0)
+                then (xdmp:set($counter-month, 1))
+                else (),
+                if($counter-year eq 0)
+                then (xdmp:set($counter-year, 1))
+                else (),
+                <div class="subnav"><h2>All Posts</h2><ul>{{xdmp:unquote(fn:concat(fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)),"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;"))}}</ul></div>
+                )
+               
+              </exec>
+              <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Blogs by date navigation</marker:title>
+                <marker:name>blogs-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of blogs by date</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+            </div>
+            ),  
+         $note,
+         $permissions, 
+         $collection)
+    let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/about-us/getting-started.container",
+         fn:true(),
+         (<div>
+            <div class="section">
+              <div class="head">
+                <h2>Getting Started</h2>
+              </div>
+              <div class="body">
+                <h3>MarkLogic Marker</h3>
+                <br/>
+                <p>Thank you for downloading the MarkLogic Marker community project.</p>
+                <ul class="more">
+                     <li><a href="/about-us">Overview &gt;</a></li>
+                     <li><a href="/about-us/xqmvc">xqmvc &gt;</a></li>
+                     <li><a href="/about-us/marker">Marker &gt;</a></li>
+                  </ul>
+              </div>
+            </div>
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Getting Started</marker:title>
+                <marker:name>getting-started</marker:name>
+                <marker:abstract>Getting started with the MarkLogic Marker community project</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+        </div>
+        ),  
+         $note,
+         $permissions, 
+         $collection)
+ let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/about-us/marker.container",
+         fn:true(),
+         (
+         <div>
+    <h1>Marker</h1>
+    <h2>CMS Toolkit</h2>
+    <p>Marker is a CMS toolkit on top of MarkLogic. The key point is a &#x201C;toolkit&#x201D; and not a complete CMS system. It is a starter, a fairly robust starter, for your basic CMS needs.</p>
+    <p>Key features include:</p>
+    <ul>
+        <li>Inline editing</li>
+        <li>Versioning</li>
+        <li>Publishing</li>
+        <li>Schema</li>
+        <li>Templating and Container Structures</li>
+    </ul>
+    <p> While the current system is fairly robust, the underlying UI does not implement some of the basic items to manage the system. </p>
+    <p>Key missing items or areas of concern:</p>
+    <ul>
+        <li>Add new content containers
+    <ul><li>Content can be added by running scripts in cq. See the setup controller in marker.</li></ul>
+</li>
+        <li>Editing dynamic containers 
+<ul><li>Dynamic content cannot currently edited. This is a fairly complex operation. There are several things to consider: editing xquery, underlying pointers to other content containers, syntax checking. Given the time constraints; these will need to be tackled in future versions</li></ul>
+</li>
+        <li>Full browser compatibility
+<ul><li>The editor has been lightly tested in chrome, safari, firefox and IE9. Try others at your own risk</li><li>The editor has dependent upon content editable and different browsers implement it in different ways</li></ul>
+</li>
+        <li>Template editing
+<ul><li>Templates are not editable through the system</li><li>Templates can be added by running scripts in cq. See the setup controller in marker.</li></ul>
+</li>
+    </ul>
+    <h2>Inline Editing</h2>
+    <p>A key difference between other CMS systems and Marker is the inline editing capability. This is implemented using jquery and content editable. This is heavily dependent upon the browser's implementation of <a href="https://developer.mozilla.org/en/rich-text_editing_in_mozilla">execCommand</a>.</p>
+    <p>There are several tabs in the editor:</p>
+    <ul>
+        <li>Formatting
+    <ul><li>Basic formatting of html. Click on the html button to get access to the underlying html.</li></ul>
+</li>
+        <li>Insert
+<ul><li>Add/Edit images, links, and tables. The tab is context sensitive and will adjust to selected content for editing</li></ul>
+</li>
+        <li>Content Mgmt
+<ul><li>Check In, Check Out, Save</li><li>Version History and Publishing. Click on the publishing icon in the history to publish a specific version. Click on the view button to see prior version content.</li><li>Tagging. Click on the tag icon to place &lt;tag&gt; around selected text. The tags will show up as a facet in the search page.</li></ul>
+</li>
+        <li>Admin Bar - Top box
+<ul><li>Toggle back and forth between published and editable content</li><li>When in published mode you can navigate through links.</li></ul>
+</li>
+    </ul>
+    <h2>Versioning</h2>
+    <p>Versioning is implemented via MarkLogic library services, DLS. All content is managed under dls.</p>
+    <h2>Publishing</h2>
+    <p>Publishing is implemented by collections. Normal visitors are only allowed to access published content. Browse the content under cq to see how collections are applied to versions.</p>
+    <h2>Schema</h2>
+    <p>Containers and templates adhere to schema created in standard xsd. The meta properties defined in the schema are placed in the content as well as the original content version properties. The properties are placed in the content to allow faceting and searching of those properties. The master copy of the properties is held on the default content. The intent is to manage properties on the default content properties. When new versions of the content are saved, the properties are appended as a copy inline to the new content.
+</p>
+    <h2>Directory Structure</h2>
+    <ul>
+        <li>/content-root - holds all toolkit content</li>
+        <li>/content-root/templates - holds all master templates - pages are derived from these templates</li>
+        <li>/content-root/site - holds all pages in the site. Only templates are placed in this directory</li>
+        <li>/content-root/containers - holds all the content for the site</li>
+    </ul>
+    <h2>Templates and Containers</h2>
+    <p>
+        <img src="/plugins/marker/resources/img/all-together.png" style="max-width:600px;"/>
+    </p>
+    <h3>Templates</h3>
+    <p>Templates are the base document. They are designated for navigable pages and define the layout of those pages. The navigable pages are derived from master templates housed in the /content-root/templates directory. 
+</p>
+    <p>New pages are implemented as a new folder and template page. For example, to add a new page, you would add /content-root/site/new-page/template.xhtml.</p>
+    <p>
+        <img src="/plugins/marker/resources/img/templates.png" style="max-width:600px;"/>
+    </p>
+    <h3>Containers</h3>
+    <p>Containers are the workhorses of the toolkit. They contain the content. They can be defined as static, dynamic or mixed. The intent is to allow maximum flexibility for displaying content.</p>
+    <p>
+        <img src="/plugins/marker/resources/img/containers.png" style="max-width:600px;"/>
+    </p>
+         <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Marker</marker:title>
+                <marker:name>marker</marker:name>
+                <marker:abstract>Marker overview</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+            </div>
+         ),  
+         $note,
+         $permissions, 
+         $collection)
+ let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/about-us/xqmvc.container",
+         fn:true(),
+         (<div>
+    <h1>xqmvc Architecture</h1>
+    <h2>xqmvc Overview</h2>
+    <p>
+        <i>Pulled from http://code.google.com/p/xqmvc/.</i>
+    </p>
+    <p>
+MVC is a design pattern which promotes organization of code and file structure by separating presentation from domain logic. While there are dozens of MVC frameworks for languages such as Java, Python, PHP, Ruby, etc, nothing similar exists for developers building complex applications in XQuery.
+XQMVC is a new XQuery web application framework which leverages MVC design principles as well as new capabilities made available in MarkLogic Server 4.1 to offer the foundation for a clean and well-organized XQuery-driven website. Highlights include friendly URLs, nestable templates (allowing visual sections of a site to be encapsulated in reusable XHTML fragments), and a simple but effective i18n engine (to externalize and manage text fragments using a web-based editor).
+</p>
+    <p>Our modifications back to xqmvc:</p>
+    <ul>
+        <li>Authorization</li>
+        <li>Request routing</li>
+    </ul>
+    <h2>Authorization</h2>
+    <p>
+Out of the box, there is no authorization to the controllers and views. In order to manage a system, you must have an authorization system that allows or denies access to system resources. So in that line of thought, we added authorization to xqmvc.</p>
+    <p>
+Authorization occurs during the routing of a controller/action request. We implemented the authorization so that you could use any custom xquery function to determine access. In our case, we are using the security plugin to handle access grants. The custom call is implemented in the security authorization model and configured via the application config.xqy file.
+</p>
+    <pre>
+(:
+ : Authentication path 
+:)
+declare variable $authentication-action as xs:string := 'xquery version "1.0-ml";
+    import module namespace authorization = "http://marklogic.com/plugins/security/authorization" at "/plugins/security/models/authorization-model.xqy";
+    declare variable $controller external;
+    declare variable $action external;
+    declare variable $role external;
+    authorization:isRoleAuthorizedForControllerAction($role, $controller, $action)';
+</pre>
+    <p>
+This call is called in an eval statement inside the xqmvc.xqy file. You can implement another authorization system by creating another function somewhere in your code.
+</p>
+    <p>
+Authorization is configured via roles mapped to controllers and actions. During setup, several files are placed in the /plugins/security/controller-mapping directory. Each of these files is named after the role that they control. Here is an example of the security-anon role.
+</p>
+    <pre>
+        &lt;role-mappings&gt;
+            &lt;mapping action="index" controller="authentication" mapped="1" plugin="security"&gt;
+                security/authentication/index
+            &lt;/mapping&gt;
+            &lt;mapping action="facebook" controller="authentication" mapped="1" plugin="security"&gt;
+                security/authentication/facebook
+            &lt;/mapping&gt;
+            &lt;mapping action="github" controller="authentication" mapped="1" plugin="security"&gt;
+                security/authentication/github
+            &lt;/mapping&gt;
+            &lt;mapping action="_authenticate" controller="authentication" mapped="1" plugin="security"&gt;
+                security/authentication/_authenticate
+            &lt;/mapping&gt;
+            &lt;mapping action="install-complete" controller="setup" mapped="1" plugin="security"&gt;
+                security/setup/install-complete
+            &lt;/mapping&gt;
+            &lt;mapping action="logout" controller="authentication" mapped="1" plugin="security"&gt;
+                security/authentication/logout
+            &lt;/mapping&gt;
+            &lt;mapping action="not-authorized" controller="error" mapped="1" plugin="security"&gt;
+                security/error/not-authorized
+            &lt;/mapping&gt;
+            &lt;mapping action="index" controller="welcome" mapped="1" plugin=""&gt;
+                /welcome/index
+            &lt;/mapping&gt;
+            &lt;mapping action="index" controller="render" mapped="1" plugin="marker"&gt;
+                marker/render/index
+            &lt;/mapping&gt;
+        &lt;/role-mappings&gt;
+    </pre>
+    <p>
+Authorization is allowed by the configuration of if the mapping is listed then you are granted access.
+</p>
+    <h2>Request Routing</h2>
+    <p>
+Xqmvc operates in a system rewrite file. Out of the box, there is one routing of controller/action and plugin/controller/action. We added two more ways of routing to allow more flexibility to a CMS based system.
+</p>
+    <h3>URL Mapping</h3>
+    <p>
+URL mapping is controlled via the rewrite.xqy file. A call is made into the xqmvc.xqy function library to see if the incoming request matches one of the defined mappings.
+The mappings allow you to embed parameters in a friendly url structure. For example, the url /blogs/Developer/this-blog-post, maps to a specific template with the parameters of blog-name:Developer and name:this-blog-post. You can come up with virtually any configuration of url parameter schemes to support your application.
+URL mappings are stored in the /application/mapping.xml file. The marker application mapping file is listed below:
+</p>
+    <pre>
+        &lt;mappings&gt;
+            &lt;mapping regex="^/blogs/([\w\-:'_]+)/([\w\-:'_]+)$" template="/blogs/detail/template.xhtml"&gt;
+                &lt;params match="1" name="blog-name"/&gt;
+                &lt;params match="2" name="name"/&gt;
+            &lt;/mapping&gt;
+            &lt;mapping regex="^/blogs/([\w\-:'_]+)$" template="/blogs/blog/template.xhtml"&gt;
+                &lt;params match="1" name="blog-name"/&gt;
+            &lt;/mapping&gt;
+            &lt;mapping regex="^/news/([\w\-:'_]+)$" template="/news/detail/template.xhtml"&gt;
+                &lt;params match="1" name="name"/&gt;
+            &lt;/mapping&gt;
+            &lt;mapping regex="^/events/([\w\-:'_]+)$" template="/events/detail/template.xhtml"&gt;
+                &lt;params match="1" name="name"/&gt;
+            &lt;/mapping&gt;
+        &lt;/mappings&gt;
+    </pre>
+    <h3>Default routing</h3>
+    <p>If the incoming request does not match a url mapping or one of the controller/action combinations, the it can be mapped to a default controller and action. This is implemented in marker to allow path translations back to actual files in the directory structure. The default controller/action is set in the application config.
+</p>
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>xqmvc</marker:title>
+                <marker:name>xqmvc</marker:name>
+                <marker:abstract>xqmvc overview</marker:abstract>
+                <marker:searchable>true</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+        </div>
+        ),  
+         $note,
+         $permissions, 
+         $collection)
+     let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/events/events-by-date-navigation.container",
+         fn:true(),
+         (  <div runtime="dynamic">
+              <exec>
+                declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
+                declare namespace marker="http://marklogic.com/marker";
+                let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Events"))
+                (:prelim sort - sorting occurs after processing:) 
+                let $results :=
+                   for $event in $results
+                   order by xs:dateTime($event/*/marker:content/marker:event/marker:start-date) descending
+                   return $event
+                let $year := ()
+                let $month := ()
+                let $counter := 0
+                let $counter-year := 0
+                let $counter-month := 0
+                let $sum := 0
+                let $holder := ""
+                let $loop-year := ()
+                let $loop-month := ()
+                
+                let $container := for $event in $results
+                    
+                    let $set := 
+                        if($year eq fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[Y0001]"))
+                        then 
+                            (
+                            
+                            let $set := xdmp:set($loop-year, ())
+                            return 
+                            if($month eq fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[MNn]"))
+                            then (xdmp:set($loop-month,()))
+                            else 
+                                (
+                                    let $set := xdmp:set($loop-month, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($month, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($holder, fn:replace($holder,  "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-month,0)) 
+                                )
+                
+                            )
+                        else 
+                        (
+                            let $set := xdmp:set($loop-month, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[MNn]"))
+                            let $set := xdmp:set($month, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[MNn]"))
+                            let $set := xdmp:set($year, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[Y0001]"))
+                            let $set := xdmp:set($loop-year, fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[Y0001]"))
+                            let $set := 
+                                if($counter eq 0)
+                                then ()
+                                else 
+                                (
+                                    let $set := xdmp:set($holder, fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-year,0),xdmp:set($counter-month,0)) 
+                                )
+                            return ()
+                        )
+                    let $set := xdmp:set($counter-year, $counter-year + 1)
+                    let $set := xdmp:set($counter-month, $counter-month + 1)
+                    let $set := xdmp:set($counter, $counter + 1)
+                
+                    return 
+                        if ($loop-year and $counter eq 1)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/events/", $event/*/marker:content/marker:name/text(),"'&gt;", $event/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-year)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/events/", $event/*/marker:content/marker:name/text(),"'&gt;", $event/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-month)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/events/", $event/*/marker:content/marker:name/text(),"'&gt;", $event/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;a href='/event/",$event/*/marker:content/marker:name/text(),"'&gt;", $event/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                return 
+                (
+                if($counter-month eq 0)
+                then (xdmp:set($counter-month, 1))
+                else (),
+                if($counter-year eq 0)
+                then (xdmp:set($counter-year, 1))
+                else (),
+                <div class="subnav"><h2>All Events</h2><ul>{{xdmp:unquote(fn:concat(fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)),"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;"))}}</ul></div>
+                )
+               
+              </exec>
+              <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Events by date navigation</marker:title>
+                <marker:name>events-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of events by date</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+            </div>
+            ),  
+         $note,
+         $permissions, 
+         $collection)
+     let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/news/news-by-date-navigation.container",
+         fn:true(),
+         (  <div runtime="dynamic">
+              <exec>
+                declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
+                declare namespace marker="http://marklogic.com/marker";
+                let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"News"))
+                (:prelim sort - sorting occurs after processing:) 
+                let $results :=
+                   for $news in $results
+                   order by xs:dateTime($news/*/marker:content/marker:published-date) descending
+                   return $news
+                let $year := ()
+                let $month := ()
+                let $counter := 0
+                let $counter-year := 0
+                let $counter-month := 0
+                let $sum := 0
+                let $holder := ""
+                let $loop-year := ()
+                let $loop-month := ()
+                
+                let $container := for $news in $results
+                    let $set := 
+                        if($year eq fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                        then 
+                            (
+                            
+                            let $set := xdmp:set($loop-year, ())
+                            return 
+                            if($month eq fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            then (xdmp:set($loop-month,()))
+                            else 
+                                (
+                                    let $set := xdmp:set($loop-month, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($month, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($holder, fn:replace($holder,  "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-month,0)) 
+                                )
+                
+                            )
+                        else 
+                        (
+                            let $set := xdmp:set($loop-month, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($month, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($year, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := xdmp:set($loop-year, fn:format-dateTime($news/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := 
+                                if($counter eq 0)
+                                then ()
+                                else 
+                                (
+                                    let $set := xdmp:set($holder, fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-year,0),xdmp:set($counter-month,0)) 
+                                )
+                            return ()
+                        )
+                    let $set := xdmp:set($counter, $counter + 1)
+                    let $set := xdmp:set($counter-year, $counter-year + 1)
+                    let $set := xdmp:set($counter-month, $counter-month + 1)
+                    
+                    return 
+                        if ($loop-year and $counter eq 1)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/news/", $news/*/marker:content/marker:name/text(),"'&gt;", $news/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-year)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/news/", $news/*/marker:content/marker:name/text(),"'&gt;", $news/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-month)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/news/",$news/*/marker:content/marker:name/text(),"'&gt;", $news/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;a href='/news/", $news/*/marker:content/marker:name/text(),"'&gt;", $news/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                return 
+                (
+                if($counter-month eq 0)
+                then (xdmp:set($counter-month, 1))
+                else (),
+                if($counter-year eq 0)
+                then (xdmp:set($counter-year, 1))
+                else (),
+                <div class="subnav"><h2>All News</h2><ul>{{xdmp:unquote(fn:concat(fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)),"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;"))}}</ul></div>
+                )
+               
+              </exec>
+              <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>News by date navigation</marker:title>
+                <marker:name>news-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of news by date</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+            </div>
+            ),  
+         $note,
+         $permissions, 
+         $collection)
+     let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/blogs/blog-by-date-navigation.container",
+         fn:true(),
+         (  <div runtime="dynamic">
+              <exec>
+                declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
+                declare namespace marker="http://marklogic.com/marker";
+                declare variable $blog-name external;
+                let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:and-query((cts:element-query(xs:QName("marker:type"),"Blogs"),cts:element-query(xs:QName("marker:blog-name"),fn:string($blog-name))))) 
+               (:prelim sort - sorting occurs after processing:) 
+                let $results :=
+                   for $post in $results
+                   order by xs:dateTime($post/*/marker:content/marker:published-date) descending
+                   return $post
+                let $year := ()
+                let $month := ()
+                let $counter := 0
+                let $counter-year := 0
+                let $counter-month := 0
+                let $sum := 0
+                let $holder := ""
+                let $loop-year := ()
+                let $loop-month := ()
+                
+                let $container := for $post in $results
+                    let $set := 
+                        if($year eq fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                        then 
+                            (
+                            
+                            let $set := xdmp:set($loop-year, ())
+                            return 
+                            if($month eq fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            then (xdmp:set($loop-month,()))
+                            else 
+                                (
+                                    let $set := xdmp:set($loop-month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                                    let $set := xdmp:set($holder, fn:replace($holder,  "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-month,0)) 
+                                )
+                
+                            )
+                        else 
+                        (
+                            let $set := xdmp:set($loop-month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($month, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[MNn]"))
+                            let $set := xdmp:set($year, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := xdmp:set($loop-year, fn:format-dateTime($post/*/marker:content/marker:published-date/text(), "[Y0001]"))
+                            let $set := 
+                                if($counter eq 0)
+                                then ()
+                                else 
+                                (
+                                    let $set := xdmp:set($holder, fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)))
+                                    return (xdmp:set($counter-year,0),xdmp:set($counter-month,0)) 
+                                )
+                            return ()
+                        )
+                    let $set := xdmp:set($counter-year, $counter-year + 1)
+                    let $set := xdmp:set($counter-month, $counter-month + 1)
+                    
+                    let $set := xdmp:set($counter, $counter + 1)
+                
+                    return 
+                        if ($loop-year and $counter eq 1)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;' &gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-year)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span&gt;", $loop-year, " (year-counter)&lt;/span&gt;&lt;ul&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else if($loop-month)
+                        then (xdmp:set($holder, fn:concat($holder,"&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;span class='closed'&gt;", $loop-month, " (month-counter)&lt;/span&gt;&lt;ul style='display: none;'&gt;","&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                        else (xdmp:set($holder, fn:concat($holder,"&lt;li&gt;&lt;a href='/blogs/",$post/*/marker:content/marker:blog/marker:blog-name/text(), "/", $post/*/marker:content/marker:name/text(),"'&gt;", $post/*/marker:content/marker:title/text(),"&lt;/a&gt;&lt;/li&gt;")))
+                return 
+                (
+                if($counter-month eq 0)
+                then (xdmp:set($counter-month, 1))
+                else (),
+                if($counter-year eq 0)
+                then (xdmp:set($counter-year, 1))
+                else (),
+                <div class="subnav"><h2>All Posts</h2><ul>{{xdmp:unquote(fn:concat(fn:replace(fn:replace($holder, "year-counter", fn:string($counter-year)), "month-counter", fn:string($counter-month)),"&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;"))}}</ul></div>
+                )
+           
+              </exec>
+              <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Blogs by date navigation</marker:title>
+                <marker:name>blog-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of blogs by date</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+            </div>
+            ),  
+         $note,
+         $permissions, 
+         $collection)
+     let $content-insert := 
+        dls:document-insert-and-manage(
         "/content-root/containers/events/event-navigation.container",
          fn:true(),
          (  <div runtime="dynamic">
               <exec>
               declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
               declare namespace marker="http://marklogic.com/marker";
-              let $events := 
-                for $event in cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Events")) 
+                 let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"Events"))
+                 let $next-event := 
+                    for $event in $results
+                    order by xs:dateTime($event/*/marker:content/marker:event/marker:start-date) descending
+                    return $event
+              let $upcoming-event :=  
+                for $event in $next-event[1]
                 let $title := $event/*/marker:content/marker:title/text() 
-                let $time := fn:string-join($event/*/marker:content/marker:event/marker:start-date/text(), ", ") 
+                let $time :=  fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[M01]/[D01]/[Y01]") 
+                return
+                    <div> 
+                        <h3>
+                            <a href="/events/{{$event/*/marker:content/marker:name/text()}}">{{$title}} on {{$time}}</a>
+                        </h3>
+                  </div>
+              let $all-events := 
+                for $event in $results
+               let $title := $event/*/marker:content/marker:title/text() 
+               let $time :=  fn:format-dateTime($event/*/marker:content/marker:event/marker:start-date/text(), "[M01]/[D01]/[Y01]") 
+               order by xs:dateTime($event/*/marker:content/marker:event/marker:start-date) descending
                 return 
-                    <li>
+                    <div>
                         <a href="/events/{{$event/*/marker:content/marker:name/text()}}">{{$title}} on {{$time}}</a>
-                    </li> 
-              return <ul>{{$events}}</ul>    
+                    </div> 
+              return 
+                <div class="news">
+                    <h1>Events</h1>
+                    <h2>Upcoming Event</h2>
+                    {{$upcoming-event}}
+                    <h2>All Events</h2>
+                    {{$all-events}}
+                    <br clear="all"/>
+                </div>    
               </exec>
               <marker:content xmlns:marker="http://marklogic.com/marker">
                 <marker:type>Miscellaneous</marker:type> 
@@ -418,14 +1180,35 @@ declare function install-data()
               <exec>
               declare namespace xhtml = "http://www.w3.org/1999/xhtml"; 
               declare namespace marker="http://marklogic.com/marker";
-              let $news := 
-                for $item in cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"News")) 
+              let $results := cts:search(fn:collection("http://marklogic.com/marker/published"),cts:element-query(xs:QName("marker:type"),"News")) 
+              let $recent-news :=  
+                for $item in $results[1 to 3]
+                let $title := $item/*/marker:content/marker:title/text() 
+                order by xs:dateTime($item/*/marker:content/marker:published-date) descending
+                return
+                    <div> 
+                        <h3>
+                            <a href="/news/{{$item/*/marker:content/marker:name/text()}}">{{$title}}</a>
+                        </h3>
+                       <p>{{$item/*/marker:content/marker:abstract/text()}}</p>
+                       <a style="float:right;" href="/news/{{$item/*/marker:content/marker:name/text()}}">Read More</a>
+                    </div>
+              let $all-news := 
+                for $item in $results
                 let $title := $item/*/marker:content/marker:title/text() 
                 return 
-                    <li>
+                    <div>
                         <a href="/news/{{$item/*/marker:content/marker:name/text()}}">{{$title}}</a>
-                    </li> 
-              return <ul>{{$news}}</ul>    
+                    </div> 
+              return 
+                <div class="news">
+                    <h1>News</h1>
+                    <h2>Recent News</h2>
+                    {{$recent-news}}
+                    <h2>All News</h2>
+                    {{$all-news}}
+                    <br clear="all"/>
+                </div>    
               </exec>
               <marker:content xmlns:marker="http://marklogic.com/marker">
                 <marker:type>Miscellaneous</marker:type> 
@@ -462,6 +1245,7 @@ declare function install-data()
                 let $meta := library:marker-properties-bag(fn:concat("/content-root/containers/blogs/", $blog-name, "/", $name , ".container"))
                 return 
                     <div class="blog">
+                        <h1>Blog: {{$blog-name}}</h1>
                         {{library:content-header($meta)}}
                         {{$doc}}
                     </div>
@@ -487,6 +1271,40 @@ declare function install-data()
          $note,
          $permissions, 
          $collection)
+    let $content-insert := 
+        dls:document-insert-and-manage(
+        "/content-root/containers/about-us/about-us-content.container",
+         fn:true(),
+         (  <div runtime="dynamic">
+                <exec>
+                import module namespace library = "http://marklogic.com/marker/library" at "/plugins/marker/library/library.xqy";
+                declare namespace xhtml = "http://www.w3.org/1999/xhtml";
+                declare variable $name external;
+                let $doc := library:stripMeta(library:doc(fn:concat("/content-root/containers/about-us/", $name , ".container"))/node())
+                return 
+                        $doc
+                 </exec>
+                <marker:content xmlns:marker="http://marklogic.com/marker">
+                    <marker:type>Miscellaneous</marker:type> 
+                    <marker:title>About Us Content</marker:title>
+                    <marker:name>about-us-content</marker:name>
+                    <marker:abstract>Display of about-us content - basic funnel for individual about us pages</marker:abstract>
+                    <marker:searchable>false</marker:searchable>
+                    <marker:published-date></marker:published-date>
+                    <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                    <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                    <marker:authors>
+                    </marker:authors>
+                    <marker:categories>
+                    </marker:categories>
+                    <marker:tags>
+                    </marker:tags>
+                </marker:content>
+            </div>
+            ),  
+         $note,
+         $permissions, 
+         $collection)
      let $content-insert := 
         dls:document-insert-and-manage(
         "/content-root/containers/news/news-content.container",
@@ -496,7 +1314,15 @@ declare function install-data()
                 import module namespace library = "http://marklogic.com/marker/library" at "/plugins/marker/library/library.xqy";
                 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
                 declare variable $name external;
-                 library:doc(fn:concat("/content-root/containers/news/", $name, ".container"))
+                let $doc := library:stripMeta( library:doc(fn:concat("/content-root/containers/news/", $name, ".container"))/node())
+                let $meta := library:marker-properties-bag(fn:concat("/content-root/containers/news/", $name, ".container"))
+                return 
+                    <div class="news">
+                        <h1>News</h1>
+                        {{library:content-header($meta)}}
+                        {{$doc}}
+                    </div>
+                
                 </exec>
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
@@ -527,8 +1353,24 @@ declare function install-data()
                 <exec>
                 import module namespace library = "http://marklogic.com/marker/library" at "/plugins/marker/library/library.xqy";
                 declare namespace xhtml = "http://www.w3.org/1999/xhtml";
+                declare namespace marker="http://marklogic.com/marker";
                 declare variable $name external;
-                 library:doc(fn:concat("/content-root/containers/events/", $name, ".container"))
+                let $base-doc := library:doc(fn:concat("/content-root/containers/events/", $name, ".container"))/node()
+                let $doc := library:stripMeta($base-doc)
+                let $meta := library:marker-properties-bag(fn:concat("/content-root/containers/events/", $name, ".container"))
+                return 
+                    <div class="Events">
+                        <h1>Events</h1>
+                        {{library:content-header($meta)}}
+                        <dl>
+                        <dt><strong>Date/Time</strong>:&nbsp;</dt><dd><i>{{fn:format-dateTime($base-doc/marker:content/marker:event/marker:start-date/text(), "[M01]/[D01]/[Y01]") }}</i></dd>
+                        <dt><strong>Location</strong>:&nbsp;</dt><dd><i>{{$base-doc/marker:content/marker:event/marker:location/text()}}</i></dd>
+                        <dt><strong>Topic</strong>:&nbsp;</dt><dd><i>{{$base-doc/marker:content/marker:event/marker:topic/text()}}</i></dd>
+                        </dl>
+                        {{$doc}}
+                    </div>
+                
+                 
                 </exec>
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
@@ -630,7 +1472,7 @@ declare function install-data()
                     </range>
                   </constraint>
                   <constraint name="Tags">
-                    <range type="xs:string" collation="http://marklogic.com/collation/codepoint">
+                    <range type="xs:string" collation="http://marklogic.com/collation/">
                      <element ns="" name="tag"/>
                      
                     </range>
@@ -921,7 +1763,28 @@ declare function install-data()
          "/content-root/containers/about-us/main-content.container",
          fn:true(),
          (  <div>
-                <p>This is the about page.</p>
+                <h1>About Marker</h1>
+                <h2>A CMS Toolkit on top of MarkLogic</h2>
+                <p>Marker is a framework for building Web CMS functionality on top of MarkLogic Server. </p>  
+
+                <p>Built on top of an MVC framework (xqmvc) with support for REST/Ajax endpoints as well, Marker provides</p>
+                
+                <ul>
+                <li>Flexible definition of content and page templates</li> 
+                <li>Storage and management of all content inside MarkLogic directly.</li>
+                <li>Management and versioning of content using MarkLogic's Library Services API</li>
+                <li>WYSIWYG authoring of content and layout</li>
+                <li>WYSIWYG markup/annotation of content</li>
+                <li>Out-of-the box, built-in full-text search, including  </li>
+                <li>Result browsing and snippetting</li>
+                <li>Search facets based on content type definition as well as custom/annotation</li>
+                <li>User authentication via OAuth2 (Github, Facebook) including automatic creation of linked user accounts in MarkLogic.</li>
+                </ul>
+                <p>Beyond the CMS toolkit, Marker is built on an additional, but stand-alone, xqmvc plugin that it uses for interacting with MarkLogic security APIs.</p>
+                
+                <p>Marker comes with some sample content from the MarkLogic developer site and is licensed via the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 open source license</a>.  More details about Marker can be found at <a href="http://developer.marklogic.com/code/marker">http://developer.marklogic.com/code/marker</a> and the code is available at <a href="http://github.com/marklogic/marker">http://github.com/marklogic/marker</a>.</p>
+
+                
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
                     <marker:title>About Us Page Content</marker:title>
@@ -1141,7 +2004,13 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                           &nbsp; 
+                            <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
                             
                         </div>
                         
@@ -1224,8 +2093,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                            &nbsp;
+                            <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                            <xi:include href="/content-root/containers/news/news-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1307,8 +2188,13 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                           &nbsp; 
+                           <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1340,6 +2226,94 @@ declare function install-data()
          $note,
          $permissions, 
          $collection)     
+   let $content-insert :=
+        dls:document-insert-and-manage(
+         "/content-root/site/about-us/detail/template.xhtml",
+         fn:true(),
+         (  
+         <html>
+            <head>
+                <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
+            </head>
+            <body>
+                <div id="container">
+                    <div id="header" style="position:relative;">
+                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
+                            <xi:fallback>
+                                <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                    <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                </xi:include>
+                            </xi:fallback> 
+                        </xi:include> 
+                        <xi:include href="/content-root/containers/site-wide/search.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
+                        <div id="navigation">
+                       <xi:include href="/content-root/containers/site-wide/main-navigation.container">
+                        <xi:fallback>
+                            <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                            </xi:include>
+                        </xi:fallback> 
+                       </xi:include>  
+                    </div>
+                   </div>
+                    
+                    <div id="content">
+                        <div id="main">
+                            <xi:include href="/content-root/containers/about-us/about-us-content.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
+                        </div>
+                        <div id="sub">
+                           <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                        </div>
+                        
+                    </div>
+                    <div id="footer">
+                            
+                            <xi:include href="/content-root/containers/site-wide/footer-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
+                        </div>
+                </div>
+            </body>
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>template</marker:type> 
+                <marker:title>About Us</marker:title>
+                <marker:name>template</marker:name>
+                <marker:abstract>Derived About Us template </marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:base-id>{$uuid}</marker:base-id>
+                <marker:derived>true</marker:derived>
+            </marker:content>
+        </html>  
+            ),
+         $note,
+         $permissions, 
+         $collection)    
      let $content-insert :=
         dls:document-insert-and-manage(
          "/content-root/site/news/detail/template.xhtml",
@@ -1390,8 +2364,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                          &nbsp;
+                         <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                           <xi:include href="/content-root/containers/news/news-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1473,8 +2459,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                           &nbsp;
+                         <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                           <xi:include href="/content-root/containers/events/events-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1556,8 +2554,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                            &nbsp;
+                         <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                             <xi:include href="/content-root/containers/events/events-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1639,8 +2649,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                         &nbsp;
+                             <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
+                            <xi:include href="/content-root/containers/blogs/blogs-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1722,8 +2744,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                           &nbsp;
+                             <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include> 
+                           <xi:include href="/content-root/containers/blogs/blog-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1743,7 +2777,7 @@ declare function install-data()
                 <marker:type>template</marker:type> 
                 <marker:title>Blogs Detail</marker:title>
                 <marker:name>template</marker:name>
-                <marker:abstract>Derived Event template </marker:abstract>
+                <marker:abstract>Derived Blogs Detail template </marker:abstract>
                 <marker:searchable>false</marker:searchable>
                 <marker:create-date>{fn:current-dateTime()}</marker:create-date>
                 <marker:update-date>{fn:current-dateTime()}</marker:update-date>
@@ -1805,8 +2839,20 @@ declare function install-data()
                             </xi:include> 
                         </div>
                         <div id="sub">
-                             
-                          &nbsp;
+                         <xi:include href="/content-root/containers/about-us/getting-started.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
+                          <xi:include href="/content-root/containers/blogs/blog-by-date-navigation.container">
+                                <xi:fallback>
+                                    <xi:include href="/content-root/containers/site-wide/fallback.container">
+                                        <xi:fallback><p>NOT FOUND</p></xi:fallback> 
+                                    </xi:include>
+                                </xi:fallback> 
+                            </xi:include>
                         </div>
                         
                     </div>
@@ -1878,6 +2924,7 @@ declare function install-data()
                     </div>
                     
                     <div id="content">
+                    
                             <xi:include href="/content-root/containers/site-wide/search-results.container">
                                 <xi:fallback>
                                     <xi:include href="/content-root/containers/site-wide/fallback.container">
@@ -1952,8 +2999,8 @@ let $inserts :=
                             }
                     </marker:tags>
                     <marker:blog>
-                        <marker:blog-name>general</marker:blog-name>
-                        <marker:realized-path>/blogs/general/</marker:realized-path>
+                        <marker:blog-name>Developer</marker:blog-name>
+                        <marker:realized-path>/blogs/Developer/</marker:realized-path>
                     </marker:blog>
                 </marker:content>
    let $docRoot := $doc/ml:Post/ml:body
@@ -1965,7 +3012,7 @@ let $inserts :=
         
     }   
     
-    return dls:document-insert-and-manage(fn:concat("/content-root/containers/blogs/general/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"), fn:false(), <div>{$newXML/node()}</div>, (), $permissions) 
+    return dls:document-insert-and-manage(fn:concat("/content-root/containers/blogs/Developer/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"), fn:false(), <div>{$newXML/node()}</div>, (), $permissions) 
 let $log := if ($xqmvc-conf:debug) then xdmp:log("Inserted Blogs") else ()
 let $entries := 
     for $entry in xdmp:filesystem-directory(fn:concat($base-dir,"/plugins/marker/resources/data/events"))//dir:entry
@@ -1981,7 +3028,7 @@ let $inserts :=
                     <marker:name>{fn:replace($pointer/dir:filename/text(), ".xml","")}</marker:name>
                     <marker:abstract></marker:abstract>
                     <marker:searchable>true</marker:searchable>
-                    <marker:published-date></marker:published-date>
+                    <marker:published-date>{$doc/ml:Event/ml:details/ml:date/text()}</marker:published-date>
                     <marker:create-date>{fn:current-dateTime()}</marker:create-date>
                     <marker:update-date>{fn:current-dateTime()}</marker:update-date>
                     <marker:authors>
@@ -2025,9 +3072,13 @@ let $inserts :=
                     <marker:type>News</marker:type>
                     <marker:title>{$doc/ml:Announcement/ml:title/text()}</marker:title>
                     <marker:name>{fn:replace($pointer/dir:filename/text(), ".xml","")}</marker:name>
-                    <marker:abstract></marker:abstract>
+                    <marker:abstract>{xdmp:quote($doc/ml:Announcement/ml:body/ml:teaser/node())}</marker:abstract>
                     <marker:searchable>true</marker:searchable>
-                    <marker:published-date>{$doc/ml:Announcement/ml:created/text()}</marker:published-date>
+                    <marker:published-date>{
+                    if($doc/ml:Announcement/ml:created/text())
+                    then ($doc/ml:Announcement/ml:created/text())
+                    else (fn:concat($doc/ml:Announcement/ml:date/text(),"T00:00:00-08:00"))
+                    }</marker:published-date>
                     <marker:create-date>{$doc/ml:Announcement/ml:created/text()}</marker:create-date>
                     <marker:update-date>{$doc/ml:Announcement/ml:last-updated/text()}</marker:update-date>
                     <marker:authors>
@@ -2085,7 +3136,7 @@ declare function install-data-properties()
         for $pointer in $entries
         let $doc := xdmp:document-get($pointer/dir:pathname/text())
         return dls:document-set-properties(
-            fn:concat("/content-root/containers/blogs/general/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"),
+            fn:concat("/content-root/containers/blogs/Developer/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"),
              (
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Blogs</marker:type>
@@ -2109,8 +3160,8 @@ declare function install-data-properties()
                             }
                     </marker:tags>
                     <marker:blog>
-                        <marker:blog-name>general</marker:blog-name>
-                        <marker:realized-path>/blogs/general/</marker:realized-path>
+                        <marker:blog-name>Developer</marker:blog-name>
+                        <marker:realized-path>/blogs/Developer/</marker:realized-path>
                     </marker:blog>
                 </marker:content>
                 
@@ -2134,7 +3185,7 @@ declare function install-data-properties()
                         <marker:name>{fn:replace($pointer/dir:filename/text(), ".xml","")}</marker:name>
                         <marker:abstract></marker:abstract>
                         <marker:searchable>true</marker:searchable>
-                        <marker:published-date></marker:published-date>
+                        <marker:published-date>{$doc/ml:Event/ml:details/ml:date/text()}</marker:published-date>
                         <marker:create-date>{fn:current-dateTime()}</marker:create-date>
                         <marker:update-date>{fn:current-dateTime()}</marker:update-date>
                         <marker:authors>
@@ -2176,7 +3227,11 @@ declare function install-data-properties()
                         <marker:name>{fn:replace($pointer/dir:filename/text(), ".xml","")}</marker:name>
                         <marker:abstract></marker:abstract>
                         <marker:searchable>true</marker:searchable>
-                        <marker:published-date>{$doc/ml:Announcement/ml:created/text()}</marker:published-date>
+                         <marker:published-date>{
+                    if($doc/ml:Announcement/ml:created/text())
+                    then ($doc/ml:Announcement/ml:created/text())
+                    else (fn:concat($doc/ml:Announcement/ml:date/text(),"T00:00:00-08:00"))
+                    }</marker:published-date>
                         <marker:create-date>{$doc/ml:Announcement/ml:created/text()}</marker:create-date>
                         <marker:update-date>{$doc/ml:Announcement/ml:last-updated/text()}</marker:update-date>
                         <marker:authors>
@@ -2198,7 +3253,23 @@ declare function install-data-properties()
      let $log := if ($xqmvc-conf:debug) then xdmp:log("Set news Properties") else ()
      
      
-  
+     let $default-container :=<marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Getting Started</marker:title>
+                <marker:name>getting-started</marker:name>
+                <marker:abstract>Getting started with the MarkLogic Marker community project</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties('/content-root/containers/about-us/getting-started.container', ($default-container))
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Setting general content properties") else ()
     let $default-container :=
                 <marker:content xmlns:marker="http://marklogic.com/marker">
@@ -2218,6 +3289,42 @@ declare function install-data-properties()
                     </marker:tags>
                 </marker:content>
     let $_ := dls:document-set-properties('/content-root/containers/site-wide/fallback.container', ($default-container))
+    let $default-container :=
+                <marker:content xmlns:marker="http://marklogic.com/marker">
+                    <marker:type>Miscellaneous</marker:type> 
+                    <marker:title>About Us Content</marker:title>
+                    <marker:name>about-us-content</marker:name>
+                    <marker:abstract>Display of about-us content - basic funnel for individual about us pages</marker:abstract>
+                    <marker:searchable>false</marker:searchable>
+                    <marker:published-date></marker:published-date>
+                    <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                    <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                    <marker:authors>
+                    </marker:authors>
+                    <marker:categories>
+                    </marker:categories>
+                    <marker:tags>
+                    </marker:tags>
+                </marker:content>
+    let $_ := dls:document-set-properties('/content-root/containers/about-us/about-us-content.container', ($default-container))
+    let $default-container :=
+    <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Marker</marker:title>
+                <marker:name>marker</marker:name>
+                <marker:abstract>Marker overview</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties('/content-root/containers/about-us/marker.container', ($default-container))        
     let $default-container :=
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
@@ -2254,6 +3361,24 @@ declare function install-data-properties()
                     </marker:tags>
                 </marker:content>
     let $_ := dls:document-set-properties("/content-root/containers/site-wide/footer-navigation.container",($default-container))
+    let $default-container :=
+                <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>xqmvc</marker:title>
+                <marker:name>xqmvc</marker:name>
+                <marker:abstract>xqmvc overview</marker:abstract>
+                <marker:searchable>true</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/containers/about-us/xqmvc.container",($default-container))
     let $default-container :=
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
@@ -2488,6 +3613,19 @@ declare function install-data-properties()
             </marker:content>
     let $_ := dls:document-set-properties("/content-root/site/events/detail/template.xhtml", ($default-template))
     let $default-template :=
+        <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>template</marker:type> 
+                <marker:title>About Us Detail</marker:title>
+                <marker:name>template</marker:name>
+                <marker:abstract>Derived About Us dynamic template </marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:base-id>{$uuid}</marker:base-id>
+                <marker:derived>true</marker:derived>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/site/about-us/detail/template.xhtml", ($default-template))
+    let $default-template :=
                  <marker:content xmlns:marker="http://marklogic.com/marker">
                 <marker:type>template</marker:type> 
                 <marker:title>News Detail</marker:title>
@@ -2518,6 +3656,78 @@ declare function install-data-properties()
                 </marker:tags>
             </marker:content>
     let $_ := dls:document-set-properties("/content-root/containers/blogs/blog-navigation.container", ($default-container))
+    let $default-container :=
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Blogs by date</marker:title>
+                <marker:name>blogs-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of blogs by name or general</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/containers/blogs/blogs-by-date-navigation.container", ($default-container))
+    let $default-container :=
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>News by date</marker:title>
+                <marker:name>news-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of news by name or general</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/containers/news/news-by-date-navigation.container", ($default-container))
+    let $default-container :=
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Events by date</marker:title>
+                <marker:name>events-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of events by name or general</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/containers/events/events-by-date-navigation.container", ($default-container))
+    let $default-container :=
+            <marker:content xmlns:marker="http://marklogic.com/marker">
+                <marker:type>Miscellaneous</marker:type> 
+                <marker:title>Blog List</marker:title>
+                <marker:name>blog-by-date-navigation</marker:name>
+                <marker:abstract>Container generates list of blogs by name or general</marker:abstract>
+                <marker:searchable>false</marker:searchable>
+                <marker:published-date></marker:published-date>
+                <marker:create-date>{fn:current-dateTime()}</marker:create-date>
+                <marker:update-date>{fn:current-dateTime()}</marker:update-date>
+                <marker:authors>
+                </marker:authors>
+                <marker:categories>
+                </marker:categories>
+                <marker:tags>
+                </marker:tags>
+            </marker:content>
+    let $_ := dls:document-set-properties("/content-root/containers/blogs/blog-by-date-navigation.container", ($default-container))
     let $default-container :=
             <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
@@ -2626,7 +3836,7 @@ declare function install-data-publish()
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Grabbed blogs list") else ()
     let $inserts :=
         for $pointer in $entries
-        return library:publishLatest(fn:concat("/content-root/containers/blogs/general/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"))
+        return library:publishLatest(fn:concat("/content-root/containers/blogs/Developer/", fn:replace($pointer/dir:filename/text(), ".xml","") ,".container"))
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Published latest blogs") else () 
     let $entries := 
         for $entry in xdmp:filesystem-directory(fn:concat($base-dir,"/plugins/marker/resources/data/events"))//dir:entry
@@ -2658,18 +3868,27 @@ declare function install-data-publish()
     let $publish := library:publishLatest("/content-root/containers/site-wide/login-logout.container")
     let $publish := library:publishLatest("/content-root/site/template.xhtml")
     let $publish := library:publishLatest("/content-root/site/about-us/template.xhtml")
+    let $publish := library:publishLatest("/content-root/containers/about-us/getting-started.container")
     let $publish := library:publishLatest("/content-root/site/blogs/template.xhtml")
     let $publish := library:publishLatest("/content-root/site/blogs/blog/template.xhtml")
     let $publish := library:publishLatest("/content-root/site/search/template.xhtml")
     let $publish := library:publishLatest("/content-root/site/blogs/detail/template.xhtml")
     let $publish := library:publishLatest("/content-root/containers/blogs/blog-navigation.container")
+    let $publish := library:publishLatest("/content-root/containers/about-us/xqmvc.container")
+    let $publish := library:publishLatest("/content-root/containers/about-us/marker.container")
     let $publish := library:publishLatest("/content-root/containers/blogs/blogs-navigation.container")
     let $publish := library:publishLatest("/content-root/containers/blogs/blog-content.container")
+    let $publish := library:publishLatest("/content-root/containers/blogs/blog-by-date-navigation.container")
+    let $publish := library:publishLatest("/content-root/containers/blogs/blogs-by-date-navigation.container")
+    let $publish := library:publishLatest("/content-root/containers/news/news-by-date-navigation.container")
+    let $publish := library:publishLatest("/content-root/containers/events/events-by-date-navigation.container")
     let $publish := library:publishLatest("/content-root/site/news/template.xhtml")
     let $publish := library:publishLatest("/content-root/site/news/detail/template.xhtml")
     let $publish := library:publishLatest("/content-root/containers/news/news-navigation.container")
     let $publish := library:publishLatest("/content-root/containers/news/news-content.container")
     let $publish := library:publishLatest("/content-root/site/events/template.xhtml")
+    let $publish := library:publishLatest("/content-root/site/about-us/detail/template.xhtml")
+    let $publish := library:publishLatest("/content-root/containers/about-us/about-us-content.container")
     let $publish := library:publishLatest("/content-root/site/events/detail/template.xhtml")
     let $publish := library:publishLatest("/content-root/containers/events/event-navigation.container")
     let $publish := library:publishLatest("/content-root/containers/events/event-content.container")

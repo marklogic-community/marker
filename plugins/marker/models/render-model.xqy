@@ -81,20 +81,6 @@ declare function display-content($uri){
         return (xs:QName(fn:string($name)), xdmp:get-request-field(fn:string($name)))
     let $injectedContent := _resolveDynamicContent($injectedContent,$params)
     let $log := if ($xqmvc-conf:debug) then xdmp:log("Injected dynamic content") else ()
-    let $log := if ($xqmvc-conf:debug) 
-        then 
-            (
-            if ($injectedContent)
-            then 
-                (
-                xdmp:log("Content rendered")
-                )
-            else 
-                (
-                xdmp:log("Content is empty")
-                )
-            )
-        else ()
     
     return 
         if ($injectedContent)

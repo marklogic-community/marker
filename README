@@ -13,16 +13,13 @@ SETUP INSTRUCTIONS
 
 5. Open a browser to http://localhost:8100 and follow the on screen prompts
 	a. to install security, click "Security has not been installed on this application. To continue, please click here to install"
-	b. you should see : Setup was successful for the security plugin. Please click logout (upper right top corner) and then click login to set your account as the administrator.
-	c. click logout
-	d. this will take you to the welcome screen
-	e. click login - this sets your account as the admin account
-	f. after successfully logging in (you will be prompted to allow this application access to your fb or github account) you will be placed back on the welcome screen
-	g. you should see "plugins" on the sidebar with security -INSTALLED and marker - NOT INSTALLED
-	h. click on marker - NOT INSTALLED
-	i. to install marker, click "Marker has not been installed on this application. To continue, please click here to install."
-	j. to install the sample data, click "Setup was successful for the marker plugin. Click here to install the sample data set"
-	k. begin exploring the application
+	b. A modal prompt will ask you to verify via Facebook or github - this sets your account as the admin account
+	c. after successfully logging in you will be placed back on the welcome screen
+	d. you should see "plugins" on the sidebar with security -INSTALLED and marker - NOT INSTALLED
+	e. click on marker - NOT INSTALLED
+	f. to install marker, click "Marker has not been installed on this application. To continue, please click here to install."
+	g. to install the sample data, click "Setup was successful for the marker plugin. Click here to install the sample data set"
+	h. begin exploring the application
 
 
 UNINSTALL INSTRUCTIONS

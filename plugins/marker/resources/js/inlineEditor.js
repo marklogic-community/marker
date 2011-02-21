@@ -23,10 +23,11 @@ $(document).ready(function(){
     // remove attr from HTML
     $("html").removeAttr("xml:base");
     $("[xml\\:base]").each(function(i){
+		if($(this).attr('runtime') != 'dynamic'){
         //$(this).attr('contentEditable', 'true');
         $(this).attr('id', $(this).attr('xml:base'));
         $(this).attr('marker:field', 'xhtml');
-        //$(this).aloha();
+        }
         
     });
 	if (viewMode != 'http://marklogic.com/marker/published') {

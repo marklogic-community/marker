@@ -15,11 +15,11 @@ declare function taglib-plugins:plugins-list()
                     if(fn:data($plugin/@installed) eq "true")
                     then
                         (
-                            <li>{fn:data($plugin/@name)} - INSTALLED</li>
+                            <li><img style="width:20px;" src="/application/resources/img/ready.png"/>{fn:data($plugin/@name)}</li>
                         )
                     else
                         (
-                            <li><a href="{fn:data($plugin/@installLocation)}">{fn:data($plugin/@name)} - NOT INSTALLED</a></li>
+                            <li><a href="{fn:data($plugin/@installLocation)}"><img style="width:20px;" src="/application/resources/img/install.png"/>{fn:data($plugin/@name)} (NOT INSTALLED)</a></li>
                         )
                 return $plugin-info
             }
