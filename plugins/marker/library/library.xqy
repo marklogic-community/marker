@@ -131,6 +131,7 @@ declare function library:insert($uri as xs:string, $doc as node(),  $note as xs:
 };
 declare function library:update($uri as xs:string, $doc as node(), $note as xs:string){
     (:place in meta data -- for search faceting only :)
+    let $_ := library:checkout($uri)
     let $meta := library:insertMeta($doc, $uri)
     let $return := xdmp:eval(
         fn:concat(
@@ -144,6 +145,7 @@ declare function library:update($uri as xs:string, $doc as node(), $note as xs:s
         ),
         (xs:QName("uri"), $uri, xs:QName("doc"), $doc, xs:QName("note"), $note)
     )
+    let $_ := library:checkin($uri)
 
     return $return
  

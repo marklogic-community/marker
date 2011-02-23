@@ -81,7 +81,7 @@ var MarkerAdminMenu = {
 			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")'></div><div onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")' class='button-text'> VIEWING: EDITABLE</div></div>");
 		}
 		
-		
+		//<div value='tag' cmdValue='tag' id='insertHTML' class='marker_button marker_button_tag'></div>
 		
 	},
 	togglePin: function(item){
@@ -676,9 +676,9 @@ var MarkerInlineEdit = {
 
 	},
 	clearContentInformation: function(){
-		$(".save-button").hide();
-		$(".checkout-button").hide();
-		$(".checkin-button").hide();
+		//$(".save-button").hide();
+		//$(".checkout-button").hide();
+		//$(".checkin-button").hide();
 	},
 	getContentInformation: function(uri){
 		$.ajax({
@@ -827,13 +827,13 @@ var MarkerInlineEdit = {
 		var data = MarkerInlineEdit.contentInformation[uri];
 		if(data){
 			if(data.status == "in"){
-				$(".save-button").hide();
-				$(".checkout-button").show();
-				$(".checkin-button").hide();
+				//$(".save-button").hide();
+				//$(".checkout-button").show();
+				//$(".checkin-button").hide();
 			}else{
-				$(".save-button").show();
-				$(".checkout-button").hide();
-				$(".checkin-button").show();
+				//$(".save-button").show();
+				//$(".checkout-button").hide();
+				//$(".checkin-button").show();
 			}
 			$("#content-details").html("");
 			$("#content-details").append(data.history);
