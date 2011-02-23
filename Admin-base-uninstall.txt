@@ -2,88 +2,48 @@ xquery version "1.0-ml";
 import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
 
 
-declare variable $username := "facebook_1115962037";
+declare variable $usernames := ("facebook_1115962037", "github_cchatfield","security-anon");
+declare variable $roles := ("security-admin", "security-anon","security-user", "marker-admin");
+declare variable $collections := ("http://marklogic.com/marker/drafts", "http://marklogic.com/marker/published");
 
 
 let $sec := try{
-				xdmp:eval(
+for $user in $usernames
+		return xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-user('", $username, "')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>) 
-            } catch ($e){}
-let $sec := try{
-				xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-user('security-anon')"), (),
+                    sec:remove-user('", $user, "')"), (),
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
             } catch ($e){}
 
-let $sec := try{xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-role('security-admin')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>) 
-                     } catch ($e){}
-let $sec := try{xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-role('security-user')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>)
-                     } catch ($e){} 
-let $sec := try{xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-role('marker-admin')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>) 
-                     } catch ($e){}
-                
-let $sec := try{xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:remove-role('security-anon')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>) 
-                     } catch ($e){}
+
 let $sec := try{
-				xdmp:eval(
+for $role in $roles
+return xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:unprotect-collection('http://marklogic.com/marker/drafts')"), (),
+                    sec:remove-role('", $role, "')"), (),
+                    <options xmlns="xdmp:eval">
+                        <database>{xdmp:database("Security")}</database> 
+                    </options>) 
+                     } catch ($e){}
+
+let $sec := try{
+for $collection in $collections
+return				xdmp:eval(
+                    fn:concat(
+                    "xquery version '1.0-ml'; 
+                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
+                    sec:unprotect-collection('", $collection, "')"), (),
                     <options xmlns="xdmp:eval">
                         <database>{xdmp:database("Security")}</database> 
                     </options>) 
             } catch ($e){}
-let $sec := try{
-				xdmp:eval(
-                    fn:concat(
-                    "xquery version '1.0-ml'; 
-                    import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
-                    sec:unprotect-collection('http://marklogic.com/marker/published')"), (),
-                    <options xmlns="xdmp:eval">
-                        <database>{xdmp:database("Security")}</database> 
-                    </options>) 
-            } catch ($e){}					
-	
+
 let $config := admin:get-configuration()
 let $groupid := admin:group-get-id($config, "Default")
 let $server := admin:appserver-delete(

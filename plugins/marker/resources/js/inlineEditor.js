@@ -76,9 +76,9 @@ var MarkerAdminMenu = {
 		$('#marker-admin-menu-right').html('');
 		$('#marker-admin-menu-left').append("<div class='expandable-buttons-container'><div id='marker-admin-pin' class='marker_button marker_button_pin " + (MarkerAdminMenu.pinned ? 'pinned' : '') + "' onclick='MarkerAdminMenu.togglePin(this)'></div></div>");
 		if(viewMode == 'http://marklogic.com/marker/published'){
-			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"EDITABLE\")'></div><div class='button-text'> VIEWING: PUBLISHED</div></div>");
+			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"EDITABLE\")'></div><div onclick='MarkerAdminMenu.toggleViewingMode(\"EDITABLE\")' class='button-text'> VIEWING: PUBLISHED</div></div>");
 		}else{
-			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")'></div><div class='button-text'> VIEWING: EDITABLE</div></div>");
+			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")'></div><div onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")' class='button-text'> VIEWING: EDITABLE</div></div>");
 		}
 		
 		
@@ -137,7 +137,7 @@ var MarkerInlineEdit = {
 		// insert the inline editor
 		var basicEditor = "";
 		basicEditor = "<div id='marker-editor-container'><div id='marker-editor'>" + 
-		 	"<ul><li><a href='#tabs-1'>Format</a></li><li><a href='#tabs-2'>Insert</a></li><li><a href='#tabs-3'>Image</a></li><li><a href='#tabs-4'>Content Mgmt</a></li><li style='float:right'><div class='expandable-buttons-container' style='background-color:#fff;'><div cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div><div cmdValue='contentmgmt' class='checkin-button marker_button marker_button_checkin' onclick='MarkerInlineEdit.checkin(MarkerInlineEdit.focusedId);'></div><div cmdValue='contentmgmt' class='checkout-button marker_button marker_button_checkout' onclick='MarkerInlineEdit.checkout(MarkerInlineEdit.focusedId);'></div></div></li></ul>" +
+		 	"<ul><li><a href='#tabs-1' title='Full html formatting with access to raw code'>Format</a></li><li><a href='#tabs-2' title='Insert html elements, img, a, tags, etc'>Insert</a></li><li><a href='#tabs-3' title='Toolset for manipulating images'>Image</a></li><li><a href='#tabs-4' title='Content Management - History, Publishing'>Content Mgmt</a></li><li style='float:right'><div class='expandable-buttons-container' style='background-color:#fff;'><div title='Save' cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div></div></li></ul>" +
 			"<div id='tabs-1' class='tab'></div>" + 
 			"<div id='tabs-2' class='tab'></div>" +
 			"<div id='tabs-3' class='tab'></div>" +
@@ -145,84 +145,84 @@ var MarkerInlineEdit = {
 			"</div></div>"
 		$("body").append(basicEditor);
 		$('#tabs-1').append("<div class='three-col-buttons-container'>" +
-							"<div value='Bold' id='bold' class='marker_button marker_button_bold'></div>" +
-							"<div value='Italic' id='italic' class='marker_button marker_button_italic'></div>" +
-							"<div value='Underline' id='underline' class='marker_button marker_button_underline'></div>" +
-							"<div value='&lt;strike&gt;' id='strikeThrough' class='marker_button marker_button_strikethrough'></div>" +
-							"<div value='&lt;sub&gt;' id='subscript' class='marker_button marker_button_sub'></div>" +
-							"<div value='&lt;sup&gt;' id='superscript' class='marker_button marker_button_sup'></div>" +
+							"<div title='Bold' value='Bold' id='bold' class='marker_button marker_button_bold'></div>" +
+							"<div title='Italic' value='Italic' id='italic' class='marker_button marker_button_italic'></div>" +
+							"<div title='Underline' value='Underline' id='underline' class='marker_button marker_button_underline'></div>" +
+							"<div title='Strike' value='&lt;strike&gt;' id='strikeThrough' class='marker_button marker_button_strikethrough'></div>" +
+							"<div title='Subscript' value='&lt;sub&gt;' id='subscript' class='marker_button marker_button_sub'></div>" +
+							"<div title='Superscript' value='&lt;sup&gt;' id='superscript' class='marker_button marker_button_sup'></div>" +
 							"</div>" + 
 							"<div class='color-buttons-container'>" +
-							"<div value='backColor' id='backColor' class='marker_button marker_button_backcolorpicker' cmdValue='transparent' class='marker_button'><div class='palette'></div></div>" +
-							"<div value='MarkerInlineEdit.selectedBackColor' id='backColorSelector' class='marker_button_sm marker_button_downarrow' target='#backColor' cmdValue='colorpicker'></div>" +
-							"<div value='foreColor' id='foreColor' class='marker_button marker_button_forecolorpicker' cmdValue='#000000' class='marker_button'><div class='palette'></div></div>" +
-							"<div value='MarkerInlineEdit.selectedForeColor' id='foreColorSelector' class='marker_button_sm marker_button_downarrow' target='#foreColor' cmdValue='colorpicker'></div>" +
+							"<div title='Back Color' value='backColor' id='backColor' class='marker_button marker_button_backcolorpicker' cmdValue='transparent' class='marker_button'><div class='palette'></div></div>" +
+							"<div title='Select Back Color' value='MarkerInlineEdit.selectedBackColor' id='backColorSelector' class='marker_button_sm marker_button_downarrow' target='#backColor' cmdValue='colorpicker'></div>" +
+							"<div title='Fore Color' value='foreColor' id='foreColor' class='marker_button marker_button_forecolorpicker' cmdValue='#000000' class='marker_button'><div class='palette'></div></div>" +
+							"<div title='Select Fore Color' value='MarkerInlineEdit.selectedForeColor' id='foreColorSelector' class='marker_button_sm marker_button_downarrow' target='#foreColor' cmdValue='colorpicker'></div>" +
 							"</div>" +
 							"<div class='expandable-buttons-container'>" +
-							"<div value='&lt;ul&gt;' id='insertunorderedlist' class='marker_button marker_button_bullist'></div>" +
-							"<div value='&lt;ol&gt;' id='insertorderedlist' class='marker_button marker_button_numlist'></div>" +
+							"<div title='Unordered List' value='&lt;ul&gt;' id='insertunorderedlist' class='marker_button marker_button_bullist'></div>" +
+							"<div title='Ordered List' value='&lt;ol&gt;' id='insertorderedlist' class='marker_button marker_button_numlist'></div>" +
 							"</div>" +
 							"<div class='expandable-buttons-container'>" +
-							"<div value='indent' id='indent' class='marker_button marker_button_indent'></div>" +
-							"<div value='outdent' id='outdent' class='marker_button marker_button_outdent'></div>" +
-							"<div value='justifyLeft' id='justifyLeft' class='marker_button marker_button_justifyleft'></div>" +
-							"<div value='justifyCenter' id='justifyCenter' class='marker_button marker_button_justifycenter'></div>" +
-							"<div value='justifyRight' id='justifyRight' class='marker_button marker_button_justifyright'></div>" +
+							"<div title='Indent' value='indent' id='indent' class='marker_button marker_button_indent'></div>" +
+							"<div title='Outdent' value='outdent' id='outdent' class='marker_button marker_button_outdent'></div>" +
+							"<div title='Justify Left' value='justifyLeft' id='justifyLeft' class='marker_button marker_button_justifyleft'></div>" +
+							"<div title='Justify Center' value='justifyCenter' id='justifyCenter' class='marker_button marker_button_justifycenter'></div>" +
+							"<div title='Justify Right' value='justifyRight' id='justifyRight' class='marker_button marker_button_justifyright'></div>" +
 							"</div>" +
 							"<div class='expandable-buttons-container'>" +
-							"<div value='undo' id='undo' class='marker_button marker_button_undo'></div>" +
-							"<div value='redo' id='redo' class='marker_button  marker_button_redo'></div>" +
-							"<div value='removeFormat' id='removeFormat' class='marker_button marker_button_removeformat'></div>" +
+							"<div title='Undo' value='undo' id='undo' class='marker_button marker_button_undo'></div>" +
+							"<div title='Redo' value='redo' id='redo' class='marker_button  marker_button_redo'></div>" +
+							"<div title='Remove Format' value='removeFormat' id='removeFormat' class='marker_button marker_button_removeformat'></div>" +
 							"</div>" +
 							"<div class='expandable-buttons-container'>" + 
-							"<div value='&lt;h1&gt;' cmdValue='&lt;h1&gt;'  id='formatBlock' class='marker_button marker_button_h1'></div>" +
-							"<div value='&lt;h2&gt;' cmdValue='&lt;h2&gt;' id='formatBlock' class='marker_button marker_button_h2'></div>" +
-							"<div value='&lt;h3&gt;' cmdValue='&lt;h3&gt;' id='formatBlock' class='marker_button marker_button_h3'></div>" +
-							"<div value='&lt;h4&gt;' cmdValue='&lt;h4&gt;' id='formatBlock' class='marker_button marker_button_h4'></div>" +
-							"<div value='&lt;h5&gt;' cmdValue='&lt;h5&gt;' id='formatBlock' class='marker_button marker_button_h5'></div>" +
-							"<div value='&lt;h6&gt;' cmdValue='&lt;h6&gt;' id='formatBlock' class='marker_button marker_button_h6'></div>" +
-							"<div value='&lt;p&gt;' cmdValue='&lt;p&gt;' id='formatBlock' class='marker_button marker_button_p'></div>" +
-							"<div value='&lt;pre&gt;' cmdValue='&lt;pre&gt;' id='formatBlock' class='marker_button marker_button_pre	'></div>" +
+							"<div title='Header 1' value='&lt;h1&gt;' cmdValue='&lt;h1&gt;'  id='formatBlock' class='marker_button marker_button_h1'></div>" +
+							"<div title='Header 2' value='&lt;h2&gt;' cmdValue='&lt;h2&gt;' id='formatBlock' class='marker_button marker_button_h2'></div>" +
+							"<div title='Header 3' value='&lt;h3&gt;' cmdValue='&lt;h3&gt;' id='formatBlock' class='marker_button marker_button_h3'></div>" +
+							"<div title='Header 4' value='&lt;h4&gt;' cmdValue='&lt;h4&gt;' id='formatBlock' class='marker_button marker_button_h4'></div>" +
+							"<div title='Header 5' value='&lt;h5&gt;' cmdValue='&lt;h5&gt;' id='formatBlock' class='marker_button marker_button_h5'></div>" +
+							"<div title='Header 6' value='&lt;h6&gt;' cmdValue='&lt;h6&gt;' id='formatBlock' class='marker_button marker_button_h6'></div>" +
+							"<div title='Paragraph' value='&lt;p&gt;' cmdValue='&lt;p&gt;' id='formatBlock' class='marker_button marker_button_p'></div>" +
+							"<div title='Pre' value='&lt;pre&gt;' cmdValue='&lt;pre&gt;' id='formatBlock' class='marker_button marker_button_pre'></div>" +
 							"</div>" +
 							"<div class='expandable-buttons-container'>" +
-							"<div value='&lt;a&gt;' id='unLink' cmdValue='' class='marker_button  marker_button_unlink'></div>" + 
+							"<div title='Remove Link' value='&lt;a&gt;' id='unLink' cmdValue='' class='marker_button  marker_button_unlink'></div>" + 
 							"</div>" +
 							"<div class='expandable-buttons-container'>" +
-							"<div value='Code Toggle' class='marker_button marker_button_code' onclick='MarkerInlineEdit.rawToggle()'></div>" +
+							"<div title='Toggle Code View' value='Code Toggle' class='marker_button marker_button_code' onclick='MarkerInlineEdit.rawToggle()'></div>" +
 							"</div>" +
 							
 							"");
 		$('#tabs-2').append("<div style='display:none;' class='confirm-buttons two-col-buttons-container'>" +
-						"<div value='confirm' id='confirm-button' class='marker_button marker_button_confirm' onclick=''></div>" +
-						"<div value='cancel' class='marker_button marker_button_cancel' onclick='MarkerInlineEdit.resetInsertDetails();'></div>" +
+						"<div title='Confirm' value='confirm' id='confirm-button' class='marker_button marker_button_confirm' onclick=''></div>" +
+						"<div title='Cancel' value='cancel' class='marker_button marker_button_cancel' onclick='MarkerInlineEdit.resetInsertDetails();'></div>" +
 						"</div><div class='insert-buttons two-col-buttons-container'>" + 
-						"<div value='Table Insert' class='marker_button marker_button_table' onclick='MarkerInlineEdit.buildTableForm(\"#insert-details\")'></div>" +
-						"<div value='Image Insert' class='marker_button marker_button_image' onclick='MarkerInlineEdit.buildImageInsertForm(\"#insert-details\")'></div>" +
-						"<div value='Link Insert' class='marker_button  marker_button_link' onclick='MarkerInlineEdit.buildLinkInsertForm(\"#insert-details\")'></div>" +
+						"<div title='Insert Basic Table' value='Table Insert' class='marker_button marker_button_table' onclick='MarkerInlineEdit.buildTableForm(\"#insert-details\")'></div>" +
+						"<div title='Insert Image' value='Image Insert' class='marker_button marker_button_image' onclick='MarkerInlineEdit.buildImageInsertForm(\"#insert-details\")'></div>" +
+						"<div title='Insert Link' value='Link Insert' class='marker_button marker_button_link' onclick='MarkerInlineEdit.buildLinkInsertForm(\"#insert-details\")'></div>" +
 						"</div>" +
 							//separator
 							"<div id='insert-details' class='not-handle'></div>" 
 							
 						);
 		$('#tabs-3').append("<div class='confirm-buttons two-col-buttons-container'>" +
-						"<div value='confirm' class='marker_button marker_button_confirm' onclick='$(MarkerInlineEdit.selectedImage.image).attr({src:$(\"#image-src\").val(), width:$(\"#image-width\").val(), height:$(\"#image-height\").val()});$(\"#marker-editor\").tabs(\"select\", 0);$(\"#marker-editor\").tabs(\"disable\", 2);'></div>" +
-						"<div value='cancel' class='marker_button marker_button_cancel' onclick='$(MarkerInlineEdit.selectedImage.image).attr({src:MarkerInlineEdit.selectedImage.src, width:MarkerInlineEdit.selectedImage.width, height:MarkerInlineEdit.selectedImage.height});$(\"#marker-editor\").tabs(\"select\", 0);$(\"#marker-editor\").tabs(\"disable\", 2);'></div>" +
+						"<div title='Confirm' value='confirm' class='marker_button marker_button_confirm' onclick='$(MarkerInlineEdit.selectedImage.image).attr({src:$(\"#image-src\").val(), width:$(\"#image-width\").val(), height:$(\"#image-height\").val()});$(\"#marker-editor\").tabs(\"select\", 0);$(\"#marker-editor\").tabs(\"disable\", 2);'></div>" +
+						"<div title='Cancel' value='cancel' class='marker_button marker_button_cancel' onclick='$(MarkerInlineEdit.selectedImage.image).attr({src:MarkerInlineEdit.selectedImage.src, width:MarkerInlineEdit.selectedImage.width, height:MarkerInlineEdit.selectedImage.height});$(\"#marker-editor\").tabs(\"select\", 0);$(\"#marker-editor\").tabs(\"disable\", 2);'></div>" +
 						"</div>" +
 						"<div class='image-buttons two-col-buttons-container'>" + 
-						"<div class='marker_button marker_button_img_align_none' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\");'></div>" +
-						"<div class='marker_button marker_button_img_align_left' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignLeft\");'></div>" +
-						"<div class='marker_button marker_button_img_align_center' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignCenter\");'></div>" +
-						"<div class='marker_button marker_button_img_align_right' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignRight\");'></div></div>" +
+						"<div title='Image Align None' class='marker_button marker_button_img_align_none' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\");'></div>" +
+						"<div title='Image Align Left' class='marker_button marker_button_img_align_left' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignLeft\");'></div>" +
+						"<div title='Image Align Center' class='marker_button marker_button_img_align_center' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignCenter\");'></div>" +
+						"<div title='Image Align Right' class='marker_button marker_button_img_align_right' onclick='$(MarkerInlineEdit.selectedImage.image).removeClass(\"alignCenter alignLeft alignRight\").addClass(\"alignRight\");'></div></div>" +
 							//separator
 						"<div id='image-details' class='not-handle'>" + 
 						"<div style='width:100%;float:left;'>URL:<input style='width:85%;' type='text' id='image-src' value='http://' /></div>" +
-						"<div id='image-size-slider' style='width:30%;float:left;margin-top:6px;margin-left:2px;'></div><div style='width:30%;float:left;margin-left:2px;'>Width:<input type='text' id='image-width' value='0' size='4'/></div>" +
+						"<div title='Resize Image' id='image-size-slider' style='width:30%;float:left;margin-top:6px;margin-left:2px;'></div><div style='width:30%;float:left;margin-left:2px;'>Width:<input type='text' id='image-width' value='0' size='4'/></div>" +
 						"<div style='width:35%;float:right;'>Height:<input type='text' id='image-height' value='0' size='4'/></div>" +
 						"</div>" 
 						);
 		$('#tabs-4').append(
 						"<div class='image-buttons two-col-buttons-container'>" + 
-						"<div cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div><div cmdValue='contentmgmt' class='checkin-button marker_button marker_button_checkin' onclick='MarkerInlineEdit.checkin(MarkerInlineEdit.focusedId);'></div><div cmdValue='contentmgmt' class='checkout-button marker_button marker_button_checkout' onclick='MarkerInlineEdit.checkout(MarkerInlineEdit.focusedId);'></div><div value='tag' cmdValue='tag' id='insertHTML' class='marker_button marker_button_tag'></div></div>" +
+						"<div title='Save' cmdValue='contentmgmt' class='save-button marker_button marker_button_save' onclick='MarkerInlineEdit.save(MarkerInlineEdit.focusedId, MarkerInlineEdit.prepareData(MarkerInlineEdit.currentFocus));'></div></div>" +
 							//separator
 						"<div id='content-details' class='not-handle'>" + 
 						
@@ -521,12 +521,10 @@ var MarkerInlineEdit = {
 		}
 		
 		data = $(element).html();
-		alert(data);
 		data = data.replace(/<br>+/g, "<br/>");
 		data = data.replace(/\n/g, '');
 		data = data.replace(/\t/g, '');
 		data = data.replace(/&nbsp;/g,' ');
-		alert(data);
 		$(element).html(data);
 			
 		return data;

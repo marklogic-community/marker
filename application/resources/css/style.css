@@ -1,10 +1,10 @@
 
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+h1, h2, h3, h4, h5, h6, p, blockquote,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
+small, strike, tt, var,
+b, u, , center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -1856,3 +1856,13 @@ border-radius: 3px;}
 .facet-value{line-height:1.3em;}
 dt{font-weight:bold:}
 dd{font-style:italic;}
+
+.tooltip {
+		display:none;
+		background-color:#ffa;
+		border:1px solid #cc9;
+		padding:3px;
+		font-size:1opx;
+		-moz-box-shadow: 2px 2px 11px #666;
+		-webkit-box-shadow: 2px 2px 11px #666;
+	}
