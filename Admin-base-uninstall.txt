@@ -50,17 +50,15 @@ return				xdmp:eval(
 
 let $config := admin:get-configuration()
 let $groupid := admin:group-get-id($config, "Default")
-let $server := admin:appserver-delete(
-  $config, 
- admin:appserver-get-id($config, $groupid, "8100-marker"))
+let $server := try{admin:appserver-delete($config, admin:appserver-get-id($config, $groupid, "8100-marker"))} catch ($e){}
 let $_ :=  admin:save-configuration($server)
 
 let $config := admin:get-configuration()
-let $config := admin:database-delete($config, xdmp:database("marker"))
+let $config := try{admin:database-delete($config, xdmp:database("marker"))} catch ($e){}
 let $_ :=  admin:save-configuration($config)
-
+let $_ := xdmp:sleep(5000)
 let $config := admin:get-configuration()
-let $config := admin:forest-delete($config, admin:forest-get-id($config, "marker"), fn:true())
+let $config := try{admin:forest-delete($config, admin:forest-get-id($config, "marker"), fn:true())} catch ($e){}
 let $_ :=  admin:save-configuration($config)
 
 return "done"
