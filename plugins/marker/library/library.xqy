@@ -143,7 +143,7 @@ declare function library:update($uri as xs:string, $doc as node(), $note as xs:s
             dls:document-update($uri, $doc, $note, fn:true(), (xdmp:permission('marker-admin', 'update'), xdmp:permission('marker-admin', 'read')) )
             "
         ),
-        (xs:QName("uri"), $uri, xs:QName("doc"), $doc, xs:QName("note"), $note)
+        (xs:QName("uri"), $uri, xs:QName("doc"), $meta, xs:QName("note"), $note)
     )
     let $_ := library:checkin($uri)
 
@@ -532,7 +532,7 @@ declare function library:getContainerVersionContent($uri) {
 
     let $doc := fn:doc($uri)/div/node()
     return
-       $doc
+       library:stripMeta($doc)
 };
 
 

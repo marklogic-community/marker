@@ -7,9 +7,11 @@ declare variable $roles := ("security-admin", "security-anon","security-user", "
 declare variable $collections := ("http://marklogic.com/marker/drafts", "http://marklogic.com/marker/published");
 
 
-let $sec := try{
+let $sec := 
 for $user in $usernames
-		return xdmp:eval(
+return try{
+
+		xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';
@@ -20,9 +22,11 @@ for $user in $usernames
             } catch ($e){}
 
 
-let $sec := try{
+let $sec := 
 for $role in $roles
-return xdmp:eval(
+return
+try{
+ xdmp:eval(
                     fn:concat(
                     "xquery version '1.0-ml'; 
                     import module namespace sec='http://marklogic.com/xdmp/security' at '/MarkLogic/security.xqy';

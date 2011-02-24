@@ -80,9 +80,6 @@ var MarkerAdminMenu = {
 		}else{
 			$('#marker-admin-menu-right').append("<div class='expandable-buttons-container'><div id='marker-admin-switch' class='marker_button marker_button_switch' onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")'></div><div onclick='MarkerAdminMenu.toggleViewingMode(\"http://marklogic.com/marker/published\")' class='button-text'> VIEWING: EDITABLE</div></div>");
 		}
-		
-		//<div value='tag' cmdValue='tag' id='insertHTML' class='marker_button marker_button_tag'></div>
-		
 	},
 	togglePin: function(item){
 		if(MarkerAdminMenu.pinned){
@@ -126,6 +123,7 @@ var MarkerInlineEdit = {
 	debug:false,
 	selectedImage:'',
 	selectedLink:'',
+	selectedTag:'',
 	savedSelection:null,
 	init: function() {
 		var originalValues = new Array();
@@ -199,6 +197,7 @@ var MarkerInlineEdit = {
 						"<div title='Insert Basic Table' value='Table Insert' class='marker_button marker_button_table' onclick='MarkerInlineEdit.buildTableForm(\"#insert-details\")'></div>" +
 						"<div title='Insert Image' value='Image Insert' class='marker_button marker_button_image' onclick='MarkerInlineEdit.buildImageInsertForm(\"#insert-details\")'></div>" +
 						"<div title='Insert Link' value='Link Insert' class='marker_button marker_button_link' onclick='MarkerInlineEdit.buildLinkInsertForm(\"#insert-details\")'></div>" +
+						"<div  title='Insert Tag'  value='Tag Insert' class='marker_button marker_button_tag' onclick='MarkerInlineEdit.buildTagInsertForm(\"#insert-details\")'></div>" +
 						"</div>" +
 							//separator
 							"<div id='insert-details' class='not-handle'></div>" 
@@ -280,6 +279,14 @@ var MarkerInlineEdit = {
 					MarkerInlineEdit.selectedLink = this;
 					MarkerInlineEdit.buildLinkInsertForm("#insert-details", true);
 					$("#link-url").val($(this).attr("href"));
+			});
+			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Setting live click event for tag");
+			$(".tagged", this).live('click',function(event){
+					if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Clicked tag " + $(this).html());
+					$("#marker-editor").tabs("select", 1);
+					MarkerInlineEdit.selectedTag = this;
+					MarkerInlineEdit.buildTagInsertForm("#insert-details", true);
+					$("#tag-subcategory").val($(this).attr("category"));
 			});
 			
 		});
@@ -520,13 +527,27 @@ var MarkerInlineEdit = {
 			MarkerInlineEdit.rawToggle($(element));
 		}
 		
+		// convert tags
+		MarkerInlineEdit.convertSpansToTags(element);	
+		
+		// clear all rangy selections on save
+		if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Cleaning rangy selection") ;
+		$('span[id^="selectionBoundary"]').each(function(index, item){
+			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Cleaning rangy selection " + $(item).attr("id")) ;
+			$(item).replaceWith(function() { 
+			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Cleaning rangy selection " + $(item).attr("id") + " with contents " + $(item).contents()) ;
+			return $(item).contents(); 
+			});
+		});
 		data = $(element).html();
 		data = data.replace(/<br>+/g, "<br/>");
 		data = data.replace(/\n/g, '');
 		data = data.replace(/\t/g, '');
 		data = data.replace(/&nbsp;/g,' ');
+		
 		$(element).html(data);
-			
+		// convert tags back
+		MarkerInlineEdit.convertTagsToSpans(element);
 		return data;
 	},
 	
@@ -624,6 +645,38 @@ var MarkerInlineEdit = {
 				$(MarkerInlineEdit.currentFocus).focus();
 				rangy.restoreSelection(MarkerInlineEdit.savedSelection);
 				var returnValue = document.execCommand("createLink", false, $("#link-url").val().toString());
+			}
+			MarkerInlineEdit.resetInsertDetails();
+		});
+		
+	},
+	buildTagInsertForm: function(node, existing){
+		if(!existing)
+			var existing = false;
+		MarkerInlineEdit.showConfirmButtons();
+		$(node).html('');
+		var linkInsertForm = "<div style='width:100%;float:left;'>Subcategory: <select style='width:75%;'  id='tag-subcategory'><option value='tag'>Select a category ...</option><option value='person'>Person</option><option value='place'>Place</option><option value='thing'>Thing</option></select></div>" 
+		$(node).append(linkInsertForm);
+		$("#confirm-button").click(function (){
+			if (existing) {
+				if (MarkerInlineEdit.debug) 
+					MarkerInlineEdit.debugLogMessage("Updating tag to " + $("#link-url").val());
+				$(MarkerInlineEdit.selectedLink).attr("href", $("#link-url").val());
+				$(MarkerInlineEdit.currentFocus).focus();
+				rangy.restoreSelection(MarkerInlineEdit.savedSelection);
+			}
+			else {
+				if (MarkerInlineEdit.debug) 
+					MarkerInlineEdit.debugLogMessage("Inserting tag " + $("#tag-subcategory option:selected").val());
+				$(MarkerInlineEdit.currentFocus).focus();
+				rangy.restoreSelection(MarkerInlineEdit.savedSelection);
+				var value="<span class='tagged'>" + rangy.getSelection() + "</span>";
+				if($("#tag-subcategory option:selected").val() != ''){
+					
+					value = "<span class='tagged' category='" + $("#tag-subcategory option:selected").val().toString() + "'>" + rangy.getSelection() + "</span>";
+					
+				}
+				var returnValue = document.execCommand("insertHTML", false,value);
 			}
 			MarkerInlineEdit.resetInsertDetails();
 		});
@@ -815,6 +868,7 @@ var MarkerInlineEdit = {
 			data: 'uri=' + uri,
 			success: function(data){
 				$(MarkerInlineEdit.currentFocus).html(data);
+				MarkerInlineEdit.convertTagsToSpans($(MarkerInlineEdit.currentFocus));
 				_show_info("Content Mgmt", "Successful update to " + uri);
 			},
 			error: function(data, status, error){
@@ -848,59 +902,27 @@ var MarkerInlineEdit = {
 		}else{
 			_show_error("Content Mgmt", "No information available for : " + uri);	
 		}
+	},
+	convertTagsToSpans:function(content){
+		$(content).find('*[tagitem]').each(function(index, item){
+			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("tags to spans " + $(item).attr("tagitem")) ;
+			$(item).replaceWith(function() { 
+				return $("<span class='tagged' category='" + $(item).attr("tagitem") + "'></span>").html($(item).contents()); 
+			});
+		});
+	},
+	convertSpansToTags:function(content){
+		if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Spans to tags") ;
+		$(content).find('.tagged').each(function(index, item){
+			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("Spans to tags " + $(item).attr("category")) ;
+			$(item).replaceWith(function() { 
+				return $("<" + $(item).attr("category")+ " tagitem='" + $(item).attr("category")+ "'></"+ $(item).attr("category")+ ">").html($(item).contents()); 
+			});
+		});
 	}
 };
 
 
 
 
-//TODO - this was inlined and should be replaced when we have a UI design, or if used
-//       included appropriately
 
-/**
-Vertigo Tip by www.vertigo-project.com
-Requires jQuery
-*/
-
-this.vtip = function() {    
-    this.xOffset = -10; // x distance from mouse
-    this.yOffset = 10; // y distance from mouse       
-    
-    $(".vtip").unbind().hover(    
-        function(e) {
-            this.t = this.title;
-            this.title = ''; 
-            this.top = (e.pageY + yOffset); this.left = (e.pageX + xOffset);
-            
-            $('body').append( '<p id="vtip"><img id="vtipArrow" />' + this.t + '</p>' );
-                        
-            $('p#vtip #vtipArrow').attr("src", 'images/vtip_arrow.png');
-            $('p#vtip').css("top", this.top+"px").css("left", this.left+"px").fadeIn("slow");
-            
-        },
-        function() {
-            this.title = this.t;
-            $("p#vtip").fadeOut("slow").remove();
-        }
-    ).mousemove(
-        function(e) {
-            this.top = (e.pageY + yOffset);
-            this.left = (e.pageX + xOffset);
-                         
-            $("p#vtip").css("top", this.top+"px").css("left", this.left+"px");
-        }
-    );            
-    
-};
-jQuery.fn.aPosition = function() {
-thisLeft = this.offset().left;
-thisTop = this.offset().top; 
-thisParent = this.parent();
-parentLeft = thisParent.offset().left;
-parentTop = thisParent.offset().top;
-return {
-left: thisLeft-parentLeft, 
-top: thisTop-parentTop
-}
-}
-//jQuery(document).ready(function($){vtip();}) 

@@ -183,6 +183,9 @@ declare function install()
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "http://marklogic.com/marker", "author", "http://marklogic.com/collation/", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "http://marklogic.com/marker", "type", "http://marklogic.com/collation/", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "http://marklogic.com/marker", "category", "http://marklogic.com/collation/", fn:false() ))
+    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "", "person", "http://marklogic.com/collation/", fn:false() ))
+    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "", "place", "http://marklogic.com/collation/", fn:false() ))
+    let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("string", "", "thing", "http://marklogic.com/collation/", fn:false() ))
     (:let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "create-date", "", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "update-date", "", fn:false() ))
     let $config  := admin:database-add-range-element-index($config, xdmp:database(),  admin:database-range-element-index("dateTime", "http://marklogic.com/marker", "publish-date", "", fn:false() )):)
@@ -1477,6 +1480,24 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                      
                     </range>
                   </constraint> 
+                  <constraint name="Person">
+                    <range type="xs:string" collation="http://marklogic.com/collation/">
+                     <element ns="" name="person"/>
+                     
+                    </range>
+                  </constraint> 
+                  <constraint name="Place">
+                    <range type="xs:string" collation="http://marklogic.com/collation/">
+                     <element ns="" name="place"/>
+                     
+                    </range>
+                  </constraint> 
+                  <constraint name="Things">
+                    <range type="xs:string" collation="http://marklogic.com/collation/">
+                     <element ns="" name="thing"/>
+                     
+                    </range>
+                  </constraint> 
                 </options>;
                 declare function local:pagination($results)
                 {{
@@ -1641,7 +1662,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                                             )
                                 }}          
                             </ul>
-                         else <ul>&#160;</ul>
+                         else ()
 
                 return
                     <div>

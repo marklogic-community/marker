@@ -1042,3 +1042,4 @@ div.marker-editable:focus {
     -moz-box-shadow: 0 0 5px rgba(245, 10, 20, 1);
 }
 td {padding:3px;vertical-align: middle; }
+.tagged{border-bottom:dotted 1px #ccc;padding-right:15px;background:transparent url(../img/tagged.png) no-repeat right top}
