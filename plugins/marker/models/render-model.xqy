@@ -36,13 +36,32 @@ declare namespace marker = "http://marklogic.com/plugins/marker";
 
 declare function display-content($uri){
     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading requested uri:", $uri)) else ()
-     let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading mode:", xdmp:get-session-field("view-mode"))) else ()
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Loading mode:", xdmp:get-session-field("view-mode"))) else ()
+    let $mode-check := 
+        if(xdmp:get-current-user() ne "security-anon" and security:getCurrentUserRoles() eq $cfg:marker-bar-roles and xdmp:get-session-field("view-mode", '') eq '')
+        then (
+           let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Setting mode to editable")) else ()
+           return xdmp:set-session-field("view-mode", "EDITABLE"))
+        else (
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not in role to edit")) else () 
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not in role:", xdmp:get-current-user())) else ()
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not in role:", security:getCurrentUserRoles() eq $cfg:marker-bar-roles)) else ()
+            let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Not in role:", xdmp:get-session-field("view-mode",''))) else ()
+            return ()) 
     (: check if viewing published or library :)
     let $content :=
         try{
             if(xdmp:get-session-field("view-mode",library:collection-name()) eq library:collection-name())
-            then dls:node-expand(library:doc($uri)/*,cts:collection-query((library:collection-name())))
-            else dls:node-expand(library:doc($uri)/*,())
+            then
+                (
+                let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Returning published content")) else ()
+                return dls:node-expand(library:doc($uri)/*,cts:collection-query((library:collection-name())))
+                )
+            else 
+                (
+                let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Returning latest content:", $uri)) else () 
+                return dls:node-expand(library:doc($uri)/*,dls:documents-query())
+                )
         }catch ($e){
             let $log := xdmp:log(fn:concat("Missing published content for uri : ",$uri , " error:", fn:string($e)), "error")
             return 

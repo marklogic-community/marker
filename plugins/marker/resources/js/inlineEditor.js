@@ -517,6 +517,8 @@ var MarkerInlineEdit = {
 		$("#marker-editor").tabs();
 		// hide the image tab
 		$("#marker-editor").tabs("disable", 2);
+		// add tag markers to all content
+		MarkerInlineEdit.convertTagsToSpans($('body'));
 		
 	},
 	
