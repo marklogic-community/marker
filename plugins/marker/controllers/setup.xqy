@@ -542,9 +542,9 @@ declare function install-data()
                 <br/>
                 <p>Thank you for downloading the MarkLogic Marker community project.</p>
                 <ul class="more">
-                     <li><a href="/about-us">Overview &gt;</a></li>
-                     <li><a href="/about-us/xqmvc">xqmvc &gt;</a></li>
-                     <li><a href="/about-us/marker">Marker &gt;</a></li>
+                     <li><a href="/about-us">Overview &#187;</a></li>
+                     <li><a href="/about-us/xqmvc">xqmvc &#187;</a></li>
+                     <li><a href="/about-us/marker">Marker &#187;</a></li>
                   </ul>
               </div>
             </div>
