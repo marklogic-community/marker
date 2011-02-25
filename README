@@ -24,3 +24,5 @@ SETUP INSTRUCTIONS
 
 UNINSTALL INSTRUCTIONS
 1. Open cq and copy and paste "Admin-base-uninstall.txt" contents into the query window. Press text.
+
+2. If necessary, you may need to go manually delete a forest named 'marker'
