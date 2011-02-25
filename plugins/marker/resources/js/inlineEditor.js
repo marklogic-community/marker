@@ -548,6 +548,7 @@ var MarkerInlineEdit = {
 		data = data.replace(/&nbsp;/g,' ');
 		
 		$(element).html(data);
+		data = data.replace(/&amp;/g,'***');
 		// convert tags back
 		MarkerInlineEdit.convertTagsToSpans(element);
 		return data;
@@ -675,7 +676,7 @@ var MarkerInlineEdit = {
 				var value="<span class='tagged'>" + rangy.getSelection() + "</span>";
 				if($("#tag-subcategory option:selected").val() != ''){
 					
-					value = "<span class='tagged' category='" + $("#tag-subcategory option:selected").val().toString() + "'>" + rangy.getSelection() + "</span>";
+					value = "<span class='tagged' title='" + $("#tag-subcategory option:selected").val().toString() + "' category='" + $("#tag-subcategory option:selected").val().toString() + "'>" + rangy.getSelection() + "</span>";
 					
 				}
 				var returnValue = document.execCommand("insertHTML", false,value);
@@ -909,7 +910,7 @@ var MarkerInlineEdit = {
 		$(content).find('*[tagitem]').each(function(index, item){
 			if(MarkerInlineEdit.debug)MarkerInlineEdit.debugLogMessage("tags to spans " + $(item).attr("tagitem")) ;
 			$(item).replaceWith(function() { 
-				return $("<span class='tagged' category='" + $(item).attr("tagitem") + "'></span>").html($(item).contents()); 
+				return $("<span class='tagged' title='" + $(item).attr("tagitem") + "' category='" + $(item).attr("tagitem") + "'></span>").html($(item).contents()); 
 			});
 		});
 	},

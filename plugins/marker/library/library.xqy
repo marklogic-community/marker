@@ -281,9 +281,10 @@ declare function library:insertMeta($doc, $uri)
 declare function library:stripMeta($doc as node())
 { 
     
-    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ():)
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("pre cleaning:", xdmp:quote($doc) )) else ()
     let $cleaned := functx:remove-elements-deep($doc,"content")
-    (:let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($cleaned) )) else ():)
+    let $cleaned := functx:remove-elements-deep($cleaned,"marker:content")
+    let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("post cleaning:", xdmp:quote($cleaned) )) else ()
     return $cleaned
     
    
@@ -400,7 +401,10 @@ declare function library:getManagedDocUri($uri) {
  : @param $uri a manage content url (e.g. /content/123456.xml) - NOT A VERSIONED URI
  :)
 declare function library:doc($uri) {
-    let $doc := fn:root(library:collection()[property::dls:version/dls:document-uri = $uri][1])
+    let $doc := 
+        if(xdmp:get-session-field("view-mode") eq "EDITABLE")
+        then (fn:doc(library:latestVersionUri($uri)))
+        else (fn:root(library:collection()[property::dls:version/dls:document-uri = $uri][1]))
     return
         if($doc) then 
             $doc 
@@ -530,9 +534,8 @@ declare function library:versionHistory($uri) {
 
 declare function library:getContainerVersionContent($uri) {
 
-    let $doc := fn:doc($uri)/div/node()
-    return
-       library:stripMeta($doc)
+    let $doc := library:stripMeta(fn:doc($uri)/div/node())
+    return $doc
 };
 
 

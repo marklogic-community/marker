@@ -217,7 +217,8 @@ declare function library-model:json-update-uri-content($uri, $content){
         
         let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("Updating requested uri:", $uri )) else ()
         let $log := if ($xqmvc-conf:debug) then xdmp:log(fn:concat("content:", $content)) else ()
-        let $content := xdmp:unquote(fn:concat("<div>",fn:replace($content,"<br>","<br/>"),"</div>"), "", ("repair-full"))
+        (: clean up the &amp; they are set on the client as *** :)
+        let $content := xdmp:unquote(fn:concat("<div>",fn:replace($content,"\*\*\*","&amp;"),"</div>"), "", ("repair-full"))
         let $exec := library:update($uri,$content, "Update from UI")
         return fn:concat("{&quot;isSuccess&quot;:&quot;",fn:true(), "&quot;}")
     }

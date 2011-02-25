@@ -3028,7 +3028,7 @@ let $inserts :=
 
     let $newXML := 
     element {fn:node-name($docRoot)} {
-        $docRoot/*,
+        xdmp:unquote(fn:replace(xdmp:quote($docRoot/*), 'xmlns="http://www.w3.org/1999/xhtml"', '')),
         element marker:content {$meta/* }
         
     }   
@@ -3073,7 +3073,7 @@ let $inserts :=
 
     let $newXML := 
     element {fn:node-name($docRoot)} {
-        $docRoot/*,
+        xdmp:unquote(fn:replace(xdmp:quote($docRoot/*), 'xmlns="http://www.w3.org/1999/xhtml"', '')),
         element marker:content {$meta/* }
         
     }   
@@ -3118,7 +3118,7 @@ let $inserts :=
 
     let $newXML := 
     element {fn:node-name($docRoot)} {
-        $docRoot/*,
+        xdmp:unquote(fn:replace(xdmp:quote($docRoot/*), 'xmlns="http://www.w3.org/1999/xhtml"', '')),
         element marker:content {$meta/* }
         
     }   

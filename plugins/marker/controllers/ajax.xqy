@@ -130,7 +130,7 @@ declare function get-version-content()
     return 
         (
         xdmp:set-response-content-type("text/html"),
-        library:stripMeta(library-model:get-version-content($uri))
+        library-model:get-version-content($uri)
         )
         
 };
