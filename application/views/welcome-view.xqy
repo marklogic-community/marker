@@ -36,7 +36,7 @@ declare variable $data as map:map external;
         Please check out the side bar to the right for additional plugins that may need to be installed.
     </p>
     <p>
-        <a href="http://github.com/marker">
+        <a href="http://github.com/marklogic/marker">
             Website / Documentation
         </a>
     </p>
