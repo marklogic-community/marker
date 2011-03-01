@@ -70,7 +70,9 @@ a {
 	text-decoration: none;
 	color: #235BAB;
 }
-a:hover {text-decoration: none;}
+a:hover {
+    text-decoration: underline;
+}
 ::selection {
 	background: #A4B243;
 	color: white;
@@ -97,7 +99,7 @@ ul {
 	padding: 0;
 	list-style: none;
 }
-#content #main ul {list-style:disc inside; padding-left:35px;}
+#content #main ul {list-style:disc outside; padding-left:35px;}
 #content #main .action ul, #content #main #special_intro ul {padding-left:0}
 fieldset {
 	margin: 0;
