@@ -164,14 +164,14 @@ declare function install()
                 <secret>1566bfe43e0f0aa91c6d259040f2e284</secret>
                 <access_token_url>https://graph.facebook.com/oauth/access_token</access_token_url>
                 <authorize_url>https://graph.facebook.com/oauth/authorize</authorize_url>
-                <redirect_url>http://localhost:8100/security/authentication/facebook</redirect_url>
+                <redirect_url>http://localhost:8101/security/authentication/facebook</redirect_url>
             </provider>
             <provider name="github">
-                <id>47df013b281952796da7</id>
-                <secret>b4482d5ac4e7f629ad20d08c2ff9b895ceb8b745</secret>
+                <id>2603a7878cb0dbf338af</id>
+                <secret>4e21731e4c5008436245a5f57b2f4729db9303cd</secret>
                 <access_token_url>https://github.com/login/oauth/access_token</access_token_url>
                 <authorize_url>https://github.com/login/oauth/authorize</authorize_url>
-                <redirect_url>http://localhost:8100/security/authentication/github</redirect_url>
+                <redirect_url>http://localhost:8101/security/authentication/github</redirect_url>
             </provider>
         </security_config>,
             (xdmp:permission("security-anon", "read"), xdmp:permission("security-anon", "update"), xdmp:permission("security-admin", "update"))

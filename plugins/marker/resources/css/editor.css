@@ -5,6 +5,7 @@
     height: 120px;
 	font-size:12px;
     display: none;
+    z-index: 100; /* editor on top please; this value depend on whatever else your templates do */
 }
 
 #marker-editor {
@@ -681,6 +682,7 @@ tr.unpublished {
     background: url(../img/colorpicker_background.png);
     font-family: Arial, Helvetica, sans-serif;
     display: none;
+    z-index: 200; /* editor on top please; this value depend on whatever else your templates do */
 }
 
 .colorpicker_color {

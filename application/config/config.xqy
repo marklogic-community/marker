@@ -112,12 +112,12 @@ declare variable $server-name as xs:string := 'localhost';
 (:
  : Server http port 
  :)
-declare variable $server-http-port as xs:string := '8100';
+declare variable $server-http-port as xs:string := '8101';
 
 (:
  : Server https port 
  :)
-declare variable $server-https-port as xs:string := '8100';
+declare variable $server-https-port as xs:string := '8101';
 
 
 

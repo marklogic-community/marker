@@ -42,38 +42,40 @@ $xqmvc:doctype-xhtml-1.1,
         <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/jquery.jstree.js">&nbsp;</script>
         <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/style.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/smoothness/jquery-ui-1.8.9.custom.css"/>
+        <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="http://drbeddow.com/wp-content/themes/thistle/favicon.ico" />
     </head>
     <body>
+    <div id="wrap">
     <div id="container">
-    <div id="header" style="position:relative;">
-        <h1>
-          &nbsp; 
-        </h1>
+      <div id="header" style="position:relative;">
+        <h1 id="blog-title"><a href="http://github.com/marklogic/xqmvc">XQMVC</a></h1>
+        <p id="blog-desc"><span>Application bootstrap and installation</span></p>
         <div style="position:absolute;top:5px;right:5px;width:150px;text-align:right;"> {taglib-security:login-logout()}</div>
         <div id="navigation">
         <ul>
           &nbsp;   
         </ul>
-    </div>
+      </div>
     </div>
     
-    <div id="content">
-        <div id="main">
-            <div>{ map:get($data, 'body') }</div>
-        </div>
-        <div id="sub">
-         <div class="subnav">
-            <h2>Administration</h2>
-          <ul>
-                {taglib-plugins:plugins-list()}
+    <div id="col-wrap">
+      <div id="content">
+        <div>{ map:get($data, 'body') }</div>
+      </div>
+
+      <div id="sidebar">
+          <div class="sidebar-top">&#160; </div>
+          <ul class="xoxo"> 
+                <h2>Administration</h2> 
+                {taglib-plugins:plugins-list()} 
           </ul>
-          </div>
-        </div>
-        
+          <div class="sidebar-bottom"> &#160;</div>
+       </div>
     </div>
     <div id="footer">
-           <p>Copyright © 2011 MarkLogic Corporation.  MARKLOGIC® is a registered trademark of MarkLogic Corporation in the United States</p>
-        </div>
+       <p>Copyright © 2010-11 MarkLogic Corporation, All rights reserved.</p>
+    </div>
+</div>
 </div>
    
       

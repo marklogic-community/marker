@@ -9,9 +9,9 @@ SETUP INSTRUCTIONS
 
 3. Open cq and copy and paste "Admin-base-install.txt" contents into the query window. Press text.
 
-4. If successful you should see : Complete - please open your browser to http://localhost:8100 and login with your admin credentials
+4. If successful you should see : Complete - please open your browser to http://localhost:8101 and login with your admin credentials
 
-5. Open a browser to http://localhost:8100 and follow the on screen prompts
+5. Open a browser to http://localhost:8101 and follow the on screen prompts
 	a. to install security, click "Security has not been installed on this application. To continue, please click here to install"
 	b. A modal prompt will ask you to verify via Facebook or github - this sets your account as the admin account
 	c. after successfully logging in you will be placed back on the welcome screen

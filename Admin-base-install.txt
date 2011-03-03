@@ -7,7 +7,7 @@ import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic
 ******************************************** :)
 
 (: define where your marker files are located :)
-declare variable $file-location := "/Users/chadchatfield/dev/Avalon/MarkLogic/marker";	
+declare variable $file-location := "/Users/ebloch/marker-doc";	
 
 
 let $isSourceAvailable :=
@@ -27,7 +27,7 @@ let $install :=
 				let $config := admin:get-configuration()
 				let $config := admin:forest-create(
 				  $config, 
-				  "marker",
+				  "marker-doc",
 				  xdmp:host(), 
 				  ())
 				let $_ := admin:save-configuration($config)
@@ -37,7 +37,7 @@ let $install :=
 				let $config := admin:get-configuration()
 				let $config := admin:database-create(
 				  $config,
-				  "marker",
+				  "marker-doc",
 				  xdmp:database("Security"),
 				  xdmp:database("Schemas"))
 				let $_ := admin:save-configuration($config)
@@ -47,8 +47,8 @@ let $install :=
 				let $config := admin:get-configuration()
 				let $config := admin:database-attach-forest(
 				  $config,
-				  xdmp:database("marker"), 
-				  xdmp:forest("marker"))
+				  xdmp:database("marker-doc"), 
+				  xdmp:forest("marker-doc"))
 				let $_ := admin:save-configuration($config)
 				
 				(: application server :)
@@ -58,21 +58,21 @@ let $install :=
 				let $server := admin:http-server-create(
 				  $config, 
 				  $groupid,
-				  "8100-marker", 
+				  "8101-marker", 
 				  $file-location,
-				  8100,
+				  8101,
 				  0,
-				  admin:database-get-id($config, "marker"))
+				  admin:database-get-id($config, "marker-doc"))
 				  
 				let $_ :=  admin:save-configuration($server)
 				
 				let $config := admin:get-configuration()
 				let $groupid := admin:group-get-id($config, "Default")
 				let $config := admin:appserver-set-url-rewriter($config,
-				         admin:appserver-get-id($config, $groupid, "8100-marker"),
+				         admin:appserver-get-id($config, $groupid, "8101-marker"),
 				         "system/rewrite.xqy")
 				let $_ :=  admin:save-configuration($config)
-				return "Complete - please open your browser to http://localhost:8100 and login with your admin credentials"
+				return "Complete - please open your browser to http://localhost:8101 and login with your admin credentials"
 				)
 			else
 				(

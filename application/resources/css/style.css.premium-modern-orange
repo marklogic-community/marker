@@ -1,0 +1,353 @@
+/*
+Theme Name: Premium Modern Orange
+Author URI: http://www.web-design.se/
+Theme URI:
+Description: Theme with modern dark orange design and SEO-friendly structure. Supports widgets.
+Author: Web-Design.se
+Version: 1.6
+Tags: orange, brown, two-columns, custom-menu, editor-style
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/* layout structure */
+
+body {
+  font-family: georgia,serif;
+  font-size: small;
+  color: #E07335;
+  background: #5f1804 url(img/bg-main.jpg) repeat-x center top;
+  margin: 0;
+  padding: 0;
+}
+
+a, a:visited, a:active {
+color: #f9f9e8;
+text-decoration: none;
+}
+a:hover {
+color: #f9f9e8;
+text-decoration: underline;
+}
+#header {	
+  height: 324px;
+}
+
+#logo, #logo a {
+padding-top: 10px;
+font-size: 40px;
+color: #f9f9e8;
+font-weight: bold;
+}
+
+#slogan {
+color: #f3bd7f;
+font-style: italic;
+padding-left: 10px;
+}
+
+#header-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
+
+#nav {
+  width: 900px;
+  background: url(img/bgd-nav.jpg) no-repeat;
+  margin: 25px 0 0 0;
+  list-style-type: none;
+  font-size: 1.2em; 
+  font-family: georgia,serif;
+  color: #E07335;
+  float: left;
+  padding: 7px 0 22px 22px;
+}
+#nav li {
+  display:block;
+  float:left;
+  height:20px;
+}
+#nav li a { 
+  float:left;
+  height:15px;
+  padding: 0 0 5px;
+}
+#nav li.active a {
+  color: #ff6600;
+}
+
+#pre-wrapp {
+  width: 900px;	
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#wrapp {
+  width: 900px;
+  background: #501503 url(img/bgd-main.jpg) no-repeat;
+  float: left;
+  margin-top: -182px;
+  margin-right: -240px;
+  } 
+
+#content {
+  width: 675px;
+  font-size: 95%;
+  line-height: 1.5em;
+  color: #E07335;
+  float: right;
+  padding-right: 15px;
+  }
+#sidebar {
+  width: 210px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  margin: 0 0 0 0px;
+  padding: 0;
+  font-size: 16px;
+}
+
+#footer { 
+  clear: both; 
+  background: url(img/footer.jpg) repeat-x center;
+  height: 269px;
+  }
+
+#nav2 {	
+  font-size: 13px;
+  margin: 0;
+  padding: 105px 15px 0 15px;
+}
+  
+#footer #links {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
+
+#footer #links ul li {
+list-style-type: none;
+display: inline;
+}
+
+#footer #credits {
+  margin-left: auto;
+  margin-right: auto;
+  width: 780px;  
+  color: #E07335;	
+  font-size: 8px;
+  text-align: right;
+  padding-top: 100px;
+}
+
+#footer #credits a {
+  color: #f9f9e8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ color: #e49459;
+ font-family: Georgia,"Times New Roman",Times,serif;
+ margin-bottom: 0.5em;
+ letter-spacing: -0.5px;
+ line-height: 1em;
+}
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 19px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 17px;
+}
+
+.posted {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  margin: 0;
+  padding: 0;
+}
+
+.posted2 {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+  padding: 0;
+  clear: both;
+}
+
+.post {
+padding: 0 0 15px 0;
+}
+
+.short {
+padding: 0;
+margin: 0;
+}
+
+.short p{
+padding: 2px 0 5px 0;
+margin: 0;
+}
+
+
+/* Comments */
+
+#comments {
+	padding:5px;
+}
+
+
+.comment-body {
+	position:relative;
+	padding:7px;
+	margin-top:20px;
+}
+
+
+.comment-body img {
+
+}
+
+
+.comment-body p {
+	font-size:13px;
+	line-height:1.3em;
+	margin-bottom:35px;
+}
+
+
+.children {
+	list-style-type:none;
+}
+
+
+.comment-reply-link {
+	position:absolute;
+	bottom:0px;
+	right:5px;
+	font-size:12px;
+}
+
+
+.comment-meta {
+	position:absolute;
+	bottom:15px;
+	right:5px;
+	font-size:12px;
+}
+
+#commentform input, #commentform textarea {
+	margin-left:7px;
+}
+
+
+
+/* alignment CSS classes */
+
+.aligncenter,
+img.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.alignleft {
+	float: left;
+	display: inline;
+	margin: 12px 14px 12px 0;
+}
+
+
+.alignright {
+	float: right;
+	margin: 12px 0px 12px 14px;
+}
+
+
+/* image caption CSS classes  */
+
+.wp-caption {
+	background: none repeat scroll 0 0 #F1F1F1;
+    line-height: 18px;
+    margin-bottom: 20px;
+    padding: 4px;
+    text-align: center;
+}
+
+
+.wp-caption img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.wp-caption-dd {
+	font-size: 11px;
+	line-height: 17px;
+	padding: 0 4px 5px;
+	margin: 0;
+}
+
+
+.wp-caption p.wp-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	margin: 0;
+	padding: 0 4px 5px;
+}
+
+
+.gallery-caption {
+	color: #888;
+	font-size: 12px;
+	margin: 0 0 12px;
+}
+
+
+.bypostauthor {
+}
+
+
+.sticky	{
+}
+
+
+embed,
+object {
+	max-width:675px;
+}
+
+.post img {
+	max-width:675px;
+	height:auto;
+}
+a img {border: 0;}
+
+.clear {clear: both;}
+.entryContent h1, .entryContent h2, .entryContent h3, .entryContent h4, .entryContent h5, .entryContent h6 {clear: both;}
