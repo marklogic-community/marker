@@ -1710,7 +1710,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
          "/content-root/containers/site-wide/footer-navigation.container",
          fn:true(),
          (  <div>
-                <p>Copyright © 2011 MarkLogic Corporation.  MARKLOGIC® is a registered trademark of MarkLogic Corporation in the United States</p>
+                <p>Copyright © 2011 MarkLogic Corporation.  MarkLogic® is a registered trademark of MarkLogic Corporation in the United States</p>
                 <marker:content xmlns:marker="http://marklogic.com/marker">
                     <marker:type>Miscellaneous</marker:type> 
                     <marker:title>Footer Container</marker:title>
