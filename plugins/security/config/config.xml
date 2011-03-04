@@ -1,0 +1,27 @@
+<security_config>
+    <install-completed>true</install-completed>
+    <admin-user-completed>false</admin-user-completed>
+
+    <provider name="facebook">
+        <!-- Replace with your facebook app id and secret.  Then remove this comment -->
+        <!-- Note: our sample facebook app is not secure, since we give away its secret! -->
+        <id>198109773541057</id>
+        <secret>188f487316914a0b2aca360eeafacd2c</secret>
+        <access_token_url>https://graph.facebook.com/oauth/access_token</access_token_url>
+        <authorize_url>https://graph.facebook.com/oauth/authorize</authorize_url>
+        <!-- Replace with public host/port for production -->
+        <redirect_url>http://localhost:8100/security/authentication/facebook</redirect_url>
+    </provider>
+
+    <provider name="github">
+        <!-- Replace with your github app id and secret.  Then remove this comment -->
+        <!-- Note: our sample github app is not secure, since we give away its secret! -->
+        <id>bb6b41fe0eb7d6df0f1f</id>
+        <secret>517b9b9433fea0347ca49b0d933e0a298f6938df</secret>
+        <access_token_url>https://github.com/login/oauth/access_token</access_token_url>
+        <authorize_url>https://github.com/login/oauth/authorize</authorize_url>
+        <!-- Replace with public host/port for production and remove this comment -->
+        <redirect_url>http://localhost:8100/security/authentication/github</redirect_url>
+    </provider>
+
+</security_config>

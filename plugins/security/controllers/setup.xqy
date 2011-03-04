@@ -27,6 +27,7 @@ import module namespace authorization = "http://marklogic.com/plugins/security/a
 import module namespace plugin-cfg = "http://marklogic.com/plugins/security/config" at "../config/config.xqy";
 import module namespace application-cfg = "http://scholarsportal.info/xqmvc/config" at "/application/config/config.xqy";
 import module namespace admin = "http://marklogic.com/xdmp/admin" at "/MarkLogic/admin.xqy";
+import module namespace util = "security:util" at "../library/util.xqy";
 declare namespace xdmphttp="xdmp:http";
 declare namespace s = "http://www.w3.org/2009/xpath-functions/analyze-string";
 
@@ -155,25 +156,8 @@ declare function install()
                                                                        </options>))
     let $_ :=  admin:save-configuration($config)
     
-    let $_ := xdmp:document-insert("/plugins/security/config.xml",
-        <security_config>
-            <install-completed>true</install-completed>
-            <admin-user-completed>false</admin-user-completed>
-            <provider name="facebook">
-                <id>162088510505521</id>
-                <secret>1566bfe43e0f0aa91c6d259040f2e284</secret>
-                <access_token_url>https://graph.facebook.com/oauth/access_token</access_token_url>
-                <authorize_url>https://graph.facebook.com/oauth/authorize</authorize_url>
-                <redirect_url>http://localhost:8100/security/authentication/facebook</redirect_url>
-            </provider>
-            <provider name="github">
-                <id>47df013b281952796da7</id>
-                <secret>b4482d5ac4e7f629ad20d08c2ff9b895ceb8b745</secret>
-                <access_token_url>https://github.com/login/oauth/access_token</access_token_url>
-                <authorize_url>https://github.com/login/oauth/authorize</authorize_url>
-                <redirect_url>http://localhost:8100/security/authentication/github</redirect_url>
-            </provider>
-        </security_config>,
+    let $_ := xdmp:document-insert("/plugins/security/config.xml", 
+            util:get-doc("/plugins/security/config/config.xml"),
             (xdmp:permission("security-anon", "read"), xdmp:permission("security-anon", "update"), xdmp:permission("security-admin", "update"))
     )
     
