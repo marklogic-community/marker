@@ -39,6 +39,8 @@ $xqmvc:doctype-xhtml-1.1,
         <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/library.js">&nbsp;</script>
         <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/main.js">&nbsp;</script>
         
+        <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/application.js">&nbsp;</script>
+
         <script type="text/javascript" src="{ $xqmvc:resource-dir }/js/jquery.jstree.js">&nbsp;</script>
         <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/style.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="{ $xqmvc:resource-dir }/css/smoothness/jquery-ui-1.8.9.custom.css"/>

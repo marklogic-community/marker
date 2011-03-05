@@ -1402,10 +1402,10 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
          fn:true(),
          (  <div>
                 <form action="/search" method="get">
-                    <fieldset>
+                    <fieldset id="search-fields" >
                         <legend><label for="q">Search</label></legend>
                     <input type="hidden" id="start" name="start" value="1"/>
-                    <input type="text" value=" Search the site" id="q" name="q" class="default" onblur="if (this.value == '')this.value = ' Search the site';" onfocus="if (this.value == ' Search the site')this.value = '';"/>
+                    <input type="text" value=" Search the site" id="q" name="q" class="default searchbox" onblur="if (this.value == '')this.value = ' Search the site';" onfocus="if (this.value == ' Search the site')this.value = '';"/>
                     </fieldset>
                 </form>
                 <marker:content xmlns:marker="http://marklogic.com/marker">
@@ -1839,6 +1839,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -1916,6 +1917,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -1987,6 +1989,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2076,6 +2079,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2171,6 +2175,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2259,6 +2264,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2347,6 +2353,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2442,6 +2449,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                         <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2537,6 +2545,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2632,6 +2641,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2727,6 +2737,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2822,6 +2833,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
@@ -2917,6 +2929,7 @@ URL mappings are stored in the /application/mapping.xml file. The marker applica
                 <link rel="stylesheet" type="text/css" media="screen" href="/application/resources/css/style.css"/>
             </head>
             <body>
+                <script type="text/javascript" src="/application/resources/js/application.js">&#160;</script>
                 <div id="container">
                     <div id="header" style="position:relative;">
                          <xi:include href="/content-root/containers/site-wide/login-logout.container">
