@@ -1,3 +1,5 @@
+![Marker](https://github.com/marklogic/marker/raw/master/application/resources/img/MarkerHeader.jpg "Marker")
+
 MarkLogic Marker 
 
 All original code copyright MarkLogic 2010-2011 and is licensed via - http://www.apache.org/licenses/LICENSE-2.0.html
