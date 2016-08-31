@@ -1,3 +1,4 @@
+<b>NB. This version of marker is not compatible with Query Console in MarkLogic 8, the latest.</b>
 ![Marker](https://github.com/marklogic/marker/raw/master/application/resources/img/MarkerHeader.jpg "Marker")
 
 MarkLogic Marker 
